@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:second_hand/loading/loading_screen_controller.dart';
 
 class LoadingScreen {
-  // singleton pattern
-  LoadingScreen._sharedInstance();
+  factory LoadingScreen() => _shared;
   static final LoadingScreen _shared = LoadingScreen._sharedInstance();
-  factory LoadingScreen.instance() => _shared;
+  LoadingScreen._sharedInstance();
 
-  // this controller help us to manage AlertDialog when close or update
   LoadingScreenController? _controller;
 
   void show({
