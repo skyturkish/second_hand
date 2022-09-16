@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1054331391506",
+    "project_id": "second-hand-sky",
+    "storage_bucket": "second-hand-sky.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054331391506:android:3ab4663a5a0369255552cb",
+        "android_client_info": {
+          "package_name": "sky.sky.second_hand"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1054331391506-dnac6ss1t2qa7fqmic6l5fnt1rbl5n2u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZZWO7ZxWYrchjABcAQo5DBsCfGJwpeaQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1054331391506-dnac6ss1t2qa7fqmic6l5fnt1rbl5n2u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

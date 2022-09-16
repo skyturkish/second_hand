@@ -1,9 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:second_hand/firebase_options.dart';
+import 'package:second_hand/view/auth/auth_view.dart';
 
-void main() {
-    runApp(
-       const MyApp(),
-   );
+void main() async {
+  await _init();
+  runApp(
+    const MyApp(),
+  );
+}
+
+Future<void> _init() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,28 +25,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Material App',
       debugShowCheckedModeBanner: false,
-      home: HomeView(),
-    );
-  }
-}
-
-class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
-
-  @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomeView Bar'),
-      ),
-      body: const Center(
-        child: Text('Hello World'),
-      ),
+      home: AuthView(),
     );
   }
 }

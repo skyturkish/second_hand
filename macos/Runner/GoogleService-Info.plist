@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1054331391506-le1kkhld3j9g8bufha71jnistqpluj08.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1054331391506-le1kkhld3j9g8bufha71jnistqpluj08</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCOjZ2uERvadomtOI9B5Q27NEsG_7_aHa4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1054331391506</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>sky.sky.secondHand</string>
+	<key>PROJECT_ID</key>
+	<string>second-hand-sky</string>
+	<key>STORAGE_BUCKET</key>
+	<string>second-hand-sky.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1054331391506:ios:ebf41b36c6a4935c5552cb</string>
+</dict>
+</plist>
