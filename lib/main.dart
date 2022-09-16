@@ -10,10 +10,11 @@ import 'package:second_hand/service/auth/firebase_auth_provider.dart';
 import 'package:second_hand/service/bloc/app_bloc.dart';
 import 'package:second_hand/service/bloc/app_event.dart';
 import 'package:second_hand/service/bloc/app_state.dart';
-import 'package:second_hand/view/forgot_password_view.dart';
-import 'package:second_hand/view/login_view.dart';
-import 'package:second_hand/view/register_view.dart';
-import 'package:second_hand/view/verify_email_view.dart';
+import 'package:second_hand/view/app/bottom_navigation_view.dart';
+import 'package:second_hand/view/authenticate/forgot_password_view.dart';
+import 'package:second_hand/view/authenticate/login_view.dart';
+import 'package:second_hand/view/authenticate/register_view.dart';
+import 'package:second_hand/view/authenticate/verify_email_view.dart';
 
 void main() async {
   await _init();
@@ -50,6 +51,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData.light().copyWith(
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: const Color.fromARGB(255, 141, 134, 134),
+          showUnselectedLabels: true,
+          selectedIconTheme: IconThemeData(
+            color: Theme.of(context).errorColor,
+          ),
+          selectedLabelStyle: TextStyle(
+            color: Theme.of(context).errorColor,
+          ),
+          unselectedIconTheme: IconThemeData(
+            color: Theme.of(context).highlightColor,
+          ),
+          unselectedLabelStyle: TextStyle(
+            color: Theme.of(context).errorColor,
+          ),
+        ),
+      ),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
@@ -80,7 +99,7 @@ class App extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is AppStateLoggedIn) {
-          return const Text('data'); // uygulmaya giriş
+          return const BottomNavigationView(); // uygulmaya giriş
         } else if (state is AppStateNeedsVerification) {
           return const VerifyEmailView();
         } else if (state is AppStateLoggedOut) {

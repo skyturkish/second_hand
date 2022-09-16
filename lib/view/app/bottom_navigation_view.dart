@@ -1,0 +1,87 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:second_hand/service/bloc/app_bloc.dart';
+import 'package:second_hand/service/bloc/app_event.dart';
+import 'package:second_hand/view/app/account/account_view.dart';
+import 'package:second_hand/view/app/chats/chats_view.dart';
+import 'package:second_hand/view/app/home/home_view.dart';
+import 'package:second_hand/view/app/my_ads/my_ads_view.dart';
+
+class BottomNavigationView extends StatefulWidget {
+  const BottomNavigationView({Key? key}) : super(key: key);
+
+  @override
+  State<BottomNavigationView> createState() => BottomNavigationViewState();
+}
+
+class BottomNavigationViewState extends State<BottomNavigationView> {
+  int _selectedIndex = 0;
+  static const List<Widget> _widgetOptions = <Widget>[
+    HomeView(),
+    ChatsView(),
+    SizedBox.shrink(),
+    MyAdsView(),
+    AccountView(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('BottomNavigationBar Sample'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                context.read<AppBloc>().add(
+                      const AppEventLogOut(),
+                    );
+              },
+              icon: const Icon(Icons.logout))
+        ],
+      ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(
+          Icons.camera_alt,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'Chats',
+          ),
+          BottomNavigationBarItem(
+            icon: SizedBox.shrink(),
+            label: 'Sell',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'My Ads',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Settings',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}
