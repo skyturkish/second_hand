@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:second_hand/service/bloc/app_bloc.dart';
-import 'package:second_hand/service/bloc/app_event.dart';
+import 'package:second_hand/service/auth/bloc/app_bloc.dart';
+import 'package:second_hand/service/auth/bloc/app_event.dart';
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({Key? key}) : super(key: key);

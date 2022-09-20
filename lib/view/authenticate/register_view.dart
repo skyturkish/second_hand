@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_hand/service/auth/auth_exceptions.dart';
-import 'package:second_hand/service/bloc/app_bloc.dart';
-import 'package:second_hand/service/bloc/app_event.dart';
-import 'package:second_hand/service/bloc/app_state.dart';
+import 'package:second_hand/service/auth/bloc/app_bloc.dart';
+import 'package:second_hand/service/auth/bloc/app_event.dart';
+import 'package:second_hand/service/auth/bloc/app_state.dart';
 import 'package:second_hand/utilities/dialogs/error_dialog.dart';
 
 class RegisterView extends StatefulWidget {

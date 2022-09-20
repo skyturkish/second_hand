@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:second_hand/service/auth/auth_provider.dart';
-import 'package:second_hand/service/bloc/app_event.dart';
-import 'package:second_hand/service/bloc/app_state.dart';
+import 'package:second_hand/service/auth/bloc/app_event.dart';
+import 'package:second_hand/service/auth/bloc/app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc(AuthProvider provider) : super(const AppStateUninitialized(isLoading: true)) {
