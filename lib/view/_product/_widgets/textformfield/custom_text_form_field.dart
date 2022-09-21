@@ -68,13 +68,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 icon: Icon(isShowPassword ? Icons.remove_red_eye : Icons.visibility_off),
               ),
       ),
-      // TODO make works thisd
-      // validator: (value) {
-      //   if (value == null || value.isEmpty) {
-      //     return 'Please enter ${widget.labelText}';
-      //   }
-      //   return null;
-      // },
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter ${widget.labelText}';
+        }
+        return null;
+      },
     );
   }
 }

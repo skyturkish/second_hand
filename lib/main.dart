@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.light().copyWith(
         textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Colors.grey,
+          cursorColor: Colors.red,
         ),
         inputDecorationTheme: const InputDecorationTheme(
           hintStyle: TextStyle(color: Colors.black),

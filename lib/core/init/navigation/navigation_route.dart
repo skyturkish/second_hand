@@ -21,18 +21,6 @@ class NavigationRoute {
       case NavigationConstants.UPLOAD_PHOTOS:
         return normalNavigate(widget: const UploadPhotosView());
 
-      // case NavigationConstants.ON_BOARD:
-      //   return normalNavigate(OnBoardView(), NavigationConstants.ON_BOARD);
-
-      // case NavigationConstants.SETTINGS_WEB_VIEW:
-      //   if (args.arguments is SettingsDynamicModel) {
-      //     return normalNavigate(
-      //       SettingsDynamicView(model: args.arguments as SettingsDynamicModel),
-      //       NavigationConstants.SETTINGS_WEB_VIEW,
-      //     );
-      //   }
-      //   throw NavigateException<SettingsDynamicModel>(args.arguments);
-
       default:
         return MaterialPageRoute(
           builder: (context) => const Scaffold(

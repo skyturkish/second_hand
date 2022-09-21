@@ -8,7 +8,7 @@ class Product {
   String state;
   String title;
   String description;
-  List<File>? images;
+  List<File> images;
   int price;
   //  final String location; // TODO
 
@@ -18,8 +18,8 @@ class Product {
     required this.state,
     required this.title,
     required this.description,
-    required this.images,
     required this.price,
+    this.images = const [],
   });
 
   @override

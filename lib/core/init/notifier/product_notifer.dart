@@ -3,6 +3,12 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:second_hand/models/product.dart';
 
+import 'dart:developer' as devtools show log;
+
+extension Log on Object {
+  void log() => devtools.log(toString());
+}
+
 class ProductNotifier extends ChangeNotifier {
   static ProductNotifier? _instance;
 
@@ -13,17 +19,26 @@ class ProductNotifier extends ChangeNotifier {
 
   ProductNotifier._init();
 
-  final Product _product = Product(
+  final Product product = Product(
     productId: '',
     ownerId: '',
     state: '',
     title: '',
     description: '',
-    images: null,
+    images: [],
     price: 0,
   );
 
-  Product get currentProduct => _product;
+  Product get currentProduct => product;
+
+  void addimages({
+    required List<File> newImages,
+  }) {
+    for (var newImage in newImages) {
+      product.images.add(newImage);
+    }
+    notifyListeners();
+  }
 
   void setProduct({
     String? productId,
@@ -34,14 +49,19 @@ class ProductNotifier extends ChangeNotifier {
     List<File>? images,
     int? price,
   }) {
-    _product.productId = productId ?? _product.productId;
-    _product.ownerId = ownerId ?? _product.ownerId;
-    _product.state = state ?? _product.state;
-    _product.title = title ?? _product.title;
-    _product.description = description ?? _product.description;
-    _product.images = images ?? _product.images;
-    _product.price = price ?? _product.price;
+    product.productId = productId ?? product.productId;
+    product.ownerId = ownerId ?? product.ownerId;
+    product.state = state ?? product.state;
+    product.title = title ?? product.title;
+    product.description = description ?? product.description;
+    product.images = images ?? product.images;
+    product.price = price ?? product.price;
 
     notifyListeners();
+  }
+
+  void skytoString() {
+    'productId: ${product.productId}, ownerId: ${product.ownerId}, state: ${product.state},title: ${product.title},description: ${product.description},images: ${product.images},price: ${product.price}'
+        .log();
   }
 }
