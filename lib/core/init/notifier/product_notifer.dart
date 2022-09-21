@@ -19,7 +19,7 @@ class ProductNotifier extends ChangeNotifier {
 
   ProductNotifier._init();
 
-  final Product product = Product(
+  Product product = Product(
     productId: '',
     ownerId: '',
     state: '',
@@ -30,6 +30,18 @@ class ProductNotifier extends ChangeNotifier {
   );
 
   Product get currentProduct => product;
+
+  void clearProduct() {
+    product = Product(
+      productId: '',
+      ownerId: '',
+      state: '',
+      title: '',
+      description: '',
+      images: [],
+      price: 0,
+    );
+  }
 
   void addimages({
     required List<File> newImages,

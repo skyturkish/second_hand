@@ -46,4 +46,18 @@ class Product {
         images.hashCode ^
         price.hashCode;
   }
+
+  Map<String, dynamic> toMap() {
+    final result = <String, dynamic>{};
+
+    result.addAll({'productId': productId});
+    result.addAll({'ownerId': ownerId});
+    result.addAll({'state': state});
+    result.addAll({'title': title});
+    result.addAll({'description': description});
+    result.addAll({'images': []});
+    result.addAll({'price': price});
+
+    return result;
+  }
 }
