@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
-import 'package:second_hand/view/app/add_product.dart';
+import 'package:second_hand/view/app/addproduct/include_some_details.dart';
+import 'package:second_hand/view/app/addproduct/set_a_price.dart';
+import 'package:second_hand/view/app/addproduct/upload_photos.dart';
 
 class NavigationRoute {
   static final NavigationRoute _instance = NavigationRoute._init();
@@ -10,14 +12,14 @@ class NavigationRoute {
 
   Route<dynamic> generateRoute(RouteSettings args) {
     switch (args.name) {
-      case NavigationConstants.ADD_PRODUCT_VIEW:
-        return normalNavigate(widget: const AddProductView());
+      case NavigationConstants.INCLUDE_SOME_DETAILS:
+        return normalNavigate(widget: const IncludeSomeDetailsView());
 
-      // case NavigationConstants.TEST_VIEW:
-      //   return normalNavigate(TestsView(), NavigationConstants.TEST_VIEW);
+      case NavigationConstants.SET_A_PRICE:
+        return normalNavigate(widget: const SetAPriceView());
 
-      // case NavigationConstants.BUY_VIEW:
-      //   return normalNavigate(BuyView(), NavigationConstants.BUY_VIEW);
+      case NavigationConstants.UPLOAD_PHOTOS:
+        return normalNavigate(widget: const UploadPhotosView());
 
       // case NavigationConstants.ON_BOARD:
       //   return normalNavigate(OnBoardView(), NavigationConstants.ON_BOARD);

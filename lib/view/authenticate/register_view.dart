@@ -1,33 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:second_hand/core/extension/context_extension.dart';
 import 'package:second_hand/service/auth/auth_exceptions.dart';
 import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/service/auth/bloc/app_state.dart';
 import 'package:second_hand/utilities/dialogs/error_dialog.dart';
+import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
 
   @override
-  _RegisterViewState createState() => _RegisterViewState();
+  RegisterViewState createState() => RegisterViewState();
 }
 
-class _RegisterViewState extends State<RegisterView> {
-  late final TextEditingController _email;
-  late final TextEditingController _password;
+class RegisterViewState extends State<RegisterView> {
+  final _formKey = GlobalKey<FormState>();
+
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
 
   @override
   void initState() {
-    _email = TextEditingController();
-    _password = TextEditingController();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    _email.dispose();
-    _password.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -54,57 +58,61 @@ class _RegisterViewState extends State<RegisterView> {
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Enter your email and password to see your notes!'),
-                TextField(
-                  controller: _email,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  autofocus: true,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    hintText: 'email',
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Enter your email and password to see your notes!'),
+                  Padding(
+                    padding: context.paddingOnlyTopSmall,
+                    child: CustomTextFormField(
+                      controller: _emailController,
+                      labelText: 'email',
+                      prefix: const Icon(Icons.mail),
+                      keyboardType: TextInputType.emailAddress,
+                    ),
                   ),
-                ),
-                TextField(
-                  controller: _password,
-                  obscureText: true,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  decoration: const InputDecoration(
-                    hintText: 'password',
-                  ),
-                ),
-                Center(
-                  child: Column(
-                    children: [
-                      TextButton(
-                        onPressed: () async {
-                          final email = _email.text;
-                          final password = _password.text;
-                          context.read<AppBloc>().add(
-                                AppEventRegister(
-                                  email,
-                                  password,
-                                ),
-                              );
-                        },
-                        child: const Text('Register'),
+                  Padding(
+                    padding: context.paddingOnlyTopSmall,
+                    child: CustomTextFormField(
+                      passwordTextFormField: true,
+                      controller: _passwordController,
+                      labelText: 'password',
+                      prefix: const Icon(
+                        Icons.password,
                       ),
-                      TextButton(
-                        onPressed: () {
-                          context.read<AppBloc>().add(
-                                const AppEventLogOut(),
-                              );
-                        },
-                        child: const Text('Already registered? Login here!'),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                  Center(
+                    child: Column(
+                      children: [
+                        TextButton(
+                          onPressed: () async {
+                            final emailText = _emailController.text;
+                            final passwordText = _passwordController.text;
+                            context.read<AppBloc>().add(
+                                  AppEventRegister(
+                                    emailText,
+                                    passwordText,
+                                  ),
+                                );
+                          },
+                          child: const Text('Register'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            context.read<AppBloc>().add(
+                                  const AppEventLogOut(),
+                                );
+                          },
+                          child: const Text('Already registered? Login here!'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

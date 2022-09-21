@@ -5,15 +5,18 @@ import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/service/auth/bloc/app_state.dart';
 import 'package:second_hand/utilities/dialogs/error_dialog.dart';
 import 'package:second_hand/utilities/dialogs/password_reset_email_sent_dialog.dart';
+import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 
 class ForgotPasswordView extends StatefulWidget {
   const ForgotPasswordView({Key? key}) : super(key: key);
 
   @override
-  _ForgotPasswordViewState createState() => _ForgotPasswordViewState();
+  ForgotPasswordViewState createState() => ForgotPasswordViewState();
 }
 
-class _ForgotPasswordViewState extends State<ForgotPasswordView> {
+class ForgotPasswordViewState extends State<ForgotPasswordView> {
+  final _formKey = GlobalKey<FormState>();
+
   late final TextEditingController _controller;
 
   @override
@@ -52,36 +55,36 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const Text(
-                  'If you forgot your password, simply enter your email and we will send you a password',
-                ),
-                TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  autocorrect: false,
-                  autofocus: true,
-                  controller: _controller,
-                  decoration: const InputDecoration(
-                    hintText: 'Your email adres....',
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const Text(
+                    'If you forgot your password, simply enter your email and we will send you a password',
                   ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    final email = _controller.text;
-                    context.read<AppBloc>().add(AppEventForgotPassword(email: email));
-                  },
-                  child: const Text('Send me password reset link'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    context.read<AppBloc>().add(
-                          const AppEventLogOut(),
-                        );
-                  },
-                  child: const Text('Back to login page'),
-                ),
-              ],
+                  CustomTextFormField(
+                    controller: _controller,
+                    labelText: 'email',
+                    hintText: 'Your email adres...',
+                    prefix: const Icon(Icons.email),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      final email = _controller.text;
+                      context.read<AppBloc>().add(AppEventForgotPassword(email: email));
+                    },
+                    child: const Text('Send me password reset link'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      context.read<AppBloc>().add(
+                            const AppEventLogOut(),
+                          );
+                    },
+                    child: const Text('Back to login page'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -2,10 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/app/app_constants.dart';
 import 'package:second_hand/core/init/localization/language_manager.dart';
 import 'package:second_hand/core/init/navigation/navigation_route.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
+import 'package:second_hand/core/init/notifier/product_notifer.dart';
 import 'package:second_hand/firebase_options.dart';
 import 'package:second_hand/loading/loading_screen.dart';
 import 'package:second_hand/service/auth/bloc/app_bloc.dart';
@@ -21,12 +23,15 @@ import 'package:second_hand/view/authenticate/verify_email_view.dart';
 void main() async {
   await _init();
   runApp(
-    MultiBlocProvider(
+    MultiProvider(
       providers: [
         BlocProvider<AppBloc>(
           create: (context) => AppBloc(
             FirebaseAuthProvider(),
           ),
+        ),
+        ChangeNotifierProvider<ProductNotifier>(
+          create: (context) => ProductNotifier.instance,
         ),
       ],
       child: EasyLocalization(
@@ -54,6 +59,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.light().copyWith(
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Colors.grey,
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          hintStyle: TextStyle(color: Colors.black),
+          labelStyle: TextStyle(color: Colors.black),
+          iconColor: Color.fromARGB(255, 14, 13, 13),
+        ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: const Color.fromARGB(255, 141, 134, 134),
           showUnselectedLabels: true,
@@ -77,7 +90,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: NavigationService.instance.navigatorKey,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
-      title: 'Material App',
+      title: ApplicationConstants.APPLICATION_TITLE,
       home: const App(),
     );
   }

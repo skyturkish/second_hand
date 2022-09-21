@@ -1,4 +1,6 @@
+// ignore_for_file: constant_identifier_names
+
 class ApplicationConstants {
-  // ignore: constant_identifier_names
   static const TRANSLATIONS_ASSET_PATH = 'assets/translations';
+  static const APPLICATION_TITLE = 'Second hand';
 }

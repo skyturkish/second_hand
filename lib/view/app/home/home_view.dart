@@ -10,7 +10,6 @@ class HomeView extends StatefulWidget {
 class HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    print(Theme.of(context).backgroundColor.toString());
     return const Scaffold(
       body: Center(
         child: Text(
