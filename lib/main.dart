@@ -23,6 +23,7 @@ import 'package:second_hand/view/authenticate/verify_email_view.dart';
 void main() async {
   await _init();
   runApp(
+    // TODO providerları başka yere al
     MultiProvider(
       providers: [
         BlocProvider<AppBloc>(
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // TODO theme'leri başka yere al
       theme: ThemeData.light().copyWith(
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Colors.red,
