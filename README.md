@@ -11,7 +11,7 @@ With this application, you can buy and sell second-hand goods, can contact the s
   - [X] Google
 - [ ] Create an account, get informations from user
 - [ ] Product
-  - [ ] Pick images and to make the product sellable.
+  - [X] Pick images and to make the product sellable.
   - [ ] to be able to see which products are being sold.
 - [ ] Communication
   - [ ] Messenger
