@@ -15,3 +15,6 @@ Future<bool> uploadProductPhoto({
         .putFile(file)
         .then((_) => true)
         .catchError((_) => false);
+
+Future<Iterable<Reference>> getImages(String productId) =>
+    FirebaseStorage.instance.ref('products').child(productId).list().then((listResult) => listResult.items);

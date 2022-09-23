@@ -1,7 +1,6 @@
-import 'dart:io';
-
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:second_hand/models/product.dart';
+import 'package:second_hand/service/cloud/product/product-service.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -11,30 +10,42 @@ class HomeView extends StatefulWidget {
 }
 
 class HomeViewState extends State<HomeView> {
-  File? bursa;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        ElevatedButton(
-          onPressed: () async {
-            final ui = await FirebaseStorage.instance
-                .ref('products')
-                .child('8f9efb92-769a-474a-a7d9-37f7cebe4fb5')
-                .child('ae1a7bcc-8555-468f-a7a8-7d79e2d4a773')
-                .getData();
-            bursa = File.fromRawPath(ui!);
+      body: FutureBuilder(
+        future: GroupCloudFireStoreService.instance.getAllProductsWithoutImages(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final data = snapshot.data as List<Product>;
 
-            setState(() {});
-          },
-          child: const Text(
-            'Home',
-          ),
-        ),
-        bursa == null ? const SizedBox.shrink() : Image.file(bursa!)
-      ],
-    ));
+            return GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1,
+                  crossAxisSpacing: 5.0,
+                  mainAxisSpacing: 5.0,
+                ),
+                itemCount: data.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Column(
+                      children: [
+                        Text(data[index].title),
+                        Expanded(
+                          child: Image.file(
+                            he
+                            data[index].images.first,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                });
+          } else {
+            return const CircularProgressIndicator();
+          }
+        },
+      ),
+    );
   }
 }

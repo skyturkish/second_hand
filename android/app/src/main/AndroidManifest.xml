@@ -2,6 +2,7 @@
     package="sky.sky.second_hand">
       <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <application
         android:label="second_hand"
         android:name="${applicationName}"

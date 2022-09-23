@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -7,6 +8,12 @@ import 'package:second_hand/core/constants/navigation/navigation_constants.dart'
 import 'package:second_hand/core/extension/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
+
+import 'dart:developer' as devtools show log;
+
+extension Log on Object {
+  void loga() => devtools.log(toString());
+}
 
 class UploadPhotosView extends StatefulWidget {
   const UploadPhotosView({Key? key}) : super(key: key);
@@ -62,6 +69,8 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
             children: [
               ElevatedButton(
                 onPressed: () async {
+                  '??? noluyor'.log();
+
                   final List<XFile>? images = await _picker.pickMultiImage(
                     maxHeight: 1024,
                     maxWidth: 1024,
@@ -73,6 +82,8 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
                       xFile.path,
                     ),
                   );
+
+                  '??? noluyor'.log();
                   context.read<ProductNotifier>().addimages(
                         newImages: fileimages.toList(),
                       );
@@ -81,15 +92,15 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+                  final XFile? xFileimage = await _picker.pickImage(source: ImageSource.camera);
 
+                  final File fileImage = File(xFileimage!.path);
+                  fileImage.readAsBytes().then((value) => value);
                   context.read<ProductNotifier>().addimages(
-                    newImages: [
-                      File(
-                        image!.path,
-                      ),
-                    ],
+                    newImages: [fileImage],
                   );
+                  '??? noluyor'.log();
+                  fileImage.readAsStringSync(encoding: utf8).loga();
                 },
                 child: const Text('Take a picture'),
               ),
