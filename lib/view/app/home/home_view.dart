@@ -1,4 +1,6 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:second_hand/main.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
 
@@ -10,15 +12,18 @@ class HomeView extends StatefulWidget {
 }
 
 class HomeViewState extends State<HomeView> {
-  late final List<Product>? products;
+  final storageRef = FirebaseStorage.instance.ref();
+
+  List<Product>? products;
 
   @override
   void initState() {
     super.initState();
+    getAll();
   }
 
   Future<void> getAll() async {
-    //products = await GroupCloudFireStoreService.instance.getAllProducts();
+    products = await GroupCloudFireStoreService.instance.getAllProducts();
     setState(() {});
   }
 
@@ -26,21 +31,26 @@ class HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: products == null
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : Center(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5,
-                  crossAxisSpacing: 5.0,
-                  mainAxisSpacing: 5.0,
-                ),
-                itemCount: products!.length,
-                itemBuilder: (context, index) {
-                  return const Text('data');
-                },
+          ? const CircularProgressIndicator()
+          : GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
               ),
+              itemCount: products!.length,
+              itemBuilder: (BuildContext context, int index) {
+                final product = products![index];
+                final mountainImagesRef = storageRef.child(product.imagesPath[0]);
+
+                return Column(
+                  children: [
+                    Expanded(
+                      child: StorageImageView(
+                        image: mountainImagesRef,
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
     );
   }

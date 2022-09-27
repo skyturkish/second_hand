@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -5,12 +7,6 @@ import 'package:second_hand/core/constants/navigation/navigation_constants.dart'
 import 'package:second_hand/core/extension/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
-
-import 'dart:developer' as devtools show log;
-
-extension Log on Object {
-  void loga() => devtools.log(toString());
-}
 
 class UploadPhotosView extends StatefulWidget {
   const UploadPhotosView({Key? key}) : super(key: key);
@@ -40,22 +36,20 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
             height: context.dynamicHeight(0.40),
             width: context.dynamicWidth(0.90),
             child: PageView.builder(
-              itemCount: context.watch<ProductNotifier>().product.images.length,
+              itemCount: context.watch<ProductNotifier>().images.length,
               itemBuilder: (context, index) {
-                return const Text('data');
-
-                // context.watch<ProductNotifier>().product.images.isEmpty
-                //     ? Center(
-                //         child: Container(
-                //           height: 100,
-                //           width: 100,
-                //           color: Colors.black,
-                //         ),
-                //       )
-                //     : Image.file(
-                //         context.watch<ProductNotifier>().product.images[index],
-                //         fit: BoxFit.cover,
-                //       );
+                return context.watch<ProductNotifier>().images.isEmpty
+                    ? Center(
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          color: Colors.black,
+                        ),
+                      )
+                    : Image.file(
+                        context.watch<ProductNotifier>().images[index],
+                        fit: BoxFit.cover,
+                      );
               },
             ),
           ),
@@ -68,38 +62,38 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
             children: [
               ElevatedButton(
                 onPressed: () async {
-                  // '??? noluyor'.log();
+                  '??? noluyor'.log();
 
-                  // final List<XFile>? images = await _picker.pickMultiImage(
-                  //   maxHeight: 1024,
-                  //   maxWidth: 1024,
-                  //   imageQuality: 50,
-                  // );
+                  final List<XFile>? images = await _picker.pickMultiImage(
+                    maxHeight: 1024,
+                    maxWidth: 1024,
+                    imageQuality: 50,
+                  );
 
-                  // final fileimages = images!.map(
-                  //   (xFile) => File(
-                  //     xFile.path,
-                  //   ),
-                  // );
+                  final fileimages = images!.map(
+                    (xFile) => File(
+                      xFile.path,
+                    ),
+                  );
 
-                  // '??? noluyor'.log();
-                  // context.read<ProductNotifier>().addimages(
-                  //       newImages: fileimages.toList(),
-                  //     );
+                  '??? noluyor'.log();
+                  context.read<ProductNotifier>().addImages(
+                        newImages: fileimages.toList(),
+                      );
                 },
                 child: const Text('From gallery'),
               ),
               ElevatedButton(
                 onPressed: () async {
-                  // final XFile? xFileimage = await _picker.pickImage(source: ImageSource.camera);
+                  final XFile? xFileimage = await _picker.pickImage(source: ImageSource.camera);
 
-                  // final File fileImage = File(xFileimage!.path);
-                  // fileImage.readAsBytes().then((value) => value);
-                  // context.read<ProductNotifier>().addimages(
-                  //   newImages: [fileImage],
-                  // );
-                  // '??? noluyor'.log();
-                  // fileImage.readAsStringSync(encoding: utf8).loga();
+                  final File fileImage = File(xFileimage!.path);
+
+                  
+                  context.read<ProductNotifier>().addImages(
+                    newImages: [fileImage],
+                  );
+                  '??? noluyor'.log();
                 },
                 child: const Text('Take a picture'),
               ),
@@ -109,7 +103,7 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
           ElevatedButton(
             // TODO 0 fotoğraf olunca işlevini de kaybettirebilirsin.
             onPressed: () {
-              if (context.read<ProductNotifier>().product.images.isEmpty) {
+              if (context.read<ProductNotifier>().images.isEmpty) {
                 const snackBar = SnackBar(
                   content: Text('You must select at least one photo'),
                 );

@@ -1,12 +1,9 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/app/app_constants.dart';
 import 'package:second_hand/core/init/localization/language_manager.dart';
@@ -19,6 +16,7 @@ import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/service/auth/bloc/app_state.dart';
 import 'package:second_hand/service/auth/firebase_auth_provider.dart';
+import 'package:second_hand/view/app/bottom_navigation_view.dart';
 import 'package:second_hand/view/authenticate/forgot_password_view.dart';
 import 'package:second_hand/view/authenticate/login_view.dart';
 import 'package:second_hand/view/authenticate/register_view.dart';
@@ -122,7 +120,7 @@ class App extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is AppStateLoggedIn) {
-          return const DenemePhotoView(); // uygulmaya giriş
+          return const BottomNavigationView(); // uygulmaya giriş
 
         } else if (state is AppStateNeedsVerification) {
           return const VerifyEmailView();
@@ -142,85 +140,85 @@ class App extends StatelessWidget {
   }
 }
 
-class DenemePhotoView extends StatefulWidget {
-  const DenemePhotoView({Key? key}) : super(key: key);
+// class DenemePhotoView extends StatefulWidget {
+//   const DenemePhotoView({Key? key}) : super(key: key);
 
-  @override
-  State<DenemePhotoView> createState() => _DenemePhotoViewState();
-}
+//   @override
+//   State<DenemePhotoView> createState() => _DenemePhotoViewState();
+// }
 
-class _DenemePhotoViewState extends State<DenemePhotoView> {
-  late final ImagePicker _picker;
+// class _DenemePhotoViewState extends State<DenemePhotoView> {
+//   late final ImagePicker _picker;
 
-  @override
-  void initState() {
-    _picker = ImagePicker();
-    super.initState();
-  }
+//   @override
+//   void initState() {
+//     _picker = ImagePicker();
+//     super.initState();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                onPressed: () async {
-                  final List<XFile>? images = await _picker.pickMultiImage(
-                    maxHeight: 1024,
-                    maxWidth: 1024,
-                    imageQuality: 50,
-                  );
-                },
-                child: const Text('gallrey'),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  final XFile? image = await _picker.pickImage(source: ImageSource.camera);
-                  final uploadTask = await FirebaseStorage.instance.ref('products').child('bursa').putFile(
-                        File(image!.path),
-                      );
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(),
+//       body: Column(
+//         children: [
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceAround,
+//             children: [
+//               ElevatedButton(
+//                 onPressed: () async {
+//                   final List<XFile>? images = await _picker.pickMultiImage(
+//                     maxHeight: 1024,
+//                     maxWidth: 1024,
+//                     imageQuality: 50,
+//                   );
+//                 },
+//                 child: const Text('gallrey'),
+//               ),
+//               ElevatedButton(
+//                 onPressed: () async {
+//                   final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+//                   final uploadTask = await FirebaseStorage.instance.ref('products').child('bursa').putFile(
+//                         File(image!.path),
+//                       );
 
-                  uploadTask.ref.fullPath.log();
-                  adan = uploadTask.ref.fullPath;
-                },
-                child: const Text('camera'),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              ElevatedButton(
-                onPressed: () async {
-                  final storageRef = FirebaseStorage.instance.ref('products');
+//                   uploadTask.ref.fullPath.log();
+//                   adan = uploadTask.ref.fullPath;
+//                 },
+//                 child: const Text('camera'),
+//               ),
+//             ],
+//           ),
+//           Row(
+//             children: [
+//               ElevatedButton(
+//                 onPressed: () async {
+//                   final storageRef = FirebaseStorage.instance.ref('products');
 
-                  final pathReference = storageRef.child('adana');
+//                   final pathReference = storageRef.child('adana');
 
-                  bro = pathReference;
-                  setState(() {});
-                },
-                child: const Text('get image'),
-              ),
-            ],
-          ),
-          bro == null
-              ? const Text('data')
-              : Expanded(
-                  child: StorageImageView(
-                    image: bro!,
-                  ),
-                ),
-        ],
-      ),
-    );
-  }
-}
+//                   bro = pathReference;
+//                   setState(() {});
+//                 },
+//                 child: const Text('get image'),
+//               ),
+//             ],
+//           ),
+//           bro == null
+//               ? const Text('data')
+//               : Expanded(
+//                   child: StorageImageView(
+//                     image: bro!,
+//                   ),
+//                 ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-Reference? bro;
-String adan = '';
+// Reference? bro;
+// String adan = '';
 
 class StorageImageView extends StatelessWidget {
   final Reference image;

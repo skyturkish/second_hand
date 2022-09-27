@@ -1,5 +1,11 @@
+import 'dart:io';
+
+import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/cloud/base-service.dart';
+import 'package:second_hand/service/storage/upload_image.dart';
 import 'dart:developer' as devtools show log;
+
+import 'package:uuid/uuid.dart';
 
 extension Log on Object {
   void log() => devtools.log(toString());
@@ -15,70 +21,30 @@ class GroupCloudFireStoreService extends CloudFireStoreBaseService {
 
   static GroupCloudFireStoreService? _instance;
 
-  // Future<void> createProduct({required Product product}) async {
-  //   await collection.doc().set(
-  //         product.toMap(),
-  //       );
+  Future<void> createProduct({required Product product, required List<File> images}) async {
+    for (var image in images) {
+      final String imageId = const Uuid().v4();
 
-  //   for (var image in product.images) {
-  //     await uploadProductPhoto(
-  //       file: image,
-  //       productId: product.productId,
-  //     );
-  //   }
-  // }
+      await uploadProductPhoto(
+        file: image,
+        productId: product.productId,
+        childUUID: imageId,
+      );
+      product.imagesPath.add('products/${product.productId}/$imageId');
+    }
 
-  // Future<List<Product>> getAllProductsWithoutImages() async {
-  //   final storageRef = FirebaseStorage.instance.ref('products');
+    await collection.doc().set(
+          product.toMap(),
+        );
+  }
 
-  //   final documents = await collection.get();
-
-  //   Iterable<Product> products = documents.docs.map(
-  //     (product) => Product.fromFirestore(
-  //       product,
-  //       null,
-  //     ),
-  //   );
-
-  //   final productsList = products.toList();
-
-  // for (var product in productsList) {
-  //   final images = await getImages(product.productId);
-  //   for (var image in images) {
-  //     final uint8List = await image.getData();
-  //     final file = File.fromRawPath(uint8List!);
-
-  //     product.images.add(file);
-  //     product.images.length.log();
-  //   }
-  // }
-  // productsList[0].title.log();
-  // productsList[0].images.length.log();
-
-  //   return productsList.toList();
-  // }
-
-  // Future<List<Product>> getAllProducts() async {
-  //   final storageRef = FirebaseStorage.instance.ref('products');
-
-  //   final documents = await collection.get();
-
-  //   final products = documents.docs.map(
-  //     (product) => Product.fromFirestore(
-  //       product,
-  //       null,
-  //     ),
-  //   );
-
-  //   for (var i = 0; i < products.length; i++) {
-  //     final references = await getImages(products.toList()[i].productId);
-  //     for (var c = 0; c < references.length; c++) {
-  //       final uint8List = await references.toList()[c].getData();
-  //       final file = File.fromRawPath(uint8List!);
-  //       products.toList()[i].images.add(file);
-  //     }
-  //   }
-
-  //   return products.toList();
-  // }
+  Future<List<Product>?> getAllProducts() async {
+    final querySnapShot = await collection.get();
+    final products = querySnapShot.docs.map(
+      (queryDocumentSnapshot) => Product.fromMap(
+        queryDocumentSnapshot.data(),
+      ),
+    );
+    return products.toList();
+  }
 }

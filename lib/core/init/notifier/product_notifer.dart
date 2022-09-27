@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:second_hand/models/product.dart';
 
@@ -17,13 +19,22 @@ class ProductNotifier extends ChangeNotifier {
 
   ProductNotifier._init();
 
+  List<File> images = [];
+
+  void addImages({required List<File> newImages}) {
+    for (var image in newImages) {
+      images.add(image);
+      notifyListeners();
+    }
+  }
+
   Product product = Product(
     productId: '',
     ownerId: '',
     state: '',
     title: '',
     description: '',
-    images: [],
+    imagesPath: [],
     price: 0,
   );
 
@@ -36,19 +47,17 @@ class ProductNotifier extends ChangeNotifier {
       state: '',
       title: '',
       description: '',
-      images: [],
+      imagesPath: [],
       price: 0,
     );
   }
 
-  // void addimages({
-  //   required List<File> newImages,
-  // }) {
-  //   for (var newImage in newImages) {
-  //     product.images.add(newImage);
-  //   }
-  //   notifyListeners();
-  // }
+  void addimagesPath({
+    required String newPath,
+  }) {
+    product.imagesPath.add(newPath);
+    notifyListeners();
+  }
 
   void setProduct({
     String? productId,
@@ -64,14 +73,14 @@ class ProductNotifier extends ChangeNotifier {
     product.state = state ?? product.state;
     product.title = title ?? product.title;
     product.description = description ?? product.description;
-    product.images = images ?? product.images;
+    product.imagesPath = images ?? product.imagesPath;
     product.price = price ?? product.price;
 
     notifyListeners();
   }
 
   void skytoString() {
-    'productId: ${product.productId}, ownerId: ${product.ownerId}, state: ${product.state},title: ${product.title},description: ${product.description},images: ${product.images},price: ${product.price}'
+    'productId: ${product.productId}, ownerId: ${product.ownerId}, state: ${product.state},title: ${product.title},description: ${product.description},images: ${product.imagesPath},price: ${product.price}'
         .log();
   }
 }

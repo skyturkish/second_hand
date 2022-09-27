@@ -4,7 +4,7 @@ class Product {
   String state;
   String title;
   String description;
-  List<String> images;
+  List<String> imagesPath; // referans'lara kolay erişebilmen için tutacaksın, referans path'lerini
   int price;
   //  final String location; // TODO
 
@@ -15,7 +15,7 @@ class Product {
     required this.title,
     required this.description,
     required this.price,
-    this.images = const [],
+    this.imagesPath = const [],
   });
 
   Map<String, dynamic> toMap() {
@@ -26,7 +26,7 @@ class Product {
     result.addAll({'state': state});
     result.addAll({'title': title});
     result.addAll({'description': description});
-    result.addAll({'images': images});
+    result.addAll({'imagesPath': imagesPath});
     result.addAll({'price': price});
 
     return result;
@@ -39,7 +39,7 @@ class Product {
       state: map['state'] ?? '',
       title: map['title'] ?? '',
       description: map['description'] ?? '',
-      images: List<String>.from(map['images']),
+      imagesPath: List<String>.from(map['imagesPath']),
       price: map['price']?.toInt() ?? 0,
     );
   }
