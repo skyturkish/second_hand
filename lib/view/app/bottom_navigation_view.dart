@@ -9,12 +9,6 @@ import 'package:second_hand/view/app/chats/chats_view.dart';
 import 'package:second_hand/view/app/home/home_view.dart';
 import 'package:second_hand/view/app/my_ads/my_ads_view.dart';
 
-import 'dart:developer' as devtools show log;
-
-extension Log on Object {
-  void log() => devtools.log(toString());
-}
-
 class BottomNavigationView extends StatefulWidget {
   const BottomNavigationView({Key? key}) : super(key: key);
 
@@ -60,16 +54,6 @@ class BottomNavigationViewState extends State<BottomNavigationView> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           NavigationService.instance.navigateToPage(path: NavigationConstants.INCLUDE_SOME_DETAILS);
-
-          // AuthService.firebase().currentUser!.id.log();
-          // final List<XFile>? adana = await _picker.pickMultiImage(maxHeight: 1024, maxWidth: 1024, imageQuality: 1024);
-          // for (var xfile in adana!) {
-          //   final file = File(xfile.path);
-          //   uploadImage(
-          //     file: file,
-          //     userId: AuthService.firebase().currentUser!.id,
-          //   );
-          // }
         },
         child: const Icon(
           Icons.camera_alt,

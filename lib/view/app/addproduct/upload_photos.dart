@@ -62,21 +62,17 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
             children: [
               ElevatedButton(
                 onPressed: () async {
-                  '??? noluyor'.log();
-
                   final List<XFile>? images = await _picker.pickMultiImage(
                     maxHeight: 1024,
                     maxWidth: 1024,
                     imageQuality: 50,
                   );
-
                   final fileimages = images!.map(
                     (xFile) => File(
                       xFile.path,
                     ),
                   );
 
-                  '??? noluyor'.log();
                   context.read<ProductNotifier>().addImages(
                         newImages: fileimages.toList(),
                       );
@@ -89,11 +85,9 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
 
                   final File fileImage = File(xFileimage!.path);
 
-                  
                   context.read<ProductNotifier>().addImages(
                     newImages: [fileImage],
                   );
-                  '??? noluyor'.log();
                 },
                 child: const Text('Take a picture'),
               ),

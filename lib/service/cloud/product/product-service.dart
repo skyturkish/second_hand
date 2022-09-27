@@ -3,13 +3,7 @@ import 'dart:io';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/cloud/base-service.dart';
 import 'package:second_hand/service/storage/upload_image.dart';
-import 'dart:developer' as devtools show log;
-
 import 'package:uuid/uuid.dart';
-
-extension Log on Object {
-  void log() => devtools.log(toString());
-}
 
 class GroupCloudFireStoreService extends CloudFireStoreBaseService {
   static GroupCloudFireStoreService get instance {
