@@ -118,7 +118,8 @@ class App extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is AppStateLoggedIn) {
-          return const BottomNavigationView(); // uygulmaya giriş
+          return const DenemePhotoView(); // uygulmaya giriş
+
         } else if (state is AppStateNeedsVerification) {
           return const VerifyEmailView();
         } else if (state is AppStateLoggedOut) {
@@ -133,6 +134,17 @@ class App extends StatelessWidget {
           );
         }
       },
+    );
+  }
+}
+
+class DenemePhotoView extends StatelessWidget {
+  const DenemePhotoView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Row(children: const []),
     );
   }
 }

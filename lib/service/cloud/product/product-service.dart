@@ -1,10 +1,4 @@
-import 'dart:io';
-
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/cloud/base-service.dart';
-import 'package:second_hand/service/storage/upload_image.dart';
-
 import 'dart:developer' as devtools show log;
 
 extension Log on Object {
@@ -21,48 +15,48 @@ class GroupCloudFireStoreService extends CloudFireStoreBaseService {
 
   static GroupCloudFireStoreService? _instance;
 
-  Future<void> createProduct({required Product product}) async {
-    await collection.doc().set(
-          product.toMap(),
-        );
+  // Future<void> createProduct({required Product product}) async {
+  //   await collection.doc().set(
+  //         product.toMap(),
+  //       );
 
-    for (var image in product.images) {
-      await uploadProductPhoto(
-        file: image,
-        productId: product.productId,
-      );
-    }
-  }
+  //   for (var image in product.images) {
+  //     await uploadProductPhoto(
+  //       file: image,
+  //       productId: product.productId,
+  //     );
+  //   }
+  // }
 
-  Future<List<Product>> getAllProductsWithoutImages() async {
-    final storageRef = FirebaseStorage.instance.ref('products');
+  // Future<List<Product>> getAllProductsWithoutImages() async {
+  //   final storageRef = FirebaseStorage.instance.ref('products');
 
-    final documents = await collection.get();
+  //   final documents = await collection.get();
 
-    Iterable<Product> products = documents.docs.map(
-      (product) => Product.fromFirestore(
-        product,
-        null,
-      ),
-    );
+  //   Iterable<Product> products = documents.docs.map(
+  //     (product) => Product.fromFirestore(
+  //       product,
+  //       null,
+  //     ),
+  //   );
 
-    final productsList = products.toList();
+  //   final productsList = products.toList();
 
-    for (var product in productsList) {
-      final images = await getImages(product.productId);
-      for (var image in images) {
-        final uint8List = await image.getData();
-        final file = File.fromRawPath(uint8List!);
+  // for (var product in productsList) {
+  //   final images = await getImages(product.productId);
+  //   for (var image in images) {
+  //     final uint8List = await image.getData();
+  //     final file = File.fromRawPath(uint8List!);
 
-        product.images.add(file);
-        product.images.length.log();
-      }
-    }
-    productsList[0].title.log();
-    productsList[0].images.length.log();
+  //     product.images.add(file);
+  //     product.images.length.log();
+  //   }
+  // }
+  // productsList[0].title.log();
+  // productsList[0].images.length.log();
 
-    return productsList.toList();
-  }
+  //   return productsList.toList();
+  // }
 
   // Future<List<Product>> getAllProducts() async {
   //   final storageRef = FirebaseStorage.instance.ref('products');

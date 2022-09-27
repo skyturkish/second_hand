@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
@@ -10,7 +8,6 @@ import 'package:second_hand/view/app/account/account_view.dart';
 import 'package:second_hand/view/app/chats/chats_view.dart';
 import 'package:second_hand/view/app/home/home_view.dart';
 import 'package:second_hand/view/app/my_ads/my_ads_view.dart';
-import 'package:uuid/uuid.dart';
 
 import 'dart:developer' as devtools show log;
 
@@ -27,16 +24,7 @@ class BottomNavigationView extends StatefulWidget {
 
 class BottomNavigationViewState extends State<BottomNavigationView> {
 // TODO bunun serviste olması lazım aslında
-  Future<bool> uploadImage({
-    required File file,
-    required String userId,
-  }) =>
-      FirebaseStorage.instance
-          .ref(userId)
-          .child(const Uuid().v4())
-          .putFile(file)
-          .then((_) => true)
-          .catchError((_) => false);
+
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {

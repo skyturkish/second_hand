@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -45,18 +42,20 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
             child: PageView.builder(
               itemCount: context.watch<ProductNotifier>().product.images.length,
               itemBuilder: (context, index) {
-                return context.watch<ProductNotifier>().product.images.isEmpty
-                    ? Center(
-                        child: Container(
-                          height: 100,
-                          width: 100,
-                          color: Colors.black,
-                        ),
-                      )
-                    : Image.file(
-                        context.watch<ProductNotifier>().product.images[index],
-                        fit: BoxFit.cover,
-                      );
+                return const Text('data');
+
+                // context.watch<ProductNotifier>().product.images.isEmpty
+                //     ? Center(
+                //         child: Container(
+                //           height: 100,
+                //           width: 100,
+                //           color: Colors.black,
+                //         ),
+                //       )
+                //     : Image.file(
+                //         context.watch<ProductNotifier>().product.images[index],
+                //         fit: BoxFit.cover,
+                //       );
               },
             ),
           ),
@@ -69,38 +68,38 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
             children: [
               ElevatedButton(
                 onPressed: () async {
-                  '??? noluyor'.log();
+                  // '??? noluyor'.log();
 
-                  final List<XFile>? images = await _picker.pickMultiImage(
-                    maxHeight: 1024,
-                    maxWidth: 1024,
-                    imageQuality: 50,
-                  );
+                  // final List<XFile>? images = await _picker.pickMultiImage(
+                  //   maxHeight: 1024,
+                  //   maxWidth: 1024,
+                  //   imageQuality: 50,
+                  // );
 
-                  final fileimages = images!.map(
-                    (xFile) => File(
-                      xFile.path,
-                    ),
-                  );
+                  // final fileimages = images!.map(
+                  //   (xFile) => File(
+                  //     xFile.path,
+                  //   ),
+                  // );
 
-                  '??? noluyor'.log();
-                  context.read<ProductNotifier>().addimages(
-                        newImages: fileimages.toList(),
-                      );
+                  // '??? noluyor'.log();
+                  // context.read<ProductNotifier>().addimages(
+                  //       newImages: fileimages.toList(),
+                  //     );
                 },
                 child: const Text('From gallery'),
               ),
               ElevatedButton(
                 onPressed: () async {
-                  final XFile? xFileimage = await _picker.pickImage(source: ImageSource.camera);
+                  // final XFile? xFileimage = await _picker.pickImage(source: ImageSource.camera);
 
-                  final File fileImage = File(xFileimage!.path);
-                  fileImage.readAsBytes().then((value) => value);
-                  context.read<ProductNotifier>().addimages(
-                    newImages: [fileImage],
-                  );
-                  '??? noluyor'.log();
-                  fileImage.readAsStringSync(encoding: utf8).loga();
+                  // final File fileImage = File(xFileimage!.path);
+                  // fileImage.readAsBytes().then((value) => value);
+                  // context.read<ProductNotifier>().addimages(
+                  //   newImages: [fileImage],
+                  // );
+                  // '??? noluyor'.log();
+                  // fileImage.readAsStringSync(encoding: utf8).loga();
                 },
                 child: const Text('Take a picture'),
               ),

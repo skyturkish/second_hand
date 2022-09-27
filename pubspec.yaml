@@ -35,9 +35,11 @@ dependencies:
   # Firebase
   firebase_core: ^1.22.0
   firebase_auth: ^3.8.0
-  cloud_firestore: ^3.4.7
   firebase_analytics: ^9.3.4
-  firebase_storage: ^10.3.8
+
+  #  Cache
+  cached_network_image: ^3.2.2
+  cloud_firestore: ^3.4.7
 
   # State Management
   flutter_bloc: ^8.1.1

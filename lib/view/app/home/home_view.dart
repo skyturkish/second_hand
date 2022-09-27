@@ -10,42 +10,38 @@ class HomeView extends StatefulWidget {
 }
 
 class HomeViewState extends State<HomeView> {
+  late final List<Product>? products;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Future<void> getAll() async {
+    //products = await GroupCloudFireStoreService.instance.getAllProducts();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: GroupCloudFireStoreService.instance.getAllProductsWithoutImages(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final data = snapshot.data as List<Product>;
-
-            return GridView.builder(
+      body: products == null
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Center(
+              child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1,
+                  crossAxisCount: 5,
                   crossAxisSpacing: 5.0,
                   mainAxisSpacing: 5.0,
                 ),
-                itemCount: data.length,
+                itemCount: products!.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Column(
-                      children: [
-                        Text(data[index].title),
-                        Expanded(
-                          child: Image.file(
-                            he
-                            data[index].images.first,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                });
-          } else {
-            return const CircularProgressIndicator();
-          }
-        },
-      ),
+                  return const Text('data');
+                },
+              ),
+            ),
     );
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:second_hand/models/product.dart';
 
@@ -43,14 +41,14 @@ class ProductNotifier extends ChangeNotifier {
     );
   }
 
-  void addimages({
-    required List<File> newImages,
-  }) {
-    for (var newImage in newImages) {
-      product.images.add(newImage);
-    }
-    notifyListeners();
-  }
+  // void addimages({
+  //   required List<File> newImages,
+  // }) {
+  //   for (var newImage in newImages) {
+  //     product.images.add(newImage);
+  //   }
+  //   notifyListeners();
+  // }
 
   void setProduct({
     String? productId,
@@ -58,7 +56,7 @@ class ProductNotifier extends ChangeNotifier {
     String? state,
     String? title,
     String? description,
-    List<File>? images,
+    List<String>? images,
     int? price,
   }) {
     product.productId = productId ?? product.productId;

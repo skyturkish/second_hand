@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:second_hand/core/extension/context_extension.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
-import 'package:second_hand/service/cloud/product/product-service.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 import 'package:uuid/uuid.dart';
 
@@ -63,9 +62,9 @@ class SetAPriceViewState extends State<SetAPriceView> {
                       const Duration(milliseconds: 10),
                     );
                     context.read<ProductNotifier>().skytoString();
-                    GroupCloudFireStoreService.instance.createProduct(
-                      product: context.read<ProductNotifier>().product,
-                    );
+                    // GroupCloudFireStoreService.instance.createProduct(
+                    //   product: context.read<ProductNotifier>().product,
+                    // );
                     context.read<ProductNotifier>().clearProduct();
 
                     Navigator.of(context).pop();
