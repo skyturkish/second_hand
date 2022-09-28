@@ -60,31 +60,36 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // TODO theme'leri başka yere al
-      theme: ThemeData.light().copyWith(
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Colors.red,
+      theme: ThemeData.dark().copyWith(
+        appBarTheme: const AppBarTheme(
+          //titleTextStyle: TextStyle(color: Colors.black87),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
         ),
-        inputDecorationTheme: const InputDecorationTheme(
-          hintStyle: TextStyle(color: Colors.black),
-          labelStyle: TextStyle(color: Colors.black),
-          iconColor: Color.fromARGB(255, 14, 13, 13),
-        ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: const Color.fromARGB(255, 141, 134, 134),
-          showUnselectedLabels: true,
-          selectedIconTheme: IconThemeData(
-            color: Theme.of(context).errorColor,
-          ),
-          selectedLabelStyle: TextStyle(
-            color: Theme.of(context).errorColor,
-          ),
-          unselectedIconTheme: IconThemeData(
-            color: Theme.of(context).highlightColor,
-          ),
-          unselectedLabelStyle: TextStyle(
-            color: Theme.of(context).errorColor,
-          ),
-        ),
+        // textSelectionTheme: const TextSelectionThemeData(
+        //   cursorColor: Colors.red,
+        // ),
+        // inputDecorationTheme: const InputDecorationTheme(
+        //   hintStyle: TextStyle(color: Colors.black),
+        //   labelStyle: TextStyle(color: Colors.black),
+        //   iconColor: Color.fromARGB(255, 14, 13, 13),
+        // ),
+        // bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        //   backgroundColor: const Color.fromARGB(255, 141, 134, 134),
+        //   showUnselectedLabels: true,
+        //   selectedIconTheme: IconThemeData(
+        //     color: Theme.of(context).errorColor,
+        //   ),
+        //   selectedLabelStyle: TextStyle(
+        //     color: Theme.of(context).errorColor,
+        //   ),
+        //   unselectedIconTheme: IconThemeData(
+        //     color: Theme.of(context).highlightColor,
+        //   ),
+        //   unselectedLabelStyle: TextStyle(
+        //     color: Theme.of(context).errorColor,
+        //   ),
+        // ),
       ),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

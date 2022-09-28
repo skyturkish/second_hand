@@ -6,6 +6,18 @@ import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 
+enum ProductState {
+  verybad(name: 'Very Bad'),
+  bad(name: 'Bad'),
+  normal(name: 'Normal'),
+  good(name: 'Good'),
+  verygood(name: 'Very Good');
+
+  const ProductState({required this.name});
+
+  final String name;
+}
+
 class IncludeSomeDetailsView extends StatefulWidget {
   const IncludeSomeDetailsView({Key? key}) : super(key: key);
 
@@ -17,6 +29,8 @@ class IncludeSomeDetailsViewState extends State<IncludeSomeDetailsView> {
   // TODO texteditincontroller'e ayrı ayrı validator yazmalısın
   // TODO minimmum text miktarı olacak unutma
   final _formKey = GlobalKey<FormState>();
+
+  ProductState valueProductState = ProductState.values.first;
 
   late final TextEditingController _stateController;
   late final TextEditingController _titleController;
@@ -53,14 +67,6 @@ class IncludeSomeDetailsViewState extends State<IncludeSomeDetailsView> {
               Padding(
                 padding: context.paddingOnlyTopSmall,
                 child: CustomTextFormField(
-                  controller: _stateController,
-                  labelText: 'state',
-                  prefix: const Icon(Icons.stairs_outlined),
-                ),
-              ),
-              Padding(
-                padding: context.paddingOnlyTopSmall,
-                child: CustomTextFormField(
                   controller: _titleController,
                   labelText: 'title',
                   prefix: const Icon(Icons.title_outlined),
@@ -74,6 +80,25 @@ class IncludeSomeDetailsViewState extends State<IncludeSomeDetailsView> {
                   prefix: const Icon(Icons.description),
                 ),
               ),
+              DropdownButton<ProductState>(
+                value: valueProductState,
+                items: ProductState.values
+                    .map<DropdownMenuItem<ProductState>>(
+                      (value) => DropdownMenuItem<ProductState>(
+                        value: value,
+                        child: Text(value.name),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (productState) {
+                  setState(
+                    () {
+                      _stateController.text = productState!.name;
+                      valueProductState = productState;
+                    },
+                  );
+                },
+              ),
               const Spacer(),
               ElevatedButton(
                 onPressed: () {
@@ -83,10 +108,6 @@ class IncludeSomeDetailsViewState extends State<IncludeSomeDetailsView> {
                           state: _stateController.text,
                           description: _describeController.text,
                         );
-                    // TODO bunu kaldırmayı dene
-                    Future.delayed(
-                      const Duration(milliseconds: 10),
-                    );
                     NavigationService.instance.navigateToPage(path: NavigationConstants.UPLOAD_PHOTOS);
                   }
                 },

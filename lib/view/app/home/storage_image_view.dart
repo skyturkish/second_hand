@@ -26,7 +26,7 @@ class StorageImageView extends StatelessWidget {
               final data = snapshot.data!;
               return Image.memory(
                 data,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               );
             }
             // else if (snapshot.hasError) { // handle error
