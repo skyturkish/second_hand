@@ -12,7 +12,7 @@ With this application, you can buy and sell second-hand goods, can contact the s
 - [ ] Create an account, get informations from user
 - [ ] Product
   - [X] Pick images and to make the product sellable.
-  - [ ] to be able to see which products are being sold.
+  - [X] to be able to see which products are being sold.
 - [ ] Communication
   - [ ] Messenger
   - [ ] Filtering messages
