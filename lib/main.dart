@@ -8,6 +8,8 @@ import 'package:second_hand/core/init/localization/language_manager.dart';
 import 'package:second_hand/core/init/navigation/navigation_route.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
+import 'package:second_hand/core/init/notifier/provider_list.dart';
+import 'package:second_hand/core/init/notifier/theme_notifer.dart';
 import 'package:second_hand/firebase_options.dart';
 import 'package:second_hand/loading/loading_screen.dart';
 import 'package:second_hand/service/auth/bloc/app_bloc.dart';
@@ -26,6 +28,7 @@ void main() async {
     // TODO providerları başka yere al
     MultiProvider(
       providers: [
+        ...ApplicationProvider.instance.dependItems,
         BlocProvider<AppBloc>(
           create: (context) => AppBloc(
             FirebaseAuthProvider(),
@@ -60,37 +63,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // TODO theme'leri başka yere al
-      theme: ThemeData.dark().copyWith(
-        appBarTheme: const AppBarTheme(
-          //titleTextStyle: TextStyle(color: Colors.black87),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-        // textSelectionTheme: const TextSelectionThemeData(
-        //   cursorColor: Colors.red,
-        // ),
-        // inputDecorationTheme: const InputDecorationTheme(
-        //   hintStyle: TextStyle(color: Colors.black),
-        //   labelStyle: TextStyle(color: Colors.black),
-        //   iconColor: Color.fromARGB(255, 14, 13, 13),
-        // ),
-        // bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        //   backgroundColor: const Color.fromARGB(255, 141, 134, 134),
-        //   showUnselectedLabels: true,
-        //   selectedIconTheme: IconThemeData(
-        //     color: Theme.of(context).errorColor,
-        //   ),
-        //   selectedLabelStyle: TextStyle(
-        //     color: Theme.of(context).errorColor,
-        //   ),
-        //   unselectedIconTheme: IconThemeData(
-        //     color: Theme.of(context).highlightColor,
-        //   ),
-        //   unselectedLabelStyle: TextStyle(
-        //     color: Theme.of(context).errorColor,
-        //   ),
-        // ),
-      ),
+      theme: context.watch<ThemeNotifier>().currentTheme,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       onGenerateRoute: NavigationRoute.instance.generateRoute,

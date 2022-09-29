@@ -20,7 +20,7 @@ class SetAPriceViewState extends State<SetAPriceView> {
 
   @override
   void initState() {
-    _priceController = TextEditingController(text: context.read<ProductNotifier>().product.price.toString());
+    _priceController = TextEditingController();
     super.initState();
   }
 
@@ -49,36 +49,41 @@ class SetAPriceViewState extends State<SetAPriceView> {
                 prefix: const Icon(
                   Icons.money,
                 ),
+                onTap: () {
+                  setState(() {});
+                },
               ),
               ElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    final String productId = const Uuid().v4();
+                onPressed: _priceController.text == 0.toString()
+                    ? null
+                    : () async {
+                        if (_formKey.currentState!.validate()) {
+                          final String productId = const Uuid().v4();
 
-                    context.read<ProductNotifier>().setProduct(
-                          price: int.parse(_priceController.text),
-                          ownerId: AuthService.firebase().currentUser!.id,
-                          productId: productId,
-                        );
+                          context.read<ProductNotifier>().setProduct(
+                                price: int.parse(_priceController.text),
+                                ownerId: AuthService.firebase().currentUser!.id,
+                                productId: productId,
+                              );
 
-                    Future.delayed(
-                      const Duration(milliseconds: 10),
-                    );
+                          Future.delayed(
+                            const Duration(milliseconds: 10),
+                          );
 
-                    context.read<ProductNotifier>().skytoString();
+                          context.read<ProductNotifier>().skytoString();
 
-                    GroupCloudFireStoreService.instance.createProduct(
-                      product: context.read<ProductNotifier>().product,
-                      images: context.read<ProductNotifier>().images,
-                    );
+                          GroupCloudFireStoreService.instance.createProduct(
+                            product: context.read<ProductNotifier>().product,
+                            images: context.read<ProductNotifier>().images,
+                          );
 
-                    context.read<ProductNotifier>().clearProduct();
+                          context.read<ProductNotifier>().clearProduct();
 
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
-                  }
-                },
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        }
+                      },
                 child: const Text(
                   'Release Product',
                 ),

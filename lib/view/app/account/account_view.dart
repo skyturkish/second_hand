@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:second_hand/core/init/notifier/theme_notifer.dart';
 
 class AccountView extends StatefulWidget {
   const AccountView({Key? key}) : super(key: key);
@@ -10,10 +12,13 @@ class AccountView extends StatefulWidget {
 class AccountViewState extends State<AccountView> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text(
-          'Account',
+        child: ElevatedButton(
+          onPressed: () {
+            context.read<ThemeNotifier>().changeValue();
+          },
+          child: const Text('change theme'),
         ),
       ),
     );

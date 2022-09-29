@@ -50,6 +50,7 @@ class ProductNotifier extends ChangeNotifier {
       imagesPath: [],
       price: 0,
     );
+    images = [];
   }
 
   void addimagesPath({

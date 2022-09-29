@@ -30,7 +30,7 @@ class IncludeSomeDetailsViewState extends State<IncludeSomeDetailsView> {
   // TODO minimmum text miktarı olacak unutma
   final _formKey = GlobalKey<FormState>();
 
-  ProductState valueProductState = ProductState.values.first;
+  ProductState valueProductState = ProductState.values.last;
 
   late final TextEditingController _stateController;
   late final TextEditingController _titleController;
