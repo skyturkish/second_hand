@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:second_hand/core/extension/context_extension.dart';
+import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/if_debugging.dart';
 import 'package:second_hand/service/auth/auth_exceptions.dart';
 import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
@@ -22,8 +23,8 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void initState() {
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
+    _emailController = TextEditingController(text: 'gokturk.acr2002@gmail.com'.ifDebugging);
+    _passwordController = TextEditingController(text: 'deniyorum123'.ifDebugging);
     super.initState();
   }
 

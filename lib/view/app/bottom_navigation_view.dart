@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
-import 'package:second_hand/service/auth/bloc/app_bloc.dart';
-import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/view/app/account/account_view.dart';
 import 'package:second_hand/view/app/chats/chats_view.dart';
 import 'package:second_hand/view/app/home/home_view.dart';
@@ -29,18 +26,6 @@ class BottomNavigationViewState extends State<BottomNavigationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                context.read<AppBloc>().add(
-                      const AppEventLogOut(),
-                    );
-              },
-              icon: const Icon(Icons.logout))
-        ],
-      ),
       body: IndexedStack(
         index: _selectedIndex,
         children: const <Widget>[

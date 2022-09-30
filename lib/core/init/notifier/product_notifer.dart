@@ -9,6 +9,7 @@ extension Log on Object {
   void log() => devtools.log(toString());
 }
 
+// TODO allah aşkına bunun gerçekten provider olması gerekiyor mu ?
 class ProductNotifier extends ChangeNotifier {
   static ProductNotifier? _instance;
 
@@ -57,7 +58,7 @@ class ProductNotifier extends ChangeNotifier {
     required String newPath,
   }) {
     product.imagesPath.add(newPath);
-    notifyListeners();
+//    notifyListeners(); //  bunu vermek zorunda değilsin aslında ? değil mi
   }
 
   void setProduct({

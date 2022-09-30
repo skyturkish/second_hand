@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:second_hand/service/auth/auth_provider.dart';
+import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/service/auth/bloc/app_state.dart';
+import 'package:second_hand/service/cloud/user/user_service.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc(AuthProvider provider) : super(const AppStateUninitialized(isLoading: true)) {
@@ -82,7 +83,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           ),
         );
       } else if (!user.isEmailVerified) {
-        emit(const AppStateNeedsVerification(isLoading: false));
+        emit(
+          const AppStateNeedsVerification(
+            isLoading: false,
+          ),
+        );
       } else {
         emit(AppStateLoggedIn(
           user: user,
@@ -122,10 +127,15 @@ class AppBloc extends Bloc<AppEvent, AppState> {
               isLoading: false,
             ),
           );
-          emit(AppStateLoggedIn(
-            user: user,
-            isLoading: false,
-          ));
+          // TODO create user's information on cloudfirestore
+
+          emit(
+            AppStateLoggedIn(
+              user: user,
+              isLoading: false,
+            ),
+          );
+          await UserCloudFireStoreService.instance.createUser(userId: AuthService.firebase().currentUser!.id);
         }
       } on Exception catch (e) {
         emit(
@@ -158,89 +168,90 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       },
     );
 
-    on<AppEventGoToAccount>(
-      (event, emit) async {
-        final user = FirebaseAuth.instance.currentUser;
-        // log the user out if we don't have a current user
-        if (user == null) {
-          emit(
-            const AppStateLoggedOut(
-              isLoading: false,
-              exception: null,
-            ),
-          );
-          return;
-        }
-        emit(
-          const AppStateInAccountView(
-            exception: null,
-            isLoading: false,
-          ),
-        );
-      },
-    );
-    on<AppEventGoToMyAds>(
-      (event, emit) async {
-        final user = FirebaseAuth.instance.currentUser;
-        // log the user out if we don't have a current user
-        if (user == null) {
-          emit(
-            const AppStateLoggedOut(
-              isLoading: false,
-              exception: null,
-            ),
-          );
-          return;
-        }
-        emit(
-          const AppStateInMyAds(
-            exception: null,
-            isLoading: false,
-          ),
-        );
-      },
-    );
-    on<AppEventGoToChats>(
-      (event, emit) async {
-        final user = FirebaseAuth.instance.currentUser;
-        // log the user out if we don't have a current user
-        if (user == null) {
-          emit(
-            const AppStateLoggedOut(
-              isLoading: false,
-              exception: null,
-            ),
-          );
-          return;
-        }
-        emit(
-          const AppStateInChats(
-            exception: null,
-            isLoading: false,
-          ),
-        );
-      },
-    );
-    on<AppEventGoToHome>(
-      (event, emit) async {
-        final user = FirebaseAuth.instance.currentUser;
-        // log the user out if we don't have a current user
-        if (user == null) {
-          emit(
-            const AppStateLoggedOut(
-              isLoading: false,
-              exception: null,
-            ),
-          );
-          return;
-        }
-        emit(
-          const AppStateInHome(
-            exception: null,
-            isLoading: false,
-          ),
-        );
-      },
-    );
+    //   on<AppEventGoToAccount>(
+    //     (event, emit) async {
+    //       final user = FirebaseAuth.instance.currentUser;
+    //       // log the user out if we don't have a current user
+    //       if (user == null) {
+    //         emit(
+    //           const AppStateLoggedOut(
+    //             isLoading: false,
+    //             exception: null,
+    //           ),
+    //         );
+    //         return;
+    //       }
+    //       emit(
+    //         const AppStateInAccountView(
+    //           exception: null,
+    //           isLoading: false,
+    //         ),
+    //       );
+    //     },
+    //   );
+    //   on<AppEventGoToMyAds>(
+    //     (event, emit) async {
+    //       final user = FirebaseAuth.instance.currentUser;
+    //       // log the user out if we don't have a current user
+    //       if (user == null) {
+    //         emit(
+    //           const AppStateLoggedOut(
+    //             isLoading: false,
+    //             exception: null,
+    //           ),
+    //         );
+    //         return;
+    //       }
+    //       emit(
+    //         const AppStateInMyAds(
+    //           exception: null,
+    //           isLoading: false,
+    //         ),
+    //       );
+    //     },
+    //   );
+    //   on<AppEventGoToChats>(
+    //     (event, emit) async {
+    //       final user = FirebaseAuth.instance.currentUser;
+    //       // log the user out if we don't have a current user
+    //       if (user == null) {
+    //         emit(
+    //           const AppStateLoggedOut(
+    //             isLoading: false,
+    //             exception: null,
+    //           ),
+    //         );
+    //         return;
+    //       }
+    //       emit(
+    //         const AppStateInChats(
+    //           exception: null,
+    //           isLoading: false,
+    //         ),
+    //       );
+    //     },
+    //   );
+    //   on<AppEventGoToHome>(
+    //     (event, emit) async {
+    //       final user = FirebaseAuth.instance.currentUser;
+    //       // log the user out if we don't have a current user
+    //       if (user == null) {
+    //         emit(
+    //           const AppStateLoggedOut(
+    //             isLoading: false,
+    //             exception: null,
+    //           ),
+    //         );
+    //         return;
+    //       }
+    //       emit(
+    //         const AppStateInHome(
+    //           exception: null,
+    //           isLoading: false,
+    //         ),
+    //       );
+    //     },
+    //   );
+    //
   }
 }

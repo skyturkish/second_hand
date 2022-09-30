@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:second_hand/core/constants/enums/app_theme_enum.dart';
 
 class ThemeNotifier extends ChangeNotifier {
-  ThemeData _currentTheme = ThemeData.dark();
+  ThemeData _currentTheme = ThemeData.dark().copyWith(
+    appBarTheme: const AppBarTheme(
+      //titleTextStyle: TextStyle(color: Colors.black87),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+    ),
+  );
 
   AppThemes _currenThemeEnum = AppThemes.DARK;
 
@@ -12,13 +18,25 @@ class ThemeNotifier extends ChangeNotifier {
 
   ThemeData get currentTheme => _currentTheme;
 
-  void changeValue() {
+  void changeTheme() {
     AppThemes theme = currentThemeEnum;
     if (theme == AppThemes.LIGHT) {
-      _currentTheme = ThemeData.dark();
+      _currentTheme = ThemeData.dark().copyWith(
+        appBarTheme: const AppBarTheme(
+          // titleTextStyle: TextStyle(color: Colors.black87),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+      );
       _currenThemeEnum = AppThemes.DARK;
     } else if (theme == AppThemes.DARK) {
-      _currentTheme = ThemeData.light();
+      _currentTheme = ThemeData.light().copyWith(
+        appBarTheme: const AppBarTheme(
+          //titleTextStyle: titleTextStyle,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+      );
       _currenThemeEnum = AppThemes.LIGHT;
     } // else if (theme == AppThemes.CUSTOM_DARK) {
     // _currentTheme = ThemeData.dark().copyWith(

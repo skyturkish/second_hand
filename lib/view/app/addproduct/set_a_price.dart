@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:second_hand/core/extension/context_extension.dart';
+import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
@@ -72,7 +72,7 @@ class SetAPriceViewState extends State<SetAPriceView> {
 
                           context.read<ProductNotifier>().skytoString();
 
-                          GroupCloudFireStoreService.instance.createProduct(
+                          ProductCloudFireStoreService.instance.createProduct(
                             product: context.read<ProductNotifier>().product,
                             images: context.read<ProductNotifier>().images,
                           );

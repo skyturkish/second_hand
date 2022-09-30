@@ -7,7 +7,6 @@ import 'package:second_hand/core/constants/app/app_constants.dart';
 import 'package:second_hand/core/init/localization/language_manager.dart';
 import 'package:second_hand/core/init/navigation/navigation_route.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
-import 'package:second_hand/core/init/notifier/product_notifer.dart';
 import 'package:second_hand/core/init/notifier/provider_list.dart';
 import 'package:second_hand/core/init/notifier/theme_notifer.dart';
 import 'package:second_hand/firebase_options.dart';
@@ -15,7 +14,6 @@ import 'package:second_hand/loading/loading_screen.dart';
 import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/service/auth/bloc/app_state.dart';
-import 'package:second_hand/service/auth/firebase_auth_provider.dart';
 import 'package:second_hand/view/app/bottom_navigation_view.dart';
 import 'package:second_hand/view/authenticate/forgot_password_view.dart';
 import 'package:second_hand/view/authenticate/login_view.dart';
@@ -25,18 +23,9 @@ import 'package:second_hand/view/authenticate/verify_email_view.dart';
 void main() async {
   await _init();
   runApp(
-    // TODO providerları başka yere al
     MultiProvider(
       providers: [
         ...ApplicationProvider.instance.dependItems,
-        BlocProvider<AppBloc>(
-          create: (context) => AppBloc(
-            FirebaseAuthProvider(),
-          ),
-        ),
-        ChangeNotifierProvider<ProductNotifier>(
-          create: (context) => ProductNotifier.instance,
-        ),
       ],
       child: EasyLocalization(
         supportedLocales: LanguageManager.instance.supportedLocales,
