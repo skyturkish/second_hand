@@ -11,7 +11,7 @@ class CustomTextFormField extends StatefulWidget {
     this.line,
     this.enableSuggestions,
     this.hintText,
-    this.onTap,
+    this.onChanged,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -22,7 +22,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool passwordTextFormField;
   final int? line;
   final bool? enableSuggestions;
-  final void Function()? onTap;
+  final void Function(String text)? onChanged;
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
@@ -76,6 +76,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           }
           return null;
         },
-        onTap: widget.onTap);
+        onChanged: widget.onChanged);
   }
 }

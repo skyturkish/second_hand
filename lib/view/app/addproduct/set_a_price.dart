@@ -20,7 +20,7 @@ class SetAPriceViewState extends State<SetAPriceView> {
 
   @override
   void initState() {
-    _priceController = TextEditingController();
+    _priceController = TextEditingController(text: context.read<ProductNotifier>().currentProduct.price.toString());
     super.initState();
   }
 
@@ -49,12 +49,13 @@ class SetAPriceViewState extends State<SetAPriceView> {
                 prefix: const Icon(
                   Icons.money,
                 ),
-                onTap: () {
+                onChanged: (String text) {
+                  text.log();
                   setState(() {});
                 },
               ),
               ElevatedButton(
-                onPressed: _priceController.text == 0.toString()
+                onPressed: int.parse(_priceController.text) > 0
                     ? null
                     : () async {
                         if (_formKey.currentState!.validate()) {

@@ -35,10 +35,10 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
           SizedBox(
             height: context.dynamicHeight(0.33),
             width: context.dynamicWidth(0.90),
-            child: context.read<ProductNotifier>().images.isEmpty
+            child: context.watch<ProductNotifier>().images.isEmpty
                 ? Image.asset('assets/images/add_photo.png')
                 : PageView.builder(
-                    itemCount: context.read<ProductNotifier>().images.length,
+                    itemCount: context.watch<ProductNotifier>().images.length,
                     itemBuilder: (context, index) {
                       return Image.file(
                         context.read<ProductNotifier>().images[index],
@@ -66,7 +66,6 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
                       xFile.path,
                     ),
                   );
-
                   context.read<ProductNotifier>().addImages(
                         newImages: fileimages.toList(),
                       );
@@ -99,12 +98,11 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
                   crossAxisSpacing: 5.0,
                   mainAxisSpacing: 5.0,
                 ),
-                itemCount: context.read<ProductNotifier>().images.length,
+                itemCount: context.watch<ProductNotifier>().images.length,
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
                     onTap: () {
                       context.read<ProductNotifier>().removeImage(index: index);
-                      setState(() {});
                     },
                     child: Stack(
                       alignment: AlignmentDirectional.topEnd,

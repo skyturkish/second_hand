@@ -31,6 +31,7 @@ class ProductNotifier extends ChangeNotifier {
 
   void removeImage({required int index}) {
     images.removeAt(index);
+    notifyListeners();
   }
 
   Product product = Product(
@@ -62,7 +63,6 @@ class ProductNotifier extends ChangeNotifier {
     required String newPath,
   }) {
     product.imagesPath.add(newPath);
-//    notifyListeners(); //  bunu vermek zorunda değilsin aslında ? değil mi
   }
 
   void setProduct({
