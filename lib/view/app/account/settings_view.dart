@@ -5,8 +5,12 @@ import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
 
-class SettingsView extends StatelessWidget {
-  const SettingsView({Key? key}) : super(key: key);
+import 'dart:io';
+
+import 'package:url_launcher/url_launcher.dart';
+
+class SettingsView extends StatelessWidget with GalleryLaunch {
+  SettingsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +40,8 @@ class SettingsView extends StatelessWidget {
           ),
           OptionListTile(
             titleText: 'Delete account',
-            onTap: () {
-              // TODO
+            onTap: () async {
+              await open();
             },
           ),
           OptionListTile(
@@ -60,5 +64,17 @@ class SettingsView extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+mixin GalleryLaunch {
+  final String _iosPhotoScheme = 'photos-redirect://';
+  final String _androidPhotoScheme = 'content://media/external/images/media';
+
+  /// It'll be open gallery on device
+  ///
+  /// If you want to open specific image on android, you should be call media/56.png
+  Future<void> open() async {
+    await launchUrl(Uri.parse(Platform.isIOS ? _iosPhotoScheme : _androidPhotoScheme));
   }
 }

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_hand/core/init/navigation/navigation_route.dart';
-import 'package:second_hand/service/auth/bloc/app_bloc.dart';
-import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
 import 'package:second_hand/view/app/account/settings_view.dart';
 
@@ -33,7 +30,7 @@ class AccountViewState extends State<AccountView> {
             onTap: () {
               Navigator.of(context).push(
                 createRoute(
-                  widget: const SettingsView(),
+                  widget: SettingsView(),
                 ),
               );
             },
@@ -42,11 +39,7 @@ class AccountViewState extends State<AccountView> {
             titleText: 'Help & Support',
             leadingIcon: Icons.support_agent_outlined,
             subTitleText: 'Help center and legal terms',
-            onTap: () {
-              context.read<AppBloc>().add(
-                    const AppEventLogOut(),
-                  );
-            },
+            onTap: () async {},
           ),
         ],
       ),

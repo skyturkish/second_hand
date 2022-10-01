@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/cloud/base-service/base-service.dart';
+import 'package:second_hand/service/cloud/user/user_service.dart';
 import 'package:second_hand/service/storage/upload_image.dart';
 import 'package:uuid/uuid.dart';
 
@@ -18,9 +20,9 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
   Future<void> createProduct({required Product product, required List<File> images}) async {
     for (var image in images) {
       final String imageId = const Uuid().v4();
-
+      File compressedimage = await compressFile(image);
       await uploadProductPhoto(
-        file: image,
+        file: compressedimage,
         productId: product.productId,
         childUUID: imageId,
       );
@@ -33,16 +35,6 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
 
   Future<List<Product>?> getAllProducts() async {
     final querySnapShot = await collection.get();
-    final products = querySnapShot.docs.map(
-      (queryDocumentSnapshot) => Product.fromMap(
-        queryDocumentSnapshot.data(),
-      ),
-    );
-    return products.toList();
-  }
-
-  Future<List<Product>?> getAllOwnerProducts({required String ownerId}) async {
-    final querySnapShot = await collection.where('ownerId', isEqualTo: ownerId).get();
     final products = querySnapShot.docs.map(
       (queryDocumentSnapshot) => Product.fromMap(
         queryDocumentSnapshot.data(),
@@ -65,4 +57,50 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
       }
     }
   }
+
+  // Ya kullanıcının içinden ürünlere gideceksin ya da bir alltaki gibi kullanıcının bilgilerinden ürünlere gideceksin acaba hangisi daha iyi ?
+  Future<List<Product>?> getAllOwnerProducts({required String ownerId}) async {
+    final querySnapShot = await collection.where('ownerId', isEqualTo: ownerId).get();
+    final products = querySnapShot.docs.map(
+      (queryDocumentSnapshot) => Product.fromMap(
+        queryDocumentSnapshot.data(),
+      ),
+    );
+    return products.toList();
+  }
+
+  Future<List<Product>?> getAllFavoriteProducts({required String userId}) async {
+    final user = await UserCloudFireStoreService.instance.getUserInformationById(userId: userId);
+    if (user == null) return null;
+    final querySnapShot = await collection.where('productId', arrayContains: user.favoriteAds).get();
+    final products = querySnapShot.docs.map(
+      (queryDocumentSnapshot) => Product.fromMap(
+        queryDocumentSnapshot.data(),
+      ),
+    );
+    return products.toList();
+  }
+}
+
+// pat yine file.path yazıyormuşuz bunu da kullanabilirim belki
+// Future<File> testCompressAndGetFile(File file, String targetPath) async {
+//   var result = await FlutterImageCompress.compressAndGetFile(
+//     file.absolute.path,
+//     targetPath,
+//     quality: 88,
+//     rotate: 180,
+//   );
+
+//   print(file.lengthSync());
+//   print(result!.lengthSync());
+
+//   return result;
+// }
+
+Future<File> compressFile(File file) async {
+  File compressedFile = await FlutterNativeImage.compressImage(
+    file.path,
+    quality: 50,
+  );
+  return compressedFile;
 }

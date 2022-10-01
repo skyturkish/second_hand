@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
-import 'package:second_hand/view/_product/grid_view/product_grid_view.dart';
 
 import 'dart:developer' as devtools show log;
+
+import 'package:second_hand/view/_product/_widgets/grid_view/product_grid_view.dart';
 
 extension Log on Object {
   void log() => devtools.log(toString());
@@ -18,7 +19,7 @@ class AdsView extends StatefulWidget {
   State<AdsView> createState() => AdsViewState();
 }
 
-class AdsViewState extends State<AdsView> {
+class AdsViewState extends State<AdsView> with AutomaticKeepAliveClientMixin {
   final storageRef = FirebaseStorage.instance.ref();
 
   List<Product>? products;
@@ -49,4 +50,7 @@ class AdsViewState extends State<AdsView> {
             ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

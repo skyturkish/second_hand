@@ -27,8 +27,6 @@ class MyAdsViewState extends State<MyAdsView> with TickerProviderStateMixin {
           title: const Text('My Ads'),
           bottom: _myTabView(),
         ),
-        //    extendBody: true, // kazdığımız yeri Scaffold tekrar doldursun diyoruz
-        // bottomNavigationBar: BottomAppBar(child: _myTabView()),
         body: _tabbarView(),
       ),
     );
@@ -36,9 +34,7 @@ class MyAdsViewState extends State<MyAdsView> with TickerProviderStateMixin {
 
   TabBar _myTabView() {
     return TabBar(
-      indicatorColor: const Color.fromARGB(255, 226, 223, 40), // alttaki çizgini rengi
-      //labelColor:  Colors.red,
-      // unselectedLabelColor: Colors.green,
+      indicatorColor: const Color.fromARGB(255, 226, 223, 40),
       padding: EdgeInsets.zero,
       onTap: (int index) {},
       controller: _tabController,

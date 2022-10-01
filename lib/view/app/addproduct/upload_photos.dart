@@ -81,7 +81,10 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  final XFile? xFileimage = await _picker.pickImage(source: ImageSource.camera);
+                  final XFile? xFileimage = await _picker.pickImage(
+                    source: ImageSource.camera,
+                    imageQuality: 50,
+                  );
 
                   final File fileImage = File(xFileimage!.path);
 

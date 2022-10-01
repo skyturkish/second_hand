@@ -19,8 +19,8 @@ class UserInformationNotifier extends ChangeNotifier {
 
   Future<void> getUserInformation({required String userId}) async {
     // çok uzattın aga o ismi
-    final userInformationFromFirebase = await UserCloudFireStoreService.instance.getUserInformationById(id: userId);
-    _userInformation = UserInformation.fromMap(userInformationFromFirebase!);
+    final userInformationFromFirebase = await UserCloudFireStoreService.instance.getUserInformationById(userId: userId);
+    _userInformation = userInformationFromFirebase!;
     notifyListeners();
   }
 }

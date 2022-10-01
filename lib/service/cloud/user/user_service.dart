@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/cloud/base-service/base-service.dart';
 import 'package:uuid/uuid.dart';
@@ -24,9 +25,27 @@ class UserCloudFireStoreService extends CloudFireStoreBaseService {
     return doc.data() == null ? false : true;
   }
 
-  Future<Map<String, dynamic>?> getUserInformationById({required String id}) async {
-    var docRef = collection.doc(id);
+  Future<UserInformation?> getUserInformationById({required String userId}) async {
+    bool userExist = await isUserExist(userId: userId);
+    if (userExist == false) {
+      return null;
+    }
+    var docRef = collection.doc(userId);
     final doc = await docRef.get();
-    return doc.data();
+
+    return UserInformation.fromMap(doc.data()!);
+  }
+
+  // TODO bu burada mı olması lazım ? producta mı ? yoksa ayrı bir serviste mi ?
+  Future<void> addProductToFavorites({required String userId, required String productId}) async {
+    collection.doc(userId).update({
+      "favoriteAds": FieldValue.arrayUnion([productId])
+    });
+  }
+
+  Future<void> removeProductToFavorites({required String userId, required String productId}) async {
+    collection.doc(userId).update({
+      "favoriteAds": FieldValue.arrayRemove([productId])
+    });
   }
 }
