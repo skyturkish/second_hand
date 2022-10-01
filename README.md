@@ -10,10 +10,11 @@ With this application, you can buy and sell second-hand goods, can contact the s
   - [ ] Email & Password
   - [X] Google
 - [ ] Create an account, get informations from user
-- [ ] Product
+- [X] Product
   - [X] Pick images and to make the product sellable.
   - [X] to be able to see which products are being sold.
-  - [ ] addable favorite product.
+  - [X] addable favorite product.
+  - [X] manage your product
 - [ ] Communication
   - [ ] Messenger
   - [ ] Filtering messages
