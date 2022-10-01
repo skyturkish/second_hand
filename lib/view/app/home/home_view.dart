@@ -1,6 +1,7 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:second_hand/models/product.dart';
+import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
 import 'package:second_hand/view/_product/_widgets/grid_view/product_grid_view.dart';
 
@@ -29,7 +30,9 @@ class HomeViewState extends State<HomeView> {
   }
 
   Future<void> getAll() async {
-    products = await ProductCloudFireStoreService.instance.getAllProducts();
+    products =
+        //TODO authservice'den okayacağına kendi yaptığın providerdan oku
+        await ProductCloudFireStoreService.instance.getAllProducts(userId: AuthService.firebase().currentUser!.id);
     setState(() {});
   }
 

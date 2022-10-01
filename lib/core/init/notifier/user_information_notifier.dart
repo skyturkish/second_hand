@@ -21,6 +21,26 @@ class UserInformationNotifier extends ChangeNotifier {
     // çok uzattın aga o ismi
     final userInformationFromFirebase = await UserCloudFireStoreService.instance.getUserInformationById(userId: userId);
     _userInformation = userInformationFromFirebase!;
+    _userInformation.favoriteAds.isEmpty ? _userInformation.favoriteAds.add('value') : null;
+
     notifyListeners();
+  }
+
+  Future<void> addFavoriteProduct({required String productId}) async {
+    _userInformation.favoriteAds.add(productId);
+    notifyListeners();
+    await UserCloudFireStoreService.instance.addProductToFavorites(
+      userId: _userInformation.userId,
+      productId: productId,
+    );
+  }
+
+  Future<void> removeFavoriteProduct({required String productId}) async {
+    _userInformation.favoriteAds.remove(productId);
+    notifyListeners();
+    await UserCloudFireStoreService.instance.removeProductToFavorites(
+      userId: _userInformation.userId,
+      productId: productId,
+    );
   }
 }

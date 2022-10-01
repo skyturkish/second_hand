@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
+import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/firebase_auth_provider.dart';
 
@@ -23,17 +24,22 @@ class ApplicationProvider {
 
   List<SingleChildWidget> singleItems = [];
   List<SingleChildWidget> dependItems = [
-    ChangeNotifierProvider(
-      create: (context) => ThemeNotifier(),
+    Provider.value(
+      value: NavigationService.instance,
     ),
-    Provider.value(value: NavigationService.instance),
     BlocProvider<AppBloc>(
       create: (context) => AppBloc(
         FirebaseAuthProvider(),
       ),
     ),
+    ChangeNotifierProvider(
+      create: (context) => ThemeNotifier(),
+    ),
     ChangeNotifierProvider<ProductNotifier>(
       create: (context) => ProductNotifier.instance,
+    ),
+    ChangeNotifierProvider<UserInformationNotifier>(
+      create: (context) => UserInformationNotifier.instance,
     ),
   ];
   List<SingleChildWidget> uiChangesItems = [];

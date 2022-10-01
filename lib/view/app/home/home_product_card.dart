@@ -1,6 +1,8 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/view/app/home/detail_product_view.dart';
 import 'package:second_hand/view/app/home/storage_image_view.dart';
@@ -21,6 +23,7 @@ class CardHomeProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Stack(children: [
+        FavoriteIconButton(product: product, provider: context.read<UserInformationNotifier>()),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -64,6 +67,39 @@ class CardHomeProduct extends StatelessWidget {
           ],
         ),
       ]),
+    );
+  }
+}
+
+class FavoriteIconButton extends StatefulWidget {
+  const FavoriteIconButton({
+    Key? key,
+    required this.product,
+    required this.provider,
+  }) : super(key: key);
+
+  final Product product;
+  final UserInformationNotifier provider;
+
+  @override
+  State<FavoriteIconButton> createState() => _FavoriteIconButtonState();
+}
+
+class _FavoriteIconButtonState extends State<FavoriteIconButton> {
+  @override
+  Widget build(BuildContext context) {
+    bool isFavorite = widget.provider.userInformation.favoriteAds.contains(widget.product.productId);
+    return IconButton(
+      onPressed: () {
+        isFavorite
+            ? widget.provider.removeFavoriteProduct(productId: widget.product.productId)
+            : widget.provider.addFavoriteProduct(productId: widget.product.productId);
+        setState(() {});
+      },
+      icon: Icon(
+        Icons.favorite,
+        color: isFavorite ? Colors.red : Colors.black,
+      ),
     );
   }
 }

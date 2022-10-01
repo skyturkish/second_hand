@@ -72,29 +72,33 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       }
     });
     // initialize
-    on<AppEventInitialize>((event, emit) async {
-      await provider.initialize();
-      final user = provider.currentUser;
-      if (user == null) {
-        emit(
-          const AppStateLoggedOut(
-            exception: null,
-            isLoading: false,
-          ),
-        );
-      } else if (!user.isEmailVerified) {
-        emit(
-          const AppStateNeedsVerification(
-            isLoading: false,
-          ),
-        );
-      } else {
-        emit(AppStateLoggedIn(
-          user: user,
-          isLoading: false,
-        ));
-      }
-    });
+    on<AppEventInitialize>(
+      (event, emit) async {
+        await provider.initialize();
+        final user = provider.currentUser;
+        if (user == null) {
+          emit(
+            const AppStateLoggedOut(
+              exception: null,
+              isLoading: false,
+            ),
+          );
+        } else if (!user.isEmailVerified) {
+          emit(
+            const AppStateNeedsVerification(
+              isLoading: false,
+            ),
+          );
+        } else {
+          emit(
+            AppStateLoggedIn(
+              user: user,
+              isLoading: false,
+            ),
+          );
+        }
+      },
+    );
     // log in
     on<AppEventLogIn>((event, emit) async {
       emit(
@@ -127,8 +131,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
               isLoading: false,
             ),
           );
-          // TODO create user's information on cloudfirestore
-
           emit(
             AppStateLoggedIn(
               user: user,

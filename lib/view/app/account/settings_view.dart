@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/theme_notifer.dart';
+import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
+import 'dart:developer' as devtools show log;
 
-import 'dart:io';
+extension Log on Object {
+  void log() => devtools.log(toString());
+}
 
-import 'package:url_launcher/url_launcher.dart';
-
-class SettingsView extends StatelessWidget with GalleryLaunch {
-  SettingsView({Key? key}) : super(key: key);
+class SettingsView extends StatelessWidget {
+  const SettingsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,26 +25,31 @@ class SettingsView extends StatelessWidget with GalleryLaunch {
           OptionListTile(
             titleText: 'Pricavy',
             subTitleText: 'Phone number visibility',
-            onTap: () {},
+            onTap: () {
+              context.read<UserInformationNotifier>().userInformation.favoriteAds.log();
+            },
           ),
           OptionListTile(
             titleText: 'Notifications',
             subTitleText: 'Recommendations & Special communications',
-            onTap: () {},
+            onTap: () {
+              print(context.read<UserInformationNotifier>().userInformation.favoriteAds);
+              //context.read<UserInformationNotifier>().userInformation.name.log();
+            },
           ),
           OptionListTile(
             titleText: 'Logout',
             onTap: () {
               Navigator.of(context).pop();
-              context.read<AppBloc>().add(const AppEventLogOut());
+              context.read<AppBloc>().add(
+                    const AppEventLogOut(),
+                  );
               // çıkıyor ama etki etmiyor bu da çok mantıklı
             },
           ),
           OptionListTile(
             titleText: 'Delete account',
-            onTap: () async {
-              await open();
-            },
+            onTap: () async {},
           ),
           OptionListTile(
             titleText: 'Dark/Light',
@@ -64,17 +71,5 @@ class SettingsView extends StatelessWidget with GalleryLaunch {
         ],
       ),
     );
-  }
-}
-
-mixin GalleryLaunch {
-  final String _iosPhotoScheme = 'photos-redirect://';
-  final String _androidPhotoScheme = 'content://media/external/images/media';
-
-  /// It'll be open gallery on device
-  ///
-  /// If you want to open specific image on android, you should be call media/56.png
-  Future<void> open() async {
-    await launchUrl(Uri.parse(Platform.isIOS ? _iosPhotoScheme : _androidPhotoScheme));
   }
 }

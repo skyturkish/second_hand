@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Product {
   String productId;
   String ownerId;
@@ -6,6 +8,7 @@ class Product {
   String description;
   List<String> imagesPath; // referans'lara kolay erişebilmen için tutacaksın, referans path'lerini
   int price;
+  String documentId;
   //  final String location; // TODO
 
   Product({
@@ -15,8 +18,19 @@ class Product {
     required this.title,
     required this.description,
     required this.price,
+    this.documentId = '',
     this.imagesPath = const [],
   });
+
+  Product.fromSnapShot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
+      : documentId = snapshot.id,
+        productId = snapshot.data()['productId'] as String,
+        ownerId = snapshot.data()['ownerId'] as String,
+        state = snapshot.data()['state'] as String,
+        title = snapshot.data()['title'] as String,
+        description = snapshot.data()['description'] as String,
+        imagesPath = List<String>.from(snapshot.data()['imagesPath']),
+        price = snapshot.data()['price'] as int;
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
@@ -28,6 +42,7 @@ class Product {
     result.addAll({'description': description});
     result.addAll({'imagesPath': imagesPath});
     result.addAll({'price': price});
+    result.addAll({'documentId': documentId});
 
     return result;
   }
@@ -41,6 +56,7 @@ class Product {
       description: map['description'] ?? '',
       imagesPath: List<String>.from(map['imagesPath']),
       price: map['price']?.toInt() ?? 0,
+      documentId: map['documentId'] ?? '',
     );
   }
 }

@@ -51,7 +51,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // TODO theme'leri başka yere al
       theme: context.watch<ThemeNotifier>().currentTheme,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
@@ -85,8 +84,7 @@ class App extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is AppStateLoggedIn) {
-          return const BottomNavigationView(); // uygulmaya giriş
-
+          return const BottomNavigationView(); // uygulamaya giriş
         } else if (state is AppStateNeedsVerification) {
           return const VerifyEmailView();
         } else if (state is AppStateLoggedOut) {

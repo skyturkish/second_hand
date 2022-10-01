@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
+import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
+import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/view/app/account/account_view.dart';
 import 'package:second_hand/view/app/chats/chats_view.dart';
 import 'package:second_hand/view/app/home/home_view.dart';
@@ -21,6 +24,17 @@ class BottomNavigationViewState extends State<BottomNavigationView> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserInformation();
+  }
+
+  Future<void> getUserInformation() async {
+    await context.read<UserInformationNotifier>().getUserInformation(userId: AuthService.firebase().currentUser!.id);
+    setState(() {});
   }
 
   @override
