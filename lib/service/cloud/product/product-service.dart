@@ -35,6 +35,7 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
         );
   }
 
+  // TODO galiba burayı da stream ile yapmak zorundayız :shrug:
   Future<List<Product>?> getAllProducts({required String userId}) async {
     final querySnapShot = await collection.where('ownerId', isNotEqualTo: userId).get();
     final products = querySnapShot.docs.map(

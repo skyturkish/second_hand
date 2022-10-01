@@ -1,5 +1,7 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
@@ -33,25 +35,7 @@ class FavoritesViewState extends State<FavoritesView> with AutomaticKeepAliveCli
                   itemBuilder: (context, index) {
                     final product = allProduct.elementAt(index);
                     final mountainImagesRef = storageRef.child(product.imagesPath[0]);
-                    return ListTile(
-                      title: Text(product.title),
-                      subtitle: Text(product.description),
-                      leading: SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: StorageImageView(
-                          image: mountainImagesRef,
-                        ),
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {
-                          ProductCloudFireStoreService.instance.removeProduct(
-                            productId: product.productId,
-                          );
-                        },
-                        icon: const Icon(Icons.delete),
-                      ),
-                    );
+                    return FavoriteListTileProduct(product: product, mountainImagesRef: mountainImagesRef);
                   },
                 );
               } else {
@@ -68,4 +52,41 @@ class FavoritesViewState extends State<FavoritesView> with AutomaticKeepAliveCli
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
+}
+
+class FavoriteListTileProduct extends StatelessWidget {
+  const FavoriteListTileProduct({
+    Key? key,
+    required this.product,
+    required this.mountainImagesRef,
+  }) : super(key: key);
+
+  final Product product;
+  final Reference mountainImagesRef;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(product.title),
+      subtitle: Text(product.description),
+      leading: SizedBox(
+        height: 50,
+        width: 50,
+        child: StorageImageView(
+          image: mountainImagesRef,
+        ),
+      ),
+      trailing: IconButton(
+        onPressed: () {
+          context.read<UserInformationNotifier>().removeFavoriteProduct(
+                productId: product.productId,
+              );
+        },
+        icon: const Icon(
+          Icons.favorite,
+          color: Colors.red,
+        ),
+      ),
+    );
+  }
 }
