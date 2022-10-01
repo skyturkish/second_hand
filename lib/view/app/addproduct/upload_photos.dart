@@ -33,25 +33,19 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
       body: Column(
         children: [
           SizedBox(
-            height: context.dynamicHeight(0.40),
+            height: context.dynamicHeight(0.33),
             width: context.dynamicWidth(0.90),
-            child: PageView.builder(
-              itemCount: context.watch<ProductNotifier>().images.length,
-              itemBuilder: (context, index) {
-                return context.watch<ProductNotifier>().images.isEmpty
-                    ? Center(
-                        child: Container(
-                          height: 100,
-                          width: 100,
-                          color: Colors.black,
-                        ),
-                      )
-                    : Image.file(
-                        context.watch<ProductNotifier>().images[index],
+            child: context.read<ProductNotifier>().images.isEmpty
+                ? Image.asset('assets/images/add_photo.png')
+                : PageView.builder(
+                    itemCount: context.read<ProductNotifier>().images.length,
+                    itemBuilder: (context, index) {
+                      return Image.file(
+                        context.read<ProductNotifier>().images[index],
                         fit: BoxFit.cover,
                       );
-              },
-            ),
+                    },
+                  ),
           ),
           const Divider(
             height: 5,
@@ -85,9 +79,7 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
                     source: ImageSource.camera,
                     imageQuality: 50,
                   );
-
                   final File fileImage = File(xFileimage!.path);
-
                   context.read<ProductNotifier>().addImages(
                     newImages: [fileImage],
                   );
@@ -96,7 +88,44 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
               ),
             ],
           ),
-          const Spacer(),
+          SingleChildScrollView(
+            child: SizedBox(
+              height: context.dynamicHeight(0.40),
+              width: context.dynamicWidth(0.90),
+              child: GridView.builder(
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 5.0,
+                  mainAxisSpacing: 5.0,
+                ),
+                itemCount: context.read<ProductNotifier>().images.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    onTap: () {
+                      context.read<ProductNotifier>().removeImage(index: index);
+                      setState(() {});
+                    },
+                    child: Stack(
+                      alignment: AlignmentDirectional.topEnd,
+                      children: [
+                        Image.file(
+                          context.read<ProductNotifier>().images[index],
+                          height: 200,
+                          width: 100,
+                          fit: BoxFit.cover,
+                        ),
+                        const Icon(
+                          Icons.remove_circle,
+                          color: Colors.red,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
           ElevatedButton(
             // TODO 0 fotoğraf olunca işlevini de kaybettirebilirsin.
             onPressed: () {

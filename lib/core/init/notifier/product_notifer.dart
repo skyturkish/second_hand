@@ -29,6 +29,10 @@ class ProductNotifier extends ChangeNotifier {
     }
   }
 
+  void removeImage({required int index}) {
+    images.removeAt(index);
+  }
+
   Product product = Product(
     productId: '',
     ownerId: '',

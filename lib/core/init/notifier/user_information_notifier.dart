@@ -15,6 +15,7 @@ class UserInformationNotifier extends ChangeNotifier {
   UserInformation _userInformation = UserInformation(
     userId: '',
     name: '',
+    favoriteAds: ['value'],
   );
 
   Future<void> getUserInformation({required String userId}) async {
