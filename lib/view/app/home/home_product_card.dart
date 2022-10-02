@@ -22,51 +22,57 @@ class CardHomeProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Stack(children: [
-        FavoriteIconButton(product: product, provider: context.read<UserInformationNotifier>()),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ProductDetailView(
-                          product: product,
-                          storageRef: storageRef,
-                        );
-                      },
+      child: Stack(
+        alignment: AlignmentDirectional.topEnd,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ProductDetailView(
+                            product: product,
+                            storageRef: storageRef,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  child: Center(
+                    child: StorageImageView(
+                      image: mountainImagesRef,
                     ),
-                  );
-                },
-                child: Center(
-                  child: StorageImageView(
-                    image: mountainImagesRef,
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: context.paddingOnlyTopSmall,
-              child: Text(
-                product.price.toString(),
-                style: Theme.of(context).textTheme.headline6,
+              Padding(
+                padding: context.paddingOnlyTopSmall,
+                child: Text(
+                  product.price.toString(),
+                  style: Theme.of(context).textTheme.headline6,
+                ),
               ),
-            ),
-            Padding(
-              padding: context.paddingOnlyBottomSmall,
-              child: Text(
-                product.title,
-                style: Theme.of(context).textTheme.subtitle2,
-                overflow: TextOverflow.ellipsis,
+              Padding(
+                padding: context.paddingOnlyBottomSmall,
+                child: Text(
+                  product.title,
+                  style: Theme.of(context).textTheme.subtitle2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
-          ],
-        ),
-      ]),
+            ],
+          ),
+          FavoriteIconButton(
+            product: product,
+            provider: context.read<UserInformationNotifier>(),
+          ),
+        ],
+      ),
     );
   }
 }

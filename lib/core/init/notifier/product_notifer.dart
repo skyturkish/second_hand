@@ -41,7 +41,7 @@ class ProductNotifier extends ChangeNotifier {
     title: '',
     description: '',
     imagesPath: [],
-    price: 0,
+    price: 1,
   );
 
   Product get currentProduct => product;
@@ -54,7 +54,7 @@ class ProductNotifier extends ChangeNotifier {
       title: '',
       description: '',
       imagesPath: [],
-      price: 0,
+      price: 1,
     );
     images = [];
   }

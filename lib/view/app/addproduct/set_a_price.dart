@@ -55,7 +55,7 @@ class SetAPriceViewState extends State<SetAPriceView> {
                 },
               ),
               ElevatedButton(
-                onPressed: int.parse(_priceController.text) > 0
+                onPressed: _priceController.text == "" || int.parse(_priceController.text) < 0
                     ? null
                     : () async {
                         if (_formKey.currentState!.validate()) {

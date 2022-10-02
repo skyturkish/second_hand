@@ -79,7 +79,7 @@ class BottomNavigationViewState extends State<BottomNavigationView> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            label: 'Settings',
+            label: 'Account',
           ),
         ],
         currentIndex: _selectedIndex,
