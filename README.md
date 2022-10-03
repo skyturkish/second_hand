@@ -30,7 +30,6 @@ With this application, you can buy and sell second-hand goods, can contact the s
 ## Features
 ---
 ## License
-
 ```
 MIT License
 
