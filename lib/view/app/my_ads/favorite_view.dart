@@ -5,6 +5,7 @@ import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
+import 'package:second_hand/view/app/home/detail_product_view.dart';
 import 'package:second_hand/view/app/home/storage_image_view.dart';
 
 class FavoritesView extends StatefulWidget {
@@ -50,7 +51,6 @@ class FavoritesViewState extends State<FavoritesView> with AutomaticKeepAliveCli
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }
 
@@ -67,6 +67,19 @@ class FavoriteListTileProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return ProductDetailView(
+                product: product,
+                storageRef: FirebaseStorage.instance.ref(),
+              );
+            },
+          ),
+        );
+      },
       title: Text(product.title),
       subtitle: Text(product.description),
       leading: SizedBox(

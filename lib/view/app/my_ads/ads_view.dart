@@ -76,6 +76,9 @@ class MyAdsListTileProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () {
+        // TODO let user to update his/her ads
+      },
       title: Text(product.title),
       subtitle: Text(product.description),
       leading: SizedBox(
