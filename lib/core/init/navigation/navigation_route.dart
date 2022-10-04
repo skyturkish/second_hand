@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
-import 'package:second_hand/view/app/addproduct/include_some_details.dart';
-import 'package:second_hand/view/app/addproduct/set_a_price.dart';
-import 'package:second_hand/view/app/addproduct/upload_photos.dart';
+import 'package:second_hand/view/app/addproduct/include_some_details/include_some_details.dart';
+import 'package:second_hand/view/app/addproduct/setprice/set_a_price.dart';
+import 'package:second_hand/view/app/addproduct/uploadphotos/upload_photos.dart';
 
 class NavigationRoute {
   static final NavigationRoute _instance = NavigationRoute._init();

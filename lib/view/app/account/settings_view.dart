@@ -49,7 +49,13 @@ class SettingsView extends StatelessWidget {
           ),
           OptionListTile(
             titleText: 'Delete account',
-            onTap: () async {},
+            onTap: () async {
+              Navigator.of(context).pop();
+
+              context.read<AppBloc>().add(
+                    const AppEventDeleteAccount(),
+                  );
+            },
           ),
           OptionListTile(
             titleText: 'Dark/Light',
@@ -57,17 +63,6 @@ class SettingsView extends StatelessWidget {
               context.read<ThemeNotifier>().changeTheme();
             },
           ),
-          // Card(
-          //   child: ListTile(
-          //     title: Text(
-          //       'Adana',
-          //       style: Theme.of(context).textTheme.subtitle1!.copyWith(
-          //             fontWeight: FontWeight.bold,
-          //           ),
-          //     ),
-          //     trailing: const Icon(Icons.keyboard_arrow_right),
-          //   ),
-          // )
         ],
       ),
     );

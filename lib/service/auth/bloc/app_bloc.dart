@@ -3,6 +3,7 @@ import 'package:second_hand/service/auth/auth_provider.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/service/auth/bloc/app_state.dart';
+import 'package:second_hand/service/cloud/product/product-service.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
@@ -169,91 +170,36 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         }
       },
     );
-
-    //   on<AppEventGoToAccount>(
-    //     (event, emit) async {
-    //       final user = FirebaseAuth.instance.currentUser;
-    //       // log the user out if we don't have a current user
-    //       if (user == null) {
-    //         emit(
-    //           const AppStateLoggedOut(
-    //             isLoading: false,
-    //             exception: null,
-    //           ),
-    //         );
-    //         return;
-    //       }
-    //       emit(
-    //         const AppStateInAccountView(
-    //           exception: null,
-    //           isLoading: false,
-    //         ),
-    //       );
-    //     },
-    //   );
-    //   on<AppEventGoToMyAds>(
-    //     (event, emit) async {
-    //       final user = FirebaseAuth.instance.currentUser;
-    //       // log the user out if we don't have a current user
-    //       if (user == null) {
-    //         emit(
-    //           const AppStateLoggedOut(
-    //             isLoading: false,
-    //             exception: null,
-    //           ),
-    //         );
-    //         return;
-    //       }
-    //       emit(
-    //         const AppStateInMyAds(
-    //           exception: null,
-    //           isLoading: false,
-    //         ),
-    //       );
-    //     },
-    //   );
-    //   on<AppEventGoToChats>(
-    //     (event, emit) async {
-    //       final user = FirebaseAuth.instance.currentUser;
-    //       // log the user out if we don't have a current user
-    //       if (user == null) {
-    //         emit(
-    //           const AppStateLoggedOut(
-    //             isLoading: false,
-    //             exception: null,
-    //           ),
-    //         );
-    //         return;
-    //       }
-    //       emit(
-    //         const AppStateInChats(
-    //           exception: null,
-    //           isLoading: false,
-    //         ),
-    //       );
-    //     },
-    //   );
-    //   on<AppEventGoToHome>(
-    //     (event, emit) async {
-    //       final user = FirebaseAuth.instance.currentUser;
-    //       // log the user out if we don't have a current user
-    //       if (user == null) {
-    //         emit(
-    //           const AppStateLoggedOut(
-    //             isLoading: false,
-    //             exception: null,
-    //           ),
-    //         );
-    //         return;
-    //       }
-    //       emit(
-    //         const AppStateInHome(
-    //           exception: null,
-    //           isLoading: false,
-    //         ),
-    //       );
-    //     },
-    //   );
-    //
+    on<AppEventDeleteAccount>(
+      (event, emit) async {
+        try {
+          emit(
+            const AppStateDeletedAccount(
+              exception: null,
+              isLoading: true,
+              loadingText: 'Wait a second, we delete your account',
+            ),
+          );
+          await ProductCloudFireStoreService.instance.removeAllProduct(
+            userId: AuthService.firebase().currentUser!.id,
+          );
+          await provider.deleteAccount();
+          emit(
+            const AppStateDeletedAccount(
+              exception: null,
+              isLoading: false,
+            ),
+          );
+        } catch (e) {
+          emit(
+            // burası yanlış olabilir // TODO
+            AppStateDeletedAccount(
+              exception: e as Exception,
+              isLoading: false,
+            ),
+          );
+        }
+      },
+    );
   }
 }

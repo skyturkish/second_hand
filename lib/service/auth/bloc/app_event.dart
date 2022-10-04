@@ -38,19 +38,6 @@ class AppEventLogOut extends AppEvent {
   const AppEventLogOut();
 }
 
-// @immutable
-// class AppEventGoToAccount implements AppEvent {
-//   const AppEventGoToAccount();
-// }
-
-// class AppEventGoToMyAds implements AppEvent {
-//   const AppEventGoToMyAds();
-// }
-
-// class AppEventGoToChats implements AppEvent {
-//   const AppEventGoToChats();
-// }
-
-// class AppEventGoToHome implements AppEvent {
-//   const AppEventGoToHome();
-// }
+class AppEventDeleteAccount extends AppEvent {
+  const AppEventDeleteAccount();
+}

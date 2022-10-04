@@ -91,7 +91,7 @@ class App extends StatelessWidget {
           return const BottomNavigationView(); // uygulamaya giriş
         } else if (state is AppStateNeedsVerification) {
           return const VerifyEmailView();
-        } else if (state is AppStateLoggedOut) {
+        } else if (state is AppStateLoggedOut || state is AppStateDeletedAccount) {
           return const LoginView();
         } else if (state is AppStateForgotPassword) {
           return const ForgotPasswordView();

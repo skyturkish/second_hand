@@ -61,6 +61,21 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
     }
   }
 
+  Future<void> removeAllProduct({required String userId}) async {
+    final querySnapShot = await collection.where('ownerId', isEqualTo: userId).get();
+
+    for (var doc in querySnapShot.docs) {
+      await doc.reference.delete();
+      final data = Product.fromMap(doc.data());
+
+      for (var image in data.imagesPath) {
+        deleteProductPhoto(
+          path: image,
+        );
+      }
+    }
+  }
+
   // TODO bunu kullacının içindeki ürünlerden aratıp da yapabilirsin bu biraz aşırı kaçıyor
   Stream<Iterable<Product>> getAllOwnerProductsStream({required String userId}) => collection
       .snapshots()

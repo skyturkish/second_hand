@@ -61,43 +61,16 @@ class AppStateLoggedOut extends AppState with EquatableMixin {
   List<Object?> get props => [exception, isLoading];
 }
 
-class AppStateInAccountView extends AppState {
+class AppStateDeletedAccount extends AppState {
   final Exception? exception;
-  const AppStateInAccountView({
-    required this.exception,
-    required bool isLoading,
-  }) : super(
-          isLoading: isLoading,
-        );
-}
 
-class AppStateInMyAds extends AppState {
-  final Exception? exception;
-  const AppStateInMyAds({
+  const AppStateDeletedAccount({
     required this.exception,
     required bool isLoading,
+    String? loadingText,
   }) : super(
           isLoading: isLoading,
-        );
-}
-
-class AppStateInChats extends AppState {
-  final Exception? exception;
-  const AppStateInChats({
-    required this.exception,
-    required bool isLoading,
-  }) : super(
-          isLoading: isLoading,
-        );
-}
-
-class AppStateInHome extends AppState {
-  final Exception? exception;
-  const AppStateInHome({
-    required this.exception,
-    required bool isLoading,
-  }) : super(
-          isLoading: isLoading,
+          loadingText: loadingText,
         );
 }
 

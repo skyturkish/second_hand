@@ -21,15 +21,6 @@ class AccountViewState extends State<AccountView> {
   @override
   Widget build(BuildContext context) {
     final userInformation = context.read<UserInformationNotifier>().userInformation;
-    print(userInformation.userId);
-    print(userInformation.userId);
-    print(userInformation.userId);
-    print(userInformation.userId);
-    print(userInformation.userId);
-    print(userInformation.userId);
-    print(userInformation.userId);
-    print(userInformation.userId);
-    print(userInformation.userId);
     final mountainImagesRef = storageRef.child('users/${userInformation.userId}/kedi_fotografi.jpg');
 
     return SafeArea(
