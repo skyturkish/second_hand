@@ -7,8 +7,8 @@ With this application, you can buy and sell second-hand goods, can contact the s
 - [X] Linked Firebase
 - [ ] Auth
   - [ ] Phone Authentication
-  - [ ] Email & Password
-  - [X] Google
+  - [x] Email & Password
+  - [ ] Google
 - [ ] Create an account, get informations from user
 - [X] Product
   - [X] Pick images and to make the product sellable.
