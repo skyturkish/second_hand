@@ -9,7 +9,7 @@ With this application, you can buy and sell second-hand goods, can contact the s
   - [ ] Phone Authentication
   - [x] Email & Password
   - [ ] Google
-- [ ] Create an account, get informations from user
+- [X] Create an account, get informations from user
 - [X] Product
   - [X] Pick images and to make the product sellable.
   - [X] to be able to see which products are being sold.
