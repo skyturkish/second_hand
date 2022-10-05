@@ -9,7 +9,6 @@ class UserInformationNotifier extends ChangeNotifier {
   UserInformation _userInformation = UserInformation(
     userId: '',
     name: '',
-    favoriteAds: ['value'],
   );
 
   Future<void> getUserInformation({required String userId}) async {
@@ -17,7 +16,6 @@ class UserInformationNotifier extends ChangeNotifier {
     final userInformationFromFirebase = await UserCloudFireStoreService.instance.getUserInformationById(userId: userId);
     _userInformation = userInformationFromFirebase!;
     _userInformation.favoriteAds.add('value'); // we added this because, when list is empty flutter throw crash ??
-
     notifyListeners();
   }
 
@@ -37,5 +35,16 @@ class UserInformationNotifier extends ChangeNotifier {
       userId: _userInformation.userId,
       productId: productId,
     );
+  }
+
+  bool anyChanges({required String name, required String aboutYou}) {
+    return name != _userInformation.name || aboutYou != _userInformation.aboutYou;
+  }
+
+  Future<void> changeUserInformation({required String name, required String aboutYou}) async {
+    if (!anyChanges(name: name, aboutYou: aboutYou)) return;
+    _userInformation.name = name;
+    _userInformation.aboutYou = aboutYou;
+    notifyListeners();
   }
 }

@@ -5,7 +5,7 @@ class ProfilePhotoCircle extends StatelessWidget {
   const ProfilePhotoCircle({
     Key? key,
     required this.photo,
-    required this.defaultAssetsPath,
+    this.defaultAssetsPath = 'assets/images/dog_eats_bread.jpg',
   }) : super(key: key);
 
   final Uint8List? photo;

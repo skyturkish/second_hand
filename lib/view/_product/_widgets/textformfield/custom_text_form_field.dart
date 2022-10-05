@@ -6,7 +6,7 @@ class CustomTextFormField extends StatefulWidget {
     required this.controller,
     this.keyboardType = TextInputType.name,
     required this.labelText,
-    required this.prefix,
+    this.prefix,
     this.passwordTextFormField = false,
     this.line,
     this.enableSuggestions,
@@ -18,7 +18,7 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputType keyboardType;
   final String labelText;
   final String? hintText;
-  final Widget prefix;
+  final Widget? prefix;
   final bool passwordTextFormField;
   final int? line;
   final bool? enableSuggestions;

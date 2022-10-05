@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class UserInformation {
   final String userId;
-  final String name;
+  String name;
   String profilePhotoPath;
   String phoneNumber;
   String aboutYou;

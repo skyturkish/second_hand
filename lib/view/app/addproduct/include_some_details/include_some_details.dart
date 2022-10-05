@@ -38,9 +38,10 @@ class IncludeSomeDetailsViewState extends State<IncludeSomeDetailsView> {
 
   @override
   void initState() {
-    _stateController = TextEditingController(text: context.read<ProductNotifier>().product.state);
-    _titleController = TextEditingController(text: context.read<ProductNotifier>().product.title);
-    _describeController = TextEditingController(text: context.read<ProductNotifier>().product.description);
+    final productInformation = context.read<ProductNotifier>().product;
+    _stateController = TextEditingController(text: productInformation.state);
+    _titleController = TextEditingController(text: productInformation.title);
+    _describeController = TextEditingController(text: productInformation.description);
     super.initState();
   }
 

@@ -34,9 +34,7 @@ class UserCloudFireStoreService extends CloudFireStoreBaseService {
 
   Future<UserInformation?> getUserInformationById({required String userId}) async {
     bool userExist = await isUserExist(userId: userId);
-    if (userExist == false) {
-      return null;
-    }
+    if (userExist == false) return null;
     var docRef = collection.doc(userId);
     final doc = await docRef.get();
 
@@ -54,5 +52,11 @@ class UserCloudFireStoreService extends CloudFireStoreBaseService {
     collection.doc(userId).update({
       "favoriteAds": FieldValue.arrayRemove([productId])
     });
+  }
+
+  Future<void> updateUserInformation({required String userId, required String name, required String aboutYou}) async {
+    bool userExist = await isUserExist(userId: userId);
+    if (userExist == false) return;
+    await collection.doc(userId).update({'name': name, 'aboutYou': aboutYou});
   }
 }

@@ -4,6 +4,7 @@ import 'package:second_hand/core/init/notifier/theme_notifer.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
+import 'package:second_hand/utilities/dialogs/logout_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
 import 'dart:developer' as devtools show log;
 
@@ -39,11 +40,14 @@ class SettingsView extends StatelessWidget {
           ),
           OptionListTile(
             titleText: 'Logout',
-            onTap: () {
-              Navigator.of(context).pop();
-              context.read<AppBloc>().add(
-                    const AppEventLogOut(),
-                  );
+            onTap: () async {
+              final logout = await showLogOutDialog(context);
+              if (logout) {
+                Navigator.of(context).pop();
+                context.read<AppBloc>().add(
+                      const AppEventLogOut(),
+                    );
+              }
               // çıkıyor ama etki etmiyor bu da çok mantıklı
             },
           ),
