@@ -91,6 +91,7 @@ class _LoginViewState extends State<LoginView> {
                             AppEventLogIn(
                               emailText,
                               passwordText,
+                              context,
                             ),
                           );
                     },

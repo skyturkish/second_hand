@@ -13,9 +13,9 @@ class UserCloudFireStoreService extends CloudFireStoreBaseService {
 
   static UserCloudFireStoreService? _instance;
 
-  Future<void> createUser({required String userId, String? name}) async {
+  Future<void> createUserIfNotExist({required String userId, String? name}) async {
     bool userExist = await isUserExist(userId: userId);
-    if (userExist == true) {}
+    if (userExist == true) return;
     await collection.doc(userId).set(UserInformation(userId: userId, name: 'User-${const Uuid().v4()}').toMap());
   }
 

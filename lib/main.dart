@@ -9,10 +9,8 @@ import 'package:second_hand/core/init/navigation/navigation_route.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/provider_list.dart';
 import 'package:second_hand/core/init/notifier/theme_notifer.dart';
-import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/firebase_options.dart';
 import 'package:second_hand/loading/loading_screen.dart';
-import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/service/auth/bloc/app_state.dart';
@@ -71,7 +69,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<AppBloc>().add(const AppEventInitialize());
+    context.read<AppBloc>().add(AppEventInitialize(context));
 
     return BlocConsumer<AppBloc, AppState>(
       listener: (context, state) {
@@ -86,8 +84,6 @@ class App extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is AppStateLoggedIn) {
-          context.read<UserInformationNotifier>().getUserInformation(userId: AuthService.firebase().currentUser!.id);
-          Future.delayed(const Duration(seconds: 1));
           return const BottomNavigationView(); // uygulamaya giriş
         } else if (state is AppStateNeedsVerification) {
           return const VerifyEmailView();

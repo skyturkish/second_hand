@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/service/auth/auth_provider.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
@@ -91,6 +93,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             ),
           );
         } else {
+          await event.context
+              .read<UserInformationNotifier>()
+              .getUserInformation(userId: AuthService.firebase().currentUser!.id);
           emit(
             AppStateLoggedIn(
               user: user,
@@ -129,16 +134,19 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           emit(
             const AppStateLoggedOut(
               exception: null,
-              isLoading: false,
+              isLoading: true,
             ),
           );
+          await UserCloudFireStoreService.instance.createUserIfNotExist(userId: AuthService.firebase().currentUser!.id);
+          await event.context
+              .read<UserInformationNotifier>()
+              .getUserInformation(userId: AuthService.firebase().currentUser!.id);
           emit(
             AppStateLoggedIn(
               user: user,
               isLoading: false,
             ),
           );
-          await UserCloudFireStoreService.instance.createUser(userId: AuthService.firebase().currentUser!.id);
         }
       } on Exception catch (e) {
         emit(

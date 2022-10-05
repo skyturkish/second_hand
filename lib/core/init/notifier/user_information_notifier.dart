@@ -16,7 +16,7 @@ class UserInformationNotifier extends ChangeNotifier {
     // çok uzattın aga o ismi
     final userInformationFromFirebase = await UserCloudFireStoreService.instance.getUserInformationById(userId: userId);
     _userInformation = userInformationFromFirebase!;
-    _userInformation.favoriteAds.isEmpty ? _userInformation.favoriteAds.add('value') : null;
+    _userInformation.favoriteAds.add('value'); // we added this because, when list is empty flutter throw crash ??
 
     notifyListeners();
   }

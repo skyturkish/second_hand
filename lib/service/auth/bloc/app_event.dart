@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart' show immutable;
+import 'package:flutter/cupertino.dart';
 
 @immutable
 abstract class AppEvent {
@@ -6,7 +6,8 @@ abstract class AppEvent {
 }
 
 class AppEventInitialize extends AppEvent {
-  const AppEventInitialize();
+  final BuildContext context;
+  const AppEventInitialize(this.context);
 }
 
 class AppEventSendEmailVerification extends AppEvent {
@@ -16,7 +17,8 @@ class AppEventSendEmailVerification extends AppEvent {
 class AppEventLogIn extends AppEvent {
   final String email;
   final String password;
-  const AppEventLogIn(this.email, this.password);
+  final BuildContext context;
+  const AppEventLogIn(this.email, this.password, this.context);
 }
 
 class AppEventRegister extends AppEvent {
