@@ -8,20 +8,25 @@ import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
-import 'package:second_hand/service/storage/upload_image.dart';
 import 'package:second_hand/utilities/dialogs/ignore_changes_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
+import 'dart:developer' as devtools show log;
+
+extension Log on Object? {
+  void log() => devtools.log(toString());
+}
 
 class EditProfileView extends StatefulWidget {
-  const EditProfileView({Key? key, required this.photo}) : super(key: key);
-  final Uint8List? photo;
+  const EditProfileView({Key? key}) : super(key: key);
   @override
   State<EditProfileView> createState() => _EditProfileViewState();
 }
 
 class _EditProfileViewState extends State<EditProfileView> {
-  Uint8List? showPhoto;
+  Uint8List? oldPhoto;
+  Uint8List? displayPhoto;
+  File? fileForStroage;
   late final TextEditingController nameController;
   late final TextEditingController aboutYouController;
   late final TextEditingController phoneController;
@@ -29,7 +34,8 @@ class _EditProfileViewState extends State<EditProfileView> {
 
   @override
   void initState() {
-    showPhoto = widget.photo;
+    oldPhoto = context.read<UserInformationNotifier>().userPhoto;
+    displayPhoto = context.read<UserInformationNotifier>().userPhoto;
     final user = context.read<UserInformationNotifier>().userInformation;
     nameController = TextEditingController(text: user.name);
     aboutYouController = TextEditingController(text: user.aboutYou);
@@ -56,6 +62,7 @@ class _EditProfileViewState extends State<EditProfileView> {
             // TODO öncesinde değişiklik var mı diye kontrol et
             final isWillIgnore = await ignoreChanges(context);
             if (!isWillIgnore) return;
+            context.read<UserInformationNotifier>().changeProfilePhoto(uint8List: oldPhoto);
             Navigator.of(context).pop();
           },
           icon: const Icon(Icons.exit_to_app),
@@ -68,10 +75,15 @@ class _EditProfileViewState extends State<EditProfileView> {
                 name: nameController.text,
                 aboutYou: aboutYouController.text,
               ); // TODO ikisinden birini ortak alalım ya da almayalım
+
               await context.read<UserInformationNotifier>().changeUserInformation(
+                    // ismini local yap
                     name: nameController.text,
                     aboutYou: aboutYouController.text,
                   );
+
+              await context.read<UserInformationNotifier>().changeProfilePhotoFirebase(file: fileForStroage);
+
               Navigator.pop(context);
             },
             child: const Text('Save'),
@@ -95,18 +107,15 @@ class _EditProfileViewState extends State<EditProfileView> {
                   InkWell(
                     onTap: () async {
                       // TODO ya show'dan nereye gideceğimiz seçeriz ya da direkt resmi alırız
-                      final photo = await SelecPhotoBottomSheet().show<File>(context);
-                      if (photo == null) return;
-                      showPhoto = photo.readAsBytesSync();
 
-                      await uploadUserPhoto(file: photo, userId: AuthService.firebase().currentUser!.id);
-                      context
-                          .read<UserInformationNotifier>()
-                          .changeUserProfilePhotoPath(userId: AuthService.firebase().currentUser!.id);
+                      final photo = await SelecPhotoBottomSheet().show<File>(context);
+                      fileForStroage = photo;
+                      photo.log();
+                      if (photo == null) return;
+                      displayPhoto = photo.readAsBytesSync();
+                      context.read<UserInformationNotifier>().changeProfilePhoto(uint8List: displayPhoto);
                     },
-                    child: ProfilePhotoCircle(
-                      photo: showPhoto,
-                    ),
+                    child: const ProfilePhotoCircle(),
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.6,

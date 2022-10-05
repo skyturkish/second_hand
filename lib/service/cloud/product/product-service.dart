@@ -130,6 +130,7 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
 //   return result;
 // }
 
+// TODO bu buraya ait değil
   Future<File> compressFile(File file) async {
     File compressedFile = await FlutterNativeImage.compressImage(
       file.path,

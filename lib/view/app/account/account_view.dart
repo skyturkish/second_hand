@@ -68,38 +68,19 @@ class UserInformationCard extends StatefulWidget {
 }
 
 class _UserInformationCardState extends State<UserInformationCard> {
-  late final Reference storageRef;
-  late final Reference imageRef;
-  Uint8List? photo;
-  @override
-  void initState() {
-    storageRef = FirebaseStorage.instance.ref();
-    imageRef = storageRef.child(widget.user.profilePhotoPath);
-    getImage();
-    super.initState();
-  }
-
-  Future<void> getImage() async {
-    photo = await imageRef.getData();
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => AccountDetailView(
-              photo: photo,
-            ),
+            builder: (context) => const AccountDetailView(),
           ),
         );
-        // NavigationService.instance.navigateToPage(path: NavigationConstants.ACCOUNT_DETAIL);
       },
       child: Row(
         children: [
-          ProfilePhotoCircle(defaultAssetsPath: 'assets/images/dog_eats_bread.jpg', photo: photo),
+          const ProfilePhotoCircle(defaultAssetsPath: 'assets/images/dog_eats_bread.jpg'),
           Padding(
             padding: context.paddingOnlyLeftSmallX,
             child: Column(

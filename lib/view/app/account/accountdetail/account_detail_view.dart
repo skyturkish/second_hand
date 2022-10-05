@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
@@ -9,9 +7,7 @@ import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.da
 import 'package:second_hand/view/app/account/editprofile/edit_profie_view.dart';
 
 class AccountDetailView extends StatelessWidget {
-  const AccountDetailView({Key? key, this.photo}) : super(key: key);
-
-  final Uint8List? photo;
+  const AccountDetailView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +22,7 @@ class AccountDetailView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ProfilePhotoCircle(photo: photo),
+              const ProfilePhotoCircle(),
               Column(
                 children: [
                   Row(
@@ -45,7 +41,7 @@ class AccountDetailView extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => EditProfileView(photo: photo),
+                          builder: (context) => const EditProfileView(),
                         ),
                       );
                     },
