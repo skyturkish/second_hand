@@ -23,7 +23,7 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
     for (var image in images) {
       final String imageId = const Uuid().v4();
       File compressedimage = await compressFile(image);
-      await uploadProductPhoto(
+      await StorageService.instance.uploadProductPhoto(
         file: compressedimage,
         productId: product.productId,
         childUUID: imageId,
@@ -54,7 +54,7 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
       final data = Product.fromMap(doc.data());
 
       for (var image in data.imagesPath) {
-        deleteProductPhoto(
+        StorageService.instance.deleteProductPhoto(
           path: image,
         );
       }
@@ -69,7 +69,7 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
       final data = Product.fromMap(doc.data());
 
       for (var image in data.imagesPath) {
-        deleteProductPhoto(
+        StorageService.instance.deleteProductPhoto(
           path: image,
         );
       }

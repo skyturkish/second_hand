@@ -1,5 +1,4 @@
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
@@ -80,7 +79,7 @@ class _UserInformationCardState extends State<UserInformationCard> {
       },
       child: Row(
         children: [
-          const ProfilePhotoCircle(defaultAssetsPath: 'assets/images/dog_eats_bread.jpg'),
+          const ProfilePhotoCircle(),
           Padding(
             padding: context.paddingOnlyLeftSmallX,
             child: Column(

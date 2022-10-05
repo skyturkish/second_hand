@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
 
@@ -36,7 +37,7 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
             height: context.dynamicHeight(0.33),
             width: context.dynamicWidth(0.90),
             child: context.watch<ProductNotifier>().images.isEmpty
-                ? Image.asset('assets/images/add_photo.png')
+                ? Image.asset(ImageConstants.instance.addPhoto)
                 : PageView.builder(
                     itemCount: context.watch<ProductNotifier>().images.length,
                     itemBuilder: (context, index) {
