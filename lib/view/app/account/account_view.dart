@@ -71,12 +71,11 @@ class _UserInformationCardState extends State<UserInformationCard> {
   late final Reference storageRef;
   late final Reference imageRef;
   Uint8List? photo;
-
   @override
   void initState() {
     storageRef = FirebaseStorage.instance.ref();
     imageRef = storageRef.child(widget.user.profilePhotoPath);
-    getImage(); // TODO #44 #45 causes fix this
+    getImage();
     super.initState();
   }
 

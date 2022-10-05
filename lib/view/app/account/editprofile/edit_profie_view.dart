@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
+import 'package:second_hand/service/storage/upload_image.dart';
 import 'package:second_hand/utilities/dialogs/ignore_changes_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
@@ -89,21 +93,16 @@ class _EditProfileViewState extends State<EditProfileView> {
               child: Row(
                 children: [
                   InkWell(
-                    onTap: () {
-                      final bursa = const Adana().show<String>(context);
+                    onTap: () async {
+                      // TODO ya show'dan nereye gideceğimiz seçeriz ya da direkt resmi alırız
+                      final photo = await SelecPhotoBottomSheet().show<File>(context);
+                      if (photo == null) return;
+                      showPhoto = photo.readAsBytesSync();
 
-                      print(bursa);
-                      print(bursa);
-                      print(bursa);
-                      print(bursa);
-                      print(bursa);
-                      print(bursa);
-                      print(bursa);
-                      print(bursa);
-                      print(bursa);
-                      print(bursa);
-                      print(bursa);
-                      print(bursa);
+                      await uploadUserPhoto(file: photo, userId: AuthService.firebase().currentUser!.id);
+                      context
+                          .read<UserInformationNotifier>()
+                          .changeUserProfilePhotoPath(userId: AuthService.firebase().currentUser!.id);
                     },
                     child: ProfilePhotoCircle(
                       photo: showPhoto,
@@ -158,7 +157,7 @@ class _EditProfileViewState extends State<EditProfileView> {
   }
 }
 
-extension SelectImageFrom on Adana {
+extension SelectImageFrom on SelecPhotoBottomSheet {
   // --> from https://vbacik-10.medium.com/season-two-flutter-short-but-golds-8cff8f4b0b29
   Future<T?> show<T>(BuildContext context) {
     return showModalBottomSheet<T>(context: context, builder: (context) => this);
@@ -171,16 +170,36 @@ extension SelectImageFrom on Adana {
 //   }
 // }
 
-class Adana extends StatelessWidget {
-  const Adana({Key? key}) : super(key: key);
+class SelecPhotoBottomSheet extends StatelessWidget {
+  SelecPhotoBottomSheet({Key? key}) : super(key: key);
+  File? photo;
+  final ImagePicker _picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.pop<String>(context, 'allahım olsun amin');
-      },
-      child: const Text('data'),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ListTile(
+          leading: const Icon(Icons.camera_alt_outlined),
+          title: const Text('From camera'),
+          onTap: () async {
+            final XFile? selectedImage = await _picker.pickImage(source: ImageSource.camera);
+            photo = File(selectedImage!.path);
+            Navigator.pop<File?>(context, photo);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.image),
+          title: const Text('From gallery'),
+          onTap: () async {
+            final XFile? selectedImage = await _picker.pickImage(source: ImageSource.gallery);
+            photo = File(selectedImage!.path);
+            Navigator.pop<File?>(context, photo);
+          },
+        ),
+        const ListTile(),
+      ],
     );
   }
 }

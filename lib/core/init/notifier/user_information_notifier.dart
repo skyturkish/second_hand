@@ -47,4 +47,8 @@ class UserInformationNotifier extends ChangeNotifier {
     _userInformation.aboutYou = aboutYou;
     notifyListeners();
   }
+
+  void changeUserProfilePhotoPath({required String userId}) {
+    _userInformation.profilePhotoPath = 'users/$userId';
+  }
 }

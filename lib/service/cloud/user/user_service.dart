@@ -59,4 +59,12 @@ class UserCloudFireStoreService extends CloudFireStoreBaseService {
     if (userExist == false) return;
     await collection.doc(userId).update({'name': name, 'aboutYou': aboutYou});
   }
+
+  Future<void> updateUserProfilePhoto({
+    required String userId,
+  }) async {
+    bool userExist = await isUserExist(userId: userId);
+    if (userExist == false) return;
+    await collection.doc(userId).update({'profilePhotoPath': 'users/$userId'});
+  }
 }
