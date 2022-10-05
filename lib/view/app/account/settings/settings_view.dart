@@ -6,11 +6,6 @@ import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/utilities/dialogs/logout_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
-import 'dart:developer' as devtools show log;
-
-extension Log on Object {
-  void log() => devtools.log(toString());
-}
 
 class SettingsView extends StatelessWidget {
   const SettingsView({Key? key}) : super(key: key);
@@ -27,7 +22,7 @@ class SettingsView extends StatelessWidget {
             titleText: 'Pricavy',
             subTitleText: 'Phone number visibility',
             onTap: () {
-              context.read<UserInformationNotifier>().userInformation.favoriteAds.log();
+              // context.read<UserInformationNotifier>().userInformation.favoriteAds.log();
             },
           ),
           OptionListTile(

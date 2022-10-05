@@ -5,12 +5,6 @@ import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
 import 'package:second_hand/view/_product/_widgets/grid_view/product_grid_view.dart';
 
-import 'dart:developer' as devtools show log;
-
-extension Log on Object {
-  void log() => devtools.log(toString());
-}
-
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 

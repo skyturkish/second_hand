@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
@@ -12,6 +13,7 @@ class CustomTextFormField extends StatefulWidget {
     this.enableSuggestions,
     this.hintText,
     this.onChanged,
+    this.inputFormatters,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -22,6 +24,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool passwordTextFormField;
   final int? line;
   final bool? enableSuggestions;
+  final List<TextInputFormatter>? inputFormatters;
   final void Function(String text)? onChanged;
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -70,6 +73,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   icon: Icon(isShowPassword ? Icons.remove_red_eye : Icons.visibility_off),
                 ),
         ),
+        inputFormatters: widget.inputFormatters,
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter ${widget.labelText}';

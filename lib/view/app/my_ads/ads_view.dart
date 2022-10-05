@@ -3,14 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
-
-import 'dart:developer' as devtools show log;
-
 import 'package:second_hand/view/app/home/storage_image_view.dart';
-
-extension Log on Object {
-  void log() => devtools.log(toString());
-}
 
 class AdsView extends StatefulWidget {
   const AdsView({Key? key}) : super(key: key);

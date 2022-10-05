@@ -17,6 +17,7 @@ class EditProfileView extends StatefulWidget {
 }
 
 class _EditProfileViewState extends State<EditProfileView> {
+  Uint8List? showPhoto;
   late final TextEditingController nameController;
   late final TextEditingController aboutYouController;
   late final TextEditingController phoneController;
@@ -24,6 +25,7 @@ class _EditProfileViewState extends State<EditProfileView> {
 
   @override
   void initState() {
+    showPhoto = widget.photo;
     final user = context.read<UserInformationNotifier>().userInformation;
     nameController = TextEditingController(text: user.name);
     aboutYouController = TextEditingController(text: user.aboutYou);
@@ -86,8 +88,26 @@ class _EditProfileViewState extends State<EditProfileView> {
               padding: context.paddingOnlyTopSmall,
               child: Row(
                 children: [
-                  ProfilePhotoCircle(
-                    photo: widget.photo,
+                  InkWell(
+                    onTap: () {
+                      final bursa = const Adana().show<String>(context);
+
+                      print(bursa);
+                      print(bursa);
+                      print(bursa);
+                      print(bursa);
+                      print(bursa);
+                      print(bursa);
+                      print(bursa);
+                      print(bursa);
+                      print(bursa);
+                      print(bursa);
+                      print(bursa);
+                      print(bursa);
+                    },
+                    child: ProfilePhotoCircle(
+                      photo: showPhoto,
+                    ),
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.6,
@@ -134,6 +154,33 @@ class _EditProfileViewState extends State<EditProfileView> {
           ],
         ),
       ),
+    );
+  }
+}
+
+extension SelectImageFrom on Adana {
+  // --> from https://vbacik-10.medium.com/season-two-flutter-short-but-golds-8cff8f4b0b29
+  Future<T?> show<T>(BuildContext context) {
+    return showModalBottomSheet<T>(context: context, builder: (context) => this);
+  }
+}
+
+// extension CustomPageSheet on EditProfileView {
+//   Future<T?> show<T>(BuildContext context) {
+//     return showModalBottomSheet(context: context, builder: (context) => this);
+//   }
+// }
+
+class Adana extends StatelessWidget {
+  const Adana({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.pop<String>(context, 'allahım olsun amin');
+      },
+      child: const Text('data'),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
@@ -49,42 +50,34 @@ class SetAPriceViewState extends State<SetAPriceView> {
                 prefix: const Icon(
                   Icons.money,
                 ),
-                onChanged: (String text) {
-                  text.log();
-                  setState(() {});
-                },
+                inputFormatters: [
+                  // only let positivi numbers -->
+                  // from https://stackoverflow.com/questions/71841263/flutter-textfield-only-positive-numbers
+                  FilteringTextInputFormatter.allow(RegExp(r'^[1-9][0-9]*')),
+                ],
               ),
               ElevatedButton(
-                onPressed: _priceController.text == "" || int.parse(_priceController.text) < 0
-                    ? null
-                    : () async {
-                        if (_formKey.currentState!.validate()) {
-                          final String productId = const Uuid().v4();
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    final String productId = const Uuid().v4();
 
-                          context.read<ProductNotifier>().setProduct(
-                                price: int.parse(_priceController.text),
-                                ownerId: AuthService.firebase().currentUser!.id,
-                                productId: productId,
-                              );
+                    context.read<ProductNotifier>().setProduct(
+                          price: int.parse(_priceController.text),
+                          ownerId: AuthService.firebase().currentUser!.id,
+                          productId: productId,
+                        );
 
-                          Future.delayed(
-                            const Duration(milliseconds: 10),
-                          );
+                    ProductCloudFireStoreService.instance.createProduct(
+                      product: context.read<ProductNotifier>().product,
+                      images: context.read<ProductNotifier>().images,
+                    );
 
-                          context.read<ProductNotifier>().skytoString();
-
-                          ProductCloudFireStoreService.instance.createProduct(
-                            product: context.read<ProductNotifier>().product,
-                            images: context.read<ProductNotifier>().images,
-                          );
-
-                          context.read<ProductNotifier>().clearProduct();
-
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pop();
-                        }
-                      },
+                    context.read<ProductNotifier>().clearProduct();
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                  }
+                },
                 child: const Text(
                   'Release Product',
                 ),
