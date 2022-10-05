@@ -19,6 +19,13 @@ class UserCloudFireStoreService extends CloudFireStoreBaseService {
     await collection.doc(userId).set(UserInformation(userId: userId, name: 'User-${const Uuid().v4()}').toMap());
   }
 
+  Future<void> deleteUser({required String userId}) async {
+    bool userExist = await isUserExist(userId: userId);
+    if (userExist == true) {
+      await collection.doc(userId).delete();
+    }
+  }
+
   Future<bool> isUserExist({required String userId}) async {
     var docRef = collection.doc(userId);
     final doc = await docRef.get();

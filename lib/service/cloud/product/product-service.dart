@@ -61,7 +61,7 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
     }
   }
 
-  Future<void> removeAllProduct({required String userId}) async {
+  Future<void> removeAllProductWithImages({required String userId}) async {
     final querySnapShot = await collection.where('ownerId', isEqualTo: userId).get();
 
     for (var doc in querySnapShot.docs) {

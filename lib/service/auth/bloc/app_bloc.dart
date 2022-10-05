@@ -180,10 +180,15 @@ class AppBloc extends Bloc<AppEvent, AppState> {
               loadingText: 'Wait a second, we delete your account',
             ),
           );
-          await ProductCloudFireStoreService.instance.removeAllProduct(
-            userId: AuthService.firebase().currentUser!.id,
-          );
+          final userId = AuthService.firebase().currentUser!.id;
           await provider.deleteAccount();
+
+          await ProductCloudFireStoreService.instance.removeAllProductWithImages(
+            userId: userId,
+          );
+          await UserCloudFireStoreService.instance.deleteUser(
+            userId: userId,
+          );
           emit(
             const AppStateDeletedAccount(
               exception: null,

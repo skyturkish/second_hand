@@ -36,10 +36,10 @@ class ApplicationProvider {
       create: (context) => ThemeNotifier(),
     ),
     ChangeNotifierProvider<ProductNotifier>(
-      create: (context) => ProductNotifier.instance,
+      create: (context) => ProductNotifier(),
     ),
     ChangeNotifierProvider<UserInformationNotifier>(
-      create: (context) => UserInformationNotifier.instance,
+      create: (context) => UserInformationNotifier(),
     ),
   ];
   List<SingleChildWidget> uiChangesItems = [];

@@ -11,14 +11,7 @@ extension Log on Object {
 
 // TODO allah aşkına bunun gerçekten provider olması gerekiyor mu ?
 class ProductNotifier extends ChangeNotifier {
-  static ProductNotifier? _instance;
-
-  static ProductNotifier get instance {
-    _instance ??= ProductNotifier._init();
-    return _instance!;
-  }
-
-  ProductNotifier._init();
+  ProductNotifier();
 
   List<File> images = [];
 
