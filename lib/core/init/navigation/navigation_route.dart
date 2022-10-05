@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
+import 'package:second_hand/view/app/account/accountdetail/account_detail_view.dart';
+import 'package:second_hand/view/app/account/editprofile/edit_profie_view.dart';
 import 'package:second_hand/view/app/addproduct/include_some_details/include_some_details.dart';
 import 'package:second_hand/view/app/addproduct/setprice/set_a_price.dart';
 import 'package:second_hand/view/app/addproduct/uploadphotos/upload_photos.dart';
@@ -20,6 +22,10 @@ class NavigationRoute {
 
       case NavigationConstants.UPLOAD_PHOTOS:
         return normalNavigate(widget: const UploadPhotosView());
+      case NavigationConstants.ACCOUNT_DETAIL:
+        return normalNavigate(widget: const AccountDetailView());
+      case NavigationConstants.EDIT_PROFILE:
+        return normalNavigate(widget: const EditProfileView());
 
       default:
         return MaterialPageRoute(

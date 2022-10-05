@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 class UserInformation {
   final String userId;
   final String name;
-  String? profilePhotoPath;
-  String? phoneNumber;
-  String? aboutYou;
+  String profilePhotoPath;
+  String phoneNumber;
+  String aboutYou;
   final List<String> myAds;
   final List<String> favoriteAds;
   // following
@@ -13,7 +15,7 @@ class UserInformation {
     required this.name,
     this.profilePhotoPath = '',
     this.phoneNumber = '',
-    this.aboutYou = '',
+    this.aboutYou = 'Hi I am new here',
     this.myAds = const [],
     this.favoriteAds = const [],
   });
@@ -23,15 +25,9 @@ class UserInformation {
 
     result.addAll({'userId': userId});
     result.addAll({'name': name});
-    if (profilePhotoPath != null) {
-      result.addAll({'profilePhotoPath': profilePhotoPath});
-    }
-    if (phoneNumber != null) {
-      result.addAll({'phoneNumber': phoneNumber});
-    }
-    if (aboutYou != null) {
-      result.addAll({'aboutYou': aboutYou});
-    }
+    result.addAll({'profilePhotoPath': profilePhotoPath});
+    result.addAll({'phoneNumber': phoneNumber});
+    result.addAll({'aboutYou': aboutYou});
     result.addAll({'myAds': myAds});
     result.addAll({'favoriteAds': favoriteAds});
 
@@ -42,11 +38,15 @@ class UserInformation {
     return UserInformation(
       userId: map['userId'] ?? '',
       name: map['name'] ?? '',
-      profilePhotoPath: map['profilePhotoPath'],
-      phoneNumber: map['phoneNumber'],
-      aboutYou: map['aboutYou'],
+      profilePhotoPath: map['profilePhotoPath'] ?? '',
+      phoneNumber: map['phoneNumber'] ?? '',
+      aboutYou: map['aboutYou'] ?? '',
       myAds: List<String>.from(map['myAds']),
       favoriteAds: List<String>.from(map['favoriteAds']),
     );
   }
+
+  String toJson() => json.encode(toMap());
+
+  factory UserInformation.fromJson(String source) => UserInformation.fromMap(json.decode(source));
 }
