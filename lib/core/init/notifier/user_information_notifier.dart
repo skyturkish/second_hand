@@ -5,7 +5,7 @@ import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
-import 'package:second_hand/service/storage/upload_image.dart';
+import 'package:second_hand/service/storage/storage-service.dart';
 
 class UserInformationNotifier extends ChangeNotifier {
   UserInformation get userInformation => _userInformation;
@@ -83,6 +83,15 @@ class UserInformationNotifier extends ChangeNotifier {
   }
 
   Future<void> changeProfilePhotoPathFirebase() async {
-    await UserCloudFireStoreService.instance.updateUserProfilePhotoPath(userId: _userInformation.userId);
+    await UserCloudFireStoreService.instance.updateUserProfilePhotoPath(
+      userId: _userInformation.userId,
+    );
+  }
+
+  void clearUserInformations() {
+    _userInformation = UserInformation(
+      userId: '',
+      name: '',
+    );
   }
 }

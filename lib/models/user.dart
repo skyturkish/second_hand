@@ -10,6 +10,8 @@ class UserInformation {
       aboutYou: map['aboutYou'] ?? '',
       myAds: List<String>.from(map['myAds']),
       favoriteAds: List<String>.from(map['favoriteAds']),
+      following: List<String>.from(map['following']),
+      followers: List<String>.from(map['followers']),
     );
   }
   // following
@@ -22,6 +24,8 @@ class UserInformation {
     this.aboutYou = 'Hi I am new here',
     this.myAds = const [],
     this.favoriteAds = const [],
+    this.following = const [],
+    this.followers = const [],
   });
   final String userId;
   String name;
@@ -30,6 +34,8 @@ class UserInformation {
   String aboutYou;
   final List<String> myAds;
   final List<String> favoriteAds;
+  final List<String> following;
+  final List<String> followers;
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
@@ -41,7 +47,9 @@ class UserInformation {
       ..addAll({'phoneNumber': phoneNumber})
       ..addAll({'aboutYou': aboutYou})
       ..addAll({'myAds': myAds})
-      ..addAll({'favoriteAds': favoriteAds});
+      ..addAll({'favoriteAds': favoriteAds})
+      ..addAll({'following': following})
+      ..addAll({'followers': followers});
 
     return result;
   }

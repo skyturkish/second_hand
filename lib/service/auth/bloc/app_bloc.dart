@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:second_hand/core/init/notifier/product_notifer.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/service/auth/auth_provider.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
@@ -7,6 +8,7 @@ import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/service/auth/bloc/app_state.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
+import 'package:second_hand/service/storage/storage-service.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc(AuthProvider provider) : super(const AppStateUninitialized(isLoading: true)) {
@@ -202,38 +204,43 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     );
     on<AppEventDeleteAccount>(
       (event, emit) async {
+        emit(
+          const AppStateDeletedAccount(
+            exception: null,
+            isLoading: true,
+            loadingText: 'Wait a second, we delete your account',
+          ),
+        );
+        // DELETE USER'S INFORMATIONS LOCALE
+        event.context.read<UserInformationNotifier>().clearUserInformations();
+        // DELETE PRODUCT ADD INFORMATIONS
+        event.context.read<ProductNotifier>().clearProduct();
+
         try {
-          emit(
-            const AppStateDeletedAccount(
-              exception: null,
-              isLoading: true,
-              loadingText: 'Wait a second, we delete your account',
-            ),
-          );
           final userId = AuthService.firebase().currentUser!.id;
+
+          // DELETE ACCOUNT
           await provider.deleteAccount();
 
-          await ProductCloudFireStoreService.instance.removeAllProductWithImages(
-            userId: userId,
-          );
-          await UserCloudFireStoreService.instance.deleteUser(
-            userId: userId,
-          );
           emit(
             const AppStateDeletedAccount(
               exception: null,
               isLoading: false,
             ),
           );
-        } catch (e) {
-          emit(
-            // TODO this place maybe wrong ?
-            AppStateDeletedAccount(
-              exception: e as Exception,
-              isLoading: false,
-            ),
+          // DELETE PRODUCTS
+          ProductCloudFireStoreService.instance.removeAllProductWithImages(
+            userId: userId,
           );
-        }
+          // DELETE USER'S INFORMATIONS AT FIREBASE
+          UserCloudFireStoreService.instance.deleteUser(
+            userId: userId,
+          );
+          // DELETE USER'S PROFILE PHOTO
+          StorageService.instance.deleteUserProfilePhoto(
+            userId: userId,
+          );
+        } catch (_) {}
       },
     );
   }

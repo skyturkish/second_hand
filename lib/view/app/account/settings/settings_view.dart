@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/theme_notifer.dart';
-import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/utilities/dialogs/logout_dialog.dart';
@@ -46,7 +45,7 @@ class SettingsView extends StatelessWidget {
               Navigator.of(context).pop();
 
               context.read<AppBloc>().add(
-                    const AppEventDeleteAccount(),
+                    AppEventDeleteAccount(context),
                   );
             },
           ),

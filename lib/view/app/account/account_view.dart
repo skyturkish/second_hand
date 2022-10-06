@@ -5,7 +5,6 @@ import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_route.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
-import 'package:second_hand/models/user.dart';
 import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
 import 'package:second_hand/view/app/account/accountdetail/account_detail_view.dart';
@@ -27,9 +26,7 @@ class AccountViewState extends State<AccountView> {
       child: Scaffold(
         body: Column(
           children: [
-            UserInformationCard(
-              user: context.read<UserInformationNotifier>().userInformation,
-            ),
+            const UserInformationCard(),
             OptionListTile(
               titleText: 'Settings',
               leadingIcon: Icons.settings,
@@ -58,9 +55,7 @@ class AccountViewState extends State<AccountView> {
 class UserInformationCard extends StatefulWidget {
   const UserInformationCard({
     super.key,
-    required this.user,
   });
-  final UserInformation user;
 
   @override
   State<UserInformationCard> createState() => _UserInformationCardState();
@@ -87,7 +82,7 @@ class _UserInformationCardState extends State<UserInformationCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.user.name.overFlowString(),
+                  context.watch<UserInformationNotifier>().userInformation.name.overFlowString(),
                   style: Theme.of(context).textTheme.headline5!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

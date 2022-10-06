@@ -26,13 +26,13 @@ class AccountDetailView extends StatelessWidget {
               Column(
                 children: [
                   Row(
-                    children: const [
+                    children: [
                       FollowInformationColumn(
-                        count: 0,
+                        count: user.following.length,
                         countName: 'Following',
                       ),
                       FollowInformationColumn(
-                        count: 0,
+                        count: user.following.length,
                         countName: 'Follower',
                       ),
                     ],

@@ -93,16 +93,16 @@ class ProductDetailView extends StatelessWidget {
               future: UserCloudFireStoreService.instance.getUserInformationById(userId: product.ownerId),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  final user = snapshot.data as UserInformation;
+                  final userInformation = snapshot.data as UserInformation;
 
                   return ListTile(
                     leading: CircleAvatar(
                       radius: 45,
                       child: ProfilePhotoCircle(
-                        image: storageRef.child(user.profilePhotoPath),
+                        userInformation: userInformation,
                       ),
                     ),
-                    title: Text(user.name),
+                    title: Text(userInformation.name),
                     trailing: const Icon(
                       Icons.keyboard_arrow_right_outlined,
                     ),
@@ -122,10 +122,10 @@ class ProductDetailView extends StatelessWidget {
 class ProfilePhotoCircle extends StatefulWidget {
   const ProfilePhotoCircle({
     super.key,
-    required this.image,
+    required this.userInformation,
   });
 
-  final Reference image;
+  final UserInformation userInformation;
 
   @override
   State<ProfilePhotoCircle> createState() => _ProfilePhotoCircleState();
@@ -141,7 +141,8 @@ class _ProfilePhotoCircleState extends State<ProfilePhotoCircle> {
   }
 
   Future<void> getImage() async {
-    photo = await widget.image.getData();
+    photo = await FirebaseStorage.instance.ref().child(widget.userInformation.profilePhotoPath).getData();
+
     setState(() {});
   }
 

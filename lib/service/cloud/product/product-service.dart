@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/cloud/base-service/base-service.dart';
-import 'package:second_hand/service/storage/upload_image.dart';
+import 'package:second_hand/service/storage/storage-service.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductCloudFireStoreService extends CloudFireStoreBaseService {

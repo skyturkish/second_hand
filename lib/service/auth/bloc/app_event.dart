@@ -41,5 +41,6 @@ class AppEventLogOut extends AppEvent {
 }
 
 class AppEventDeleteAccount extends AppEvent {
-  const AppEventDeleteAccount();
+  const AppEventDeleteAccount(this.context);
+  final BuildContext context;
 }
