@@ -34,7 +34,7 @@ class SettingsView extends StatelessWidget {
               if (logout) {
                 Navigator.of(context).pop();
                 context.read<AppBloc>().add(
-                      const AppEventLogOut(),
+                      AppEventLogOut(context),
                     );
               }
             },

@@ -37,7 +37,8 @@ class AppEventForgotPassword extends AppEvent {
 }
 
 class AppEventLogOut extends AppEvent {
-  const AppEventLogOut();
+  const AppEventLogOut(this.context);
+  final BuildContext context;
 }
 
 class AppEventDeleteAccount extends AppEvent {

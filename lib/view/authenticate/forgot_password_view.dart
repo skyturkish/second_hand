@@ -79,7 +79,7 @@ class ForgotPasswordViewState extends State<ForgotPasswordView> {
                   TextButton(
                     onPressed: () {
                       context.read<AppBloc>().add(
-                            const AppEventLogOut(),
+                            AppEventLogOut(context),
                           );
                     },
                     child: const Text('Back to login page'),

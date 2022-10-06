@@ -3,15 +3,30 @@ import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
+import 'package:second_hand/models/user.dart';
 import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
 import 'package:second_hand/view/app/account/editprofile/edit_profie_view.dart';
 
-class AccountDetailView extends StatelessWidget {
-  const AccountDetailView({super.key});
+class AccountDetailView extends StatefulWidget {
+  const AccountDetailView({super.key, required this.user});
+  final UserInformation user;
+
+  @override
+  State<AccountDetailView> createState() => _AccountDetailViewState();
+}
+
+class _AccountDetailViewState extends State<AccountDetailView> {
+  late final bool isHost;
+
+  @override
+  void initState() {
+    isHost = widget.user.userId == context.read<UserInformationNotifier>().userInformation.userId;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<UserInformationNotifier>().userInformation;
+    final localUser = context.watch<UserInformationNotifier>().userInformation;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Account detail'),
@@ -28,25 +43,32 @@ class AccountDetailView extends StatelessWidget {
                   Row(
                     children: [
                       FollowInformationColumn(
-                        count: user.following.length,
+                        count: isHost ? localUser.following.length : widget.user.following.length,
                         countName: 'Following',
                       ),
                       FollowInformationColumn(
-                        count: user.following.length,
+                        count: isHost ? localUser.followers.length : widget.user.followers.length,
                         countName: 'Follower',
                       ),
                     ],
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const EditProfileView(),
+                  isHost
+                      ? ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const EditProfileView(),
+                              ),
+                            );
+                          },
+                          child: const Text('Edit Profile'),
+                        )
+                      : ElevatedButton(
+                          onPressed: () {
+                            //TODO follow
+                          },
+                          child: const Text('Follow'),
                         ),
-                      );
-                    },
-                    child: const Text('Edit Profile'),
-                  ),
                 ],
               ),
               const SizedBox.shrink(),
@@ -55,7 +77,7 @@ class AccountDetailView extends StatelessWidget {
           Padding(
             padding: context.paddingOnlyTopSmall,
             child: Text(
-              user.name.overFlowString(limit: 24),
+              (isHost ? localUser : widget.user).name.overFlowString(limit: 24),
               style: Theme.of(context).textTheme.headline5!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -64,7 +86,7 @@ class AccountDetailView extends StatelessWidget {
           Padding(
             padding: context.paddingOnlyTopSmall,
             child: Text(
-              user.aboutYou,
+              (isHost ? localUser : widget.user).aboutYou,
               style: Theme.of(context).textTheme.headline6,
             ),
           )

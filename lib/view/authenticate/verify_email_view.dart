@@ -36,7 +36,7 @@ class VerifyEmailViewState extends State<VerifyEmailView> {
             TextButton(
               onPressed: () async {
                 context.read<AppBloc>().add(
-                      const AppEventLogOut(),
+                      AppEventLogOut(context),
                     );
               },
               child: const Text(

@@ -184,6 +184,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     // log out
     on<AppEventLogOut>(
       (event, emit) async {
+        // DELETE USER'S INFORMATIONS LOCALE
+        event.context.read<UserInformationNotifier>().clearUserInformations();
+        // DELETE PRODUCT ADD INFORMATIONS LOCALE
+        event.context.read<ProductNotifier>().clearProduct();
         try {
           await provider.logOut();
           emit(
@@ -213,7 +217,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         );
         // DELETE USER'S INFORMATIONS LOCALE
         event.context.read<UserInformationNotifier>().clearUserInformations();
-        // DELETE PRODUCT ADD INFORMATIONS
+        // DELETE PRODUCT ADD INFORMATIONS LOCALE
         event.context.read<ProductNotifier>().clearProduct();
 
         try {

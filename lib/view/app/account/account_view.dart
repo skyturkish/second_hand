@@ -68,7 +68,9 @@ class _UserInformationCardState extends State<UserInformationCard> {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const AccountDetailView(),
+            builder: (context) => AccountDetailView(
+              user: context.read<UserInformationNotifier>().userInformation,
+            ),
           ),
         );
       },

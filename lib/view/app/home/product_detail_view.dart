@@ -7,6 +7,7 @@ import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
+import 'package:second_hand/view/app/account/accountdetail/account_detail_view.dart';
 import 'package:second_hand/view/app/home/home_product_card.dart';
 import 'package:second_hand/view/app/home/storage_image_view.dart';
 
@@ -95,16 +96,25 @@ class ProductDetailView extends StatelessWidget {
                 if (snapshot.hasData) {
                   final userInformation = snapshot.data as UserInformation;
 
-                  return ListTile(
-                    leading: CircleAvatar(
-                      radius: 45,
-                      child: ProfilePhotoCircle(
-                        userInformation: userInformation,
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => AccountDetailView(user: userInformation),
+                        ),
+                      );
+                    },
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 45,
+                        child: ProfilePhotoCircle(
+                          userInformation: userInformation,
+                        ),
                       ),
-                    ),
-                    title: Text(userInformation.name),
-                    trailing: const Icon(
-                      Icons.keyboard_arrow_right_outlined,
+                      title: Text(userInformation.name),
+                      trailing: const Icon(
+                        Icons.keyboard_arrow_right_outlined,
+                      ),
                     ),
                   );
                 } else {
