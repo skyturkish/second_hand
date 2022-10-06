@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/view/app/account/accountdetail/account_detail_view.dart';
-import 'package:second_hand/view/app/addproduct/include_some_details/include_some_details.dart';
+import 'package:second_hand/view/app/addproduct/include_some_details/view/include_some_details_view.dart';
 import 'package:second_hand/view/app/addproduct/setprice/set_a_price.dart';
 import 'package:second_hand/view/app/addproduct/uploadphotos/upload_photos.dart';
 

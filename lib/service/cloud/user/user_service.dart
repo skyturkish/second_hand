@@ -59,7 +59,7 @@ class UserCloudFireStoreService extends CloudFireStoreBaseService {
     await collection.doc(userId).update({'name': name, 'aboutYou': aboutYou});
   }
 
-  Future<void> updateUserProfilePhoto({
+  Future<void> updateUserProfilePhotoPath({
     required String userId,
   }) async {
     final userExist = await isUserExist(userId: userId);

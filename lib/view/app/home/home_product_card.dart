@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/view/app/home/detail_product_view.dart';
+import 'package:second_hand/view/app/home/product_detail_view.dart';
 import 'package:second_hand/view/app/home/storage_image_view.dart';
 
 class CardHomeProduct extends StatelessWidget {
@@ -22,6 +22,7 @@ class CardHomeProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 10,
       child: Stack(
         alignment: AlignmentDirectional.topEnd,
         children: [
@@ -94,7 +95,8 @@ class FavoriteIconButton extends StatefulWidget {
 class _FavoriteIconButtonState extends State<FavoriteIconButton> {
   @override
   Widget build(BuildContext context) {
-    final isFavorite = widget.provider.userInformation.favoriteAds.contains(widget.product.productId);
+    final isFavorite =
+        context.watch<UserInformationNotifier>().userInformation.favoriteAds.contains(widget.product.productId);
     return IconButton(
       onPressed: () {
         isFavorite

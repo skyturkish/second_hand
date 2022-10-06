@@ -9,7 +9,7 @@ class Product {
   List<String> imagesPath;
   int price;
   String documentId;
-  //  final String location; // TODO
+  // TODO final String location
 
   Product({
     required this.productId,
@@ -34,9 +34,9 @@ class Product {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-    //  cascade consecutive method
-    // https://dart.dev/guides/language/language-tour#cascade-notation
 
+    // cascade consecutive method
+    // https://dart.dev/guides/language/language-tour#cascade-notation
     result
       ..addAll({'productId': productId})
       ..addAll({'ownerId': ownerId})

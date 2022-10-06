@@ -85,7 +85,7 @@ class App extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is AppStateLoggedIn) {
-          return const BottomNavigationView(); // uygulamaya giriş
+          return const BottomNavigationView();
         } else if (state is AppStateNeedsVerification) {
           return const VerifyEmailView();
         } else if (state is AppStateLoggedOut || state is AppStateDeletedAccount) {

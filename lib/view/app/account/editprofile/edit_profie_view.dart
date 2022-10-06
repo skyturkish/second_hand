@@ -85,6 +85,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                   );
               if (!mounted) return;
               await context.read<UserInformationNotifier>().changeProfilePhotoFirebase(file: fileForStroage);
+              await context.read<UserInformationNotifier>().changeProfilePhotoPathFirebase();
               LoadingScreen().hide();
               if (!mounted) return;
               Navigator.pop(context);

@@ -38,7 +38,11 @@ class UserInformationNotifier extends ChangeNotifier {
     final userInformationFromFirebase = await UserCloudFireStoreService.instance.getUserInformationById(userId: userId);
     _userInformation = userInformationFromFirebase!;
     _userInformation.favoriteAds.add('value'); // we added this because, when list is empty flutter throw crash ??
-    await getUserPhoto(userId: userId);
+
+    if (userInformationFromFirebase.profilePhotoPath != '') {
+      await getUserPhoto(userId: userId);
+    }
+
     notifyListeners();
   }
 
@@ -76,5 +80,9 @@ class UserInformationNotifier extends ChangeNotifier {
     final uint8List = await FirebaseStorage.instance.ref().child('users/$userId').getData();
     if (uint8List == null) return;
     userPhoto = uint8List;
+  }
+
+  Future<void> changeProfilePhotoPathFirebase() async {
+    await UserCloudFireStoreService.instance.updateUserProfilePhotoPath(userId: _userInformation.userId);
   }
 }

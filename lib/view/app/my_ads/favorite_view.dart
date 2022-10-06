@@ -5,7 +5,7 @@ import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
-import 'package:second_hand/view/app/home/detail_product_view.dart';
+import 'package:second_hand/view/app/home/product_detail_view.dart';
 import 'package:second_hand/view/app/home/storage_image_view.dart';
 
 class FavoritesView extends StatefulWidget {

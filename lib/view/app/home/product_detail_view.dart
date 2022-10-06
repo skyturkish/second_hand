@@ -6,6 +6,7 @@ import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
+import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
 import 'package:second_hand/view/app/home/home_product_card.dart';
 import 'package:second_hand/view/app/home/storage_image_view.dart';
 
@@ -95,9 +96,8 @@ class ProductDetailView extends StatelessWidget {
                   final user = snapshot.data as UserInformation;
 
                   return ListTile(
-                    leading: const CircleAvatar(
-                      child: Icon(Icons.account_circle),
-                    ),
+                    // TODO show user photo who is belong to product
+                    leading: const ProfilePhotoCircle(),
                     title: Text(user.name),
                     trailing: const Icon(
                       Icons.keyboard_arrow_right_outlined,

@@ -17,8 +17,6 @@ class BottomNavigationView extends StatefulWidget {
 }
 
 class BottomNavigationViewState extends State<BottomNavigationView> {
-// TODO bunun serviste olması lazım aslında
-
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
