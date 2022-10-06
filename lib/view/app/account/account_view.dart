@@ -79,7 +79,7 @@ class _UserInformationCardState extends State<UserInformationCard> {
       },
       child: Row(
         children: [
-          const ProfilePhotoCircle(),
+          const ProfilePhotoCircleFromLocal(),
           Padding(
             padding: context.paddingOnlyLeftSmallX,
             child: Column(

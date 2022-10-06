@@ -119,7 +119,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                       displayPhoto = photo.readAsBytesSync();
                       context.read<UserInformationNotifier>().changeProfilePhoto(uint8List: displayPhoto);
                     },
-                    child: const ProfilePhotoCircle(),
+                    child: const ProfilePhotoCircleFromLocal(),
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.6,

@@ -22,7 +22,7 @@ class AccountDetailView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const ProfilePhotoCircle(),
+              const ProfilePhotoCircleFromLocal(),
               Column(
                 children: [
                   Row(

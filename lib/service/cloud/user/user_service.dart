@@ -33,14 +33,16 @@ class UserCloudFireStoreService extends CloudFireStoreBaseService {
 
   Future<UserInformation?> getUserInformationById({required String userId}) async {
     final userExist = await isUserExist(userId: userId);
+
     if (userExist == false) return null;
+
     final docRef = collection.doc(userId);
+
     final doc = await docRef.get();
 
     return UserInformation.fromMap(doc.data()!);
   }
 
-  // TODO bu burada mı olması lazım ? producta mı ? yoksa ayrı bir serviste mi ?
   Future<void> addProductToFavorites({required String userId, required String productId}) async {
     await collection.doc(userId).update({
       'favoriteAds': FieldValue.arrayUnion([productId])

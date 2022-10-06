@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 
-class ProfilePhotoCircle extends StatelessWidget {
-  const ProfilePhotoCircle({
+class ProfilePhotoCircleFromLocal extends StatelessWidget {
+  const ProfilePhotoCircleFromLocal({
     super.key,
     this.defaultAssetsPath = 'assets/images/dog_eats_bread.jpg',
   });
