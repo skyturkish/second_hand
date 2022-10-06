@@ -9,16 +9,16 @@ With this application, you can buy and sell second-hand goods, can contact the s
   - [ ] Phone Authentication
   - [x] Email & Password
   - [ ] Google
-- [ ] Create an account, get informations from user
+- [X] Create an account, get informations from user
 - [X] Product
   - [X] Pick images and to make the product sellable.
   - [X] to be able to see which products are being sold.
   - [X] addable favorite product.
   - [X] manage your product
-- [ ] Account
+- [X] Account
   - [X] User can see own Informations  
   - [X] User can update own Informations
-  - [ ] User can update own Photo 
+  - [X] User can update own Photo 
 - [ ] Communication
   - [ ] Messenger
   - [ ] Filtering messages
