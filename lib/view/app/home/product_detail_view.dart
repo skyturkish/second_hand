@@ -12,9 +12,8 @@ import 'package:second_hand/view/app/home/home_product_card.dart';
 import 'package:second_hand/view/app/home/storage_image_view.dart';
 
 class ProductDetailView extends StatelessWidget {
-  const ProductDetailView({super.key, required this.product, required this.storageRef});
+  const ProductDetailView({super.key, required this.product});
   final Product product;
-  final Reference storageRef;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class ProductDetailView extends StatelessWidget {
                 allowImplicitScrolling: true,
                 itemCount: product.imagesPath.length,
                 itemBuilder: (context, index) {
-                  final mountainImagesRef = storageRef.child(product.imagesPath[index]);
+                  final mountainImagesRef = FirebaseStorage.instance.ref().child(product.imagesPath[index]);
                   return StorageImageView(
                     image: mountainImagesRef,
                   );

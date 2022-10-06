@@ -4,7 +4,9 @@ import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/user.dart';
+import 'package:second_hand/service/cloud/product/product-service.dart';
 import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
+import 'package:second_hand/view/_product/_widgets/grid_view/product_grid_view.dart';
 import 'package:second_hand/view/app/account/editprofile/edit_profie_view.dart';
 
 class AccountDetailView extends StatefulWidget {
@@ -89,7 +91,19 @@ class _AccountDetailViewState extends State<AccountDetailView> {
               (isHost ? localUser : widget.user).aboutYou,
               style: Theme.of(context).textTheme.headline6,
             ),
-          )
+          ),
+          const Divider(
+            height: 10,
+            thickness: 2,
+          ),
+          isHost
+              ? const Text('data')
+              : Expanded(
+                  child: RefreshsableProductGridView(
+                    getProducts: ProductCloudFireStoreService.instance.getAllBelongProductsById,
+                    userId: widget.user.userId,
+                  ),
+                ),
         ],
       ),
     );

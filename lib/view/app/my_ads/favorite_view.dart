@@ -74,7 +74,6 @@ class FavoriteListTileProduct extends StatelessWidget {
             builder: (context) {
               return ProductDetailView(
                 product: product,
-                storageRef: FirebaseStorage.instance.ref(),
               );
             },
           ),

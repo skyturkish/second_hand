@@ -7,17 +7,13 @@ import 'package:second_hand/models/product.dart';
 import 'package:second_hand/view/app/home/product_detail_view.dart';
 import 'package:second_hand/view/app/home/storage_image_view.dart';
 
-class CardHomeProduct extends StatelessWidget {
-  const CardHomeProduct({
+class ProductCard extends StatelessWidget {
+  const ProductCard({
     super.key,
     required this.product,
-    required this.storageRef,
-    required this.mountainImagesRef,
   });
 
   final Product product;
-  final Reference storageRef;
-  final Reference mountainImagesRef;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +34,6 @@ class CardHomeProduct extends StatelessWidget {
                         builder: (context) {
                           return ProductDetailView(
                             product: product,
-                            storageRef: storageRef,
                           );
                         },
                       ),
@@ -46,7 +41,7 @@ class CardHomeProduct extends StatelessWidget {
                   },
                   child: Center(
                     child: StorageImageView(
-                      image: mountainImagesRef,
+                      image: FirebaseStorage.instance.ref().child(product.imagesPath.first),
                     ),
                   ),
                 ),

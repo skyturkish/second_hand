@@ -35,7 +35,17 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
   }
 
   // TODO galiba burayı da stream ile yapmak zorundayız :shrug:
-  Future<List<Product>?> getAllProducts({required String userId}) async {
+  Future<List<Product>?> getAllBelongProductsById({required String userId}) async {
+    final querySnapShot = await collection.where('ownerId', isEqualTo: userId).get();
+    final products = querySnapShot.docs.map(
+      (queryDocumentSnapshot) => Product.fromMap(
+        queryDocumentSnapshot.data(),
+      ),
+    );
+    return products.toList();
+  }
+
+  Future<List<Product>?> getAllNotBelongProducts({required String userId}) async {
     final querySnapShot = await collection.where('ownerId', isNotEqualTo: userId).get();
     final products = querySnapShot.docs.map(
       (queryDocumentSnapshot) => Product.fromMap(
