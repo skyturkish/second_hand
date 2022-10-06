@@ -37,7 +37,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const ProfilePhotoCircleFromLocal(),
+              ProfilePhotoCircle(userInformation: widget.user),
               Column(
                 children: [
                   Row(

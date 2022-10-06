@@ -76,7 +76,7 @@ class _UserInformationCardState extends State<UserInformationCard> {
       },
       child: Row(
         children: [
-          const ProfilePhotoCircleFromLocal(),
+          ProfilePhotoCircle(userInformation: context.read<UserInformationNotifier>().userInformation),
           Padding(
             padding: context.paddingOnlyLeftSmallX,
             child: Column(

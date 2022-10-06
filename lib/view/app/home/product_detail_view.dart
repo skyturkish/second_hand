@@ -1,5 +1,4 @@
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
@@ -7,6 +6,7 @@ import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
+import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
 import 'package:second_hand/view/app/account/accountdetail/account_detail_view.dart';
 import 'package:second_hand/view/app/home/home_product_card.dart';
 import 'package:second_hand/view/app/home/storage_image_view.dart';
@@ -125,44 +125,6 @@ class ProductDetailView extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class ProfilePhotoCircle extends StatefulWidget {
-  const ProfilePhotoCircle({
-    super.key,
-    required this.userInformation,
-  });
-
-  final UserInformation userInformation;
-
-  @override
-  State<ProfilePhotoCircle> createState() => _ProfilePhotoCircleState();
-}
-
-class _ProfilePhotoCircleState extends State<ProfilePhotoCircle> {
-  Uint8List? photo;
-
-  @override
-  void initState() {
-    getImage();
-    super.initState();
-  }
-
-  Future<void> getImage() async {
-    photo = await FirebaseStorage.instance.ref().child(widget.userInformation.profilePhotoPath).getData();
-
-    setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 45,
-      backgroundImage:
-          // TODO buraya gerçekten geç geldiği zaman karşıdakinin geç geleceğini anladığın bir fotoğraf koyarsın
-          photo == null ? const AssetImage('assets/images/dog_eats_bread.jpg') : MemoryImage(photo!) as ImageProvider,
     );
   }
 }
