@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
+import 'package:second_hand/loading/loading_screen.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
 import 'package:second_hand/utilities/dialogs/ignore_changes_dialog.dart';
@@ -70,20 +71,23 @@ class _EditProfileViewState extends State<EditProfileView> {
         actions: [
           TextButton(
             onPressed: () async {
+              LoadingScreen().show(context: context, text: 'wait');
+
               await UserCloudFireStoreService.instance.updateUserInformation(
                 userId: AuthService.firebase().currentUser!.id,
                 name: nameController.text,
                 aboutYou: aboutYouController.text,
               ); // TODO ikisinden birini ortak alalım ya da almayalım
-
+              if (!mounted) return;
               await context.read<UserInformationNotifier>().changeUserInformation(
                     // ismini local yap
                     name: nameController.text,
                     aboutYou: aboutYouController.text,
                   );
-
+              if (!mounted) return;
               await context.read<UserInformationNotifier>().changeProfilePhotoFirebase(file: fileForStroage);
-
+              LoadingScreen().hide();
+              if (!mounted) return;
               Navigator.pop(context);
             },
             child: const Text('Save'),

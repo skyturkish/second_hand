@@ -43,7 +43,6 @@ class SettingsView extends StatelessWidget {
                       const AppEventLogOut(),
                     );
               }
-              // çıkıyor ama etki etmiyor bu da çok mantıklı
             },
           ),
           OptionListTile(

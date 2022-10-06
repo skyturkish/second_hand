@@ -1,3 +1,9 @@
+extension OverFlowString on String {
+  String overFlowString({int limit = 15}) {
+    return length > limit ? '${substring(0, limit - 1)}...' : this;
+  }
+}
+
 class ImageConstants {
   static ImageConstants? _instance;
 
@@ -18,10 +24,4 @@ extension _ImageConstantsExtensionPng on String {
 
 extension _ImageConstantsExtensionJpg on String {
   String get toJPG => 'assets/images/$this.jph';
-}
-
-extension OverFlowString on String {
-  String overFlowString({int limit = 15}) {
-    return length > limit ? '${substring(0, limit - 1)}...' : this;
-  }
 }

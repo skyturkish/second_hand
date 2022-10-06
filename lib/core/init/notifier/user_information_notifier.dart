@@ -1,6 +1,4 @@
-// TODO bak buraya da aynı şeyi yazacağım bunlar gerçekten gerekiyor mu provider ile yapmama ???????? hiç doğru hissetirmiyor
 import 'dart:io';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:second_hand/models/user.dart';
@@ -35,7 +33,7 @@ class UserInformationNotifier extends ChangeNotifier {
     final userInformationFromFirebase = await UserCloudFireStoreService.instance.getUserInformationById(userId: userId);
     _userInformation = userInformationFromFirebase!;
     _userInformation.favoriteAds.add('value'); // we added this because, when list is empty flutter throw crash ??
-    getUserPhoto(userId: userId);
+    await getUserPhoto(userId: userId);
     notifyListeners();
   }
 

@@ -20,9 +20,14 @@ class ApplicationProvider {
 
   ApplicationProvider._init();
 
-  // TODO tüm providerlar aynı listede mi duracak ?
-
-  List<SingleChildWidget> singleItems = [];
+  List<SingleChildWidget> singleItems = [
+    ChangeNotifierProvider<ProductNotifier>(
+      create: (context) => ProductNotifier(),
+    ),
+    ChangeNotifierProvider<UserInformationNotifier>(
+      create: (context) => UserInformationNotifier(),
+    ),
+  ];
   List<SingleChildWidget> dependItems = [
     Provider.value(
       value: NavigationService.instance,
@@ -34,12 +39,6 @@ class ApplicationProvider {
     ),
     ChangeNotifierProvider(
       create: (context) => ThemeNotifier(),
-    ),
-    ChangeNotifierProvider<ProductNotifier>(
-      create: (context) => ProductNotifier(),
-    ),
-    ChangeNotifierProvider<UserInformationNotifier>(
-      create: (context) => UserInformationNotifier(),
     ),
   ];
   List<SingleChildWidget> uiChangesItems = [];

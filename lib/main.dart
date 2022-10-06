@@ -26,6 +26,7 @@ void main() async {
     MultiProvider(
       providers: [
         ...ApplicationProvider.instance.dependItems,
+        ...ApplicationProvider.instance.singleItems,
       ],
       child: EasyLocalization(
         supportedLocales: LanguageManager.instance.supportedLocales,

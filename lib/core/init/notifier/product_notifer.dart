@@ -9,7 +9,7 @@ extension Log on Object {
   void log() => devtools.log(toString());
 }
 
-// TODO allah aşkına bunun gerçekten provider olması gerekiyor mu ?
+// for images, yes, this must be provider
 class ProductNotifier extends ChangeNotifier {
   ProductNotifier();
 

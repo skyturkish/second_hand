@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/loading/loading_screen_controller.dart';
 
 class LoadingScreen {
@@ -34,6 +35,7 @@ class LoadingScreen {
     required String text,
   }) {
     final streamControllerText = StreamController<String>();
+
     streamControllerText.add(text);
 
     // get the size
@@ -51,38 +53,48 @@ class LoadingScreen {
                 // It limits a area which we will see on the app
                 maxWidth: size.width * 0.8,
                 maxHeight: size.height * 0.8,
-                minWidth: size.width * 0.5,
+                minWidth: size.width * 0.8,
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadiusDirectional.circular(10.0),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: context.paddingAllMedium,
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(
-                        height: 10,
+                      Padding(
+                        padding: context.paddingOnlyTopSmall,
+                        child: const CircularProgressIndicator(),
                       ),
-                      const CircularProgressIndicator(),
-                      const SizedBox(
-                        height: 20,
+                      Padding(
+                        padding: context.paddingOnlyTopSmall,
+                        child: Text(
+                          text,
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle2!
+                              .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
                       ),
-                      StreamBuilder<String>(
-                        stream: streamControllerText.stream,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return Text(
-                              snapshot.data ?? 'loading_screen.dart 81.satır null geldi',
-                              textAlign: TextAlign.center,
-                            );
-                          } else {
-                            return Container();
-                          }
-                        },
+                      Padding(
+                        padding: context.paddingOnlyTopMedium,
+                        child: StreamBuilder<String>(
+                          stream: streamControllerText.stream,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(
+                                snapshot.data ?? 'loading_screen.dart 81.satır null geldi',
+                                textAlign: TextAlign.center,
+                              );
+                            } else {
+                              return Container();
+                            }
+                          },
+                        ),
                       )
                     ],
                   ),
