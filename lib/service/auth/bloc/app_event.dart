@@ -6,8 +6,8 @@ abstract class AppEvent {
 }
 
 class AppEventInitialize extends AppEvent {
-  final BuildContext context;
   const AppEventInitialize(this.context);
+  final BuildContext context;
 }
 
 class AppEventSendEmailVerification extends AppEvent {
@@ -15,16 +15,16 @@ class AppEventSendEmailVerification extends AppEvent {
 }
 
 class AppEventLogIn extends AppEvent {
+  const AppEventLogIn(this.email, this.password, this.context);
   final String email;
   final String password;
   final BuildContext context;
-  const AppEventLogIn(this.email, this.password, this.context);
 }
 
 class AppEventRegister extends AppEvent {
+  const AppEventRegister(this.email, this.password);
   final String email;
   final String password;
-  const AppEventRegister(this.email, this.password);
 }
 
 class AppEventShouldRegister extends AppEvent {
@@ -32,8 +32,8 @@ class AppEventShouldRegister extends AppEvent {
 }
 
 class AppEventForgotPassword extends AppEvent {
-  final String? email;
   const AppEventForgotPassword({this.email});
+  final String? email;
 }
 
 class AppEventLogOut extends AppEvent {

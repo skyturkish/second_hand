@@ -1,5 +1,5 @@
+import 'dart:developer' as devtools show log;
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,14 +12,13 @@ import 'package:second_hand/service/cloud/user/user_service.dart';
 import 'package:second_hand/utilities/dialogs/ignore_changes_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
-import 'dart:developer' as devtools show log;
 
 extension Log on Object? {
   void log() => devtools.log(toString());
 }
 
 class EditProfileView extends StatefulWidget {
-  const EditProfileView({Key? key}) : super(key: key);
+  const EditProfileView({super.key});
   @override
   State<EditProfileView> createState() => _EditProfileViewState();
 }

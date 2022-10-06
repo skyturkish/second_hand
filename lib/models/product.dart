@@ -6,7 +6,7 @@ class Product {
   String state;
   String title;
   String description;
-  List<String> imagesPath; // referans'lara kolay erişebilmen için tutacaksın, referans path'lerini
+  List<String> imagesPath;
   int price;
   String documentId;
   //  final String location; // TODO
@@ -34,15 +34,18 @@ class Product {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
+    //  cascade consecutive method
+    // https://dart.dev/guides/language/language-tour#cascade-notation
 
-    result.addAll({'productId': productId});
-    result.addAll({'ownerId': ownerId});
-    result.addAll({'state': state});
-    result.addAll({'title': title});
-    result.addAll({'description': description});
-    result.addAll({'imagesPath': imagesPath});
-    result.addAll({'price': price});
-    result.addAll({'documentId': documentId});
+    result
+      ..addAll({'productId': productId})
+      ..addAll({'ownerId': ownerId})
+      ..addAll({'state': state})
+      ..addAll({'title': title})
+      ..addAll({'description': description})
+      ..addAll({'imagesPath': imagesPath})
+      ..addAll({'price': price})
+      ..addAll({'documentId': documentId});
 
     return result;
   }

@@ -10,7 +10,7 @@ import 'package:second_hand/view/app/home/home_view.dart';
 import 'package:second_hand/view/app/my_ads/my_ads_view.dart';
 
 class BottomNavigationView extends StatefulWidget {
-  const BottomNavigationView({Key? key}) : super(key: key);
+  const BottomNavigationView({super.key});
 
   @override
   State<BottomNavigationView> createState() => BottomNavigationViewState();
@@ -52,7 +52,7 @@ class BottomNavigationViewState extends State<BottomNavigationView> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          NavigationService.instance.navigateToPage(path: NavigationConstants.INCLUDE_SOME_DETAILS);
+          await NavigationService.instance.navigateToPage(path: NavigationConstants.INCLUDE_SOME_DETAILS);
         },
         child: const Icon(
           Icons.camera_alt,

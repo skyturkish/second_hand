@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_hand/core/extensions/context_extension.dart';
 
 typedef CloseDialog = void Function();
 
@@ -11,8 +12,10 @@ CloseDialog showLoadingDialog({
       mainAxisSize: MainAxisSize.min,
       children: [
         const CircularProgressIndicator(),
-        const SizedBox(height: 10.0),
-        Text(text),
+        Padding(
+          padding: context.paddingOnlyTopSmall,
+          child: Text(text),
+        ),
       ],
     ),
   );

@@ -7,7 +7,7 @@ import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.da
 import 'package:second_hand/view/app/account/editprofile/edit_profie_view.dart';
 
 class AccountDetailView extends StatelessWidget {
-  const AccountDetailView({Key? key}) : super(key: key);
+  const AccountDetailView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +76,10 @@ class AccountDetailView extends StatelessWidget {
 
 class FollowInformationColumn extends StatelessWidget {
   const FollowInformationColumn({
-    Key? key,
+    super.key,
     required this.count,
     required this.countName,
-  }) : super(key: key);
+  });
   final int count;
   final String countName;
 

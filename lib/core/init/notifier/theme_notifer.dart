@@ -19,7 +19,7 @@ class ThemeNotifier extends ChangeNotifier {
   ThemeData get currentTheme => _currentTheme;
 
   void changeTheme() {
-    AppThemes theme = currentThemeEnum;
+    final theme = currentThemeEnum;
     if (theme == AppThemes.LIGHT) {
       _currentTheme = ThemeData.dark().copyWith(
         appBarTheme: const AppBarTheme(

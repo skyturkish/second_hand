@@ -9,7 +9,7 @@ import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_for
 import 'package:uuid/uuid.dart';
 
 class SetAPriceView extends StatefulWidget {
-  const SetAPriceView({Key? key}) : super(key: key);
+  const SetAPriceView({super.key});
 
   @override
   State<SetAPriceView> createState() => SetAPriceViewState();
@@ -59,7 +59,7 @@ class SetAPriceViewState extends State<SetAPriceView> {
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    final String productId = const Uuid().v4();
+                    final productId = const Uuid().v4();
 
                     context.read<ProductNotifier>().setProduct(
                           price: int.parse(_priceController.text),

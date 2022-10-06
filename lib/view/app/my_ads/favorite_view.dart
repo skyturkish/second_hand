@@ -9,7 +9,7 @@ import 'package:second_hand/view/app/home/detail_product_view.dart';
 import 'package:second_hand/view/app/home/storage_image_view.dart';
 
 class FavoritesView extends StatefulWidget {
-  const FavoritesView({Key? key}) : super(key: key);
+  const FavoritesView({super.key});
 
   @override
   State<FavoritesView> createState() => FavoritesViewState();
@@ -56,10 +56,10 @@ class FavoritesViewState extends State<FavoritesView> with AutomaticKeepAliveCli
 
 class FavoriteListTileProduct extends StatelessWidget {
   const FavoriteListTileProduct({
-    Key? key,
+    super.key,
     required this.product,
     required this.mountainImagesRef,
-  }) : super(key: key);
+  });
 
   final Product product;
   final Reference mountainImagesRef;

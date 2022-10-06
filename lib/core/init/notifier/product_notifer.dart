@@ -1,9 +1,7 @@
+import 'dart:developer' as devtools show log;
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:second_hand/models/product.dart';
-
-import 'dart:developer' as devtools show log;
 
 extension Log on Object {
   void log() => devtools.log(toString());
@@ -16,7 +14,7 @@ class ProductNotifier extends ChangeNotifier {
   List<File> images = [];
 
   void addImages({required List<File> newImages}) {
-    for (var image in newImages) {
+    for (final image in newImages) {
       images.add(image);
       notifyListeners();
     }
@@ -67,13 +65,14 @@ class ProductNotifier extends ChangeNotifier {
     List<String>? images,
     int? price,
   }) {
-    product.productId = productId ?? product.productId;
-    product.ownerId = ownerId ?? product.ownerId;
-    product.state = state ?? product.state;
-    product.title = title ?? product.title;
-    product.description = description ?? product.description;
-    product.imagesPath = images ?? product.imagesPath;
-    product.price = price ?? product.price;
+    product
+      ..productId = productId ?? product.productId
+      ..ownerId = ownerId ?? product.ownerId
+      ..state = state ?? product.state
+      ..title = title ?? product.title
+      ..description = description ?? product.description
+      ..imagesPath = images ?? product.imagesPath
+      ..price = price ?? product.price;
 
     notifyListeners();
   }

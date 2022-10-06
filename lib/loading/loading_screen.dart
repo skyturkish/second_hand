@@ -4,9 +4,9 @@ import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/loading/loading_screen_controller.dart';
 
 class LoadingScreen {
+  LoadingScreen._sharedInstance();
   factory LoadingScreen() => _shared;
   static final LoadingScreen _shared = LoadingScreen._sharedInstance();
-  LoadingScreen._sharedInstance();
 
   LoadingScreenController? _controller;
 
@@ -46,7 +46,8 @@ class LoadingScreen {
     final overlay = OverlayEntry(
       builder: (context) {
         return Material(
-          color: Colors.black.withAlpha(150), // It provides a transparent view on the back.
+          // It provides a transparent view on the back.
+          color: Colors.black.withAlpha(150),
           child: Center(
             child: Container(
               constraints: BoxConstraints(
@@ -57,7 +58,7 @@ class LoadingScreen {
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadiusDirectional.circular(10.0),
+                borderRadius: BorderRadiusDirectional.circular(10),
               ),
               child: Padding(
                 padding: context.paddingAllMedium,
@@ -74,10 +75,10 @@ class LoadingScreen {
                         padding: context.paddingOnlyTopSmall,
                         child: Text(
                           text,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle2!
-                              .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+                          style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                       ),
                       Padding(
@@ -107,7 +108,8 @@ class LoadingScreen {
     );
     // https://stackoverflow.com/questions/56537718/what-assert-do-in-dart ,,, eğer test yazmıyorsak bunu kullanabilirsen
     state?.insert(
-        overlay); // Overlay.of(context) aynı ekranın uzunluğunu alıyormuş gibi, ekranın state'ini alıyormuş gibi düşünebiliriz
+      overlay,
+    );
 
     return LoadingScreenController(
       close: () {

@@ -19,7 +19,7 @@ enum ProductState {
 }
 
 class IncludeSomeDetailsView extends StatefulWidget {
-  const IncludeSomeDetailsView({Key? key}) : super(key: key);
+  const IncludeSomeDetailsView({super.key});
 
   @override
   State<IncludeSomeDetailsView> createState() => IncludeSomeDetailsViewState();

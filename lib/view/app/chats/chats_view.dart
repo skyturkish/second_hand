@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ChatsView extends StatefulWidget {
-  const ChatsView({Key? key}) : super(key: key);
+  const ChatsView({super.key});
 
   @override
   State<ChatsView> createState() => ChatsViewState();

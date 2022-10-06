@@ -8,7 +8,7 @@ import 'package:second_hand/utilities/dialogs/logout_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
 
 class SettingsView extends StatelessWidget {
-  const SettingsView({Key? key}) : super(key: key);
+  const SettingsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +21,12 @@ class SettingsView extends StatelessWidget {
           OptionListTile(
             titleText: 'Pricavy',
             subTitleText: 'Phone number visibility',
-            onTap: () {
-              // context.read<UserInformationNotifier>().userInformation.favoriteAds.log();
-            },
+            onTap: () {},
           ),
           OptionListTile(
             titleText: 'Notifications',
             subTitleText: 'Recommendations & Special communications',
-            onTap: () {
-              print(context.read<UserInformationNotifier>().userInformation.favoriteAds);
-              //context.read<UserInformationNotifier>().userInformation.name.log();
-            },
+            onTap: () {},
           ),
           OptionListTile(
             titleText: 'Logout',

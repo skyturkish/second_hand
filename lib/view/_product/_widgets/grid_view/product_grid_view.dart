@@ -5,10 +5,10 @@ import 'package:second_hand/view/app/home/home_product_card.dart';
 
 class ProductGridView extends StatelessWidget {
   const ProductGridView({
-    Key? key,
+    super.key,
     required this.products,
     required this.storageRef,
-  }) : super(key: key);
+  });
 
   final List<Product>? products;
   final Reference storageRef;
@@ -18,8 +18,8 @@ class ProductGridView extends StatelessWidget {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        crossAxisSpacing: 5.0,
-        mainAxisSpacing: 5.0,
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 5,
       ),
       itemCount: products!.length,
       itemBuilder: (BuildContext context, int index) {

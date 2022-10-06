@@ -15,9 +15,9 @@ dependencies:
     sdk: flutter
 
   # Firebase
-  firebase_core: ^1.22.0
   firebase_auth: ^3.8.0
   firebase_analytics: ^9.3.4
+  firebase_core: ^1.22.0
 
   #  Cache
   cached_network_image: ^3.2.2

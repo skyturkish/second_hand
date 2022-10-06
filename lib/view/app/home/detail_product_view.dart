@@ -10,7 +10,7 @@ import 'package:second_hand/view/app/home/home_product_card.dart';
 import 'package:second_hand/view/app/home/storage_image_view.dart';
 
 class ProductDetailView extends StatelessWidget {
-  const ProductDetailView({Key? key, required this.product, required this.storageRef}) : super(key: key);
+  const ProductDetailView({super.key, required this.product, required this.storageRef});
   final Product product;
   final Reference storageRef;
 

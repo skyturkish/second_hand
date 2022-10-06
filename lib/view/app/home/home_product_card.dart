@@ -9,11 +9,11 @@ import 'package:second_hand/view/app/home/storage_image_view.dart';
 
 class CardHomeProduct extends StatelessWidget {
   const CardHomeProduct({
-    Key? key,
+    super.key,
     required this.product,
     required this.storageRef,
     required this.mountainImagesRef,
-  }) : super(key: key);
+  });
 
   final Product product;
   final Reference storageRef;
@@ -79,10 +79,10 @@ class CardHomeProduct extends StatelessWidget {
 
 class FavoriteIconButton extends StatefulWidget {
   const FavoriteIconButton({
-    Key? key,
+    super.key,
     required this.product,
     required this.provider,
-  }) : super(key: key);
+  });
 
   final Product product;
   final UserInformationNotifier provider;
@@ -94,7 +94,7 @@ class FavoriteIconButton extends StatefulWidget {
 class _FavoriteIconButtonState extends State<FavoriteIconButton> {
   @override
   Widget build(BuildContext context) {
-    bool isFavorite = widget.provider.userInformation.favoriteAds.contains(widget.product.productId);
+    final isFavorite = widget.provider.userInformation.favoriteAds.contains(widget.product.productId);
     return IconButton(
       onPressed: () {
         isFavorite

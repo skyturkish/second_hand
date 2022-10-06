@@ -10,7 +10,7 @@ import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
 
 class UploadPhotosView extends StatefulWidget {
-  const UploadPhotosView({Key? key}) : super(key: key);
+  const UploadPhotosView({super.key});
 
   @override
   State<UploadPhotosView> createState() => UploadPhotosViewState();
@@ -50,14 +50,14 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
           ),
           const Divider(
             height: 5,
-            thickness: 10.0,
+            thickness: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ElevatedButton(
                 onPressed: () async {
-                  final List<XFile>? images = await _picker.pickMultiImage(
+                  final images = await _picker.pickMultiImage(
                     maxHeight: 1024,
                     maxWidth: 1024,
                     imageQuality: 50,
@@ -75,11 +75,11 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  final XFile? xFileimage = await _picker.pickImage(
+                  final xFileimage = await _picker.pickImage(
                     source: ImageSource.camera,
                     imageQuality: 50,
                   );
-                  final File fileImage = File(xFileimage!.path);
+                  final fileImage = File(xFileimage!.path);
                   context.read<ProductNotifier>().addImages(
                     newImages: [fileImage],
                   );
@@ -96,8 +96,8 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
-                  crossAxisSpacing: 5.0,
-                  mainAxisSpacing: 5.0,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
                 ),
                 itemCount: context.watch<ProductNotifier>().images.length,
                 itemBuilder: (BuildContext context, int index) {

@@ -5,14 +5,13 @@ extension OverFlowString on String {
 }
 
 class ImageConstants {
+  ImageConstants._();
   static ImageConstants? _instance;
 
   static ImageConstants get instance {
     _instance ??= ImageConstants._();
     return _instance!;
   }
-
-  ImageConstants._();
 
   final String addPhoto = 'add_photo'.toPNG;
   final String dogEatsBread = 'dog_eats_bread'.toJPG;

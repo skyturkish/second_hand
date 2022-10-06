@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class OptionListTile extends StatelessWidget {
   OptionListTile({
-    Key? key,
+    super.key,
     required this.titleText,
     this.leadingIcon,
     this.subTitleText,
     this.trailingIcon = Icons.keyboard_arrow_right,
     required this.onTap,
-  }) : super(key: key);
+  });
   final String titleText;
   IconData? leadingIcon;
   String? subTitleText;

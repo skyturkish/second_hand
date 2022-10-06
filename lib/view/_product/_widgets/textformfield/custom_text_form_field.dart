@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
-    Key? key,
+    super.key,
     required this.controller,
     this.keyboardType = TextInputType.name,
     required this.labelText,
@@ -14,7 +14,7 @@ class CustomTextFormField extends StatefulWidget {
     this.hintText,
     this.onChanged,
     this.inputFormatters,
-  }) : super(key: key);
+  });
 
   final TextEditingController controller;
   final TextInputType keyboardType;
@@ -45,41 +45,42 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        controller: widget.controller,
-        keyboardType: widget.keyboardType,
-        maxLines: widget.line ?? 1,
-        obscureText: _isPasswordTextFormField ? !isShowPassword : false,
-        enableSuggestions: widget.enableSuggestions ?? false,
-        decoration: InputDecoration(
-          fillColor: Colors.brown.withOpacity(0.6),
-          filled: true,
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: const BorderSide(color: Colors.white),
-          ),
-          labelText: widget.labelText,
-          prefixIcon: widget.prefix,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          hintText: widget.hintText ?? widget.labelText,
-          suffixIcon: !_isPasswordTextFormField
-              ? null
-              : IconButton(
-                  onPressed: () {
-                    isShowPassword = !isShowPassword;
-                    setState(() {});
-                  },
-                  icon: Icon(isShowPassword ? Icons.remove_red_eye : Icons.visibility_off),
-                ),
+      controller: widget.controller,
+      keyboardType: widget.keyboardType,
+      maxLines: widget.line ?? 1,
+      obscureText: _isPasswordTextFormField ? !isShowPassword : false,
+      enableSuggestions: widget.enableSuggestions ?? false,
+      decoration: InputDecoration(
+        fillColor: Colors.brown.withOpacity(0.6),
+        filled: true,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: const BorderSide(color: Colors.white),
         ),
-        inputFormatters: widget.inputFormatters,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please enter ${widget.labelText}';
-          }
-          return null;
-        },
-        onChanged: widget.onChanged);
+        labelText: widget.labelText,
+        prefixIcon: widget.prefix,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        hintText: widget.hintText ?? widget.labelText,
+        suffixIcon: !_isPasswordTextFormField
+            ? null
+            : IconButton(
+                onPressed: () {
+                  isShowPassword = !isShowPassword;
+                  setState(() {});
+                },
+                icon: Icon(isShowPassword ? Icons.remove_red_eye : Icons.visibility_off),
+              ),
+      ),
+      inputFormatters: widget.inputFormatters,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter ${widget.labelText}';
+        }
+        return null;
+      },
+      onChanged: widget.onChanged,
+    );
   }
 }

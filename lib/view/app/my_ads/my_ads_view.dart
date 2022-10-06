@@ -3,7 +3,7 @@ import 'package:second_hand/view/app/my_ads/ads_View.dart';
 import 'package:second_hand/view/app/my_ads/favorite_view.dart';
 
 class MyAdsView extends StatefulWidget {
-  const MyAdsView({Key? key}) : super(key: key);
+  const MyAdsView({super.key});
 
   @override
   State<MyAdsView> createState() => MyAdsViewState();

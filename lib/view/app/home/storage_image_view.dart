@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class StorageImageView extends StatelessWidget {
-  final Reference image;
   const StorageImageView({
-    Key? key,
+    super.key,
     required this.image,
-  }) : super(key: key);
+  });
+  final Reference image;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,6 @@ class StorageImageView extends StatelessWidget {
             // else if (snapshot.hasError) { // handle error
 
             // }
-
             else {
               return const Center(
                 child: CircularProgressIndicator(),

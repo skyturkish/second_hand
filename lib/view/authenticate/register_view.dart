@@ -10,7 +10,7 @@ import 'package:second_hand/utilities/dialogs/error_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 
 class RegisterView extends StatefulWidget {
-  const RegisterView({Key? key}) : super(key: key);
+  const RegisterView({super.key});
 
   @override
   RegisterViewState createState() => RegisterViewState();
@@ -57,7 +57,7 @@ class RegisterViewState extends State<RegisterView> {
           title: const Text('Register'),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: context.paddingAllMedium,
           child: SingleChildScrollView(
             child: Form(
               key: _formKey,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/service/auth/bloc/app_state.dart';
@@ -8,7 +9,7 @@ import 'package:second_hand/utilities/dialogs/password_reset_email_sent_dialog.d
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 
 class ForgotPasswordView extends StatefulWidget {
-  const ForgotPasswordView({Key? key}) : super(key: key);
+  const ForgotPasswordView({super.key});
 
   @override
   ForgotPasswordViewState createState() => ForgotPasswordViewState();
@@ -53,7 +54,7 @@ class ForgotPasswordViewState extends State<ForgotPasswordView> {
           title: const Text('Forgot Password'),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: context.paddingAllMedium,
           child: SingleChildScrollView(
             child: Form(
               key: _formKey,

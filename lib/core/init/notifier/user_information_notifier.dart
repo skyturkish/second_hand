@@ -24,8 +24,13 @@ class UserInformationNotifier extends ChangeNotifier {
 
   Future<void> changeProfilePhotoFirebase({required File? file}) async {
     if (file == null) return;
+
     final compressedFile = await ProductCloudFireStoreService.instance.compressFile(file);
-    await StorageService.instance.uploadUserPhoto(file: compressedFile, userId: AuthService.firebase().currentUser!.id);
+
+    await StorageService.instance.uploadUserPhoto(
+      file: compressedFile,
+      userId: AuthService.firebase().currentUser!.id,
+    );
   }
 
   Future<void> getUserInformation({required String userId}) async {
@@ -61,8 +66,9 @@ class UserInformationNotifier extends ChangeNotifier {
 
   Future<void> changeUserInformation({required String name, required String aboutYou}) async {
     if (!anyChanges(name: name, aboutYou: aboutYou)) return;
-    _userInformation.name = name;
-    _userInformation.aboutYou = aboutYou;
+    _userInformation
+      ..name = name
+      ..aboutYou = aboutYou;
     notifyListeners();
   }
 

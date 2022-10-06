@@ -1,6 +1,5 @@
-import 'package:firebase_core/firebase_core.dart';
-
 import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth, FirebaseAuthException;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:second_hand/firebase_options.dart';
 import 'package:second_hand/service/auth/auth_exceptions.dart';
 import 'package:second_hand/service/auth/auth_provider.dart';

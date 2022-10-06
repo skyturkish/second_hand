@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
@@ -9,19 +9,19 @@ import 'package:second_hand/service/storage/upload_image.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductCloudFireStoreService extends CloudFireStoreBaseService {
+  ProductCloudFireStoreService._init({required super.collectionName});
+
   static ProductCloudFireStoreService get instance {
     _instance ??= ProductCloudFireStoreService._init(collectionName: 'products');
     return _instance!;
   }
 
-  ProductCloudFireStoreService._init({required super.collectionName});
-
   static ProductCloudFireStoreService? _instance;
 
   Future<void> createProduct({required Product product, required List<File> images}) async {
-    for (var image in images) {
-      final String imageId = const Uuid().v4();
-      File compressedimage = await compressFile(image);
+    for (final image in images) {
+      final imageId = const Uuid().v4();
+      final compressedimage = await compressFile(image);
       await StorageService.instance.uploadProductPhoto(
         file: compressedimage,
         productId: product.productId,
@@ -48,11 +48,11 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
   Future<void> removeProduct({required String productId}) async {
     final querySnapShot = await collection.where('productId', isEqualTo: productId).get();
 
-    for (var doc in querySnapShot.docs) {
+    for (final doc in querySnapShot.docs) {
       await doc.reference.delete();
       final data = Product.fromMap(doc.data());
 
-      for (var image in data.imagesPath) {
+      for (final image in data.imagesPath) {
         StorageService.instance.deleteProductPhoto(
           path: image,
         );
@@ -63,11 +63,11 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
   Future<void> removeAllProductWithImages({required String userId}) async {
     final querySnapShot = await collection.where('ownerId', isEqualTo: userId).get();
 
-    for (var doc in querySnapShot.docs) {
+    for (final doc in querySnapShot.docs) {
       await doc.reference.delete();
       final data = Product.fromMap(doc.data());
 
-      for (var image in data.imagesPath) {
+      for (final image in data.imagesPath) {
         StorageService.instance.deleteProductPhoto(
           path: image,
         );
@@ -86,7 +86,7 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
           .snapshots()
           .map(
             (event) => event.docs.map(
-              (doc) => Product.fromSnapShot(doc),
+              Product.fromSnapShot, // same --> (doc) => Product.fromSnapShot(doc)
             ),
           );
   // // Ya kullanıcının içinden ürünlere gideceksin ya da bir alltaki gibi kullanıcının bilgilerinden ürünlere gideceksin acaba hangisi daha iyi ?
@@ -131,7 +131,7 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
 
 // TODO bu buraya ait değil
   Future<File> compressFile(File file) async {
-    File compressedFile = await FlutterNativeImage.compressImage(
+    final compressedFile = await FlutterNativeImage.compressImage(
       file.path,
       quality: 50,
     );

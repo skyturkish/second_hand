@@ -12,7 +12,7 @@ import 'package:second_hand/view/app/account/accountdetail/account_detail_view.d
 import 'package:second_hand/view/app/account/settings/settings_view.dart';
 
 class AccountView extends StatefulWidget {
-  const AccountView({Key? key}) : super(key: key);
+  const AccountView({super.key});
 
   @override
   State<AccountView> createState() => AccountViewState();
@@ -57,9 +57,9 @@ class AccountViewState extends State<AccountView> {
 
 class UserInformationCard extends StatefulWidget {
   const UserInformationCard({
-    Key? key,
+    super.key,
     required this.user,
-  }) : super(key: key);
+  });
   final UserInformation user;
 
   @override

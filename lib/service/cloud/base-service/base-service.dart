@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// TODO
-// T alsın içinde de T model olabilir BUndan türettiğin şeylere bir model ver o modelde fromfirebase, to firebase gibi methodları olsun onlardan türemiş olsun
+// TODO T alsın içinde de T model olabilir BUndan türettiğin şeylere bir model ver o modelde fromfirebase, to firebase gibi methodları olsun onlardan türemiş olsun
 
 class CloudFireStoreBaseService {
   final String collectionName;
@@ -24,7 +23,7 @@ class CloudFireStoreBaseService {
   Future<Map<String, dynamic>?> getDocument({required String docName}) async {
     // Burayı daha generic hale getirebilirsin T al ve T.fromFirebase() ile döndür
     // ama null dönme ihtimali var, yani düşün bunu bi
-    DocumentSnapshot<Object> doc = await collection.doc(docName).get();
+    final DocumentSnapshot<Object> doc = await collection.doc(docName).get();
     if (doc.data() == null) return null;
     final data = doc.data() as Map<String, dynamic>;
     return data;
