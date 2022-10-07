@@ -34,11 +34,14 @@ dependencies:
   # Storage
   firebase_storage: ^10.3.9
   flutter_native_image: ^0.0.6 # COMPRESS
+  image_picker: ^0.8.5+3
+
+  # very_good
+  very_good_analysis: ^3.1.0
 
   equatable: ^2.0.5
   uuid: ^3.0.6
-  image_picker: ^0.8.5+3
-  very_good_analysis: ^3.1.0
+  google_sign_in: ^5.4.2
 
 dev_dependencies:
   flutter_test:

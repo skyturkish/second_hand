@@ -27,6 +27,11 @@ class AppEventRegister extends AppEvent {
   final String password;
 }
 
+class AppEventLogInWithGoogle extends AppEvent {
+  const AppEventLogInWithGoogle(this.context);
+  final BuildContext context;
+}
+
 class AppEventShouldRegister extends AppEvent {
   const AppEventShouldRegister();
 }

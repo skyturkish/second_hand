@@ -181,6 +181,31 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         }
       },
     );
+    on<AppEventLogInWithGoogle>((event, emit) async {
+      emit(
+        const AppStateLoggedOut(
+          exception: null,
+          isLoading: true,
+          loadingText: 'Please wait while I log you in',
+        ),
+      );
+
+      try {
+        await provider.signInWithGoogle();
+        await UserCloudFireStoreService.instance.createUserIfNotExist(userId: AuthService.firebase().currentUser!.id);
+        await event.context
+            .read<UserInformationNotifier>()
+            .getUserInformation(userId: AuthService.firebase().currentUser!.id);
+
+        emit(
+          AppStateLoggedIn(
+            user: AuthService.firebase().currentUser!,
+            isLoading: false,
+          ),
+        );
+      } catch (_) {}
+    });
+
     // log out
     on<AppEventLogOut>(
       (event, emit) async {
@@ -237,7 +262,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             userId: userId,
           );
           // DELETE USER'S INFORMATIONS AT FIREBASE
-          UserCloudFireStoreService.instance.deleteUser(
+          UserCloudFireStoreService.instance.deleteUserById(
             userId: userId,
           );
           // DELETE USER'S PROFILE PHOTO

@@ -105,6 +105,14 @@ class _LoginViewState extends State<LoginView> {
                     },
                     child: const Text('I forgot my password'),
                   ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      context.read<AppBloc>().add(
+                            AppEventLogInWithGoogle(context),
+                          );
+                    },
+                    child: const Text('Sign in with google'),
+                  ),
                   TextButton(
                     onPressed: () {
                       context.read<AppBloc>().add(

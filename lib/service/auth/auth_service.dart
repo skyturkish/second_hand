@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:second_hand/service/auth/auth_provider.dart';
 import 'package:second_hand/service/auth/auth_user.dart';
 import 'package:second_hand/service/auth/firebase_auth_provider.dart';
@@ -46,4 +47,7 @@ class AuthService implements AuthProvider {
 
   @override
   Future<void> deleteAccount() => provider.deleteAccount();
+
+  @override
+  Future<UserCredential> signInWithGoogle() => provider.signInWithGoogle();
 }

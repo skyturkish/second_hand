@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:second_hand/service/auth/auth_user.dart';
 
 abstract class AuthProvider {
@@ -15,4 +16,5 @@ abstract class AuthProvider {
   Future<void> sendEmailVerification();
   Future<void> sendPasswordReset({required String toEmail});
   Future<void> deleteAccount();
+  Future<UserCredential> signInWithGoogle();
 }

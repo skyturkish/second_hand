@@ -8,6 +8,7 @@ import 'package:second_hand/utilities/dialogs/error_dialog.dart';
 import 'package:second_hand/utilities/dialogs/password_reset_email_sent_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 
+// TODO data gelmezse diyip, sizedbox yukarı, gerçek body aşağıda durmalı
 class ForgotPasswordView extends StatefulWidget {
   const ForgotPasswordView({super.key});
 

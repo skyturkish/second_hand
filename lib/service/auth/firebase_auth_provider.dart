@@ -1,5 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth, FirebaseAuthException;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:second_hand/firebase_options.dart';
 import 'package:second_hand/service/auth/auth_exceptions.dart';
 import 'package:second_hand/service/auth/auth_provider.dart';
@@ -101,6 +102,10 @@ class FirebaseAuthProvider implements AuthProvider {
     } else {
       throw UserNotLoggedInAuthException();
     }
+    // If user login with google, If we don't do these, we can't again ask user login witch which account?
+    GoogleSignIn googleSignIn = GoogleSignIn();
+    await googleSignIn.disconnect();
+    await FirebaseAuth.instance.signOut();
   }
 
   @override
@@ -134,5 +139,23 @@ class FirebaseAuthProvider implements AuthProvider {
   @override
   Future<void> deleteAccount() async {
     await FirebaseAuth.instance.currentUser!.delete();
+  }
+
+  @override
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }
