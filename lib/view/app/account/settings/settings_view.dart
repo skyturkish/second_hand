@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/theme_notifer.dart';
 import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
+import 'package:second_hand/utilities/dialogs/delete_account_dialog.dart';
 import 'package:second_hand/utilities/dialogs/logout_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
 
@@ -30,8 +31,8 @@ class SettingsView extends StatelessWidget {
           OptionListTile(
             titleText: 'Logout',
             onTap: () async {
-              final logout = await showLogOutDialog(context);
-              if (logout) {
+              final logoutDecision = await showLogOutDialog(context);
+              if (logoutDecision) {
                 Navigator.of(context).pop();
                 context.read<AppBloc>().add(
                       AppEventLogOut(context),
@@ -42,11 +43,15 @@ class SettingsView extends StatelessWidget {
           OptionListTile(
             titleText: 'Delete account',
             onTap: () async {
-              Navigator.of(context).pop();
+              final deleteDecision = await showDeleteAccountDialog(context);
 
-              context.read<AppBloc>().add(
-                    AppEventDeleteAccount(context),
-                  );
+              if (deleteDecision) {
+                Navigator.of(context).pop();
+
+                context.read<AppBloc>().add(
+                      AppEventDeleteAccount(context),
+                    );
+              }
             },
           ),
           OptionListTile(
