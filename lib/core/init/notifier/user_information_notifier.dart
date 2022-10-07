@@ -17,7 +17,7 @@ class UserInformationNotifier extends ChangeNotifier {
     name: '',
   );
 
-  void changeProfilePhoto({required Uint8List? uint8List}) {
+  void changeProfilePhotoLocal({required Uint8List? uint8List}) {
     userPhoto = uint8List;
     notifyListeners();
   }
@@ -31,6 +31,12 @@ class UserInformationNotifier extends ChangeNotifier {
       file: compressedFile,
       userId: AuthService.firebase().currentUser!.id,
     );
+  }
+
+  Future<void> getUserPhoto({required String userId}) async {
+    final uint8List = await FirebaseStorage.instance.ref().child('users/$userId').getData();
+    if (uint8List == null) return;
+    userPhoto = uint8List;
   }
 
   Future<void> getUserInformation({required String userId}) async {
@@ -74,12 +80,6 @@ class UserInformationNotifier extends ChangeNotifier {
       ..name = name
       ..aboutYou = aboutYou;
     notifyListeners();
-  }
-
-  Future<void> getUserPhoto({required String userId}) async {
-    final uint8List = await FirebaseStorage.instance.ref().child('users/$userId').getData();
-    if (uint8List == null) return;
-    userPhoto = uint8List;
   }
 
   Future<void> changeProfilePhotoPathFirebase() async {

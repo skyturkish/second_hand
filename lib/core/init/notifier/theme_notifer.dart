@@ -31,8 +31,9 @@ class ThemeNotifier extends ChangeNotifier {
       _currenThemeEnum = AppThemes.DARK;
     } else if (theme == AppThemes.DARK) {
       _currentTheme = ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.grey,
         appBarTheme: const AppBarTheme(
-          //titleTextStyle: titleTextStyle,
+          titleTextStyle: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),

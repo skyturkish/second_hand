@@ -62,7 +62,7 @@ class _EditProfileViewState extends State<EditProfileView> {
             // TODO öncesinde değişiklik var mı diye kontrol et
             final isWillIgnore = await ignoreChanges(context);
             if (!isWillIgnore) return;
-            context.read<UserInformationNotifier>().changeProfilePhoto(uint8List: oldPhoto);
+            context.read<UserInformationNotifier>().changeProfilePhotoLocal(uint8List: oldPhoto);
             Navigator.of(context).pop();
           },
           icon: const Icon(Icons.exit_to_app),
@@ -117,7 +117,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                       photo.log();
                       if (photo == null) return;
                       displayPhoto = photo.readAsBytesSync();
-                      context.read<UserInformationNotifier>().changeProfilePhoto(uint8List: displayPhoto);
+                      context.read<UserInformationNotifier>().changeProfilePhotoLocal(uint8List: displayPhoto);
                     },
                     child: ProfilePhotoCircle(userInformation: context.read<UserInformationNotifier>().userInformation),
                   ),
