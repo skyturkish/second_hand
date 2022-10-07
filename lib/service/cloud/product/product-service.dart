@@ -1,22 +1,24 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/service/cloud/base-service/base-service.dart';
 import 'package:second_hand/service/storage/storage-service.dart';
 import 'package:uuid/uuid.dart';
 
-class ProductCloudFireStoreService extends CloudFireStoreBaseService {
-  ProductCloudFireStoreService._init({required super.collectionName});
+class ProductCloudFireStoreService {
+  ProductCloudFireStoreService._init();
 
   static ProductCloudFireStoreService get instance {
-    _instance ??= ProductCloudFireStoreService._init(collectionName: 'products');
+    _instance ??= ProductCloudFireStoreService._init();
     return _instance!;
   }
 
   static ProductCloudFireStoreService? _instance;
+
+  final _collection = FirebaseFirestore.instance.collection('products');
 
   Future<void> createProduct({required Product product, required List<File> images}) async {
     for (final image in images) {
@@ -29,14 +31,14 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
       );
       product.imagesPath.add('products/${product.productId}/$imageId');
     }
-    await collection.doc().set(
+    await _collection.doc().set(
           product.toMap(),
         );
   }
 
   // TODO galiba burayı da stream ile yapmak zorundayız :shrug:
   Future<List<Product>?> getAllBelongProductsById({required String userId}) async {
-    final querySnapShot = await collection.where('ownerId', isEqualTo: userId).get();
+    final querySnapShot = await _collection.where('ownerId', isEqualTo: userId).get();
     final products = querySnapShot.docs.map(
       (queryDocumentSnapshot) => Product.fromMap(
         queryDocumentSnapshot.data(),
@@ -46,7 +48,7 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
   }
 
   Future<List<Product>?> getAllNotBelongProducts({required String userId}) async {
-    final querySnapShot = await collection.where('ownerId', isNotEqualTo: userId).get();
+    final querySnapShot = await _collection.where('ownerId', isNotEqualTo: userId).get();
     final products = querySnapShot.docs.map(
       (queryDocumentSnapshot) => Product.fromMap(
         queryDocumentSnapshot.data(),
@@ -56,7 +58,7 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
   }
 
   Future<void> removeProduct({required String productId}) async {
-    final querySnapShot = await collection.where('productId', isEqualTo: productId).get();
+    final querySnapShot = await _collection.where('productId', isEqualTo: productId).get();
 
     for (final doc in querySnapShot.docs) {
       await doc.reference.delete();
@@ -71,7 +73,7 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
   }
 
   Future<void> removeAllProductWithImages({required String userId}) async {
-    final querySnapShot = await collection.where('ownerId', isEqualTo: userId).get();
+    final querySnapShot = await _collection.where('ownerId', isEqualTo: userId).get();
 
     for (final doc in querySnapShot.docs) {
       await doc.reference.delete();
@@ -86,12 +88,12 @@ class ProductCloudFireStoreService extends CloudFireStoreBaseService {
   }
 
   // TODO bunu kullacının içindeki ürünlerden aratıp da yapabilirsin bu biraz aşırı kaçıyor
-  Stream<Iterable<Product>> getAllOwnerProductsStream({required String userId}) => collection
+  Stream<Iterable<Product>> getAllOwnerProductsStream({required String userId}) => _collection
       .snapshots()
       .map((event) => event.docs.map((doc) => Product.fromSnapShot(doc)).where((product) => product.ownerId == userId));
 
   Stream<Iterable<Product>> getAllFavoriteProductsStream({required String userId, required BuildContext context}) =>
-      collection
+      _collection
           .where('productId', whereIn: context.watch<UserInformationNotifier>().userInformation.favoriteAds)
           .snapshots()
           .map(
