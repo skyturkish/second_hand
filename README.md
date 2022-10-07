@@ -1,6 +1,23 @@
-# SECOND HAND
+<h1 align="center">Second-Hand</h1>
+
 ---
-With this application, you can buy and sell second-hand goods, can contact the seller and customer.
+
+<p align="center">
+    Are you thinking of throwing away or storing your old or unused product? what if we said someone wants to buy it. Second-Hand is taking the stage here.
+</p>
+ 
+ 
+## Screenshots
+---
+
+## Installation
+
+Run the following commands: <will edit>
+
+```
+
+
+```
 
 ## TO DO 📋 
 ---
@@ -30,9 +47,12 @@ With this application, you can buy and sell second-hand goods, can contact the s
 ## Libraries Used
 ---
 
+## Packages
+---
 
 ## Features
 ---
+
 ## License
 ```
 MIT License
