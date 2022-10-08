@@ -18,6 +18,7 @@ dependencies:
   firebase_auth: ^3.8.0
   firebase_analytics: ^9.3.4
   firebase_core: ^1.22.0
+  google_sign_in: ^5.4.2
 
   #  Cache
   cached_network_image: ^3.2.2
@@ -41,11 +42,12 @@ dependencies:
 
   equatable: ^2.0.5
   uuid: ^3.0.6
-  google_sign_in: ^5.4.2
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^2.2.10+1
 
   flutter_lints: ^2.0.0
 
@@ -55,3 +57,8 @@ flutter:
   assets:
     - assets/translations/
     - assets/images/
+
+flutter_native_splash:
+  color: "#42a5f5"
+  image: assets/images/splash_screen.png
+  android_12:

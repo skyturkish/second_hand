@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/app/app_constants.dart';
+import 'package:second_hand/core/init/cache/locale_manager.dart';
 import 'package:second_hand/core/init/localization/language_manager.dart';
 import 'package:second_hand/core/init/navigation/navigation_route.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
@@ -44,6 +45,7 @@ Future<void> _init() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await LocaleManager.preferencesInit(); // Shared_preferences init
 }
 
 class MyApp extends StatelessWidget {
@@ -51,6 +53,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // bu buraya ait değil ama, init diye bir şey yapabiliriz biz
+    // splash screen zamanı
+    context.read<ThemeNotifier>().initTheme();
     return MaterialApp(
       theme: context.watch<ThemeNotifier>().currentTheme,
       localizationsDelegates: context.localizationDelegates,
@@ -71,7 +76,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<AppBloc>().add(AppEventInitialize(context));
-
     return BlocConsumer<AppBloc, AppState>(
       listener: (context, state) {
         if (state.isLoading) {
