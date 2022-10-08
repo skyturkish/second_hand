@@ -1,8 +1,5 @@
-import 'dart:developer' as devtools show log;
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
@@ -12,47 +9,19 @@ import 'package:second_hand/service/cloud/user/user_service.dart';
 import 'package:second_hand/utilities/dialogs/ignore_changes_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
+import 'package:second_hand/view/app/account/editprofile/view/select_image_bottom_sheet.dart';
+import 'package:second_hand/view/app/account/editprofile/viewmodel/edit_profie_view_model.dart';
 
-extension Log on Object? {
-  void log() => devtools.log(toString());
-}
-
+// TODO githubda sana yardım eden adamın dediği gibi gelki fonksiyonlara ayırsan iyi olur burayı
+// changeLocal, changeFirebase gibi şeylere daha kolay yönetilir, fonksiyonları direkt çağırıyorsun çünkü
 class EditProfileView extends StatefulWidget {
   const EditProfileView({super.key});
   @override
   State<EditProfileView> createState() => _EditProfileViewState();
 }
+// TODO bu sayfa çok karışık ya
 
-class _EditProfileViewState extends State<EditProfileView> {
-  Uint8List? oldPhoto;
-  Uint8List? displayPhoto;
-  File? fileForStroage;
-  late final TextEditingController nameController;
-  late final TextEditingController aboutYouController;
-  late final TextEditingController phoneController;
-  late final TextEditingController emailController;
-
-  @override
-  void initState() {
-    oldPhoto = context.read<UserInformationNotifier>().userPhoto;
-    displayPhoto = context.read<UserInformationNotifier>().userPhoto;
-    final user = context.read<UserInformationNotifier>().userInformation;
-    nameController = TextEditingController(text: user.name);
-    aboutYouController = TextEditingController(text: user.aboutYou);
-    phoneController = TextEditingController(text: user.phoneNumber);
-    emailController = TextEditingController(text: AuthService.firebase().currentUser!.email);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    aboutYouController.dispose();
-    phoneController.dispose();
-    emailController.dispose();
-    super.dispose();
-  }
-
+class _EditProfileViewState extends EditProfileViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,34 +79,19 @@ class _EditProfileViewState extends State<EditProfileView> {
                 children: [
                   InkWell(
                     onTap: () async {
-                      // TODO ya show'dan nereye gideceğimiz seçeriz ya da direkt resmi alırız
-
                       final photo = await SelecPhotoBottomSheet().show<File>(context);
                       fileForStroage = photo;
-                      photo.log();
                       if (photo == null) return;
                       displayPhoto = photo.readAsBytesSync();
                       context.read<UserInformationNotifier>().changeProfilePhotoLocal(uint8List: displayPhoto);
                     },
                     child: ProfilePhotoCircle(userInformation: context.read<UserInformationNotifier>().userInformation),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    child: CustomTextFormField(
-                      controller: nameController,
-                      labelText: 'Enter name',
-                    ),
-                  )
+                  EnterNameTextFormField(nameController: nameController)
                 ],
               ),
             ),
-            Padding(
-              padding: context.paddingOnlyTopSmall,
-              child: CustomTextFormField(
-                controller: aboutYouController,
-                labelText: 'Write about you',
-              ),
-            ),
+            WriteAboutYouTextFormField(aboutYouController: aboutYouController),
             Padding(
               padding: context.paddingOnlyTopMedium,
               child: Text(
@@ -170,49 +124,60 @@ class _EditProfileViewState extends State<EditProfileView> {
   }
 }
 
-extension SelectImageFrom on SelecPhotoBottomSheet {
-  // --> from https://vbacik-10.medium.com/season-two-flutter-short-but-golds-8cff8f4b0b29
-  Future<T?> show<T>(BuildContext context) {
-    return showModalBottomSheet<T>(context: context, builder: (context) => this);
+class EnterNameTextFormField extends StatefulWidget {
+  const EnterNameTextFormField({
+    Key? key,
+    required this.nameController,
+  }) : super(key: key);
+
+  final TextEditingController nameController;
+
+  @override
+  State<EnterNameTextFormField> createState() => _EnterNameTextFormFieldState();
+}
+
+class _EnterNameTextFormFieldState extends State<EnterNameTextFormField> {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.6,
+      child: CustomTextFormField(
+        controller: widget.nameController,
+        labelText: 'Enter name',
+        maxLetter: 25,
+        onChanged: (text) {
+          setState(() {});
+        },
+      ),
+    );
   }
 }
 
-// extension CustomPageSheet on EditProfileView {
-//   Future<T?> show<T>(BuildContext context) {
-//     return showModalBottomSheet(context: context, builder: (context) => this);
-//   }
-// }
+class WriteAboutYouTextFormField extends StatefulWidget {
+  const WriteAboutYouTextFormField({
+    Key? key,
+    required this.aboutYouController,
+  }) : super(key: key);
 
-class SelecPhotoBottomSheet extends StatelessWidget {
-  SelecPhotoBottomSheet({Key? key}) : super(key: key);
-  File? photo;
-  final ImagePicker _picker = ImagePicker();
+  final TextEditingController aboutYouController;
 
   @override
+  State<WriteAboutYouTextFormField> createState() => _WriteAboutYouTextFormFieldState();
+}
+
+class _WriteAboutYouTextFormFieldState extends State<WriteAboutYouTextFormField> {
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        ListTile(
-          leading: const Icon(Icons.camera_alt_outlined),
-          title: const Text('From camera'),
-          onTap: () async {
-            final XFile? selectedImage = await _picker.pickImage(source: ImageSource.camera);
-            photo = File(selectedImage!.path);
-            Navigator.pop<File?>(context, photo);
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.image),
-          title: const Text('From gallery'),
-          onTap: () async {
-            final XFile? selectedImage = await _picker.pickImage(source: ImageSource.gallery);
-            photo = File(selectedImage!.path);
-            Navigator.pop<File?>(context, photo);
-          },
-        ),
-        const ListTile(),
-      ],
+    return Padding(
+      padding: context.paddingOnlyTopSmall,
+      child: CustomTextFormField(
+        controller: widget.aboutYouController,
+        labelText: 'Write about you',
+        maxLetter: 150,
+        onChanged: (text) {
+          setState(() {});
+        },
+      ),
     );
   }
 }

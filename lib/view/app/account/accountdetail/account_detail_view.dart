@@ -6,8 +6,8 @@ import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
 import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
-import 'package:second_hand/view/_product/_widgets/grid_view/product_grid_view.dart';
-import 'package:second_hand/view/app/account/editprofile/edit_profie_view.dart';
+import 'package:second_hand/view/_product/_widgets/grid_view/refreshable_product_grid_view.dart';
+import 'package:second_hand/view/app/account/editprofile/view/edit_profie_view.dart';
 
 class AccountDetailView extends StatefulWidget {
   const AccountDetailView({super.key, required this.user});
@@ -18,11 +18,11 @@ class AccountDetailView extends StatefulWidget {
 }
 
 class _AccountDetailViewState extends State<AccountDetailView> {
-  late final bool isHost;
+  late final bool isLocalUser;
 
   @override
   void initState() {
-    isHost = widget.user.userId == context.read<UserInformationNotifier>().userInformation.userId;
+    isLocalUser = widget.user.userId == context.read<UserInformationNotifier>().userInformation.userId;
     super.initState();
   }
 
@@ -45,16 +45,16 @@ class _AccountDetailViewState extends State<AccountDetailView> {
                   Row(
                     children: [
                       FollowInformationColumn(
-                        count: isHost ? localUser.following.length : widget.user.following.length,
+                        count: (isLocalUser ? localUser : widget.user).following.length,
                         countName: 'Following',
                       ),
                       FollowInformationColumn(
-                        count: isHost ? localUser.followers.length : widget.user.followers.length,
+                        count: (isLocalUser ? localUser : widget.user).followers.length,
                         countName: 'Follower',
                       ),
                     ],
                   ),
-                  isHost
+                  isLocalUser
                       ? ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).push(
@@ -79,7 +79,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
           Padding(
             padding: context.paddingOnlyTopSmall,
             child: Text(
-              (isHost ? localUser : widget.user).name.overFlowString(limit: 24),
+              (isLocalUser ? localUser : widget.user).name.overFlowString(limit: 24),
               style: Theme.of(context).textTheme.headline5!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -88,7 +88,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
           Padding(
             padding: context.paddingOnlyTopSmall,
             child: Text(
-              (isHost ? localUser : widget.user).aboutYou,
+              (isLocalUser ? localUser : widget.user).aboutYou,
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
@@ -96,11 +96,11 @@ class _AccountDetailViewState extends State<AccountDetailView> {
             height: 10,
             thickness: 2,
           ),
-          isHost
+          isLocalUser
               ? const Text('data')
               : Expanded(
                   child: RefreshsableProductGridView(
-                    getProducts: ProductCloudFireStoreService.instance.getAllBelongProductsById,
+                    getProducts: ProductCloudFireStoreService.instance.getAllBelongProducts,
                     userId: widget.user.userId,
                   ),
                 ),
