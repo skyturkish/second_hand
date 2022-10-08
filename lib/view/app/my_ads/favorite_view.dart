@@ -21,7 +21,7 @@ class FavoritesViewState extends State<FavoritesView> with AutomaticKeepAliveCli
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
+      body: StreamBuilder( 
         stream: ProductCloudFireStoreService.instance
             .getAllFavoriteProductsStream(userId: AuthService.firebase().currentUser!.id, context: context),
         builder: (context, snapshot) {
