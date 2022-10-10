@@ -6,7 +6,7 @@ abstract class IUserCloudFireStoreService {
   Future<void> updateUserInformation(
       {required String userId, required String name, required String aboutYou}); // Update
   Future<void> deleteUserById({required String userId}); // Delete
-  Future<void> updateUserProfilePhotoPath({required String userId}); // Update
+  Future<void> updateUserProfilePhotoPath({required String userId, required String profilePhotoURL}); // Update
   Future<bool> isUserExist({required String userId}); // Check
   Future<void> addProductToFavorites({required String userId, required String productId}); // Update
   Future<void> removeProductToFavorites({required String userId, required String productId}); // Update

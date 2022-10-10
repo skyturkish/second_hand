@@ -6,7 +6,6 @@ import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
 import 'package:second_hand/view/app/home/product_detail_view.dart';
-import 'package:second_hand/view/app/home/storage_image_view.dart';
 
 class FavoritesView extends StatefulWidget {
   const FavoritesView({super.key});
@@ -36,7 +35,7 @@ class FavoritesViewState extends State<FavoritesView> with AutomaticKeepAliveCli
                   itemBuilder: (context, index) {
                     final product = allProduct.elementAt(index);
                     final mountainImagesRef = storageRef.child(product.imagesPath[0]);
-                    return FavoriteListTileProduct(product: product, mountainImagesRef: mountainImagesRef);
+                    return FavoriteListTileProduct(product: product);
                   },
                 );
               } else {
@@ -58,11 +57,9 @@ class FavoriteListTileProduct extends StatelessWidget {
   const FavoriteListTileProduct({
     super.key,
     required this.product,
-    required this.mountainImagesRef,
   });
 
   final Product product;
-  final Reference mountainImagesRef;
 
   @override
   Widget build(BuildContext context) {
@@ -81,11 +78,10 @@ class FavoriteListTileProduct extends StatelessWidget {
       },
       title: Text(product.title),
       subtitle: Text(product.description),
-      leading: SizedBox(
-        height: 50,
-        width: 50,
-        child: StorageImageView(
-          image: mountainImagesRef,
+      leading: CircleAvatar(
+        radius: 30,
+        backgroundImage: NetworkImage(
+          product.imagesPath[0],
         ),
       ),
       trailing: IconButton(

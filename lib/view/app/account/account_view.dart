@@ -5,7 +5,6 @@ import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_route.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
-import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
 import 'package:second_hand/view/app/account/accountdetail/account_detail_view.dart';
 import 'package:second_hand/view/app/account/help_support/help_support_view.dart';
@@ -83,7 +82,12 @@ class _UserInformationCardState extends State<UserInformationCard> {
       },
       child: Row(
         children: [
-          ProfilePhotoCircle(userInformation: context.read<UserInformationNotifier>().userInformation),
+          CircleAvatar(
+            radius: 60,
+            backgroundImage: NetworkImage(
+              context.read<UserInformationNotifier>().userInformation.profilePhotoPath,
+            ),
+          ),
           Padding(
             padding: context.paddingOnlyLeftSmallX,
             child: Column(

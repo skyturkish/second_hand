@@ -25,13 +25,18 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
   Future<void> createProduct({required Product product, required List<File> images}) async {
     for (final image in images) {
       final imageId = const Uuid().v4();
+
       final compressedimage = await compressFile(image);
-      await StorageService.instance.uploadProductPhoto(
+
+      final taskSnapShot = await StorageService.instance.uploadProductPhoto(
         file: compressedimage,
         productId: product.productId,
         childUUID: imageId,
       );
-      product.imagesPath.add('products/${product.productId}/$imageId');
+
+      final downloadURL = await taskSnapShot.ref.getDownloadURL();
+
+      product.imagesPath.add(downloadURL);
     }
     await _collection.doc().set(
           product.toMap(),

@@ -50,12 +50,6 @@ class ProductNotifier extends ChangeNotifier {
     images = [];
   }
 
-  void addimagesPath({
-    required String newPath,
-  }) {
-    product.imagesPath.add(newPath);
-  }
-
   void setProduct({
     String? productId,
     String? ownerId,

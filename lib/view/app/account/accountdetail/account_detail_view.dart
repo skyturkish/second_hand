@@ -5,7 +5,6 @@ import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
-import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
 import 'package:second_hand/view/_product/_widgets/grid_view/refreshable_product_grid_view.dart';
 import 'package:second_hand/view/app/account/editprofile/view/edit_profie_view.dart';
 
@@ -39,7 +38,12 @@ class _AccountDetailViewState extends State<AccountDetailView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ProfilePhotoCircle(userInformation: widget.user),
+              CircleAvatar(
+                radius: 60,
+                backgroundImage: NetworkImage(
+                  widget.user.profilePhotoPath,
+                ),
+              ),
               Column(
                 children: [
                   Row(

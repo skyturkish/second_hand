@@ -19,7 +19,12 @@ class UserCloudFireStoreService implements IUserCloudFireStoreService {
   Future<void> createUserIfNotExist({required String userId, String? name}) async {
     final userExist = await isUserExist(userId: userId);
     if (userExist == true) return;
-    await _collection.doc(userId).set(UserInformation(userId: userId, name: 'User-${const Uuid().v4()}').toMap());
+    await _collection.doc(userId).set(UserInformation(
+            profilePhotoPath:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI64fYIV7EMYQ8XUYQ4_QrZM0YxY353PQI1yNYuaXbb_YbTJGwozRe6ru-RIsWTjGE8ZQ&usqp=CAU',
+            userId: userId,
+            name: 'User-${const Uuid().v4()}')
+        .toMap());
   }
 
   @override
@@ -38,10 +43,10 @@ class UserCloudFireStoreService implements IUserCloudFireStoreService {
   }
 
   @override
-  Future<void> updateUserProfilePhotoPath({required String userId}) async {
+  Future<void> updateUserProfilePhotoPath({required String userId, required String profilePhotoURL}) async {
     final userExist = await isUserExist(userId: userId);
     if (userExist == false) return;
-    await _collection.doc(userId).update({'profilePhotoPath': 'users/$userId'});
+    await _collection.doc(userId).update({'profilePhotoPath': profilePhotoURL});
   }
 
   @override

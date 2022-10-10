@@ -1,11 +1,9 @@
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/view/app/home/product_detail_view.dart';
-import 'package:second_hand/view/app/home/storage_image_view.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -40,8 +38,11 @@ class ProductCard extends StatelessWidget {
                     );
                   },
                   child: Center(
-                    child: StorageImageView(
-                      image: FirebaseStorage.instance.ref().child(product.imagesPath.first),
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundImage: NetworkImage(
+                        product.imagesPath[0],
+                      ),
                     ),
                   ),
                 ),

@@ -7,7 +7,6 @@ import 'package:second_hand/loading/loading_screen.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
 import 'package:second_hand/utilities/dialogs/ignore_changes_dialog.dart';
-import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 import 'package:second_hand/view/app/account/editprofile/view/select_image_bottom_sheet.dart';
 import 'package:second_hand/view/app/account/editprofile/viewmodel/edit_profie_view_model.dart';
@@ -22,6 +21,30 @@ class EditProfileView extends StatefulWidget {
 // TODO bu sayfa çok karışık ya
 
 class _EditProfileViewState extends EditProfileViewModel {
+  // TEXT CONTROLLER
+  late final TextEditingController nameController;
+  late final TextEditingController aboutYouController;
+  late final TextEditingController phoneController;
+  late final TextEditingController emailController;
+  @override
+  void initState() {
+    final user = context.read<UserInformationNotifier>().userInformation;
+    nameController = TextEditingController(text: user.name);
+    aboutYouController = TextEditingController(text: user.aboutYou);
+    phoneController = TextEditingController(text: user.phoneNumber);
+    emailController = TextEditingController(text: AuthService.firebase().currentUser!.email);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    aboutYouController.dispose();
+    phoneController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +54,7 @@ class _EditProfileViewState extends EditProfileViewModel {
             // TODO öncesinde değişiklik var mı diye kontrol et
             final isWillIgnore = await ignoreChanges(context);
             if (!isWillIgnore) return;
-            context.read<UserInformationNotifier>().changeProfilePhotoLocal(uint8List: oldPhoto);
+            context.read<UserInformationNotifier>().resetChanges();
             Navigator.of(context).pop();
           },
           icon: const Icon(Icons.exit_to_app),
@@ -41,22 +64,24 @@ class _EditProfileViewState extends EditProfileViewModel {
             onPressed: () async {
               LoadingScreen().show(context: context, text: 'wait');
 
+              await context.read<UserInformationNotifier>().changeUserInformationLocal(
+                    // ismini local yap
+                    name: nameController.text,
+                    aboutYou: aboutYouController.text,
+                  );
+
+              await context.read<UserInformationNotifier>().saveProfilePhotoToFirebaseIfPhotoChange(context: context);
+
+              LoadingScreen().hide();
+
               await UserCloudFireStoreService.instance.updateUserInformation(
                 userId: AuthService.firebase().currentUser!.id,
                 name: nameController.text,
                 aboutYou: aboutYouController.text,
               ); // TODO ikisinden birini ortak alalım ya da almayalım
-              if (!mounted) return;
-              await context.read<UserInformationNotifier>().changeUserInformation(
-                    // ismini local yap
-                    name: nameController.text,
-                    aboutYou: aboutYouController.text,
-                  );
-              if (!mounted) return;
-              await context.read<UserInformationNotifier>().changeProfilePhotoFirebase(file: fileForStroage);
-              await context.read<UserInformationNotifier>().changeProfilePhotoPathFirebase();
-              LoadingScreen().hide();
-              if (!mounted) return;
+
+              context.read<UserInformationNotifier>().resetChanges();
+
               Navigator.pop(context);
             },
             child: const Text('Save'),
@@ -77,17 +102,10 @@ class _EditProfileViewState extends EditProfileViewModel {
               padding: context.paddingOnlyTopSmall,
               child: Row(
                 children: [
-                  InkWell(
-                    onTap: () async {
-                      final photo = await SelecPhotoBottomSheet().show<File>(context);
-                      fileForStroage = photo;
-                      if (photo == null) return;
-                      displayPhoto = photo.readAsBytesSync();
-                      context.read<UserInformationNotifier>().changeProfilePhotoLocal(uint8List: displayPhoto);
-                    },
-                    child: ProfilePhotoCircle(userInformation: context.read<UserInformationNotifier>().userInformation),
-                  ),
-                  EnterNameTextFormField(nameController: nameController)
+                  const EditProfilePhotoView(),
+                  EnterNameTextFormField(
+                    nameController: nameController,
+                  )
                 ],
               ),
             ),
@@ -177,6 +195,38 @@ class _WriteAboutYouTextFormFieldState extends State<WriteAboutYouTextFormField>
         onChanged: (text) {
           setState(() {});
         },
+      ),
+    );
+  }
+}
+
+class EditProfilePhotoView extends StatefulWidget {
+  const EditProfilePhotoView({Key? key}) : super(key: key);
+
+  @override
+  State<EditProfilePhotoView> createState() => _EditProfilePhotoViewState();
+}
+
+class _EditProfilePhotoViewState extends State<EditProfilePhotoView> {
+  File? appearPhoto;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () async {
+        final photo = await SelecPhotoBottomSheet().show<File>(context);
+        if (photo == null) return;
+        appearPhoto = photo;
+        context.read<UserInformationNotifier>().changeProfilePhotoLocal(image: appearPhoto);
+        setState(() {});
+      },
+      child: CircleAvatar(
+        radius: 60,
+        backgroundImage: appearPhoto != null
+            ? FileImage(appearPhoto!) as ImageProvider
+            : NetworkImage(
+                context.read<UserInformationNotifier>().userInformation.profilePhotoPath,
+              ),
       ),
     );
   }

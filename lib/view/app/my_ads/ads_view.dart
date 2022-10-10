@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
-import 'package:second_hand/view/app/home/storage_image_view.dart';
 
 class AdsView extends StatefulWidget {
   const AdsView({Key? key}) : super(key: key);
@@ -35,8 +34,7 @@ class AdsViewState extends State<AdsView> with AutomaticKeepAliveClientMixin {
                       itemCount: allProduct.length,
                       itemBuilder: (context, index) {
                         final product = allProduct.elementAt(index);
-                        final mountainImagesRef = storageRef.child(product.imagesPath[0]);
-                        return MyAdsListTileProduct(product: product, mountainImagesRef: mountainImagesRef);
+                        return MyAdsListTileProduct(product: product);
                       },
                     );
                   } else {
@@ -60,11 +58,9 @@ class MyAdsListTileProduct extends StatelessWidget {
   const MyAdsListTileProduct({
     Key? key,
     required this.product,
-    required this.mountainImagesRef,
   }) : super(key: key);
 
   final Product product;
-  final Reference mountainImagesRef;
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +70,10 @@ class MyAdsListTileProduct extends StatelessWidget {
       },
       title: Text(product.title),
       subtitle: Text(product.description),
-      leading: SizedBox(
-        height: 50,
-        width: 50,
-        child: StorageImageView(
-          image: mountainImagesRef,
+      leading: CircleAvatar(
+        radius: 30,
+        backgroundImage: NetworkImage(
+          product.imagesPath[0],
         ),
       ),
       trailing: IconButton(

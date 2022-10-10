@@ -1,4 +1,3 @@
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
@@ -6,10 +5,8 @@ import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
-import 'package:second_hand/view/_product/_widgets/circleavatar/profile_photo.dart';
 import 'package:second_hand/view/app/account/accountdetail/account_detail_view.dart';
 import 'package:second_hand/view/app/home/home_product_card.dart';
-import 'package:second_hand/view/app/home/storage_image_view.dart';
 
 class ProductDetailView extends StatelessWidget {
   const ProductDetailView({super.key, required this.product});
@@ -28,9 +25,8 @@ class ProductDetailView extends StatelessWidget {
                 allowImplicitScrolling: true,
                 itemCount: product.imagesPath.length,
                 itemBuilder: (context, index) {
-                  final mountainImagesRef = FirebaseStorage.instance.ref().child(product.imagesPath[index]);
-                  return StorageImageView(
-                    image: mountainImagesRef,
+                  return Image.network(
+                    product.imagesPath[index],
                   );
                 },
               ),
@@ -106,8 +102,11 @@ class ProductDetailView extends StatelessWidget {
                     child: ListTile(
                       leading: CircleAvatar(
                         radius: 45,
-                        child: ProfilePhotoCircle(
-                          userInformation: userInformation,
+                        child: CircleAvatar(
+                          radius: 60,
+                          backgroundImage: NetworkImage(
+                            product.imagesPath[0],
+                          ),
                         ),
                       ),
                       title: Text(userInformation.name),

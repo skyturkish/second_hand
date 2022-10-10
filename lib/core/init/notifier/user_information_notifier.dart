@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
@@ -10,33 +10,40 @@ import 'package:second_hand/service/storage/storage-service.dart';
 class UserInformationNotifier extends ChangeNotifier {
   UserInformation get userInformation => _userInformation;
 
-  Uint8List? userPhoto;
+  File? userPhoto;
 
   UserInformation _userInformation = UserInformation(
     userId: '',
     name: '',
   );
 
-  void changeProfilePhotoLocal({required Uint8List? uint8List}) {
-    userPhoto = uint8List;
+  void resetChanges() {
+    userPhoto = null;
+  }
+
+  void changeProfilePhotoLocal({required File? image}) {
+    userPhoto = image;
     notifyListeners();
   }
 
-  Future<void> changeProfilePhotoFirebase({required File? file}) async {
-    if (file == null) return;
+  Future<void> saveProfilePhotoToFirebaseIfPhotoChange({required BuildContext context}) async {
+    if (userPhoto == null) return;
 
-    final compressedFile = await ProductCloudFireStoreService.instance.compressFile(file);
+    final compressedFile = await ProductCloudFireStoreService.instance.compressFile(userPhoto!);
 
-    await StorageService.instance.uploadUserPhoto(
+    final taskSnapshot = await StorageService.instance.uploadUserPhoto(
       file: compressedFile,
       userId: AuthService.firebase().currentUser!.id,
     );
-  }
 
-  Future<void> getUserPhoto({required String userId}) async {
-    final uint8List = await FirebaseStorage.instance.ref().child('users/$userId').getData();
-    if (uint8List == null) return;
-    userPhoto = uint8List;
+    final profilePhotoDownloadURL = await taskSnapshot.ref.getDownloadURL();
+
+    _userInformation.profilePhotoPath = profilePhotoDownloadURL;
+
+    UserCloudFireStoreService.instance.updateUserProfilePhotoPath(
+        userId: AuthService.firebase().currentUser!.id, profilePhotoURL: profilePhotoDownloadURL);
+
+    context.read<UserInformationNotifier>()._userInformation.profilePhotoPath = profilePhotoDownloadURL;
   }
 
   Future<void> getUserInformation({required String userId}) async {
@@ -44,10 +51,6 @@ class UserInformationNotifier extends ChangeNotifier {
     final userInformationFromFirebase = await UserCloudFireStoreService.instance.getUserInformationById(userId: userId);
     _userInformation = userInformationFromFirebase!;
     _userInformation.favoriteAds.add('value'); // we added this because, when list is empty flutter throw crash ??
-
-    if (userInformationFromFirebase.profilePhotoPath != '') {
-      await getUserPhoto(userId: userId);
-    }
 
     notifyListeners();
   }
@@ -74,7 +77,7 @@ class UserInformationNotifier extends ChangeNotifier {
     return name != _userInformation.name || aboutYou != _userInformation.aboutYou;
   }
 
-  Future<void> changeUserInformation({required String name, required String aboutYou}) async {
+  Future<void> changeUserInformationLocal({required String name, required String aboutYou}) async {
     if (!anyChanges(name: name, aboutYou: aboutYou)) return;
     _userInformation
       ..name = name
@@ -82,9 +85,10 @@ class UserInformationNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> changeProfilePhotoPathFirebase() async {
+  Future<void> changeProfilePhotoPathFirebase({required String profilePhotoURL}) async {
     await UserCloudFireStoreService.instance.updateUserProfilePhotoPath(
       userId: _userInformation.userId,
+      profilePhotoURL: profilePhotoURL,
     );
   }
 

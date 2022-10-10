@@ -245,31 +245,29 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         // DELETE PRODUCT ADD INFORMATIONS LOCALE
         event.context.read<ProductNotifier>().clearProduct();
 
-        try {
-          final userId = AuthService.firebase().currentUser!.id;
+        final userId = AuthService.firebase().currentUser!.id;
 
-          // DELETE ACCOUNT
-          await provider.deleteAccount();
+        // DELETE ACCOUNT
+        await provider.deleteAccount();
 
-          emit(
-            const AppStateDeletedAccount(
-              exception: null,
-              isLoading: false,
-            ),
-          );
-          // DELETE PRODUCTS
-          ProductCloudFireStoreService.instance.removeAllProductWithImages(
-            userId: userId,
-          );
-          // DELETE USER'S INFORMATIONS AT FIREBASE
-          UserCloudFireStoreService.instance.deleteUserById(
-            userId: userId,
-          );
-          // DELETE USER'S PROFILE PHOTO
-          StorageService.instance.deleteUserProfilePhoto(
-            userId: userId,
-          );
-        } catch (_) {}
+        emit(
+          const AppStateDeletedAccount(
+            exception: null,
+            isLoading: false,
+          ),
+        );
+        // DELETE PRODUCTS
+        ProductCloudFireStoreService.instance.removeAllProductWithImages(
+          userId: userId,
+        );
+        // DELETE USER'S INFORMATIONS AT FIREBASE
+        UserCloudFireStoreService.instance.deleteUserById(
+          userId: userId,
+        );
+        // DELETE USER'S PROFILE PHOTO
+        StorageService.instance.deleteUserProfilePhoto(
+          userId: userId,
+        );
       },
     );
   }
