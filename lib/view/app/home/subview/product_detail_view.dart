@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/string_extension.dart';
+import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
 import 'package:second_hand/view/_product/_widgets/iconbutton/favorite_icon_button.dart';
-import 'package:second_hand/view/app/account/accountdetail/account_detail_view.dart';
 
 class ProductDetailView extends StatelessWidget {
   const ProductDetailView({super.key, required this.product});
   final Product product;
-
+//TODO product vdetail view'i düzelt hacım
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,8 +21,8 @@ class ProductDetailView extends StatelessWidget {
             Hero(
               tag: 'image',
               child: SizedBox(
-                height: 300,
-                width: double.infinity,
+                height: context.dynamicHeight(0.33),
+                width: context.dynamicWidth(0.90),
                 child: PageView.builder(
                   allowImplicitScrolling: true,
                   itemCount: product.imagesPath.length,
@@ -93,23 +95,25 @@ class ProductDetailView extends StatelessWidget {
 
                   return InkWell(
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => AccountDetailView(user: userInformation),
-                        ),
-                      );
+                      NavigationService.instance
+                          .navigateToPage(path: NavigationConstants.ACCOUNT_DETAIL, data: userInformation);
                     },
                     child: ListTile(
-                      leading: CircleAvatar(
-                        radius: 45,
+                      leading: Hero(
+                        tag: 'profilephoto',
                         child: CircleAvatar(
-                          radius: 60,
-                          backgroundImage: NetworkImage(
-                            product.imagesPath[0],
+                          radius: 70,
+                          child: CircleAvatar(
+                            radius: 60,
+                            backgroundImage: NetworkImage(
+                              product.imagesPath[0],
+                            ),
                           ),
                         ),
                       ),
-                      title: Text(userInformation.name),
+                      title: Text(
+                        userInformation.name.overFlowString(limit: 15),
+                      ),
                       trailing: const Icon(
                         Icons.keyboard_arrow_right_outlined,
                       ),

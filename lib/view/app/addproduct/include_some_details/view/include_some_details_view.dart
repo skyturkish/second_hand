@@ -144,7 +144,7 @@ class NextButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         if (formKey.currentState!.validate()) {
-          context.read<ProductNotifier>().setProduct(
+          context.read<ProductNotifier>().updateProduct(
                 title: titleController.text,
                 state: stateController.text,
                 description: describeController.text,

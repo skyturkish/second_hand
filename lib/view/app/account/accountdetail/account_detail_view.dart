@@ -39,10 +39,13 @@ class _AccountDetailViewState extends State<AccountDetailView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              CircleAvatar(
-                radius: 60,
-                backgroundImage: NetworkImage(
-                  widget.user.profilePhotoPath,
+              Hero(
+                tag: 'profilephoto',
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundImage: NetworkImage(
+                    widget.user.profilePhotoPath,
+                  ),
                 ),
               ),
               Column(

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/models/product.dart';
+import 'package:second_hand/models/user.dart';
+import 'package:second_hand/view/app/account/accountdetail/account_detail_view.dart';
 import 'package:second_hand/view/app/addproduct/include_some_details/view/include_some_details_view.dart';
-import 'package:second_hand/view/app/addproduct/setprice/set_a_price.dart';
+import 'package:second_hand/view/app/addproduct/setprice/view/set_a_price_view.dart';
 import 'package:second_hand/view/app/addproduct/uploadphotos/upload_photos.dart';
-import 'package:second_hand/view/app/home/product_detail_view.dart';
+import 'package:second_hand/view/app/home/subview/product_detail_view.dart';
 
 class NavigationRoute {
   static final NavigationRoute _instance = NavigationRoute._init();
@@ -25,9 +27,15 @@ class NavigationRoute {
       case NavigationConstants.PRODUCT_DETAIL:
         final product = args.arguments as Product;
         return normalNavigate(
-            widget: ProductDetailView(
-          product: product,
-        ));
+          widget: ProductDetailView(
+            product: product,
+          ),
+        );
+      case NavigationConstants.ACCOUNT_DETAIL:
+        final userInformation = args.arguments as UserInformation;
+        return normalNavigate(
+          widget: AccountDetailView(user: userInformation),
+        );
 
       default:
         return MaterialPageRoute(
