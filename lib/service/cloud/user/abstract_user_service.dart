@@ -10,4 +10,7 @@ abstract class IUserCloudFireStoreService {
   Future<bool> isUserExist({required String userId}); // Check
   Future<void> addProductToFavorites({required String userId, required String productId}); // Update
   Future<void> removeProductToFavorites({required String userId, required String productId}); // Update
+  // wtf ?
+  Future<void> followUser({required String userIdWhichOneWillFollow, required String followerId}); // update
+
 }

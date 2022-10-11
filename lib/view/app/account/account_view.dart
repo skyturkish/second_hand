@@ -85,7 +85,7 @@ class _UserInformationCardState extends State<UserInformationCard> {
           CircleAvatar(
             radius: 60,
             backgroundImage: NetworkImage(
-              context.read<UserInformationNotifier>().userInformation.profilePhotoPath,
+              context.watch<UserInformationNotifier>().userInformation.profilePhotoPath,
             ),
           ),
           Padding(

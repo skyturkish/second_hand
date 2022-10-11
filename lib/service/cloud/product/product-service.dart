@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/cloud/product/abstract_product_service.dart';
 import 'package:second_hand/service/storage/storage-service.dart';
+import 'package:second_hand/utilities/compress/compress_image.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductCloudFireStoreService implements IProductCloudFireStoreService {
@@ -26,7 +26,7 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
     for (final image in images) {
       final imageId = const Uuid().v4();
 
-      final compressedimage = await compressFile(image);
+      final compressedimage = await ImageCompress.instance.compressFile(image);
 
       final taskSnapShot = await StorageService.instance.uploadProductPhoto(
         file: compressedimage,
@@ -114,13 +114,4 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
               Product.fromSnapShot, // same --> (doc) => Product.fromSnapShot(doc)
             ),
           );
-
-  // TODO This don't belong here, to where ?
-  Future<File> compressFile(File file) async {
-    final compressedFile = await FlutterNativeImage.compressImage(
-      file.path,
-      quality: 50,
-    );
-    return compressedFile;
-  }
 }

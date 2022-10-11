@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
-import 'package:second_hand/service/cloud/product/product-service.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
 import 'package:second_hand/service/storage/storage-service.dart';
+import 'package:second_hand/utilities/compress/compress_image.dart';
 
 class UserInformationNotifier extends ChangeNotifier {
   UserInformation get userInformation => _userInformation;
@@ -29,7 +29,7 @@ class UserInformationNotifier extends ChangeNotifier {
   Future<void> saveProfilePhotoToFirebaseIfPhotoChange({required BuildContext context}) async {
     if (userPhoto == null) return;
 
-    final compressedFile = await ProductCloudFireStoreService.instance.compressFile(userPhoto!);
+    final compressedFile = await ImageCompress.instance.compressFile(userPhoto!);
 
     final taskSnapshot = await StorageService.instance.uploadUserPhoto(
       file: compressedFile,
@@ -96,6 +96,30 @@ class UserInformationNotifier extends ChangeNotifier {
     _userInformation = UserInformation(
       userId: '',
       name: '',
+    );
+  }
+
+  Future<void> followUserBothFirebaseAndLocal({
+    required String userIdWhichOneWillFollow,
+    required String followerId,
+  }) async {
+    _userInformation.following.add(userIdWhichOneWillFollow);
+    notifyListeners();
+    await UserCloudFireStoreService.instance.followUser(
+      userIdWhichOneWillFollow: userIdWhichOneWillFollow,
+      followerId: AuthService.firebase().currentUser!.id,
+    );
+  }
+
+  Future<void> breakFollowUserBothFirebaseAndLocal({
+    required String userIdWhichOneWillFollow,
+    required String followerId,
+  }) async {
+    _userInformation.following.remove(userIdWhichOneWillFollow);
+    notifyListeners();
+    await UserCloudFireStoreService.instance.breakFollowUser(
+      userIdWhichOneWillFollow: userIdWhichOneWillFollow,
+      followerId: AuthService.firebase().currentUser!.id,
     );
   }
 }

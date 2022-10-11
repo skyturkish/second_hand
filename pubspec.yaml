@@ -21,7 +21,6 @@ dependencies:
   google_sign_in: ^5.4.2
 
   #  Cache
-  cached_network_image: ^3.2.2
   cloud_firestore: ^3.4.7
 
   # State Management

@@ -4,6 +4,7 @@ import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/user.dart';
+import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
 import 'package:second_hand/view/_product/_widgets/grid_view/refreshable_product_grid_view.dart';
 import 'package:second_hand/view/app/account/editprofile/view/edit_profie_view.dart';
@@ -69,12 +70,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
                           },
                           child: const Text('Edit Profile'),
                         )
-                      : ElevatedButton(
-                          onPressed: () {
-                            //TODO follow
-                          },
-                          child: const Text('Follow'),
-                        ),
+                      : FollowButtonView(user: widget.user),
                 ],
               ),
               const SizedBox.shrink(),
@@ -139,6 +135,36 @@ class FollowInformationColumn extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+}
+
+class FollowButtonView extends StatefulWidget {
+  const FollowButtonView({Key? key, required this.user}) : super(key: key);
+  final UserInformation user;
+  @override
+  State<FollowButtonView> createState() => _FollowButtonViewState();
+}
+
+class _FollowButtonViewState extends State<FollowButtonView> {
+  void breakFollow() {
+    context.read<UserInformationNotifier>().breakFollowUserBothFirebaseAndLocal(
+        userIdWhichOneWillFollow: widget.user.userId, followerId: AuthService.firebase().currentUser!.id);
+    setState(() {});
+  }
+
+  void follow() {
+    context.read<UserInformationNotifier>().followUserBothFirebaseAndLocal(
+        userIdWhichOneWillFollow: widget.user.userId, followerId: AuthService.firebase().currentUser!.id);
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    bool isFollow = context.watch<UserInformationNotifier>().userInformation.following.contains(widget.user.userId);
+    return ElevatedButton(
+      onPressed: isFollow ? breakFollow : follow,
+      child: Text(isFollow ? 'Break Follow' : 'Follow'),
     );
   }
 }

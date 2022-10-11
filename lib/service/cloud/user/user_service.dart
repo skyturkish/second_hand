@@ -82,4 +82,25 @@ class UserCloudFireStoreService implements IUserCloudFireStoreService {
       'favoriteAds': FieldValue.arrayRemove([productId])
     });
   }
+
+  @override
+  Future<void> followUser({required String userIdWhichOneWillFollow, required String followerId}) async {
+    await _collection.doc(followerId).update({
+      'following': FieldValue.arrayUnion([userIdWhichOneWillFollow])
+    });
+
+    await _collection.doc(userIdWhichOneWillFollow).update({
+      'followers': FieldValue.arrayUnion([followerId])
+    });
+  }
+
+  Future<void> breakFollowUser({required String userIdWhichOneWillFollow, required String followerId}) async {
+    await _collection.doc(followerId).update({
+      'following': FieldValue.arrayRemove([userIdWhichOneWillFollow])
+    });
+
+    await _collection.doc(userIdWhichOneWillFollow).update({
+      'followers': FieldValue.arrayRemove([followerId])
+    });
+  }
 }

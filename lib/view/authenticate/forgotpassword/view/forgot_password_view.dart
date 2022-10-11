@@ -7,6 +7,7 @@ import 'package:second_hand/service/auth/bloc/app_state.dart';
 import 'package:second_hand/utilities/dialogs/error_dialog.dart';
 import 'package:second_hand/utilities/dialogs/password_reset_email_sent_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
+import 'package:second_hand/view/authenticate/forgotpassword/viewmodel/forgot_password_view_model.dart';
 
 // TODO data gelmezse diyip, sizedbox yukarı, gerçek body aşağıda durmalı
 class ForgotPasswordView extends StatefulWidget {
@@ -16,30 +17,14 @@ class ForgotPasswordView extends StatefulWidget {
   ForgotPasswordViewState createState() => ForgotPasswordViewState();
 }
 
-class ForgotPasswordViewState extends State<ForgotPasswordView> {
-  final _formKey = GlobalKey<FormState>();
-
-  late final TextEditingController _controller;
-
-  @override
-  void initState() {
-    _controller = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
+class ForgotPasswordViewState extends ForgotPasswordViewModel {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AppBloc, AppState>(
       listener: (context, state) async {
         if (state is AppStateForgotPassword) {
           if (state.hasSentEmail) {
-            _controller.clear();
+            controller.clear();
             await showPasswordResetSentDialog(context);
           }
           if (state.exception != null) {
@@ -58,39 +43,76 @@ class ForgotPasswordViewState extends State<ForgotPasswordView> {
           padding: context.paddingAllMedium,
           child: SingleChildScrollView(
             child: Form(
-              key: _formKey,
+              key: formKey,
               child: Column(
                 children: [
-                  const Text(
-                    'If you forgot your password, simply enter your email and we will send you a password',
-                  ),
-                  CustomTextFormField(
-                    controller: _controller,
-                    labelText: 'email',
-                    hintText: 'Your email adres...',
-                    prefix: const Icon(Icons.email),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      final email = _controller.text;
-                      context.read<AppBloc>().add(AppEventForgotPassword(email: email));
-                    },
-                    child: const Text('Send me password reset link'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      context.read<AppBloc>().add(
-                            AppEventLogOut(context),
-                          );
-                    },
-                    child: const Text('Back to login page'),
-                  ),
+                  const Text('If you forgot your password, simply enter your email and we will send you a password'),
+                  EmailTextFormField(controller: controller),
+                  SendPasswordButton(controller: controller),
+                  const BackToLoginButton(),
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class EmailTextFormField extends StatelessWidget {
+  const EmailTextFormField({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomTextFormField(
+      controller: controller,
+      labelText: 'email',
+      hintText: 'Your email adres...',
+      prefix: const Icon(Icons.email),
+    );
+  }
+}
+
+class SendPasswordButton extends StatelessWidget {
+  const SendPasswordButton({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        final email = controller.text;
+        context.read<AppBloc>().add(AppEventForgotPassword(email: email));
+      },
+      child: const Text('Send me password reset link'),
+    );
+  }
+}
+
+class BackToLoginButton extends StatelessWidget {
+  const BackToLoginButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        context.read<AppBloc>().add(
+              AppEventLogOut(context),
+            );
+      },
+      child: const Text('Back to login page'),
     );
   }
 }

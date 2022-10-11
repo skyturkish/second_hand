@@ -80,8 +80,6 @@ class _EditProfileViewState extends EditProfileViewModel {
                 aboutYou: aboutYouController.text,
               ); // TODO ikisinden birini ortak alalım ya da almayalım
 
-              context.read<UserInformationNotifier>().resetChanges();
-
               Navigator.pop(context);
             },
             child: const Text('Save'),
