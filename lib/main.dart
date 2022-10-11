@@ -16,10 +16,10 @@ import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/service/auth/bloc/app_state.dart';
 import 'package:second_hand/view/app/bottom_navigation_view.dart';
-import 'package:second_hand/view/authenticate/forgot_password_view.dart';
-import 'package:second_hand/view/authenticate/login_view.dart';
-import 'package:second_hand/view/authenticate/register_view.dart';
-import 'package:second_hand/view/authenticate/verify_email_view.dart';
+import 'package:second_hand/view/authenticate/forgotpassword/view/forgot_password_view.dart';
+import 'package:second_hand/view/authenticate/login/view/login_view.dart';
+import 'package:second_hand/view/authenticate/register/view/register_view.dart';
+import 'package:second_hand/view/authenticate/verifyemail/verify_email_view.dart';
 
 void main() async {
   await _init();

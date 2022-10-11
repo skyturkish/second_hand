@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
-import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
+import 'package:second_hand/view/_product/_widgets/iconbutton/favorite_icon_button.dart';
 import 'package:second_hand/view/app/account/accountdetail/account_detail_view.dart';
-import 'package:second_hand/view/app/home/home_product_card.dart';
 
 class ProductDetailView extends StatelessWidget {
   const ProductDetailView({super.key, required this.product});
@@ -18,17 +16,20 @@ class ProductDetailView extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            SizedBox(
-              height: 300,
-              width: double.infinity,
-              child: PageView.builder(
-                allowImplicitScrolling: true,
-                itemCount: product.imagesPath.length,
-                itemBuilder: (context, index) {
-                  return Image.network(
-                    product.imagesPath[index],
-                  );
-                },
+            Hero(
+              tag: 'image',
+              child: SizedBox(
+                height: 300,
+                width: double.infinity,
+                child: PageView.builder(
+                  allowImplicitScrolling: true,
+                  itemCount: product.imagesPath.length,
+                  itemBuilder: (context, index) {
+                    return Image.network(
+                      product.imagesPath[index],
+                    );
+                  },
+                ),
               ),
             ),
             Padding(
@@ -57,7 +58,6 @@ class ProductDetailView extends StatelessWidget {
                   ),
                   FavoriteIconButton(
                     product: product,
-                    provider: context.read<UserInformationNotifier>(),
                   ),
                 ],
               ),

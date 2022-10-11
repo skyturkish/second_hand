@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/view/app/home/home_product_card.dart';
+import 'package:second_hand/view/_product/_widgets/card/product_card.dart';
 
 typedef getAllProducts = Future<List<Product>?> Function({required String userId});
 
