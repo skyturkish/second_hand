@@ -41,15 +41,15 @@ class PriceTextFormField extends StatelessWidget {
   const PriceTextFormField({
     Key? key,
     required TextEditingController priceController,
-  })  : priceController = priceController,
+  })  : _priceController = priceController,
         super(key: key);
 
-  final TextEditingController priceController;
+  final TextEditingController _priceController;
 
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
-      controller: priceController,
+      controller: _priceController,
       labelText: 'price',
       keyboardType: TextInputType.number,
       prefix: const Icon(
@@ -69,20 +69,20 @@ class ReleaseProductButton extends StatelessWidget {
     Key? key,
     required GlobalKey<FormState> formKey,
     required TextEditingController priceController,
-  })  : formKey = formKey,
-        priceController = priceController,
+  })  : _formKey = formKey,
+        _priceController = priceController,
         super(key: key);
 
-  final GlobalKey<FormState> formKey;
-  final TextEditingController priceController;
+  final GlobalKey<FormState> _formKey;
+  final TextEditingController _priceController;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        if (formKey.currentState!.validate()) {
+        if (_formKey.currentState!.validate()) {
           context.read<ProductNotifier>().updateProduct(
-                price: int.parse(priceController.text),
+                price: int.parse(_priceController.text),
                 ownerId: AuthService.firebase().currentUser!.id,
               );
 

@@ -18,7 +18,7 @@
 	<string>second-hand-sky</string>
 	<key>STORAGE_BUCKET</key>
 	<string>second-hand-sky.appspot.com</string>
-	<key>IS_ADS_ENABLED</key>
+	<key>IS_Products_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
 	<false></false>

@@ -5,8 +5,6 @@ import 'package:second_hand/view/app/addproduct/include_some_details/view/enum_p
 import 'package:second_hand/view/app/addproduct/include_some_details/view/include_some_details_view.dart';
 
 abstract class IncludeSomeDetailsViewModel extends State<IncludeSomeDetailsView> {
-  // TODO texteditincontroller'e ayrı ayrı validator yazmalısın
-  // TODO minimmum text miktarı olacak unutma
   final formKey = GlobalKey<FormState>();
 
   ProductState valueProductState = ProductState.values.last;

@@ -31,7 +31,6 @@ class CustomTextFormField extends StatefulWidget {
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
-// TODO ortak bir yere alınmalı
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late bool _isPasswordTextFormField;

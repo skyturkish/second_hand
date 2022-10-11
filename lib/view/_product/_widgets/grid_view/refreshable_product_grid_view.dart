@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/view/_product/_widgets/card/product_card.dart';

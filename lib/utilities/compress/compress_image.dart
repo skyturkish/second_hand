@@ -11,7 +11,6 @@ class ImageCompress {
 
   ImageCompress._internal();
 
-  // TODO This don't belong here, to where ?
   Future<File> compressFile(File file) async {
     final compressedFile = await FlutterNativeImage.compressImage(
       file.path,

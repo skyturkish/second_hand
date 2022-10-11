@@ -72,14 +72,14 @@ class UserCloudFireStoreService implements IUserCloudFireStoreService {
   @override
   Future<void> addProductToFavorites({required String userId, required String productId}) async {
     await _collection.doc(userId).update({
-      'favoriteAds': FieldValue.arrayUnion([productId])
+      'favoriteProducts': FieldValue.arrayUnion([productId])
     });
   }
 
   @override
   Future<void> removeProductToFavorites({required String userId, required String productId}) async {
     await _collection.doc(userId).update({
-      'favoriteAds': FieldValue.arrayRemove([productId])
+      'favoriteProducts': FieldValue.arrayRemove([productId])
     });
   }
 

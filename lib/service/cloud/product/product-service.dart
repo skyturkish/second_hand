@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +45,6 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
         );
   }
 
-  // TODO galiba burayı da stream ile yapmak zorundayız :shrug:
   @override
   Future<List<Product>?> getAllBelongProducts({required String userId}) async {
     final querySnapShot = await _collection.where('ownerId', isEqualTo: userId).get();
@@ -98,7 +99,6 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
     }
   }
 
-  // TODO bunu kullacının içindeki ürünlerden aratıp da yapabilirsin bu biraz aşırı kaçıyor
   @override
   Stream<Iterable<Product>> getAllOwnerProductsStream({required String userId}) => _collection
       .snapshots()
@@ -107,7 +107,7 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
   @override
   Stream<Iterable<Product>> getAllFavoriteProductsStream({required String userId, required BuildContext context}) =>
       _collection
-          .where('productId', whereIn: context.watch<UserInformationNotifier>().userInformation.favoriteAds)
+          .where('productId', whereIn: context.watch<UserInformationNotifier>().userInformation.favoriteProducts)
           .snapshots()
           .map(
             (event) => event.docs.map(

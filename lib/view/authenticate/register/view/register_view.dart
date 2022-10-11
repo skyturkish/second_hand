@@ -48,8 +48,14 @@ class RegisterViewState extends RegisterViewModel {
                   const Text('Enter your email and password to see your notes!'),
                   EmailTextFormField(emailController: emailController),
                   PasswordTextFormField(passwordController: passwordController),
-                  RegisterButton(emailController: emailController, passwordController: passwordController),
-                  const AlreadyRegisterButton(),
+                  Center(
+                    child: Column(
+                      children: [
+                        RegisterButton(emailController: emailController, passwordController: passwordController),
+                        const AlreadyRegisterButton(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

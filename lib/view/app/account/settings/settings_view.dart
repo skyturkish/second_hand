@@ -47,7 +47,7 @@ class SettingsView extends StatelessWidget {
 
               if (deleteDecision) {
                 Navigator.of(context).pop();
-
+                // son zamanlarda girilmeyi isteyebiliyor bazen hesabın silinmesi için onu handle et
                 context.read<AppBloc>().add(
                       AppEventDeleteAccount(context),
                     );

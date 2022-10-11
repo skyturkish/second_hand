@@ -19,7 +19,7 @@ class _FavoriteIconButtonState extends State<FavoriteIconButton> {
   @override
   Widget build(BuildContext context) {
     final isFavorite =
-        context.watch<UserInformationNotifier>().userInformation.favoriteAds.contains(widget.product.productId);
+        context.watch<UserInformationNotifier>().userInformation.favoriteProducts.contains(widget.product.productId);
     return IconButton(
       onPressed: () {
         isFavorite

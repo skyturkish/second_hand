@@ -9,7 +9,7 @@ import 'package:second_hand/utilities/dialogs/keep_same_product.dart';
 import 'package:second_hand/view/app/account/account_view.dart';
 import 'package:second_hand/view/app/chats/chats_view.dart';
 import 'package:second_hand/view/app/home/home_view.dart';
-import 'package:second_hand/view/app/my_ads/my_ads_view.dart';
+import 'package:second_hand/view/app/my_ads/my_products_view.dart';
 
 class BottomNavigationView extends StatefulWidget {
   const BottomNavigationView({super.key});
@@ -46,7 +46,7 @@ class BottomNavigationViewState extends State<BottomNavigationView> {
           HomeView(),
           ChatsView(),
           SizedBox.shrink(),
-          MyAdsView(),
+          MyProductsView(),
           AccountView(),
         ],
       ),
@@ -82,7 +82,7 @@ class BottomNavigationViewState extends State<BottomNavigationView> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
-            label: 'My Ads',
+            label: 'My Products',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),

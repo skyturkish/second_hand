@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
-import 'package:second_hand/view/_product/_widgets/list_tile/favorite_product_listtile.dart';
+import 'package:second_hand/view/_product/_widgets/list_tile/my_ads_listtile.dart';
 
-class FavoritesView extends StatefulWidget {
-  const FavoritesView({super.key});
+class ProductsView extends StatefulWidget {
+  const ProductsView({Key? key}) : super(key: key);
 
   @override
-  State<FavoritesView> createState() => FavoritesViewState();
+  State<ProductsView> createState() => ProductsViewState();
 }
 
-class FavoritesViewState extends State<FavoritesView> with AutomaticKeepAliveClientMixin {
+class ProductsViewState extends State<ProductsView> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: StreamMyFavoriteProductsStream(),
+    return Scaffold(
+      body: Column(
+        children: const [
+          StreamMyProductsProducts(),
+        ],
+      ),
     );
   }
 
@@ -23,8 +27,8 @@ class FavoritesViewState extends State<FavoritesView> with AutomaticKeepAliveCli
   bool get wantKeepAlive => true;
 }
 
-class StreamMyFavoriteProductsStream extends StatelessWidget {
-  const StreamMyFavoriteProductsStream({
+class StreamMyProductsProducts extends StatelessWidget {
+  const StreamMyProductsProducts({
     Key? key,
   }) : super(key: key);
 
@@ -32,7 +36,7 @@ class StreamMyFavoriteProductsStream extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: ProductCloudFireStoreService.instance
-          .getAllFavoriteProductsStream(userId: AuthService.firebase().currentUser!.id, context: context),
+          .getAllOwnerProductsStream(userId: AuthService.firebase().currentUser!.id),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
@@ -44,7 +48,7 @@ class StreamMyFavoriteProductsStream extends StatelessWidget {
                 itemCount: allProduct.length,
                 itemBuilder: (context, index) {
                   final product = allProduct.elementAt(index);
-                  return FavoriteListTileProduct(product: product);
+                  return MyProductsListTileProduct(product: product);
                 },
               );
             } else {

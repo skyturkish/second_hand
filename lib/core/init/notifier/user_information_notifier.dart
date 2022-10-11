@@ -17,6 +17,11 @@ class UserInformationNotifier extends ChangeNotifier {
     name: '',
   );
 
+  void changeProfilePhotoPathLocal({required String newPhotoPath}) {
+    _userInformation.profilePhotoPath = newPhotoPath;
+    notifyListeners();
+  }
+
   void resetChanges() {
     userPhoto = null;
   }
@@ -43,20 +48,20 @@ class UserInformationNotifier extends ChangeNotifier {
     UserCloudFireStoreService.instance.updateUserProfilePhotoPath(
         userId: AuthService.firebase().currentUser!.id, profilePhotoURL: profilePhotoDownloadURL);
 
-    context.read<UserInformationNotifier>()._userInformation.profilePhotoPath = profilePhotoDownloadURL;
+    context.read<UserInformationNotifier>().changeProfilePhotoPathLocal(newPhotoPath: profilePhotoDownloadURL);
   }
 
   Future<void> getUserInformation({required String userId}) async {
     // çok uzattın aga o ismi
     final userInformationFromFirebase = await UserCloudFireStoreService.instance.getUserInformationById(userId: userId);
     _userInformation = userInformationFromFirebase!;
-    _userInformation.favoriteAds.add('value'); // we added this because, when list is empty flutter throw crash ??
+    _userInformation.favoriteProducts.add('value'); // we added this because, when list is empty flutter throw crash ??
 
     notifyListeners();
   }
 
   Future<void> addFavoriteProduct({required String productId}) async {
-    _userInformation.favoriteAds.add(productId);
+    _userInformation.favoriteProducts.add(productId);
     notifyListeners();
     await UserCloudFireStoreService.instance.addProductToFavorites(
       userId: _userInformation.userId,
@@ -65,7 +70,7 @@ class UserInformationNotifier extends ChangeNotifier {
   }
 
   Future<void> removeFavoriteProduct({required String productId}) async {
-    _userInformation.favoriteAds.remove(productId);
+    _userInformation.favoriteProducts.remove(productId);
     notifyListeners();
     await UserCloudFireStoreService.instance.removeProductToFavorites(
       userId: _userInformation.userId,

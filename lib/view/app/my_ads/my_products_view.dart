@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/view/app/my_ads/ads_View.dart';
 import 'package:second_hand/view/app/my_ads/favorite_view.dart';
+import 'package:second_hand/view/app/my_ads/products_view.dart';
 
-class MyAdsView extends StatefulWidget {
-  const MyAdsView({super.key});
+class MyProductsView extends StatefulWidget {
+  const MyProductsView({super.key});
 
   @override
-  State<MyAdsView> createState() => MyAdsViewState();
+  State<MyProductsView> createState() => MyProductsViewState();
 }
 
-class MyAdsViewState extends State<MyAdsView> with TickerProviderStateMixin {
+class MyProductsViewState extends State<MyProductsView> with TickerProviderStateMixin {
   late final TabController _tabController;
 
   @override
@@ -24,7 +24,7 @@ class MyAdsViewState extends State<MyAdsView> with TickerProviderStateMixin {
       length: _MyTabViews.values.length,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('My Ads'),
+          title: const Text('My Products'),
           bottom: _myTabView(),
         ),
         body: _tabbarView(),
@@ -47,7 +47,7 @@ class MyAdsViewState extends State<MyAdsView> with TickerProviderStateMixin {
       physics: const NeverScrollableScrollPhysics(),
       controller: _tabController,
       children: const [
-        AdsView(),
+        ProductsView(),
         FavoritesView(),
       ],
     );
@@ -55,4 +55,4 @@ class MyAdsViewState extends State<MyAdsView> with TickerProviderStateMixin {
 }
 
 // ignore: constant_identifier_names
-enum _MyTabViews { ADS, FAVOURITES }
+enum _MyTabViews { Products, FAVOURITES }

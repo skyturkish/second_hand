@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:second_hand/core/constants/enums/locale_keys_enum.dart';
 
 abstract class IlocaleManager {

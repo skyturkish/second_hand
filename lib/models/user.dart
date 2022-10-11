@@ -8,8 +8,8 @@ class UserInformation {
       profilePhotoPath: map['profilePhotoPath'] ?? '',
       phoneNumber: map['phoneNumber'] ?? '',
       aboutYou: map['aboutYou'] ?? '',
-      myAds: List<String>.from(map['myAds']),
-      favoriteAds: List<String>.from(map['favoriteAds']),
+      myProducts: List<String>.from(map['myProducts']),
+      favoriteProducts: List<String>.from(map['favoriteProducts']),
       following: List<String>.from(map['following']),
       followers: List<String>.from(map['followers']),
     );
@@ -22,8 +22,8 @@ class UserInformation {
     this.profilePhotoPath = '',
     this.phoneNumber = '',
     this.aboutYou = 'Hi I am new here',
-    this.myAds = const [],
-    this.favoriteAds = const [],
+    this.myProducts = const [],
+    this.favoriteProducts = const [],
     this.following = const [],
     this.followers = const [],
   });
@@ -32,8 +32,8 @@ class UserInformation {
   String profilePhotoPath;
   String phoneNumber;
   String aboutYou;
-  final List<String> myAds;
-  final List<String> favoriteAds;
+  final List<String> myProducts;
+  final List<String> favoriteProducts;
   final List<String> following;
   final List<String> followers;
 
@@ -46,8 +46,8 @@ class UserInformation {
       ..addAll({'profilePhotoPath': profilePhotoPath})
       ..addAll({'phoneNumber': phoneNumber})
       ..addAll({'aboutYou': aboutYou})
-      ..addAll({'myAds': myAds})
-      ..addAll({'favoriteAds': favoriteAds})
+      ..addAll({'myProducts': myProducts})
+      ..addAll({'favoriteProducts': favoriteProducts})
       ..addAll({'following': following})
       ..addAll({'followers': followers});
 
