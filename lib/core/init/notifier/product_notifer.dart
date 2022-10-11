@@ -74,6 +74,10 @@ class ProductNotifier extends ChangeNotifier {
     images = [];
   }
 
+  bool productInProcess() {
+    return product.title.isNotEmpty;
+  }
+
   Future<void> releaseProduct() async {
     await ProductCloudFireStoreService.instance.createProduct(
       product: product,
