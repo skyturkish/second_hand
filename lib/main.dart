@@ -100,7 +100,8 @@ class App extends StatelessWidget {
           return const RegisterView();
         } else {
           return const Scaffold(
-            body: CircularProgressIndicator(),
+            // güzel bir lottie animasyonu koy
+            body: Center(child: CircularProgressIndicator()),
           );
         }
       },

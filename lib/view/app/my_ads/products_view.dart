@@ -48,7 +48,7 @@ class StreamMyProductsProducts extends StatelessWidget {
                 itemCount: allProduct.length,
                 itemBuilder: (context, index) {
                   final product = allProduct.elementAt(index);
-                  return MyProductsListTileProduct(product: product);
+                  return MyProductsListTile(product: product);
                 },
               );
             } else {

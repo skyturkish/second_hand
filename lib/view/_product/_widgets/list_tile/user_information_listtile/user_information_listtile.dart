@@ -4,6 +4,7 @@ import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
+import 'package:second_hand/view/_product/_widgets/list_tile/user_information_listtile/shimmer_user_information_listtile.dart';
 import 'package:shimmer/shimmer.dart';
 
 class UserInformationListtile extends StatelessWidget {
@@ -41,7 +42,7 @@ class UserInformationListtile extends StatelessWidget {
                 ),
               ),
               title: Text(
-                userInformation.name.overFlowString(limit: 15),
+                userInformation.name.overFlowString(limit: 25),
               ),
               trailing: const Icon(
                 Icons.keyboard_arrow_right_outlined,
@@ -49,7 +50,7 @@ class UserInformationListtile extends StatelessWidget {
             ),
           );
         } else {
-          return const CircularProgressIndicator();
+          return const ShimmerUserInformationListTile();
         }
       },
     );

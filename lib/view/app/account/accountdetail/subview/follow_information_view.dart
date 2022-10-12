@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/constants/enums/follow_type.dart';
+import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/models/user.dart';
-import 'package:second_hand/view/_product/_widgets/list_tile/user_information_listtile.dart';
+import 'package:second_hand/view/_product/_widgets/list_tile/user_information_listtile/user_information_listtile.dart';
 
 // typedef getUsersInformation = Future<List<UserInformation>?> Function({required List<String> followList});
 
@@ -38,8 +39,11 @@ class _FollowInformationsViewState extends State<FollowInformationsView> {
     return ListView.builder(
       itemCount: users!.length,
       itemBuilder: (context, index) {
-        return UserInformationListtile(
-          userId: users![index],
+        return Padding(
+          padding: context.paddingOnlyTopSmall,
+          child: UserInformationListtile(
+            userId: users![index],
+          ),
         );
       },
     );

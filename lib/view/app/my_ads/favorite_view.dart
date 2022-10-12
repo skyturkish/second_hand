@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
-import 'package:second_hand/view/_product/_widgets/list_tile/favorite_product_listtile.dart';
+import 'package:second_hand/view/_product/_widgets/list_tile/favorite_product_listtile/favorite_product_listtile.dart';
+import 'package:second_hand/view/_product/_widgets/list_tile/favorite_product_listtile/shimmer_favorite_list_tile.dart';
 
 class FavoritesView extends StatefulWidget {
   const FavoritesView({super.key});
@@ -48,10 +49,10 @@ class StreamMyFavoriteProductsStream extends StatelessWidget {
                 },
               );
             } else {
-              return const CircularProgressIndicator();
+              return const ShimmerFavoriteListTileProduct();
             }
           default:
-            return const CircularProgressIndicator();
+            return const ShimmerFavoriteListTileProduct();
         }
       },
     );
