@@ -7,6 +7,7 @@ import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product-service.dart';
 import 'package:second_hand/view/_product/_widgets/grid_view/refreshable_product_grid_view.dart';
+import 'package:second_hand/view/app/account/accountdetail/subview/network_view.dart';
 import 'package:second_hand/view/app/account/editprofile/view/edit_profie_view.dart';
 
 class AccountDetailView extends StatefulWidget {
@@ -40,7 +41,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Hero(
-                tag: 'profilephoto',
+                tag: 'profilephoto ${widget.user.userId}',
                 child: CircleAvatar(
                   radius: 60,
                   backgroundImage: NetworkImage(
@@ -53,12 +54,14 @@ class _AccountDetailViewState extends State<AccountDetailView> {
                   Row(
                     children: [
                       FollowInformationColumn(
-                        count: (isLocalUser ? localUser : widget.user).following.length,
-                        countName: 'Following',
-                      ),
-                      FollowInformationColumn(
                         count: (isLocalUser ? localUser : widget.user).followers.length,
                         countName: 'Follower',
+                        userInformation: widget.user,
+                      ),
+                      FollowInformationColumn(
+                        count: (isLocalUser ? localUser : widget.user).following.length,
+                        countName: 'Following',
+                        userInformation: widget.user,
                       ),
                     ],
                   ),
@@ -118,26 +121,37 @@ class FollowInformationColumn extends StatelessWidget {
     super.key,
     required this.count,
     required this.countName,
+    required this.userInformation,
   });
   final int count;
   final String countName;
+  final UserInformation userInformation;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          count.toString(),
-          style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.bold),
-        ),
-        Padding(
-          padding: context.paddingOnlyTopSmall,
-          child: Text(
-            countName,
-            style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.bold),
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => NetworkView(userInformation: userInformation),
           ),
-        )
-      ],
+        );
+      },
+      child: Column(
+        children: [
+          Text(
+            count.toString(),
+            style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.bold),
+          ),
+          Padding(
+            padding: context.paddingOnlyTopSmall,
+            child: Text(
+              countName,
+              style: Theme.of(context).textTheme.headline6!.copyWith(fontWeight: FontWeight.bold),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

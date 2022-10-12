@@ -22,6 +22,7 @@ dependencies:
 
   #  Cache
   cloud_firestore: ^3.4.7
+  shared_preferences: ^2.0.15
 
   # State Management
   flutter_bloc: ^8.1.1
@@ -34,14 +35,16 @@ dependencies:
   # Storage
   firebase_storage: ^10.3.9
   flutter_native_image: ^0.0.6 # COMPRESS
-  image_picker: ^0.8.5+3
+  image_picker: ^0.8.5+3 # bunun önüne katman yazmadın
 
   # very_good
   very_good_analysis: ^3.1.0
 
+  # UI
+  shimmer: ^2.0.0
+
   equatable: ^2.0.5
   uuid: ^3.0.6
-  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:

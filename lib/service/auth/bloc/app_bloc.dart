@@ -116,7 +116,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         } else {
           await event.context
               .read<UserInformationNotifier>()
-              .getUserInformation(userId: AuthService.firebase().currentUser!.id);
+              .getUserInformationById(userId: AuthService.firebase().currentUser!.id);
           emit(
             AppStateLoggedIn(
               user: user,
@@ -163,7 +163,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
                 .createUserIfNotExist(userId: AuthService.firebase().currentUser!.id);
             await event.context
                 .read<UserInformationNotifier>()
-                .getUserInformation(userId: AuthService.firebase().currentUser!.id);
+                .getUserInformationById(userId: AuthService.firebase().currentUser!.id);
             emit(
               AppStateLoggedIn(
                 user: user,
@@ -195,7 +195,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         await UserCloudFireStoreService.instance.createUserIfNotExist(userId: AuthService.firebase().currentUser!.id);
         await event.context
             .read<UserInformationNotifier>()
-            .getUserInformation(userId: AuthService.firebase().currentUser!.id);
+            .getUserInformationById(userId: AuthService.firebase().currentUser!.id);
 
         emit(
           AppStateLoggedIn(
@@ -210,7 +210,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<AppEventLogOut>(
       (event, emit) async {
         // DELETE USER'S INFORMATIONS LOCALE
-        event.context.read<UserInformationNotifier>().clearUserInformations();
+        event.context.read<UserInformationNotifier>().clearUserInformationsLocal();
         // DELETE PRODUCT ADD INFORMATIONS LOCALE
         event.context.read<ProductNotifier>().clearProduct();
         try {
@@ -241,7 +241,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           ),
         );
         // DELETE USER'S INFORMATIONS LOCALE
-        event.context.read<UserInformationNotifier>().clearUserInformations();
+        event.context.read<UserInformationNotifier>().clearUserInformationsLocal();
         // DELETE PRODUCT ADD INFORMATIONS LOCALE
         event.context.read<ProductNotifier>().clearProduct();
 

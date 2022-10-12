@@ -22,7 +22,7 @@ class UserInformationNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void resetChanges() {
+  void clearLocalPhoto() {
     userPhoto = null;
   }
 
@@ -31,6 +31,7 @@ class UserInformationNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  // notifier neden servisin görevini yapıyor ???
   Future<void> saveProfilePhotoToFirebaseIfPhotoChange({required BuildContext context}) async {
     if (userPhoto == null) return;
 
@@ -43,15 +44,13 @@ class UserInformationNotifier extends ChangeNotifier {
 
     final profilePhotoDownloadURL = await taskSnapshot.ref.getDownloadURL();
 
-    _userInformation.profilePhotoPath = profilePhotoDownloadURL;
-
     UserCloudFireStoreService.instance.updateUserProfilePhotoPath(
         userId: AuthService.firebase().currentUser!.id, profilePhotoURL: profilePhotoDownloadURL);
 
     context.read<UserInformationNotifier>().changeProfilePhotoPathLocal(newPhotoPath: profilePhotoDownloadURL);
   }
 
-  Future<void> getUserInformation({required String userId}) async {
+  Future<void> getUserInformationById({required String userId}) async {
     // çok uzattın aga o ismi
     final userInformationFromFirebase = await UserCloudFireStoreService.instance.getUserInformationById(userId: userId);
     _userInformation = userInformationFromFirebase!;
@@ -79,25 +78,17 @@ class UserInformationNotifier extends ChangeNotifier {
   }
 
   bool anyChanges({required String name, required String aboutYou}) {
-    return name != _userInformation.name || aboutYou != _userInformation.aboutYou;
+    return !(name == _userInformation.name && aboutYou == _userInformation.aboutYou) || userPhoto != null;
   }
 
   Future<void> changeUserInformationLocal({required String name, required String aboutYou}) async {
-    if (!anyChanges(name: name, aboutYou: aboutYou)) return;
     _userInformation
       ..name = name
       ..aboutYou = aboutYou;
     notifyListeners();
   }
 
-  Future<void> changeProfilePhotoPathFirebase({required String profilePhotoURL}) async {
-    await UserCloudFireStoreService.instance.updateUserProfilePhotoPath(
-      userId: _userInformation.userId,
-      profilePhotoURL: profilePhotoURL,
-    );
-  }
-
-  void clearUserInformations() {
+  void clearUserInformationsLocal() {
     _userInformation = UserInformation(
       userId: '',
       name: '',
@@ -109,7 +100,9 @@ class UserInformationNotifier extends ChangeNotifier {
     required String followerId,
   }) async {
     _userInformation.following.add(userIdWhichOneWillFollow);
+
     notifyListeners();
+
     await UserCloudFireStoreService.instance.followUser(
       userIdWhichOneWillFollow: userIdWhichOneWillFollow,
       followerId: AuthService.firebase().currentUser!.id,
@@ -121,7 +114,9 @@ class UserInformationNotifier extends ChangeNotifier {
     required String followerId,
   }) async {
     _userInformation.following.remove(userIdWhichOneWillFollow);
+
     notifyListeners();
+
     await UserCloudFireStoreService.instance.breakFollowUser(
       userIdWhichOneWillFollow: userIdWhichOneWillFollow,
       followerId: AuthService.firebase().currentUser!.id,

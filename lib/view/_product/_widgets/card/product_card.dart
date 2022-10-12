@@ -33,7 +33,7 @@ class ProductCard extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: Hero(
-                      tag: 'image',
+                      tag: 'image ${product.productId}',
                       child: Image.network(
                         product.imagesPath[0],
                       ),

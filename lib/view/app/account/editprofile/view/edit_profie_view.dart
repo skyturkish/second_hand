@@ -51,11 +51,20 @@ class _EditProfileViewState extends EditProfileViewModel {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () async {
-            // TODO öncesinde değişiklik var mı diye kontrol et
-            final isWillIgnore = await ignoreChanges(context);
-            if (!isWillIgnore) return;
-            context.read<UserInformationNotifier>().resetChanges();
-            Navigator.of(context).pop();
+            final isAnyChanges = context.read<UserInformationNotifier>().anyChanges(
+                  name: nameController.text,
+                  aboutYou: aboutYouController.text,
+                );
+
+            if (isAnyChanges) {
+              final isWillIgnore = await ignoreChanges(context);
+              if (!isWillIgnore) return;
+              context.read<UserInformationNotifier>().clearLocalPhoto();
+              Navigator.of(context).pop();
+            } else {
+              context.read<UserInformationNotifier>().clearLocalPhoto();
+              Navigator.of(context).pop();
+            }
           },
           icon: const Icon(Icons.exit_to_app),
         ),

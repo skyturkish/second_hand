@@ -19,7 +19,8 @@ class UserInformation {
   UserInformation({
     required this.userId,
     required this.name,
-    this.profilePhotoPath = '',
+    this.profilePhotoPath =
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI64fYIV7EMYQ8XUYQ4_QrZM0YxY353PQI1yNYuaXbb_YbTJGwozRe6ru-RIsWTjGE8ZQ&usqp=CAU',
     this.phoneNumber = '',
     this.aboutYou = 'Hi I am new here',
     this.myProducts = const [],

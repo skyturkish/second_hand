@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
-import 'package:second_hand/core/extensions/string_extension.dart';
-import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/models/user.dart';
-import 'package:second_hand/service/cloud/user/user_service.dart';
 import 'package:second_hand/view/_product/_widgets/iconbutton/favorite_icon_button.dart';
+import 'package:second_hand/view/_product/_widgets/list_tile/user_information_listtile.dart';
 
 class ProductDetailView extends StatelessWidget {
   const ProductDetailView({super.key, required this.product});
@@ -19,7 +15,7 @@ class ProductDetailView extends StatelessWidget {
         body: Column(
           children: [
             Hero(
-              tag: 'image',
+              tag: 'image ${product.productId}',
               child: SizedBox(
                 height: context.dynamicHeight(0.33),
                 width: context.dynamicWidth(0.90),
@@ -87,43 +83,7 @@ class ProductDetailView extends StatelessWidget {
               ),
             ),
             const Divider(),
-            FutureBuilder(
-              future: UserCloudFireStoreService.instance.getUserInformationById(userId: product.ownerId),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final userInformation = snapshot.data as UserInformation;
-
-                  return InkWell(
-                    onTap: () {
-                      NavigationService.instance
-                          .navigateToPage(path: NavigationConstants.ACCOUNT_DETAIL, data: userInformation);
-                    },
-                    child: ListTile(
-                      leading: Hero(
-                        tag: 'profilephoto',
-                        child: CircleAvatar(
-                          radius: 70,
-                          child: CircleAvatar(
-                            radius: 60,
-                            backgroundImage: NetworkImage(
-                              product.imagesPath[0],
-                            ),
-                          ),
-                        ),
-                      ),
-                      title: Text(
-                        userInformation.name.overFlowString(limit: 15),
-                      ),
-                      trailing: const Icon(
-                        Icons.keyboard_arrow_right_outlined,
-                      ),
-                    ),
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              },
-            )
+            UserInformationListtile(userId: product.ownerId),
           ],
         ),
       ),
