@@ -4,6 +4,7 @@ import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/view/app/home/subview/product_detail_view.dart';
 
+@immutable
 class FavoriteListTileProduct extends StatelessWidget {
   const FavoriteListTileProduct({
     super.key,

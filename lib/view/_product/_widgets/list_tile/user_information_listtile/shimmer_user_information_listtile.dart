@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+@immutable
 class ShimmerUserInformationListTile extends StatelessWidget {
   const ShimmerUserInformationListTile({super.key});
 
