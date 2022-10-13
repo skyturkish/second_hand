@@ -25,7 +25,7 @@ Run the following commands: <will edit>
 - [ ] Auth
   - [ ] Phone Authentication
   - [x] Email & Password
-  - [ ] Google
+  - [X] Google
 - [X] Create an account, get informations from user
 - [X] Product
   - [X] Pick images and to make the product sellable.
