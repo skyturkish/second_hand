@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
+import 'package:second_hand/utilities/crop_image/crop_image.dart';
 import 'package:second_hand/view/_product/_widgets/divider/general_divider.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 import 'package:second_hand/view/app/account/editprofile/view/select_image_bottom_sheet.dart';
@@ -165,7 +166,11 @@ class _EditProfilePhotoViewState extends State<EditProfilePhotoView> {
       onTap: () async {
         final photo = await SelecPhotoBottomSheet().show<File>(context);
         if (photo == null) return;
-        appearPhoto = photo;
+        final croppedFile = await CropImage.instance.croppedFile(context: context, imageFilePath: photo.path);
+        if (croppedFile == null) return;
+        final croppedPhoto = File(croppedFile.path);
+
+        appearPhoto = croppedPhoto;
         context.read<UserInformationNotifier>().changeProfilePhotoLocal(image: appearPhoto);
         setState(() {});
       },
