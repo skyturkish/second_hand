@@ -164,14 +164,19 @@ class _EditProfilePhotoViewState extends State<EditProfilePhotoView> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
+        // ask, from gallery ? or camera
         final photo = await SelecPhotoBottomSheet().show<File>(context);
         if (photo == null) return;
+        // want to crop image or not ?
         final croppedFile = await CropImage.instance.croppedFile(context: context, imageFilePath: photo.path);
         if (croppedFile == null) return;
+
         final croppedPhoto = File(croppedFile.path);
 
         appearPhoto = croppedPhoto;
+
         context.read<UserInformationNotifier>().changeProfilePhotoLocal(image: appearPhoto);
+
         setState(() {});
       },
       child: CircleAvatar(
