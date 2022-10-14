@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/view/app/my_ads/favorite_view.dart';
-import 'package:second_hand/view/app/my_ads/products_view.dart';
+import 'package:second_hand/view/app/my_ads/subview/favorite_view.dart';
+import 'package:second_hand/view/app/my_ads/subview/products_view.dart';
 
 class MyProductsView extends StatefulWidget {
   const MyProductsView({super.key});
