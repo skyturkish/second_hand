@@ -14,6 +14,7 @@ class ChatContact {
   final String productPic;
   final String productName;
   final String productId;
+  final String sellerId;
   final DateTime timeSent;
   const ChatContact({
     required this.chatContactId,
@@ -27,6 +28,7 @@ class ChatContact {
     required this.productPic,
     required this.productName,
     required this.productId,
+    required this.sellerId,
     required this.timeSent,
   });
 
@@ -42,6 +44,7 @@ class ChatContact {
         productPic = snapshot.data()['productPic'] as String,
         productName = snapshot.data()['productName'] as String,
         productId = snapshot.data()['productId'] as String,
+        sellerId = snapshot.data()['sellerId'] as String,
         timeSent = DateTime.fromMillisecondsSinceEpoch(snapshot.data()['timeSent']);
 
   Map<String, dynamic> toMap() {
@@ -58,6 +61,7 @@ class ChatContact {
     result.addAll({'productPic': productPic});
     result.addAll({'productName': productName});
     result.addAll({'productId': productId});
+    result.addAll({'sellerId': sellerId});
     result.addAll({'timeSent': timeSent.millisecondsSinceEpoch});
 
     return result;
@@ -76,6 +80,7 @@ class ChatContact {
       productPic: map['productPic'] ?? '',
       productName: map['productName'] ?? '',
       productId: map['productId'] ?? '',
+      sellerId: map['sellerId'] ?? '',
       timeSent: DateTime.fromMillisecondsSinceEpoch(map['timeSent']),
     );
   }

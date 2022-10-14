@@ -41,12 +41,9 @@ class ChatContactInformation extends StatelessWidget {
                     // olum lan bu list tile olabilirdi
                     return InkWell(
                         onTap: () {
-                          final contactUserId = chatContactType == ChatContactType.BUY
-                              ? chatContactData.receiverId
-                              : chatContactData.senderId;
                           NavigationService.instance.navigateToPage(
                             path: NavigationConstants.CHAT_VIEW,
-                            data: [chatContactData.productId, contactUserId],
+                            data: [chatContactData.productId, chatContactData.receiverId],
                           );
                         },
                         child: ListTile(
@@ -58,10 +55,7 @@ class ChatContactInformation extends StatelessWidget {
                                 backgroundImage: NetworkImage(chatContactData.productPic),
                               ),
                               CircleAvatar(
-                                  radius: 13,
-                                  backgroundImage: NetworkImage(chatContactType == ChatContactType.BUY
-                                      ? chatContactData.receiverProfilePictureURL
-                                      : chatContactData.senderProfilePictureURL)),
+                                  radius: 13, backgroundImage: NetworkImage(chatContactData.receiverProfilePictureURL)),
                             ],
                           ),
                           title: Column(
@@ -70,9 +64,7 @@ class ChatContactInformation extends StatelessWidget {
                               Padding(
                                 padding: context.paddingOnlyBottomSmall / 3,
                                 child: Text(
-                                  chatContactType == ChatContactType.BUY
-                                      ? chatContactData.receiverName
-                                      : chatContactData.senderName,
+                                  chatContactData.receiverName,
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6!
@@ -88,9 +80,13 @@ class ChatContactInformation extends StatelessWidget {
                               ),
                             ],
                           ),
-                          subtitle: Text(
-                            chatContactData.lastMessage.overFlowString(limit: 30),
-                            style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.w200),
+                          subtitle: Row(
+                            children: [
+                              Text(
+                                chatContactData.lastMessage.overFlowString(limit: 30),
+                                style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.w200),
+                              ),
+                            ],
                           ),
                           trailing: Text(
                             DateFormat.Hm().format(chatContactData.timeSent),

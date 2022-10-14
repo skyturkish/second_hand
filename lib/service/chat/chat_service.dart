@@ -24,13 +24,14 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
     required String productImageURL,
     required String productName,
     required String productId,
+    required String productOwnerId,
     required DateTime timeSent,
   }) async {
     // The chatContactId to delete chatcontact
-    final chatContactId = const Uuid().v4();
+    final senderContactId = const Uuid().v4();
     // Let the sender user know who they are talking to, what product they are talking about, and what the latest message is.
-    final chatContact = ChatContact(
-      chatContactId: chatContactId,
+    final senderChatContact = ChatContact(
+      chatContactId: senderContactId,
       senderName: senderUserInformation.name,
       receiverName: receiverUserInformation.name,
       senderId: senderUserInformation.userId,
@@ -42,30 +43,8 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
       productName: productName,
       productId: productId,
       timeSent: timeSent,
+      sellerId: productOwnerId,
     );
-    // The chatContactId to delete chatcontact
-
-    // final receiverChatContactId = const Uuid().v4();
-
-    // // Let the receiver user know who they are talking to, what product they are talking about, and what the latest message is.
-    // final receiverChatContact = ChatContact(
-    //   chatContactId: receiverChatContactId,
-    //   senderName: receiverUserInformation.name,
-    //   receiverName: senderUserInformation.name,
-    //   senderId: receiverUserInformation.userId,
-    //   receiverId: senderUserInformation.userId,
-    //   senderProfilePictureURL: receiverUserInformation.profilePhotoPath,
-    //   receiverProfilePictureURL: senderUserInformation.profilePhotoPath,
-    //   lastMessage: lastMessage,
-    //   productPic: productImageURL,
-    //   productName: productName,
-    //   productId: productId,
-    //   timeSent: timeSent,
-    // );
-
-    // TODO WHY WE DO THE SAME THING TWICE ??????
-    // TODO 2 defa yapmayalım çünkü farklı chatcontact kaydetmiliyiz. bu baya bir şeyi de kolaylaşıtrakcak
-    // TODO chat view ekranında da buysa bu buysa bu demesine gerek yok
 
 // save to sender
     final senderRef = FirebaseFirestore.instance
@@ -77,14 +56,14 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
     senderRef.get().then((value) {
       if (!value.exists) {
         senderRef.set(
-          chatContact.toMap(),
+          senderChatContact.toMap(),
         );
       } else {
         senderRef.update({
-          'senderName': receiverUserInformation.name,
-          'receiverName': senderUserInformation.name,
-          'senderProfilePictureURL': receiverUserInformation.profilePhotoPath,
-          'receiverProfilePictureURL': senderUserInformation.profilePhotoPath,
+          'senderName': senderUserInformation.name,
+          'receiverName': receiverUserInformation.name,
+          'senderProfilePictureURL': senderUserInformation.profilePhotoPath,
+          'receiverProfilePictureURL': receiverUserInformation.profilePhotoPath,
           'lastMessage': lastMessage,
           'productPic': productImageURL,
           'productName': productName,
@@ -92,6 +71,24 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
         });
       }
     });
+
+    final receiverContactId = const Uuid().v4();
+    // Let the sender user know who they are talking to, what product they are talking about, and what the latest message is.
+    final receiverChatContact = ChatContact(
+      chatContactId: receiverContactId,
+      senderName: receiverUserInformation.name,
+      receiverName: senderUserInformation.name,
+      senderId: receiverUserInformation.userId,
+      receiverId: senderUserInformation.userId,
+      senderProfilePictureURL: receiverUserInformation.profilePhotoPath,
+      receiverProfilePictureURL: senderUserInformation.profilePhotoPath,
+      lastMessage: lastMessage,
+      productPic: productImageURL,
+      productName: productName,
+      productId: productId,
+      timeSent: timeSent,
+      sellerId: productOwnerId,
+    );
 
     // save to receiver
     final receiverRef = FirebaseFirestore.instance
@@ -103,7 +100,7 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
     receiverRef.get().then((value) {
       if (!value.exists) {
         receiverRef.set(
-          chatContact.toMap(),
+          receiverChatContact.toMap(),
         );
       } else {
         receiverRef.update({
@@ -181,6 +178,7 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
       productName: product.title,
       productId: product.productId,
       timeSent: timeSent,
+      productOwnerId: product.ownerId,
     );
 
     saveMessageToMessageSubCollection(
@@ -195,32 +193,15 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
 
   @override
   Stream<Iterable<ChatContact>> getChatContactsToBuy({required String userId}) {
-    // TODO Burası öncelik
-    // Burayı düzelteceksin
     return FirebaseFirestore.instance
         .collection('users')
         .doc(userId)
         .collection('chats')
+        .orderBy('timeSent', descending: true) // new chat contact will appear top
         .snapshots()
         .map((event) => event.docs.map((e) => ChatContact.fromSnapShot(e)).where(
-              (element) => element.senderId == userId,
+              (element) => element.sellerId != userId,
             ));
-
-    // return FirebaseFirestore.instance
-    //     .collection('users')
-    //     .doc(userId)
-    //     .collection('chats')
-    //     .snapshots()
-    //     .asyncMap((event) async {
-    //   List<ChatContact> contacts = [];
-    //   for (var document in event.docs) {
-    //     final chatContact = ChatContact.fromMap(document.data());
-    //     if (chatContact.senderId == userId) {
-    //       contacts.add(chatContact);
-    //     }
-    //   }
-    //   return contacts;
-    // });
   }
 
   @override
@@ -229,26 +210,11 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
         .collection('users')
         .doc(userId)
         .collection('chats')
-        .orderBy('timeSent', descending: true)
+        .orderBy('timeSent', descending: true) // new chat contact will appear top
         .snapshots()
         .map((event) => event.docs.map((e) => ChatContact.fromSnapShot(e)).where(
-              (element) => element.receiverId == userId,
+              (element) => element.sellerId == userId,
             ));
-    // return FirebaseFirestore.instance
-    //     .collection('users')
-    //     .doc(userId)
-    //     .collection('chats')
-    //     .snapshots()
-    //     .asyncMap((event) async {
-    //   List<ChatContact> contacts = [];
-    //   for (var document in event.docs) {
-    //     final chatContact = ChatContact.fromMap(document.data());
-    //     if (chatContact.receiverId == userId) {
-    //       contacts.add(chatContact);
-    //     }
-    //   }
-    //   return contacts;
-    // });
   }
 
   @override

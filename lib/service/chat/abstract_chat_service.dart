@@ -24,6 +24,7 @@ abstract class IChatCloudFireStoreService {
     required String productName,
     required DateTime timeSent,
     required String productId,
+    required String productOwnerId,
   });
   // save message to firebase,
   Future<void> saveMessageToMessageSubCollection({
