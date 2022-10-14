@@ -81,10 +81,10 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
         );
       } else {
         senderRef.update({
-          'senderName': senderUserInformation.name,
-          'receiverName': receiverUserInformation.name,
-          'senderProfilePictureURL': senderUserInformation.profilePhotoPath,
-          'receiverProfilePictureURL': receiverUserInformation.profilePhotoPath,
+          'senderName': receiverUserInformation.name,
+          'receiverName': senderUserInformation.name,
+          'senderProfilePictureURL': receiverUserInformation.profilePhotoPath,
+          'receiverProfilePictureURL': senderUserInformation.profilePhotoPath,
           'lastMessage': lastMessage,
           'productPic': productImageURL,
           'productName': productName,
@@ -107,10 +107,10 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
         );
       } else {
         receiverRef.update({
-          'senderName': senderUserInformation.name,
-          'receiverName': receiverUserInformation.name,
-          'senderProfilePictureURL': senderUserInformation.profilePhotoPath,
-          'receiverProfilePictureURL': receiverUserInformation.profilePhotoPath,
+          'senderName': receiverUserInformation.name,
+          'receiverName': senderUserInformation.name,
+          'senderProfilePictureURL': receiverUserInformation.profilePhotoPath,
+          'receiverProfilePictureURL': senderUserInformation.profilePhotoPath,
           'lastMessage': lastMessage,
           'productPic': productImageURL,
           'productName': productName,
