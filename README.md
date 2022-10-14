@@ -36,9 +36,9 @@ Run the following commands: <will edit>
   - [X] User can see own Informations  
   - [X] User can update own Informations
   - [X] User can update own Photo 
-- [ ] Communication
-  - [ ] Messenger
-  - [ ] Filtering messages
+- [x] Communication
+  - [X] Messenger
+  - [X] Users can communicate each other about a product
 - [ ] Security
   - [ ] Block option
   - [ ] Report system
