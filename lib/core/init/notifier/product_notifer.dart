@@ -2,7 +2,7 @@ import 'dart:developer' as devtools show log;
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/service/cloud/product/product-service.dart';
+import 'package:second_hand/service/cloud/product/product_service.dart';
 import 'package:uuid/uuid.dart';
 
 extension Log on Object {

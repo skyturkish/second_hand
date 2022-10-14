@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/app/app_constants.dart';
+import 'package:second_hand/core/constants/enums/lottie_animation.dart';
 import 'package:second_hand/core/init/cache/locale_manager.dart';
 import 'package:second_hand/core/init/localization/language_manager.dart';
 import 'package:second_hand/core/init/navigation/navigation_route.dart';
@@ -15,6 +16,7 @@ import 'package:second_hand/loading/loading_screen.dart';
 import 'package:second_hand/service/auth/bloc/app_bloc.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/service/auth/bloc/app_state.dart';
+import 'package:second_hand/view/_product/_widgets/animation/lottie_view.dart';
 import 'package:second_hand/view/app/bottom_navigation_view.dart';
 import 'package:second_hand/view/authenticate/forgotpassword/view/forgot_password_view.dart';
 import 'package:second_hand/view/authenticate/login/view/login_view.dart';
@@ -100,8 +102,11 @@ class App extends StatelessWidget {
           return const RegisterView();
         } else {
           return const Scaffold(
-            // güzel bir lottie animasyonu koy
-            body: Center(child: CircularProgressIndicator()),
+            body: Center(
+              child: LottieAnimationView(
+                animation: LottieAnimation.splash,
+              ),
+            ),
           );
         }
       },

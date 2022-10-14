@@ -5,8 +5,8 @@ import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/user_information_listtile/shimmer_user_information_listtile.dart';
-import 'package:shimmer/shimmer.dart';
 
+@immutable
 class UserInformationListtile extends StatelessWidget {
   const UserInformationListtile({
     Key? key,

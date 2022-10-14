@@ -1,4 +1,3 @@
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
@@ -18,8 +17,6 @@ class AccountView extends StatefulWidget {
 }
 
 class AccountViewState extends State<AccountView> {
-  // TODO bu storageRef'i provider'ın içinde tutsan güzel olmaz mı ? sürekli baştan oluşutuyorsun
-  final storageRef = FirebaseStorage.instance.ref();
   @override
   Widget build(BuildContext context) {
     return SafeArea(

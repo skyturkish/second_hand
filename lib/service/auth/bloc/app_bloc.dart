@@ -6,7 +6,7 @@ import 'package:second_hand/service/auth/auth_provider.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/auth/bloc/app_event.dart';
 import 'package:second_hand/service/auth/bloc/app_state.dart';
-import 'package:second_hand/service/cloud/product/product-service.dart';
+import 'package:second_hand/service/cloud/product/product_service.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
 import 'package:second_hand/service/storage/storage-service.dart';
 

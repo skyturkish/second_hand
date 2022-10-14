@@ -6,7 +6,8 @@ class Product {
   String state;
   String title;
   String description;
-  List<String> imagesPath;
+  List<String>
+      imagesPath; // bu da path değil, URL olması lazım internetten çekiyoruz// TODO en son yamada bunu düzeltirsin
   int price;
   String documentId;
   // TODO final String location

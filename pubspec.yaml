@@ -21,6 +21,7 @@ dependencies:
   google_sign_in: ^5.4.2
 
   #  Cache
+  cached_network_image: ^3.2.2
   cloud_firestore: ^3.4.7
   shared_preferences: ^2.0.15
 
@@ -45,12 +46,10 @@ dependencies:
 
   equatable: ^2.0.5
   uuid: ^3.0.6
-
+  lottie: ^1.4.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_native_splash: ^2.2.10+1
-
   flutter_lints: ^2.0.0
 
 flutter:
@@ -59,8 +58,4 @@ flutter:
   assets:
     - assets/translations/
     - assets/images/
-
-flutter_native_splash:
-  color: "#42a5f5"
-  image: assets/images/splash_screen.png
-  android_12:
+    - assets/animations/

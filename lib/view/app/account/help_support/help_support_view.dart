@@ -15,22 +15,30 @@ class HelpAndSupportView extends StatelessWidget {
           OptionListTile(
             titleText: 'Help Center',
             subTitleText: 'You can read our help guide',
-            onTap: () {},
+            onTap: () {
+              // bunu da kullanma klavuzu gibi bir yere götürürümn
+            },
           ),
           OptionListTile(
             titleText: 'Rate Us',
             subTitleText: 'If you like our app, we will be happy if you rate us',
-            onTap: () {},
+            onTap: () {
+              // google play yerine götürecem
+            },
           ),
           OptionListTile(
             titleText: 'Invite your friends to Second-Hand',
             subTitleText: 'Invite your friends to buy and sell their stuff',
-            onTap: () {},
+            onTap: () {
+              // share_plus
+            },
           ),
           OptionListTile(
             titleText: 'Version',
             subTitleText: 'bana okulda 0 0 7 derler',
-            onTap: () {},
+            onTap: () {
+              // kendim yazacam
+            },
           ),
         ],
       ),

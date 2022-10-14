@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 
+@immutable
 class FavoriteIconButton extends StatefulWidget {
   const FavoriteIconButton({
     super.key,

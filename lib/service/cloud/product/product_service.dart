@@ -99,6 +99,11 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
     }
   }
 
+  Future<Product> getProductById({required String productId}) async {
+    final querySnapShot = await _collection.where('productId', isEqualTo: productId).get();
+    return Product.fromSnapShot(querySnapShot.docs.first);
+  }
+
   @override
   Stream<Iterable<Product>> getAllOwnerProductsStream({required String userId}) => _collection
       .snapshots()

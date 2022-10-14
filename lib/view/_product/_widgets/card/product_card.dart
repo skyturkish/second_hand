@@ -3,6 +3,7 @@ import 'package:second_hand/core/constants/navigation/navigation_constants.dart'
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/product.dart';
+import 'package:second_hand/utilities/cached_image/cache_image.dart';
 import 'package:second_hand/view/_product/_widgets/iconbutton/favorite_icon_button.dart';
 
 class ProductCard extends StatelessWidget {
@@ -34,8 +35,8 @@ class ProductCard extends StatelessWidget {
                   child: Center(
                     child: Hero(
                       tag: 'image ${product.productId}',
-                      child: Image.network(
-                        product.imagesPath[0],
+                      child: ShowCachedImageOrFromNetwork(
+                        networkUrl: product.imagesPath.first,
                       ),
                     ),
                   ),

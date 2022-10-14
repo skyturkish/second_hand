@@ -6,6 +6,7 @@ import 'package:second_hand/view/_product/_widgets/card/product_card.dart';
 
 typedef getAllProducts = Future<List<Product>?> Function({required String userId});
 
+@immutable
 class RefreshsableProductGridView extends StatefulWidget {
   const RefreshsableProductGridView({
     super.key,

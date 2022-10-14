@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+@immutable
 class NormalDivider extends StatelessWidget {
   const NormalDivider({super.key});
 

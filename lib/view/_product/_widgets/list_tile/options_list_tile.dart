@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+@immutable
 class OptionListTile extends StatelessWidget {
-  OptionListTile({
+  const OptionListTile({
     super.key,
     required this.titleText,
     this.leadingIcon,
@@ -10,8 +11,8 @@ class OptionListTile extends StatelessWidget {
     required this.onTap,
   });
   final String titleText;
-  IconData? leadingIcon;
-  String? subTitleText;
+  final IconData? leadingIcon;
+  final String? subTitleText;
   final IconData trailingIcon;
   final void Function()? onTap;
 
@@ -19,8 +20,6 @@ class OptionListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        //contentPadding: EdgeInsets.zero
-        //minVerticalPadding:,
         title: Text(
           titleText,
           style: Theme.of(context).textTheme.subtitle1!.copyWith(

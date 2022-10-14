@@ -33,10 +33,11 @@ class UserInformationNotifier extends ChangeNotifier {
 
   // notifier neden servisin görevini yapıyor ???
   Future<void> saveProfilePhotoToFirebaseIfPhotoChange({required BuildContext context}) async {
+    // check photo is changed or not
     if (userPhoto == null) return;
-
+    // compressed Image help to https://pub.dev/packages/flutter_native_image
     final compressedFile = await ImageCompress.instance.compressFile(userPhoto!);
-
+    // We upload photo to firebase then take download URl to save to local and firebase
     final taskSnapshot = await StorageService.instance.uploadUserPhoto(
       file: compressedFile,
       userId: AuthService.firebase().currentUser!.id,
@@ -44,21 +45,22 @@ class UserInformationNotifier extends ChangeNotifier {
 
     final profilePhotoDownloadURL = await taskSnapshot.ref.getDownloadURL();
 
+    // local
+    context.read<UserInformationNotifier>().changeProfilePhotoPathLocal(newPhotoPath: profilePhotoDownloadURL);
+    // firebase, we don't use await because, we don't have to wait to update, we won't take user information again
     UserCloudFireStoreService.instance.updateUserProfilePhotoPath(
         userId: AuthService.firebase().currentUser!.id, profilePhotoURL: profilePhotoDownloadURL);
-
-    context.read<UserInformationNotifier>().changeProfilePhotoPathLocal(newPhotoPath: profilePhotoDownloadURL);
   }
 
   Future<void> getUserInformationById({required String userId}) async {
-    // çok uzattın aga o ismi
     final userInformationFromFirebase = await UserCloudFireStoreService.instance.getUserInformationById(userId: userId);
     _userInformation = userInformationFromFirebase!;
-    _userInformation.favoriteProducts.add('value'); // we added this because, when list is empty flutter throw crash ??
+    _userInformation.favoriteProducts.add('value'); // we added this because, when list is empty firebase throw crash ?
 
     notifyListeners();
   }
 
+  // add favorite product to local and firebase
   Future<void> addFavoriteProduct({required String productId}) async {
     _userInformation.favoriteProducts.add(productId);
     notifyListeners();
@@ -68,6 +70,7 @@ class UserInformationNotifier extends ChangeNotifier {
     );
   }
 
+  // remove favorite product to local and firebase
   Future<void> removeFavoriteProduct({required String productId}) async {
     _userInformation.favoriteProducts.remove(productId);
     notifyListeners();
@@ -77,10 +80,12 @@ class UserInformationNotifier extends ChangeNotifier {
     );
   }
 
+  // we are checking whether there are any changes to the edit page.
   bool anyChanges({required String name, required String aboutYou}) {
     return !(name == _userInformation.name && aboutYou == _userInformation.aboutYou) || userPhoto != null;
   }
 
+  // change user Information locally
   Future<void> changeUserInformationLocal({required String name, required String aboutYou}) async {
     _userInformation
       ..name = name
@@ -88,6 +93,7 @@ class UserInformationNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  // clear user Information locally, when logout or delete account
   void clearUserInformationsLocal() {
     _userInformation = UserInformation(
       userId: '',
@@ -95,6 +101,7 @@ class UserInformationNotifier extends ChangeNotifier {
     );
   }
 
+  // follow user
   Future<void> followUserBothFirebaseAndLocal({
     required String userIdWhichOneWillFollow,
     required String followerId,
@@ -107,8 +114,9 @@ class UserInformationNotifier extends ChangeNotifier {
       userIdWhichOneWillFollow: userIdWhichOneWillFollow,
       followerId: AuthService.firebase().currentUser!.id,
     );
-  }
+  } // TODO isimlendirmeleri düzelt
 
+  // break follow user
   Future<void> breakFollowUserBothFirebaseAndLocal({
     required String userIdWhichOneWillFollow,
     required String followerId,
