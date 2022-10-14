@@ -19,5 +19,5 @@ class LottieAnimationView extends StatelessWidget {
         animation.fullPath,
         reverse: reverse,
         repeat: repeat,
-      );
+      ); 
 }

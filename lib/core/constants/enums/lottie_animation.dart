@@ -8,5 +8,5 @@ enum LottieAnimation {
     required this.name,
   });
 
-  String get fullPath => 'assets/animations/$name.json';
+  String get fullPath => 'assets/animations/$name.json'; 
 }
