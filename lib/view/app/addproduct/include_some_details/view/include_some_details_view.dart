@@ -112,11 +112,11 @@ class _DescriptionTextFormFieldState extends State<DescriptionTextFormField> {
     return Padding(
       padding: context.paddingOnlyTopSmall,
       child: CustomTextFormField(
+        line: 4,
         controller: widget.describeController,
         labelText: 'description',
         prefix: const Icon(Icons.description),
         maxLetter: 150,
-        // onChanged kaldırıp sadece max letter verebilir miyim acaba
         onChanged: (text) {
           setState(() {});
         },

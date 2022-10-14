@@ -229,6 +229,7 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
         .collection('users')
         .doc(userId)
         .collection('chats')
+        .orderBy('timeSent', descending: true)
         .snapshots()
         .map((event) => event.docs.map((e) => ChatContact.fromSnapShot(e)).where(
               (element) => element.receiverId == userId,

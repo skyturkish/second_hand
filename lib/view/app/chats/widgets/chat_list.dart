@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
@@ -80,22 +81,34 @@ class _ChatListViewState extends State<ChatListView> {
         ),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // shimmer ile buraya güzel bir page yaparsın
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
 
-          // SchedulerBinding.instance.addPostFrameCallback((_) {
-          //   messageController
-          //       .jumpTo(messageController.position.maxScrollExtent);
-          // });
+          // Auto scroll view
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            messageController.jumpTo(messageController.position.maxScrollExtent);
+          });
+
           return ListView.builder(
             controller: messageController,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               final messageData = snapshot.data![index];
+
               final timeSent = DateFormat.Hm().format(messageData.timeSent);
+
+              // set message as seen
+              if (!messageData.isSeen && messageData.receiverId == AuthService.firebase().currentUser!.id) {
+                ChatCloudFireStoreService.instance.setChatMessageSeen(
+                  messageId: messageData.messageId,
+                  productId: widget.productId,
+                  receiverUserId: messageData.receiverId,
+                  senderUserId: messageData.senderId,
+                );
+              }
+
               if (messageData.senderId == AuthService.firebase().currentUser!.id) {
                 return MyMessageCard(
                   message: messageData.text,

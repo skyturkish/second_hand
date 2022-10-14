@@ -19,21 +19,33 @@ class SenderMessageCard extends StatelessWidget {
           elevation: 1,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           color: Colors.grey, // değiştir bunu
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Padding(
-                padding: context.paddingOnlyLeftSmallX,
-                child: Text(
-                  date,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    color: Colors.white60,
+          child: Padding(
+            padding: context.paddingAllSmall * (2 / 3),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Flexible(child: Text(message)),
+                Padding(
+                  padding: context.paddingOnlyLeftSmallX + context.paddingOnlyLeftSmallX,
+                  child: Text(
+                    date,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: Colors.white60,
+                    ),
                   ),
                 ),
-              ),
-              Flexible(child: Text('     $message')),
-            ],
+                Padding(
+                  padding: context.paddingOnlyLeftSmallX,
+                  child: Icon(
+                    isSeen ? Icons.done_all : Icons.done,
+                    size: 20,
+                    color: isSeen ? Colors.blue : Colors.white60,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

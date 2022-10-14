@@ -27,30 +27,37 @@ class _BottomChatFieldState extends State<BottomChatField> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Form(
-            key: _formKey,
+    return Form(
+      key: _formKey,
+      child: Row(
+        children: [
+          Expanded(
             child: TextFormField(
               controller: messageController,
               decoration: const InputDecoration(hintText: 'buraya yaz'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "you can't send empty message";
+                }
+                return null;
+              },
             ),
           ),
-        ),
-        IconButton(
-            onPressed: () async {
-              // await olabilir de olmayabilir de 2'sini de denersin
-              await ChatCloudFireStoreService.instance.sendTextMessage(
-                senderUserInformation: widget.senderUserInformation,
-                receiverUserInformation: widget.receiverUserInformation,
-                text: messageController.text,
-                product: widget.product,
-              );
-              messageController.clear();
-            },
-            icon: const Icon(Icons.send))
-      ],
+          IconButton(
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  ChatCloudFireStoreService.instance.sendTextMessage(
+                    senderUserInformation: widget.senderUserInformation,
+                    receiverUserInformation: widget.receiverUserInformation,
+                    text: messageController.text,
+                    product: widget.product,
+                  );
+                  messageController.clear();
+                }
+              },
+              icon: const Icon(Icons.send))
+        ],
+      ),
     );
   }
 }
