@@ -182,14 +182,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       },
     );
     on<AppEventLogInWithGoogle>((event, emit) async {
-      emit(
-        const AppStateLoggedOut(
-          exception: null,
-          isLoading: true,
-          loadingText: 'Please wait while I log you in',
-        ),
-      );
-
       try {
         await provider.signInWithGoogle();
         await UserCloudFireStoreService.instance.createUserIfNotExist(userId: AuthService.firebase().currentUser!.id);
