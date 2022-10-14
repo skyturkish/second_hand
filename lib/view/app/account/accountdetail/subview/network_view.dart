@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/constants/enums/follow_type.dart';
 import 'package:second_hand/models/user.dart';
+import 'package:second_hand/view/_product/enums/follow_type.dart';
 import 'package:second_hand/view/app/account/accountdetail/subview/follow_information_view.dart';
 
 class NetworkView extends StatefulWidget {

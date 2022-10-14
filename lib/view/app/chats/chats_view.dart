@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/constants/enums/chat_contact_type_enum.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
+import 'package:second_hand/view/_product/enums/chat_contact_type_enum.dart';
 import 'package:second_hand/view/app/chats/chat_contact_information.dart';
 
 class ChatsView extends StatefulWidget {

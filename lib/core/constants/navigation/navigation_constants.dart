@@ -7,4 +7,8 @@ class NavigationConstants {
   static const ACCOUNT_DETAIL = '/account-detail';
   static const EDIT_PROFILE = '/edit-profile';
   static const PRODUCT_DETAIL = '/product-detail';
+  static const SETTINGS_VIEW = '/settings';
+  static const HELP_AND_SUPPORT = '/help-and-support';
+  static const NETWORK_VIEW = '/network-view';
+  static const CHAT_VIEW = '/chat-view';
 }

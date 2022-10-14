@@ -1,11 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/constants/enums/chat_contact_type_enum.dart';
+import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/extensions/string_extension.dart';
+import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/chat_contact.dart';
 import 'package:second_hand/service/chat/chat_service.dart';
-import 'package:second_hand/view/app/chats/subview/chat_view.dart';
+import 'package:second_hand/view/_product/enums/chat_contact_type_enum.dart';
 
 class ChatContactInformation extends StatelessWidget {
   const ChatContactInformation({super.key, required this.userId, required this.chatContactType});
@@ -40,16 +41,12 @@ class ChatContactInformation extends StatelessWidget {
                     // olum lan bu list tile olabilirdi
                     return InkWell(
                         onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              // TODO bunu id alacak şekilde yap
-                              builder: (context) => ChatView(
-                                productId: chatContactData.productId,
-                                contactUserId: chatContactType == ChatContactType.BUY
-                                    ? chatContactData.receiverId
-                                    : chatContactData.senderId,
-                              ),
-                            ),
+                          final contactUserId = chatContactType == ChatContactType.BUY
+                              ? chatContactData.receiverId
+                              : chatContactData.senderId;
+                          NavigationService.instance.navigateToPage(
+                            path: NavigationConstants.CHAT_VIEW,
+                            data: [chatContactData.productId, contactUserId],
                           );
                         },
                         child: ListTile(

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/extensions/string_extension.dart';
+import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/auth/auth_service.dart';
 import 'package:second_hand/service/cloud/product/product_service.dart';
 import 'package:second_hand/view/_product/_widgets/grid_view/refreshable_product_grid_view.dart';
-import 'package:second_hand/view/app/account/accountdetail/subview/network_view.dart';
-import 'package:second_hand/view/app/account/editprofile/view/edit_profie_view.dart';
 
 class AccountDetailView extends StatefulWidget {
   const AccountDetailView({super.key, required this.user});
@@ -68,10 +68,8 @@ class _AccountDetailViewState extends State<AccountDetailView> {
                   isLocalUser
                       ? ElevatedButton(
                           onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const EditProfileView(),
-                              ),
+                            NavigationService.instance.navigateToPage(
+                              path: NavigationConstants.EDIT_PROFILE,
                             );
                           },
                           child: const Text('Edit Profile'),
@@ -131,10 +129,9 @@ class FollowInformationColumn extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => NetworkView(userInformation: userInformation),
-          ),
+        NavigationService.instance.navigateToPage(
+          path: NavigationConstants.NETWORK_VIEW,
+          data: userInformation,
         );
       },
       child: Column(

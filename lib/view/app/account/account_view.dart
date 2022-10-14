@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_route.dart';
+import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
 import 'package:second_hand/view/app/account/accountdetail/account_detail_view.dart';
@@ -29,23 +31,15 @@ class AccountViewState extends State<AccountView> {
               leadingIcon: Icons.settings,
               subTitleText: 'Privacy and logout',
               onTap: () {
-                Navigator.of(context).push(
-                  createRoute(
-                    widget: const SettingsView(),
-                  ),
-                );
+                NavigationService.instance.navigateToPage(path: NavigationConstants.SETTINGS_VIEW);
               },
             ),
             OptionListTile(
               titleText: 'Help & Support',
               leadingIcon: Icons.support_agent_outlined,
               subTitleText: 'Help center and legal terms',
-              onTap: () async {
-                Navigator.of(context).push(
-                  createRoute(
-                    widget: const HelpAndSupportView(),
-                  ),
-                );
+              onTap: () {
+                NavigationService.instance.navigateToPage(path: NavigationConstants.HELP_AND_SUPPORT);
               },
             ),
           ],
@@ -69,12 +63,9 @@ class _UserInformationCardState extends State<UserInformationCard> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => AccountDetailView(
-              user: context.read<UserInformationNotifier>().userInformation,
-            ),
-          ),
+        NavigationService.instance.navigateToPage(
+          path: NavigationConstants.ACCOUNT_DETAIL,
+          data: context.read<UserInformationNotifier>().userInformation,
         );
       },
       child: Row(

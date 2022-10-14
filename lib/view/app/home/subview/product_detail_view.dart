@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/service/cloud/user/user_service.dart';
 import 'package:second_hand/view/_product/_widgets/iconbutton/favorite_icon_button.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/user_information_listtile/user_information_listtile.dart';
-import 'package:second_hand/view/app/chats/subview/chat_view.dart';
 
 class ProductDetailView extends StatelessWidget {
   const ProductDetailView({super.key, required this.product});
@@ -95,10 +96,9 @@ class ProductDetailView extends StatelessWidget {
 
                   return ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ChatView(productId: product.productId, contactUserId: product.ownerId),
-                        ),
+                      NavigationService.instance.navigateToPage(
+                        path: NavigationConstants.CHAT_VIEW,
+                        data: [product.productId, product.ownerId],
                       );
                     },
                     child: const Text('start talking'),
