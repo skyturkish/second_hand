@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/theme_notifer.dart';
-import 'package:second_hand/service/auth/bloc/app_bloc.dart';
-import 'package:second_hand/service/auth/bloc/app_event.dart';
-import 'package:second_hand/utilities/dialogs/delete_account_dialog.dart';
-import 'package:second_hand/utilities/dialogs/logout_dialog.dart';
+import 'package:second_hand/services/auth/bloc/app_bloc.dart';
+import 'package:second_hand/services/auth/bloc/app_event.dart';
+import 'package:second_hand/product/utilities/dialogs/delete_account_dialog.dart';
+import 'package:second_hand/product/utilities/dialogs/logout_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
 
 class SettingsView extends StatelessWidget {

@@ -11,8 +11,8 @@ class ShimmerProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: const Color.fromARGB(255, 90, 87, 87),
-      highlightColor: const Color.fromARGB(255, 212, 206, 206),
+      baseColor: context.colors.surface,
+      highlightColor: context.colors.onSurface,
       child: Card(
         elevation: 10,
         child: Stack(
@@ -24,7 +24,10 @@ class ShimmerProductCard extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: Container(
-                        width: context.dynamicWidth(0.40), height: context.dynamicHeight(0.20), color: Colors.grey),
+                      width: context.dynamicWidth(0.40),
+                      height: context.dynamicHeight(0.20),
+                      color: context.colors.background,
+                    ),
                   ),
                 ),
                 Padding(

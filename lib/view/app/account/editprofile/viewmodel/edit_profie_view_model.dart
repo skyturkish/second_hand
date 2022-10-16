@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/loading/loading_screen.dart';
-import 'package:second_hand/service/auth/auth_service.dart';
-import 'package:second_hand/service/cloud/user/user_service.dart';
-import 'package:second_hand/utilities/dialogs/ignore_changes_dialog.dart';
+import 'package:second_hand/services/auth/auth_service.dart';
+import 'package:second_hand/services/cloud/user/user_service.dart';
+import 'package:second_hand/product/utilities/dialogs/ignore_changes_dialog.dart';
 import 'package:second_hand/view/app/account/editprofile/view/edit_profie_view.dart';
 
 abstract class EditProfileViewModel extends State<EditProfileView> {

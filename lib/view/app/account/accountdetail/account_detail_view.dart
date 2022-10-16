@@ -6,8 +6,9 @@ import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/user.dart';
-import 'package:second_hand/service/auth/auth_service.dart';
-import 'package:second_hand/service/cloud/product/product_service.dart';
+import 'package:second_hand/services/auth/auth_service.dart';
+import 'package:second_hand/services/cloud/product/product_service.dart';
+import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 import 'package:second_hand/view/_product/_widgets/grid_view/refreshable_product_grid_view.dart';
 
 class AccountDetailView extends StatefulWidget {
@@ -52,6 +53,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
               Column(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       FollowInformationColumn(
                         count: (isLocalUser ? localUser : widget.user).followers.length,
@@ -66,7 +68,9 @@ class _AccountDetailViewState extends State<AccountDetailView> {
                     ],
                   ),
                   isLocalUser
-                      ? ElevatedButton(
+                      ? CustomElevatedButton(
+                          dynamicWidth: 0.42,
+                          borderRadius: 30,
                           onPressed: () {
                             NavigationService.instance.navigateToPage(
                               path: NavigationConstants.EDIT_PROFILE,
@@ -176,7 +180,8 @@ class _FollowButtonViewState extends State<FollowButtonView> {
   @override
   Widget build(BuildContext context) {
     bool isFollow = context.watch<UserInformationNotifier>().userInformation.following.contains(widget.user.userId);
-    return ElevatedButton(
+    return CustomElevatedButton(
+      dynamicWidth: 0.3,
       onPressed: isFollow ? breakFollow : follow,
       child: Text(isFollow ? 'Break Follow' : 'Follow'),
     );

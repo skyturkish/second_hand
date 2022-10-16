@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:shimmer/shimmer.dart';
 
 @immutable
@@ -10,25 +11,25 @@ class ShimmerFavoriteListTileProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: const Color.fromARGB(255, 90, 87, 87),
-      highlightColor: const Color.fromARGB(255, 212, 206, 206),
+      baseColor: context.colors.surface,
+      highlightColor: context.colors.onSurface,
       child: ListTile(
         title: Container(
           height: 15,
           width: 100,
-          color: Colors.grey,
+          color: context.colors.background,
         ),
         subtitle: Column(
           children: [
             Container(
               height: 15,
               width: double.infinity,
-              color: Colors.grey,
+              color: context.colors.background,
             ),
             Container(
               height: 15,
               width: 250,
-              color: Colors.grey,
+              color: context.colors.background,
             )
           ],
         ),
@@ -37,9 +38,9 @@ class ShimmerFavoriteListTileProduct extends StatelessWidget {
         ),
         trailing: IconButton(
           onPressed: () {},
-          icon: const Icon(
+          icon: Icon(
             Icons.favorite,
-            color: Colors.red,
+            color: context.colors.error,
           ),
         ),
       ),

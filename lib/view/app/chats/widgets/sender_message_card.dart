@@ -18,7 +18,7 @@ class SenderMessageCard extends StatelessWidget {
         child: Card(
           elevation: 1,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          color: Colors.grey, // değiştir bunu
+          color: context.colors.background,
           child: Padding(
             padding: context.paddingAllSmall * (2 / 3),
             child: Row(
@@ -30,9 +30,9 @@ class SenderMessageCard extends StatelessWidget {
                   padding: context.paddingOnlyLeftSmallX + context.paddingOnlyLeftSmallX,
                   child: Text(
                     date,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 13,
-                      color: Colors.white60,
+                      color: context.colors.onPrimary,
                     ),
                   ),
                 ),
@@ -41,7 +41,7 @@ class SenderMessageCard extends StatelessWidget {
                   child: Icon(
                     isSeen ? Icons.done_all : Icons.done,
                     size: 20,
-                    color: isSeen ? Colors.blue : Colors.white60,
+                    color: isSeen ? Colors.blue : context.colors.onPrimary,
                   ),
                 ),
               ],

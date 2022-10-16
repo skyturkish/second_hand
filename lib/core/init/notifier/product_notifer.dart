@@ -1,17 +1,12 @@
-import 'dart:developer' as devtools show log;
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/service/cloud/product/product_service.dart';
+import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:uuid/uuid.dart';
 
-extension Log on Object {
-  void log() => devtools.log(toString());
-}
-
-// for images, yes, this must be provider
-class ProductNotifier extends ChangeNotifier {
-  ProductNotifier();
+// bunun adı ürünü sattığını daha fazla belli eden bir şey olmalı
+class SaleProductNotifier extends ChangeNotifier {
+  SaleProductNotifier();
 
   List<File> images = [];
 
@@ -74,6 +69,7 @@ class ProductNotifier extends ChangeNotifier {
     images = [];
   }
 
+  // If title place is not empty,  the user has not yet completed the process of selling the product.
   bool productInProcess() {
     return product.title.isNotEmpty;
   }
@@ -85,10 +81,5 @@ class ProductNotifier extends ChangeNotifier {
     );
 
     clearProduct();
-  }
-
-  void skytoString() {
-    'productId: ${product.productId}, ownerId: ${product.ownerId}, state: ${product.state},title: ${product.title},description: ${product.description},images: ${product.imagesPath},price: ${product.price}'
-        .log();
   }
 }

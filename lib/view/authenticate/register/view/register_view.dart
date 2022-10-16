@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
-import 'package:second_hand/service/auth/auth_exceptions.dart';
-import 'package:second_hand/service/auth/bloc/app_bloc.dart';
-import 'package:second_hand/service/auth/bloc/app_event.dart';
-import 'package:second_hand/service/auth/bloc/app_state.dart';
-import 'package:second_hand/utilities/dialogs/error_dialog.dart';
+import 'package:second_hand/services/auth/auth_exceptions.dart';
+import 'package:second_hand/services/auth/bloc/app_bloc.dart';
+import 'package:second_hand/services/auth/bloc/app_event.dart';
+import 'package:second_hand/services/auth/bloc/app_state.dart';
+import 'package:second_hand/product/utilities/dialogs/error_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 import 'package:second_hand/view/authenticate/register/viewmodel/register_view_model.dart';
 

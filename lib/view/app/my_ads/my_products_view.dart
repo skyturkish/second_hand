@@ -34,7 +34,7 @@ class MyProductsViewState extends State<MyProductsView> with TickerProviderState
 
   TabBar _myTabView() {
     return TabBar(
-      indicatorColor: const Color.fromARGB(255, 226, 223, 40),
+      indicatorColor: Theme.of(context).colorScheme.secondary,
       padding: EdgeInsets.zero,
       onTap: (int index) {},
       controller: _tabController,

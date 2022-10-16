@@ -4,23 +4,27 @@ import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/models/user.dart';
-import 'package:second_hand/service/cloud/user/user_service.dart';
+import 'package:second_hand/services/cloud/user/user_service.dart';
+import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 import 'package:second_hand/view/_product/_widgets/iconbutton/favorite_icon_button.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/user_information_listtile/user_information_listtile.dart';
 
 class ProductDetailView extends StatelessWidget {
   const ProductDetailView({super.key, required this.product});
   final Product product;
-//TODO product vdetail view'i düzelt hacım
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(),
+        extendBodyBehindAppBar: true,
         body: Column(
           children: [
             Hero(
               tag: 'image ${product.productId}',
               child: SizedBox(
+                // TODO https://pub.dev/packages/palette_generator bununla baskın rengi alıp arkamaya mı verrisin
+                // arkaya grimsi bir şey mi atarsın onun kararını sen ver. ve safeAredan çıkart istersen pageviewbuilderı
                 height: context.dynamicHeight(0.33),
                 width: context.dynamicWidth(0.90),
                 child: PageView.builder(
@@ -29,6 +33,7 @@ class ProductDetailView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Image.network(
                       product.imagesPath[index],
+                      fit: BoxFit.contain,
                     );
                   },
                 ),
@@ -36,30 +41,29 @@ class ProductDetailView extends StatelessWidget {
             ),
             Padding(
               padding: context.paddingHorizontalSmall + context.paddingOnlyTopSmall,
-              child: Row(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Row(
                     children: [
                       Text(
                         '${product.price} TL',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5!
-                            .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+                        style: Theme.of(context).textTheme.headline5!.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: context.colors.onBackground,
+                            ),
                       ),
-                      Padding(
-                        padding: context.paddingOnlyTopSmall,
-                        child: Text(
-                          product.title,
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
+                      FavoriteIconButton(
+                        product: product,
                       ),
                     ],
                   ),
-                  FavoriteIconButton(
-                    product: product,
+                  Padding(
+                    padding: context.paddingOnlyTopSmall,
+                    child: Text(
+                      product.title,
+                    ),
                   ),
                 ],
               ),
@@ -88,13 +92,13 @@ class ProductDetailView extends StatelessWidget {
             ),
             const Divider(),
             UserInformationListtile(userId: product.ownerId),
+            const Divider(),
             FutureBuilder(
               future: UserCloudFireStoreService.instance.getUserInformationById(userId: product.ownerId),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final userInformation = snapshot.data as UserInformation;
-
-                  return ElevatedButton(
+                  return CustomElevatedButton(
                     onPressed: () {
                       NavigationService.instance.navigateToPage(
                         path: NavigationConstants.CHAT_VIEW,

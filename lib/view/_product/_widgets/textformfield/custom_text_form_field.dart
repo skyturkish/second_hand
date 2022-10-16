@@ -46,6 +46,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      minLines: 1,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       maxLines: widget.line ?? 1,
@@ -53,7 +54,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       enableSuggestions: widget.enableSuggestions ?? false,
       decoration: InputDecoration(
         counterText: widget.maxLetter == null ? null : '${widget.controller.text.length}/${widget.maxLetter}',
-        fillColor: Colors.brown.withOpacity(0.6),
         labelText: widget.labelText,
         prefixIcon: widget.prefix,
         border: OutlineInputBorder(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/service/auth/auth_service.dart';
-import 'package:second_hand/service/cloud/product/product_service.dart';
+import 'package:second_hand/services/auth/auth_service.dart';
+import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/my_ads_listtile.dart';
 
 class ProductsView extends StatefulWidget {

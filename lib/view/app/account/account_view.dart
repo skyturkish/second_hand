@@ -3,13 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/extensions/string_extension.dart';
-import 'package:second_hand/core/init/navigation/navigation_route.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
-import 'package:second_hand/view/app/account/accountdetail/account_detail_view.dart';
-import 'package:second_hand/view/app/account/help_support/help_support_view.dart';
-import 'package:second_hand/view/app/account/settings/settings_view.dart';
 
 class AccountView extends StatefulWidget {
   const AccountView({super.key});
@@ -23,24 +19,31 @@ class AccountViewState extends State<AccountView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(),
         body: Column(
           children: [
             const UserInformationCard(),
-            OptionListTile(
-              titleText: 'Settings',
-              leadingIcon: Icons.settings,
-              subTitleText: 'Privacy and logout',
-              onTap: () {
-                NavigationService.instance.navigateToPage(path: NavigationConstants.SETTINGS_VIEW);
-              },
+            Padding(
+              padding: context.paddingOnlyTopSmall,
+              child: OptionListTile(
+                titleText: 'Settings',
+                leadingIcon: Icons.settings,
+                subTitleText: 'Privacy and logout',
+                onTap: () {
+                  NavigationService.instance.navigateToPage(path: NavigationConstants.SETTINGS_VIEW);
+                },
+              ),
             ),
-            OptionListTile(
-              titleText: 'Help & Support',
-              leadingIcon: Icons.support_agent_outlined,
-              subTitleText: 'Help center and legal terms',
-              onTap: () {
-                NavigationService.instance.navigateToPage(path: NavigationConstants.HELP_AND_SUPPORT);
-              },
+            Padding(
+              padding: context.paddingOnlyTopSmall,
+              child: OptionListTile(
+                titleText: 'Help & Support',
+                leadingIcon: Icons.support_agent_outlined,
+                subTitleText: 'Help center and legal terms',
+                onTap: () {
+                  NavigationService.instance.navigateToPage(path: NavigationConstants.HELP_AND_SUPPORT);
+                },
+              ),
             ),
           ],
         ),
@@ -69,6 +72,7 @@ class _UserInformationCardState extends State<UserInformationCard> {
         );
       },
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           CircleAvatar(
             radius: 60,
@@ -93,7 +97,7 @@ class _UserInformationCardState extends State<UserInformationCard> {
                   'Show profile and edit',
                   style: Theme.of(context).textTheme.headline6!.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Colors.red,
+                        color: Theme.of(context).colorScheme.error,
                         decoration: TextDecoration.underline,
                       ),
                 ),
@@ -101,6 +105,7 @@ class _UserInformationCardState extends State<UserInformationCard> {
               ],
             ),
           ),
+          const SizedBox.shrink(),
         ],
       ),
     );

@@ -44,8 +44,8 @@ class _RefreshsableProductGridViewState extends State<RefreshsableProductGridVie
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 5,
+                crossAxisSpacing: 3,
+                mainAxisSpacing: 3,
               ),
               itemCount: products!.length,
               itemBuilder: (BuildContext context, int index) {

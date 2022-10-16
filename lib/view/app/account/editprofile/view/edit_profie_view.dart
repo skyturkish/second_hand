@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
-import 'package:second_hand/utilities/crop_image/crop_image.dart';
-import 'package:second_hand/view/_product/_widgets/divider/general_divider.dart';
+import 'package:second_hand/product/utilities/crop_image/crop_image.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 import 'package:second_hand/view/app/account/editprofile/view/select_image_bottom_sheet.dart';
 import 'package:second_hand/view/app/account/editprofile/viewmodel/edit_profie_view_model.dart';
@@ -31,7 +30,12 @@ class _EditProfileViewState extends EditProfileViewModel {
             onPressed: () async {
               await saveChangesAndLeaveEditView();
             },
-            child: const Text('Save'),
+            child: Text(
+              'Save',
+              style: Theme.of(context).textTheme.headline6!.copyWith(
+                    color: context.colors.secondary,
+                  ),
+            ),
           ),
         ],
       ),
@@ -74,7 +78,6 @@ class _EditProfileViewState extends EditProfileViewModel {
             ),
             CustomTextFormField(controller: emailController, labelText: 'E-mail adress'),
             const Text('E posta adresini doğruladın, artık güvenli bir satıcı ve alıcısın bla bla bla '),
-            const NormalDivider(),
             Padding(
               padding: context.paddingOnlyTopSmall,
               child: Text(

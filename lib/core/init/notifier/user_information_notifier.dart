@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/models/user.dart';
-import 'package:second_hand/service/auth/auth_service.dart';
-import 'package:second_hand/service/cloud/user/user_service.dart';
-import 'package:second_hand/service/storage/storage-service.dart';
-import 'package:second_hand/utilities/compress/compress_image.dart';
+import 'package:second_hand/services/auth/auth_service.dart';
+import 'package:second_hand/services/cloud/user/user_service.dart';
+import 'package:second_hand/services/storage/storage-service.dart';
+import 'package:second_hand/product/utilities/compress/compress_image.dart';
 
 class UserInformationNotifier extends ChangeNotifier {
   UserInformation get userInformation => _userInformation;

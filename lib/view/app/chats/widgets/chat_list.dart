@@ -6,8 +6,8 @@ import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/message.dart';
 import 'package:second_hand/models/user.dart';
-import 'package:second_hand/service/auth/auth_service.dart';
-import 'package:second_hand/service/chat/chat_service.dart';
+import 'package:second_hand/services/auth/auth_service.dart';
+import 'package:second_hand/services/chat/chat_service.dart';
 import 'package:second_hand/view/app/chats/widgets/my_message_card.dart';
 import 'package:second_hand/view/app/chats/widgets/sender_message_card.dart';
 

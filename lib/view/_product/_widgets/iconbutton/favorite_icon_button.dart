@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 
@@ -29,8 +30,8 @@ class _FavoriteIconButtonState extends State<FavoriteIconButton> {
         setState(() {});
       },
       icon: Icon(
-        Icons.favorite,
-        color: isFavorite ? Colors.red : Colors.black,
+        isFavorite ? Icons.favorite : Icons.favorite_border,
+        color: isFavorite ? context.colors.error : context.colors.surface,
       ),
     );
   }

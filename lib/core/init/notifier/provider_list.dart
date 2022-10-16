@@ -5,8 +5,8 @@ import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
 import 'package:second_hand/core/init/notifier/theme_notifer.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
-import 'package:second_hand/service/auth/bloc/app_bloc.dart';
-import 'package:second_hand/service/auth/firebase_auth_provider.dart';
+import 'package:second_hand/services/auth/bloc/app_bloc.dart';
+import 'package:second_hand/services/auth/firebase_auth_provider.dart';
 
 class ApplicationProvider {
   static ApplicationProvider? _instance;
@@ -20,8 +20,8 @@ class ApplicationProvider {
   ApplicationProvider._init();
 
   List<SingleChildWidget> singleItems = [
-    ChangeNotifierProvider<ProductNotifier>(
-      create: (context) => ProductNotifier(),
+    ChangeNotifierProvider<SaleProductNotifier>(
+      create: (context) => SaleProductNotifier(),
     ),
     ChangeNotifierProvider<UserInformationNotifier>(
       create: (context) => UserInformationNotifier(),

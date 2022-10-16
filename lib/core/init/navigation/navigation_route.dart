@@ -12,6 +12,7 @@ import 'package:second_hand/view/app/addproduct/setprice/view/set_a_price_view.d
 import 'package:second_hand/view/app/addproduct/uploadphotos/upload_photos.dart';
 import 'package:second_hand/view/app/chats/subview/chat_view.dart';
 import 'package:second_hand/view/app/home/subview/product_detail_view.dart';
+import 'package:second_hand/view/error_view.dart';
 
 class NavigationRoute {
   static final NavigationRoute _instance = NavigationRoute._init();
@@ -63,10 +64,8 @@ class NavigationRoute {
         return createRoute(widget: ChatView(productId: productId, contactUserId: contactUserId));
 
       default:
-        return MaterialPageRoute(
-          builder: (context) => const Scaffold(
-            body: Text('page is not found'),
-          ), //
+        return normalNavigate(
+          widget: const ErrorView(),
         );
     }
   }
@@ -79,7 +78,7 @@ MaterialPageRoute normalNavigate({required Widget widget, String? pageName}) {
   );
 }
 
-// PageRouteBuilder has more properites  than MaterialPageBuilder
+// PageRouteBuilder has more properites than MaterialPageBuilder
 PageRouteBuilder createRoute({required Widget widget}) {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => widget,

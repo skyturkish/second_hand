@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/view/app/home/subview/product_detail_view.dart';
@@ -42,9 +43,9 @@ class FavoriteListTileProduct extends StatelessWidget {
                 productId: product.productId,
               );
         },
-        icon: const Icon(
+        icon: Icon(
           Icons.favorite,
-          color: Colors.red,
+          color: context.colors.error,
         ),
       ),
     );

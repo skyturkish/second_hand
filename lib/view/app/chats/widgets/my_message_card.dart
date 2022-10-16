@@ -19,7 +19,7 @@ class MyMessageCard extends StatelessWidget {
         child: Card(
           elevation: 1,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          color: Colors.grey, // değiştir bunu
+          color: context.colors.background, // değiştir bunu
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5), // contexten oku
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -31,9 +31,9 @@ class MyMessageCard extends StatelessWidget {
                     padding: context.paddingOnlyLeftSmallX,
                     child: Text(
                       date,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 13,
-                        color: Colors.white60,
+                        color: context.colors.onPrimary,
                       ),
                     ),
                   ),
@@ -42,7 +42,7 @@ class MyMessageCard extends StatelessWidget {
                     child: Icon(
                       isSeen ? Icons.done_all : Icons.done,
                       size: 20,
-                      color: isSeen ? Colors.blue : Colors.white60,
+                      color: isSeen ? Colors.blue : context.colors.onPrimary,
                     ),
                   ),
                 ],

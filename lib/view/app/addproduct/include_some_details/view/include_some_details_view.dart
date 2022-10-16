@@ -4,6 +4,7 @@ import 'package:second_hand/core/constants/navigation/navigation_constants.dart'
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
+import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 import 'package:second_hand/view/app/addproduct/include_some_details/view/enum_product_state.dart';
 import 'package:second_hand/view/app/addproduct/include_some_details/viewmodel/include_some_details_view_model.dart';
@@ -82,10 +83,11 @@ class _TitleTextFormFieldState extends State<TitleTextFormField> {
     return Padding(
       padding: context.paddingOnlyTopSmall,
       child: CustomTextFormField(
+        line: 2,
         controller: widget.titleController,
         labelText: 'title',
         prefix: const Icon(Icons.title_outlined),
-        maxLetter: 50,
+        maxLetter: 75,
         onChanged: (text) {
           setState(() {});
         },
@@ -116,7 +118,7 @@ class _DescriptionTextFormFieldState extends State<DescriptionTextFormField> {
         controller: widget.describeController,
         labelText: 'description',
         prefix: const Icon(Icons.description),
-        maxLetter: 150,
+        maxLetter: 300,
         onChanged: (text) {
           setState(() {});
         },
@@ -141,10 +143,10 @@ class NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return CustomElevatedButton(
       onPressed: () {
         if (formKey.currentState!.validate()) {
-          context.read<ProductNotifier>().updateProduct(
+          context.read<SaleProductNotifier>().updateProduct(
                 title: titleController.text,
                 state: stateController.text,
                 description: describeController.text,

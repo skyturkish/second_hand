@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
-import 'package:second_hand/service/auth/auth_service.dart';
+import 'package:second_hand/services/auth/auth_service.dart';
+import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 import 'package:second_hand/view/app/addproduct/setprice/viewmodel/set_a_price_view_model.dart';
 
@@ -28,6 +29,7 @@ class SetAPriceViewState extends SetAPriceViewModel {
           child: Column(
             children: [
               PriceTextFormField(priceController: priceController),
+              const Spacer(),
               ReleaseProductButton(formKey: formKey, priceController: priceController),
             ],
           ),
@@ -78,15 +80,15 @@ class ReleaseProductButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return CustomElevatedButton(
       onPressed: () {
         if (_formKey.currentState!.validate()) {
-          context.read<ProductNotifier>().updateProduct(
+          context.read<SaleProductNotifier>().updateProduct(
                 price: int.parse(_priceController.text),
                 ownerId: AuthService.firebase().currentUser!.id,
               );
 
-          context.read<ProductNotifier>().releaseProduct();
+          context.read<SaleProductNotifier>().releaseProduct();
 
           // burası hiç güzel olmadı ama
           // 3 geri çıkıp tekrar blocğun içine giriyoruz çünk,

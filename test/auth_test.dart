@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:second_hand/service/auth/auth_provider.dart';
-import 'package:second_hand/service/auth/auth_user.dart';
+import 'package:second_hand/services/auth/auth_provider.dart';
+import 'package:second_hand/services/auth/auth_user.dart';
 
 class MockAuthProvider implements AuthProvider {
   @override

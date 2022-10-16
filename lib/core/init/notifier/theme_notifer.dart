@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:second_hand/core/constants/enums/app_theme_enum.dart';
 import 'package:second_hand/core/constants/enums/locale_keys_enum.dart';
 import 'package:second_hand/core/init/cache/locale_manager.dart';
-import 'package:second_hand/core/init/theme/dark_theme.dart';
+import 'package:second_hand/core/init/theme/spacedark/space_dark_light_theme.dart';
+import 'package:second_hand/core/init/theme/light/ligh_theme.dart';
 
 class ThemeNotifier extends ChangeNotifier {
-  ThemeData _currentTheme = AvailableThemes.instance.darkTheme;
+  ThemeData _currentTheme = SpaceDarkTheme.instance.theme!;
 
   AppThemes _currenThemeEnum = AppThemes.DARK;
 
@@ -20,7 +21,7 @@ class ThemeNotifier extends ChangeNotifier {
   }
 
   void setDarkTheme() {
-    _currentTheme = AvailableThemes.instance.darkTheme;
+    _currentTheme = SpaceDarkTheme.instance.theme!;
 
     _currenThemeEnum = AppThemes.DARK;
 
@@ -28,7 +29,7 @@ class ThemeNotifier extends ChangeNotifier {
   }
 
   void setLightTheme() {
-    _currentTheme = AvailableThemes.instance.lighTheme;
+    _currentTheme = LightTheme.instance.theme!;
 
     _currenThemeEnum = AppThemes.LIGHT;
 

@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
-import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/product_notifer.dart';
-import 'package:second_hand/view/_product/_widgets/divider/general_divider.dart';
+import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';
+import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 
 class UploadPhotosView extends StatefulWidget {
   const UploadPhotosView({super.key});
@@ -30,12 +31,12 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('UploadPhotos'),
+        title: const Text('Upload Photos'),
       ),
       body: Column(
         children: [
           const PageViewImages(),
-          const NormalDivider(),
+          Divider(thickness: 6, height: context.dynamicHeight(0.03)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -43,8 +44,13 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
               TakeAPictureButton(picker: _picker),
             ],
           ),
+          Divider(thickness: 6, height: context.dynamicHeight(0.03)),
           const ImagesGridView(),
-          const NextButton(),
+          const Spacer(),
+          Padding(
+            padding: context.paddingOnlyBottomMedium,
+            child: const NextButton(),
+          ),
         ],
       ),
     );
@@ -58,17 +64,18 @@ class PageViewImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final saleProductProvider = context.watch<SaleProductNotifier>();
     return SizedBox(
-      height: context.dynamicHeight(0.33),
+      height: context.dynamicHeight(0.34),
       width: context.dynamicWidth(0.90),
-      child: context.watch<ProductNotifier>().images.isEmpty
-          ? Image.asset(ImageConstants.instance.addPhoto)
+      child: saleProductProvider.images.isEmpty
+          ? const LottieAnimationView(animation: LottieAnimation.uploadPhotos)
           : PageView.builder(
-              itemCount: context.watch<ProductNotifier>().images.length,
+              itemCount: saleProductProvider.images.length,
               itemBuilder: (context, index) {
                 return Image.file(
-                  context.read<ProductNotifier>().images[index],
-                  fit: BoxFit.cover,
+                  context.read<SaleProductNotifier>().images[index],
+                  fit: BoxFit.contain,
                 );
               },
             ),
@@ -87,7 +94,9 @@ class FromGalleryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return CustomElevatedButton(
+      dynamicWidth: 0.4,
+      borderRadius: 10,
       onPressed: () async {
         final images = await _picker.pickMultiImage(
           maxHeight: 1024,
@@ -99,7 +108,7 @@ class FromGalleryButton extends StatelessWidget {
             xFile.path,
           ),
         );
-        context.read<ProductNotifier>().addImages(
+        context.read<SaleProductNotifier>().addImages(
               newImages: fileimages.toList(),
             );
       },
@@ -119,14 +128,18 @@ class TakeAPictureButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return CustomElevatedButton(
+      dynamicWidth: 0.4,
+      borderRadius: 10,
       onPressed: () async {
         final xFileimage = await _picker.pickImage(
           source: ImageSource.camera,
           imageQuality: 50,
         );
+
         final fileImage = File(xFileimage!.path);
-        context.read<ProductNotifier>().addImages(
+
+        context.read<SaleProductNotifier>().addImages(
           newImages: [fileImage],
         );
       },
@@ -142,41 +155,36 @@ class ImagesGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SizedBox(
-        height: context.dynamicHeight(0.40),
-        width: context.dynamicWidth(0.90),
-        child: GridView.builder(
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
-          ),
-          itemCount: context.watch<ProductNotifier>().images.length,
-          itemBuilder: (BuildContext context, int index) {
-            return InkWell(
-              onTap: () {
-                context.read<ProductNotifier>().removeImage(index: index);
-              },
-              child: Stack(
-                alignment: AlignmentDirectional.topEnd,
-                children: [
-                  Image.file(
-                    context.read<ProductNotifier>().images[index],
-                    height: 200,
-                    width: 100,
-                    fit: BoxFit.cover,
-                  ),
-                  const Icon(
-                    Icons.remove_circle,
-                    color: Colors.red,
-                  ),
-                ],
-              ),
-            );
-          },
+    return SizedBox(
+      height: context.dynamicHeight(0.34),
+      width: context.dynamicWidth(0.90),
+      child: GridView.builder(
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
         ),
+        itemCount: context.watch<SaleProductNotifier>().images.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Stack(
+            alignment: AlignmentDirectional.topEnd,
+            children: [
+              Center(
+                child: Image.file(
+                  context.read<SaleProductNotifier>().images[index],
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  context.read<SaleProductNotifier>().removeImage(index: index);
+                },
+                icon: const Icon(Icons.remove_circle),
+                color: context.colors.error,
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -189,9 +197,9 @@ class NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return CustomElevatedButton(
       onPressed: () {
-        if (context.read<ProductNotifier>().images.isEmpty) {
+        if (context.read<SaleProductNotifier>().images.isEmpty) {
           const snackBar = SnackBar(
             content: Text('You must select at least one photo'),
           );

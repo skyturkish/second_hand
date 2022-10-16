@@ -5,7 +5,7 @@ import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/chat_contact.dart';
-import 'package:second_hand/service/chat/chat_service.dart';
+import 'package:second_hand/services/chat/chat_service.dart';
 import 'package:second_hand/view/_product/enums/chat_contact_type_enum.dart';
 
 class ChatContactInformation extends StatelessWidget {
@@ -65,10 +65,10 @@ class ChatContactInformation extends StatelessWidget {
                                 padding: context.paddingOnlyBottomSmall / 3,
                                 child: Text(
                                   chatContactData.receiverName,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6!
-                                      .copyWith(fontWeight: FontWeight.bold, color: Colors.black54),
+                                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        color: context.colors.onBackground,
+                                      ),
                                 ),
                               ),
                               Padding(

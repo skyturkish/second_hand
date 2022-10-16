@@ -47,7 +47,7 @@ class LoadingScreen {
       builder: (context) {
         return Material(
           // It provides a transparent view on the back.
-          color: Colors.black.withAlpha(150),
+          color: context.colors.onBackground,
           child: Center(
             child: Container(
               constraints: BoxConstraints(
@@ -57,7 +57,7 @@ class LoadingScreen {
                 minWidth: size.width * 0.8,
               ),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: context.colors.onPrimary,
                 borderRadius: BorderRadiusDirectional.circular(10),
               ),
               child: Padding(
@@ -76,7 +76,7 @@ class LoadingScreen {
                         child: Text(
                           text,
                           style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                                color: Colors.black,
+                                color: context.colors.onBackground,
                                 fontWeight: FontWeight.bold,
                               ),
                         ),
