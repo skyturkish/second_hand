@@ -18,6 +18,7 @@ class UploadPhotosView extends StatefulWidget {
   State<UploadPhotosView> createState() => UploadPhotosViewState();
 }
 
+// tamamm bunun photo muhabbetini, kaç sayfa olduğunu vesaire viewmodel ile yap, en son kaydettiğinde git genel provider'a kayıt et
 class UploadPhotosViewState extends State<UploadPhotosView> {
   late final ImagePicker _picker;
   @override
@@ -152,7 +153,7 @@ class ImagesGridView extends StatelessWidget {
   const ImagesGridView({
     Key? key,
   }) : super(key: key);
-
+  // tüm kareyi kaplaması için şunu sağdan ve soldan çekiştirsene , Positional.fill'in içine - değer vererek
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -206,7 +207,8 @@ class NextButton extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
           return;
         }
-        NavigationService.instance.navigateToPage(path: NavigationConstants.SET_A_PRICE);
+        NavigationService.instance
+            .navigateToPage(path: NavigationConstants.SET_A_PRICE);
       },
       child: const Text(
         'Next',

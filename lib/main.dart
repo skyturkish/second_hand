@@ -30,6 +30,7 @@ void main() async {
       providers: [
         ...ApplicationProvider.instance.dependItems,
         ...ApplicationProvider.instance.singleItems,
+        ...ApplicationProvider.instance.uiChangesItems,
       ],
       child: EasyLocalization(
         supportedLocales: LanguageManager.instance.supportedLocales,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:second_hand/core/extensions/context_extension.dart';
-import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
+import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
+import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/view/app/home/subview/product_detail_view.dart';
+import 'package:second_hand/view/_product/_widgets/iconbutton/favorite_icon_button.dart';
 
 @immutable
 class FavoriteListTileProduct extends StatelessWidget {
@@ -18,15 +17,9 @@ class FavoriteListTileProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return ProductDetailView(
-                product: product,
-              );
-            },
-          ),
+        NavigationService.instance.navigateToPage(
+          path: NavigationConstants.PRODUCT_DETAIL,
+          data: product,
         );
       },
       title: Text(product.title),
@@ -37,16 +30,8 @@ class FavoriteListTileProduct extends StatelessWidget {
           product.imagesPath[0],
         ),
       ),
-      trailing: IconButton(
-        onPressed: () {
-          context.read<UserInformationNotifier>().removeFavoriteProduct(
-                productId: product.productId,
-              );
-        },
-        icon: Icon(
-          Icons.favorite,
-          color: context.colors.error,
-        ),
+      trailing: FavoriteIconButton(
+        product: product,
       ),
     );
   }

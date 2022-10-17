@@ -7,6 +7,7 @@ import 'package:second_hand/core/init/notifier/theme_notifer.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/services/auth/bloc/app_bloc.dart';
 import 'package:second_hand/services/auth/firebase_auth_provider.dart';
+import 'package:second_hand/view/app/home/subview/product_detail_view_model.dart';
 
 class ApplicationProvider {
   static ApplicationProvider? _instance;
@@ -40,5 +41,9 @@ class ApplicationProvider {
       create: (context) => ThemeNotifier(),
     ),
   ];
-  List<SingleChildWidget> uiChangesItems = [];
+  List<SingleChildWidget> uiChangesItems = [
+    ChangeNotifierProvider<ProductDetailViewModelNotifier>(
+      create: (context) => ProductDetailViewModelNotifier(),
+    ),
+  ];
 }
