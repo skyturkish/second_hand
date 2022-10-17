@@ -44,7 +44,7 @@ class ProductCard extends StatelessWidget {
                 Padding(
                   padding: context.paddingOnlyTopSmall,
                   child: Text(
-                    product.price.toString(),
+                    "${product.price}" " \$",
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 ),

@@ -15,7 +15,11 @@ class SpaceDarkTheme implements AppTheme {
         floatingActionButtonTheme:
             const FloatingActionButtonThemeData(backgroundColor: Color.fromARGB(133, 83, 92, 145), elevation: 10),
         appBarTheme: const AppBarTheme(
-          titleTextStyle: TextStyle(color: Colors.white),
+          titleTextStyle: TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+            fontWeight: FontWeight.w300,
+          ),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),

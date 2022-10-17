@@ -31,7 +31,7 @@ class UserInformationNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  // notifier neden servisin görevini yapıyor ???
+  // notifier neden servisin görevini yapıyor ? ben de onu soruyorumn işte
   Future<void> saveProfilePhotoToFirebaseIfPhotoChange({required BuildContext context}) async {
     // check photo is changed or not
     if (userPhoto == null) return;
@@ -47,7 +47,9 @@ class UserInformationNotifier extends ChangeNotifier {
 
     // local
     context.read<UserInformationNotifier>().changeProfilePhotoPathLocal(newPhotoPath: profilePhotoDownloadURL);
+
     // firebase, we don't use await because, we don't have to wait to update, we won't take user information again
+
     UserCloudFireStoreService.instance.updateUserProfilePhotoPath(
         userId: AuthService.firebase().currentUser!.id, profilePhotoURL: profilePhotoDownloadURL);
   }

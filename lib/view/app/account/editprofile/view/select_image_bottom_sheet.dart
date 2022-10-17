@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-extension SelectImageFrom on SelecPhotoBottomSheet {
+extension SelectImageFrom on SelectPhotoFromBottomSheet {
   // --> from https://vbacik-10.medium.com/season-two-flutter-short-but-golds-8cff8f4b0b29
   Future<T?> show<T>(BuildContext context) {
     return showModalBottomSheet<T>(context: context, builder: (context) => this);
@@ -10,8 +10,8 @@ extension SelectImageFrom on SelecPhotoBottomSheet {
 }
 
 @immutable
-class SelecPhotoBottomSheet extends StatelessWidget {
-  SelecPhotoBottomSheet({Key? key}) : super(key: key);
+class SelectPhotoFromBottomSheet extends StatelessWidget {
+  SelectPhotoFromBottomSheet({Key? key}) : super(key: key);
   late final File? photo;
   final ImagePicker _picker = ImagePicker();
 

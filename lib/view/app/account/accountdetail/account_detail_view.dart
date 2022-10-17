@@ -97,7 +97,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
             padding: context.paddingOnlyTopSmall,
             child: Text(
               (isLocalUser ? localUser : widget.user).aboutYou,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
           const Divider(

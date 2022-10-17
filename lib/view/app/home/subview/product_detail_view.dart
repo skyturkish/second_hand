@@ -95,14 +95,16 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                        '${widget.product.price} TL',
+                        '${widget.product.price}' ' \$',
                         style: Theme.of(context).textTheme.headline5!.copyWith(
                               fontWeight: FontWeight.bold,
                               color: context.colors.onBackground,
                             ),
                       ),
+                      const SizedBox.shrink(),
                       FavoriteIconButton(
                         product: widget.product,
                       ),
@@ -112,6 +114,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                     padding: context.paddingOnlyTopSmall,
                     child: Text(
                       widget.product.title,
+                      style: Theme.of(context).textTheme.headline6,
                     ),
                   ),
                 ],
@@ -120,23 +123,26 @@ class _ProductDetailViewState extends State<ProductDetailView> {
             const Divider(),
             Padding(
               padding: context.paddingHorizontalSmall,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: context.paddingOnlyTopSmall,
-                    child: Text(
-                      'Description',
-                      style: Theme.of(context).textTheme.headline6,
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: context.paddingOnlyTopSmall,
+                      child: Text(
+                        'Description',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: context.paddingOnlyTopSmall,
-                    child: Text(
-                      widget.product.description,
+                    Padding(
+                      padding: context.paddingOnlyTopSmall,
+                      child: Text(
+                        widget.product.description,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             const Divider(),

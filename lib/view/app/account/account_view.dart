@@ -24,7 +24,7 @@ class AccountViewState extends State<AccountView> {
           children: [
             const UserInformationCard(),
             Padding(
-              padding: context.paddingOnlyTopSmall,
+              padding: context.paddingOnlyTopSmall / 2,
               child: OptionListTile(
                 titleText: 'Settings',
                 leadingIcon: Icons.settings,
@@ -35,7 +35,7 @@ class AccountViewState extends State<AccountView> {
               ),
             ),
             Padding(
-              padding: context.paddingOnlyTopSmall,
+              padding: context.paddingOnlyTopSmall / 2,
               child: OptionListTile(
                 titleText: 'Help & Support',
                 leadingIcon: Icons.support_agent_outlined,

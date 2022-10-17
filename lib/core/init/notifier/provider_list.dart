@@ -42,6 +42,7 @@ class ApplicationProvider {
     ),
   ];
   List<SingleChildWidget> uiChangesItems = [
+    // product detail view, indicator
     ChangeNotifierProvider<ProductDetailViewModelNotifier>(
       create: (context) => ProductDetailViewModelNotifier(),
     ),
