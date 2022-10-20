@@ -34,7 +34,7 @@ class _BottomChatFieldState extends State<BottomChatField> {
           Expanded(
             child: TextFormField(
               controller: messageController,
-              decoration: const InputDecoration(hintText: 'buraya yaz'),
+              decoration: const InputDecoration(hintText: 'write here!'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return "you can't send empty message";

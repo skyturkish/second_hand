@@ -47,9 +47,9 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                     width: context.dynamicWidth(0.90),
                     child: PageView.builder(
                       allowImplicitScrolling: true,
-                      itemCount: widget.product.imagesPath.length,
+                      itemCount: widget.product.imagesUrl.length,
                       itemBuilder: (context, index) {
-                        final productImage = widget.product.imagesPath[index];
+                        final productImage = widget.product.imagesUrl[index];
                         return Image.network(
                           productImage,
                           fit: BoxFit.contain,
@@ -72,7 +72,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                       child: ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemCount: widget.product.imagesPath.length,
+                        itemCount: widget.product.imagesUrl.length,
                         itemBuilder: (context, index) {
                           return CircleImageCount(
                             isSelected: context.watch<ProductDetailViewModelNotifier>().currentPageIndex == index,
@@ -82,7 +82,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                     ),
                     Text(
                       '${context.watch<ProductDetailViewModelNotifier>().currentPageIndex + 1}'
-                      '/ ${widget.product.imagesPath.length}',
+                      '/ ${widget.product.imagesUrl.length}',
                     )
                   ],
                 )

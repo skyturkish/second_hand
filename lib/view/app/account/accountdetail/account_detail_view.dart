@@ -105,7 +105,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
             thickness: 2,
           ),
           isLocalUser
-              ? const Text('data')
+              ? const Text('')
               : Expanded(
                   child: RefreshsableProductGridView(
                     getProducts: ProductCloudFireStoreService.instance.getAllBelongProducts,

@@ -27,7 +27,7 @@ class FavoriteListTileProduct extends StatelessWidget {
       leading: CircleAvatar(
         radius: 30,
         backgroundImage: NetworkImage(
-          product.imagesPath[0],
+          product.imagesUrl[0],
         ),
       ),
       trailing: FavoriteIconButton(

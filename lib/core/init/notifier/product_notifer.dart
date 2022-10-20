@@ -27,10 +27,10 @@ class SaleProductNotifier extends ChangeNotifier {
   Product product = Product(
     productId: const Uuid().v4(),
     ownerId: '',
-    state: '',
+    condition: '',
     title: '',
     description: '',
-    imagesPath: [],
+    imagesUrl: [],
     price: 1,
   );
 
@@ -40,17 +40,17 @@ class SaleProductNotifier extends ChangeNotifier {
     String? state,
     String? title,
     String? description,
-    List<String>? imagesPath,
+    List<String>? imagesUrl,
     int? price,
     String? documentId,
   }) {
     product = Product(
       productId: productId ?? product.productId,
       ownerId: ownerId ?? product.ownerId,
-      state: state ?? product.state,
+      condition: state ?? product.condition,
       title: title ?? product.title,
       description: description ?? product.description,
-      imagesPath: imagesPath ?? product.imagesPath,
+      imagesUrl: imagesUrl ?? product.imagesUrl,
       price: price ?? product.price,
       documentId: documentId ?? product.documentId,
     );
@@ -60,10 +60,10 @@ class SaleProductNotifier extends ChangeNotifier {
     product = Product(
       productId: const Uuid().v4(),
       ownerId: '',
-      state: '',
+      condition: '',
       title: '',
       description: '',
-      imagesPath: [],
+      imagesUrl: [],
       price: 1,
     );
     images = [];

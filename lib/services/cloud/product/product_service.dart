@@ -38,7 +38,7 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
 
       final downloadURL = await taskSnapShot.ref.getDownloadURL();
 
-      product.imagesPath.add(downloadURL);
+      product.imagesUrl.add(downloadURL);
     }
     await _collection.doc().set(
           product.toMap(),
@@ -75,7 +75,7 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
       await doc.reference.delete();
       final data = Product.fromMap(doc.data());
 
-      for (final image in data.imagesPath) {
+      for (final image in data.imagesUrl) {
         StorageService.instance.deleteProductPhoto(
           path: image,
         );
@@ -91,7 +91,7 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
       await doc.reference.delete();
       final data = Product.fromMap(doc.data());
 
-      for (final image in data.imagesPath) {
+      for (final image in data.imagesUrl) {
         StorageService.instance.deleteProductPhoto(
           path: image,
         );

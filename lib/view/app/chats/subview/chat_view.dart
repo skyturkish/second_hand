@@ -46,7 +46,7 @@ class _ChatViewState extends State<ChatView> {
               children: [
                 Expanded(
                   child: ChatListView(
-                    productImage: product!.imagesPath.first,
+                    productImage: product!.imagesUrl.first,
                     productId: product!.productId,
                     receiverUserInformation: contactUserInformation!,
                   ),

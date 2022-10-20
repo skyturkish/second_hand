@@ -36,7 +36,7 @@ class ProductCard extends StatelessWidget {
                     child: Hero(
                       tag: 'image ${product.productId}',
                       child: ShowCachedImageOrFromNetwork(
-                        networkUrl: product.imagesPath.first,
+                        networkUrl: product.imagesUrl.first,
                       ),
                     ),
                   ),

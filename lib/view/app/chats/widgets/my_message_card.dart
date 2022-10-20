@@ -22,6 +22,7 @@ class MyMessageCard extends StatelessWidget {
           color: context.colors.background, // değiştir bunu
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5), // contexten oku
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Flexible(child: Text('    $message')),

@@ -25,7 +25,7 @@ class SpaceDarkTheme implements AppTheme {
         ),
         colorScheme: ColorScheme(
           brightness: Brightness.dark,
-          primary: const Color.fromARGB(134, 66, 75, 123),
+          primary: const Color.fromARGB(133, 94, 106, 175),
           onPrimary: Colors.white,
           secondary: const Color.fromARGB(133, 83, 92, 145),
           onSecondary: Colors.black,

@@ -45,7 +45,7 @@ class RegisterViewState extends RegisterViewModel {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Enter your email and password to see your notes!'),
+                  const Text('Enter your email and password to sell and buy products'),
                   EmailTextFormField(emailController: emailController),
                   PasswordTextFormField(passwordController: passwordController),
                   Center(

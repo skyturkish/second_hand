@@ -172,7 +172,7 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
       senderUserInformation: senderUserInformation,
       receiverUserInformation: receiverUserInformation,
       lastMessage: text,
-      productImageURL: product.imagesPath.first,
+      productImageURL: product.imagesUrl.first,
       productName: product.title,
       productId: product.productId,
       timeSent: timeSent,

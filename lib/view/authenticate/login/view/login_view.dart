@@ -43,7 +43,7 @@ class _LoginViewState extends LoginViewmodel {
               child: Column(
                 children: [
                   const Text(
-                    'Please log in to your account in order to interact with and create notes and talk friends',
+                    'Please log in to your account to sell and buy products',
                   ),
                   EmailTextFormField(emailController: emailController),
                   PasswordTextFormField(passwordController: passwordController),

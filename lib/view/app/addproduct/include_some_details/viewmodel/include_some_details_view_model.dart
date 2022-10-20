@@ -16,7 +16,7 @@ abstract class IncludeSomeDetailsViewModel extends State<IncludeSomeDetailsView>
   @override
   void initState() {
     final productInformation = context.read<SaleProductNotifier>().product;
-    stateController = TextEditingController(text: productInformation.state);
+    stateController = TextEditingController(text: productInformation.condition);
     titleController = TextEditingController(text: productInformation.title);
     describeController = TextEditingController(text: productInformation.description);
     super.initState();

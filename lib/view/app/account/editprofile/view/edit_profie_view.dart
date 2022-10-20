@@ -106,7 +106,7 @@ class _EditProfileViewState extends State<EditProfileView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Simple Informations',
+              'Informations',
               style: Theme.of(context).textTheme.headline5!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -125,17 +125,13 @@ class _EditProfileViewState extends State<EditProfileView> {
             ),
             WriteAboutYouTextFormField(aboutYouController: aboutYouController),
             Padding(
-              padding: context.paddingOnlyTopSmall,
-              child: Text(
-                'Communication İnformation',
-                style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.bold),
-              ),
-            ),
-            Padding(
               padding: context.paddingOnlyTopSmall + context.paddingOnlyBottomSmall,
               child: IgnorePointer(child: CustomTextFormField(controller: emailController, labelText: 'E-mail adress')),
             ),
-            const Text('E posta adresini doğruladın, artık güvenli bir satıcı ve alıcısın bla bla bla '),
+            const Text(
+              'You are a verified user. Buyers will take this into account. ',
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),

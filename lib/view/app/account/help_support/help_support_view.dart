@@ -35,7 +35,7 @@ class HelpAndSupportView extends StatelessWidget {
           ),
           OptionListTile(
             titleText: 'Version',
-            subTitleText: 'bana okulda 0 0 7 derler',
+            subTitleText: '1.01.215',
             onTap: () {
               // kendim yazacam
             },

@@ -3,11 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Product {
   String productId;
   String ownerId;
-  String state;
+  String condition;
   String title;
   String description;
   List<String>
-      imagesPath; // bu da path değil, URL olması lazım internetten çekiyoruz// TODO en son yamada bunu düzeltirsin
+      imagesUrl; // bu da path değil, URL olması lazım internetten çekiyoruz// TODO en son yamada bunu düzeltirsin
   int price;
   String documentId;
   // TODO final String location
@@ -15,22 +15,22 @@ class Product {
   Product({
     required this.productId,
     required this.ownerId,
-    required this.state,
+    required this.condition,
     required this.title,
     required this.description,
     required this.price,
     this.documentId = '',
-    this.imagesPath = const [],
+    this.imagesUrl = const [],
   });
 
   Product.fromSnapShot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
       : documentId = snapshot.id,
         productId = snapshot.data()['productId'] as String,
         ownerId = snapshot.data()['ownerId'] as String,
-        state = snapshot.data()['state'] as String,
+        condition = snapshot.data()['condition'] as String,
         title = snapshot.data()['title'] as String,
         description = snapshot.data()['description'] as String,
-        imagesPath = List<String>.from(snapshot.data()['imagesPath']),
+        imagesUrl = List<String>.from(snapshot.data()['imagesUrl']),
         price = snapshot.data()['price'] as int;
 
   Map<String, dynamic> toMap() {
@@ -41,10 +41,10 @@ class Product {
     result
       ..addAll({'productId': productId})
       ..addAll({'ownerId': ownerId})
-      ..addAll({'state': state})
+      ..addAll({'condition': condition})
       ..addAll({'title': title})
       ..addAll({'description': description})
-      ..addAll({'imagesPath': imagesPath})
+      ..addAll({'imagesUrl': imagesUrl})
       ..addAll({'price': price})
       ..addAll({'documentId': documentId});
 
@@ -55,10 +55,10 @@ class Product {
     return Product(
       productId: map['productId'] ?? '',
       ownerId: map['ownerId'] ?? '',
-      state: map['state'] ?? '',
+      condition: map['condition'] ?? '',
       title: map['title'] ?? '',
       description: map['description'] ?? '',
-      imagesPath: List<String>.from(map['imagesPath']),
+      imagesUrl: List<String>.from(map['imagesUrl']),
       price: map['price']?.toInt() ?? 0,
       documentId: map['documentId'] ?? '',
     );
