@@ -7,6 +7,17 @@
 </p>
  
  
+
+## Installation
+
+Run the following commands: <will edit>
+
+```
+
+
+```
+
+    
 ## Screenshots
 ---
 Authentication
@@ -41,16 +52,6 @@ Setttings
 
 
 
-
-## Installation
-
-Run the following commands: <will edit>
-
-```
-
-
-```
-
 ## TO DO 📋 
 ---
 - [X] Linked Firebase
@@ -75,12 +76,6 @@ Run the following commands: <will edit>
   - [ ] Block option
   - [ ] Report system
 
-
-## Libraries Used
----
-
-## Packages
----
 
 ## Features
 ---
