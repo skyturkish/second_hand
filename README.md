@@ -13,8 +13,8 @@
 Run the following commands: <will edit>
 
 ```
-
-
+flutter pub get
+flutter run
 ```
 
     
