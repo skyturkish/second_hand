@@ -44,10 +44,10 @@ dependencies:
   # UI
   shimmer: ^2.0.0
   lottie: ^1.4.3
+  image_cropper: ^3.0.0
 
   equatable: ^2.0.5
   uuid: ^3.0.6
-  image_cropper: ^3.0.0
 
 dev_dependencies:
   flutter_test:
