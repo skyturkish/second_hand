@@ -23,15 +23,12 @@ Add Product
 
 Chat Contact
 
- <img src="https://user-images.githubusercontent.com/73424678/197160351-0b80b5c5-9dc5-47bf-83b4-91fa2649bdfa.jpg" width="200">
- <img src="https://user-images.githubusercontent.com/73424678/197160360-0accf760-fe8e-400c-8f69-3fe4284bc0da.jpg" width="200">
- <img src="https://user-images.githubusercontent.com/73424678/197160370-c7b5b173-6767-4980-be71-aca720310a0f.jpg" width="200">
+<img src="https://user-images.githubusercontent.com/73424678/197160351-0b80b5c5-9dc5-47bf-83b4-91fa2649bdfa.jpg" width="200"> <img src="https://user-images.githubusercontent.com/73424678/197160360-0accf760-fe8e-400c-8f69-3fe4284bc0da.jpg" width="200"> <img src="https://user-images.githubusercontent.com/73424678/197160370-c7b5b173-6767-4980-be71-aca720310a0f.jpg" width="200">
 
 
 Chats
 
-
-
+<img src="https://user-images.githubusercontent.com/73424678/197161089-1cae3b0b-3d93-40fa-b982-438915a4a015.jpg" width="200"> <img src="https://user-images.githubusercontent.com/73424678/197161091-80e4ad60-70eb-49f4-a9e8-36933708bb6d.jpg" width="200"> <img src="https://user-images.githubusercontent.com/73424678/197161093-b003518e-6177-4862-9192-e568bbc4599f.jpg" width="200"> <img src="https://user-images.githubusercontent.com/73424678/197161097-918d7690-861c-4f30-a10e-fbfbd79c243d.jpg" width="200">
 
 Account
 
@@ -40,8 +37,8 @@ Account
 
 Setttings 
 
-![help support](https://user-images.githubusercontent.com/73424678/197160736-35d4f391-b0c5-483e-822c-0ae7dd2d1117.jpg)
-![settings](https://user-images.githubusercontent.com/73424678/197160739-e2e86886-0521-44e7-ba04-ba8ea9d07951.jpg)
+<img src="https://user-images.githubusercontent.com/73424678/197160736-35d4f391-b0c5-483e-822c-0ae7dd2d1117.jpg" width="200"> <img src="https://user-images.githubusercontent.com/73424678/197160739-e2e86886-0521-44e7-ba04-ba8ea9d07951.jpg" width="200">
+
 
 
 
