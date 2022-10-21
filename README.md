@@ -17,6 +17,9 @@ Home View, Products
 
 <img src="https://user-images.githubusercontent.com/73424678/197158617-42076dd6-9e3e-4396-9e03-638ee6793b12.jpg" width="200"> <img src="https://user-images.githubusercontent.com/73424678/197158651-645ad20b-7daa-4982-a4ea-9c027ce93e18.jpg" width="200"> <img src="https://user-images.githubusercontent.com/73424678/197158656-2d056d83-4ce7-4672-96e1-a9413739733b.jpg" width="200"> <img src="https://user-images.githubusercontent.com/73424678/197158810-18a702cf-2031-4cad-a463-53f3925da19d.jpg" width="200">
 
+Account
+
+<img src="https://user-images.githubusercontent.com/73424678/197159377-1aa2b2dd-dd6d-442f-9fd3-2237bdb658d6.jpg" width="200"> <img src="https://user-images.githubusercontent.com/73424678/197159387-a4c5ab58-ac65-4a5b-a0d0-b531e8a3edcf.jpg" width="200"> <img src="https://user-images.githubusercontent.com/73424678/197159392-1638cf77-2a3b-4eaf-b01e-600fc2e683be.jpg" width="200"> <img src="https://user-images.githubusercontent.com/73424678/197159528-332486a5-b8fe-4a95-af63-509f57d2ef4e.jpg" width="200">
 
 
 
