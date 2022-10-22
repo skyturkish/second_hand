@@ -4,7 +4,6 @@ import 'package:second_hand/models/product.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:uuid/uuid.dart';
 
-// bunun adı ürünü sattığını daha fazla belli eden bir şey olmalı
 class SaleProductNotifier extends ChangeNotifier {
   SaleProductNotifier();
 

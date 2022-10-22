@@ -6,8 +6,7 @@ class Product {
   String condition;
   String title;
   String description;
-  List<String>
-      imagesUrl; // bu da path değil, URL olması lazım internetten çekiyoruz// TODO en son yamada bunu düzeltirsin
+  List<String> imagesUrl;
   int price;
   String documentId;
   // TODO final String location

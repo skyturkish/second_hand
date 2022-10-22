@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:second_hand/core/init/notifier/product_notifer.dart';
+import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 import 'package:second_hand/view/app/addproduct/include_some_details/view/enum_product_state.dart';
 import 'package:second_hand/view/app/addproduct/include_some_details/view/include_some_details_view.dart';
 

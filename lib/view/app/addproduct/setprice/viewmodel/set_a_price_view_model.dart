@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:second_hand/core/init/notifier/product_notifer.dart';
+import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 import 'package:second_hand/view/app/addproduct/setprice/view/set_a_price_view.dart';
 
 abstract class SetAPriceViewModel extends State<SetAPriceView> {

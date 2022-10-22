@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
-import 'package:second_hand/core/init/notifier/product_notifer.dart';
+import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 import 'package:second_hand/product/utilities/dialogs/keep_same_product.dart';
 import 'package:second_hand/view/app/account/account_view.dart';
 import 'package:second_hand/view/app/chats/chats_view.dart';

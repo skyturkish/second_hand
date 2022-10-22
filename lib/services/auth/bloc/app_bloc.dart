@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:second_hand/core/init/notifier/product_notifer.dart';
+import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/services/auth/auth_provider.dart';
 import 'package:second_hand/services/auth/auth_service.dart';

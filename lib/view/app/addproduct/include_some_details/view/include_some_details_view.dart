@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
-import 'package:second_hand/core/init/notifier/product_notifer.dart';
+import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 import 'package:second_hand/view/app/addproduct/include_some_details/view/enum_product_state.dart';

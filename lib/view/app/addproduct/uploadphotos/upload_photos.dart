@@ -7,7 +7,7 @@ import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
-import 'package:second_hand/core/init/notifier/product_notifer.dart';
+import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 
@@ -207,8 +207,7 @@ class NextButton extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
           return;
         }
-        NavigationService.instance
-            .navigateToPage(path: NavigationConstants.SET_A_PRICE);
+        NavigationService.instance.navigateToPage(path: NavigationConstants.SET_A_PRICE);
       },
       child: const Text(
         'Next',
