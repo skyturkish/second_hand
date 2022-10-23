@@ -8,6 +8,7 @@ import 'package:second_hand/view/app/account/editprofile/view/edit_profie_view.d
 import 'package:second_hand/view/app/account/help_support/help_support_view.dart';
 import 'package:second_hand/view/app/account/settings/settings_view.dart';
 import 'package:second_hand/view/app/addproduct/include_some_details/view/include_some_details_view.dart';
+import 'package:second_hand/view/app/addproduct/setLocation/set_location_view.dart';
 import 'package:second_hand/view/app/addproduct/setprice/view/set_a_price_view.dart';
 import 'package:second_hand/view/app/addproduct/uploadphotos/upload_photos.dart';
 import 'package:second_hand/view/app/chats/subview/chat_view.dart';
@@ -25,11 +26,14 @@ class NavigationRoute {
       case NavigationConstants.INCLUDE_SOME_DETAILS:
         return normalNavigate(widget: const IncludeSomeDetailsView());
 
+      case NavigationConstants.UPLOAD_PHOTOS:
+        return normalNavigate(widget: const UploadPhotosView());
+
       case NavigationConstants.SET_A_PRICE:
         return normalNavigate(widget: const SetAPriceView());
 
-      case NavigationConstants.UPLOAD_PHOTOS:
-        return normalNavigate(widget: const UploadPhotosView());
+      case NavigationConstants.SET_LOCATION:
+        return normalNavigate(widget: const SetLocationView());
 
       case NavigationConstants.PRODUCT_DETAIL:
         final product = args.arguments as Product;

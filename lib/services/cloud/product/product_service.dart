@@ -112,7 +112,7 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
   @override
   Stream<Iterable<Product>> getAllFavoriteProductsStream({required String userId, required BuildContext context}) =>
       _collection
-          .where('productId', whereIn: context.watch<UserInformationNotifier>().userInformation.favoriteProducts)
+          .where('productId', whereIn: context.watch<UserInformationNotifier>().userInformation!.favoriteProducts)
           .snapshots()
           .map(
             (event) => event.docs.map(

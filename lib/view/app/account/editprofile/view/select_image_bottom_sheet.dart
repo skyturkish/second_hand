@@ -25,7 +25,9 @@ class SelectPhotoFromBottomSheet extends StatelessWidget {
           title: const Text('From camera'),
           onTap: () async {
             final XFile? selectedImage = await _picker.pickImage(source: ImageSource.camera);
-            photo = File(selectedImage!.path);
+            if (selectedImage == null) return;
+
+            photo = File(selectedImage.path);
             Navigator.pop<File?>(context, photo);
           },
         ),
@@ -34,7 +36,8 @@ class SelectPhotoFromBottomSheet extends StatelessWidget {
           title: const Text('From gallery'),
           onTap: () async {
             final XFile? selectedImage = await _picker.pickImage(source: ImageSource.gallery);
-            photo = File(selectedImage!.path);
+            if (selectedImage == null) return;
+            photo = File(selectedImage.path);
             Navigator.pop<File?>(context, photo);
           },
         ),

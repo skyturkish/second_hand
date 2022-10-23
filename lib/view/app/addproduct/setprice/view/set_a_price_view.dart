@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 import 'package:second_hand/services/auth/auth_service.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
@@ -30,7 +32,7 @@ class SetAPriceViewState extends SetAPriceViewModel {
             children: [
               PriceTextFormField(priceController: priceController),
               const Spacer(),
-              ReleaseProductButton(formKey: formKey, priceController: priceController),
+              NextButton(formKey: formKey, priceController: priceController),
             ],
           ),
         ),
@@ -66,8 +68,8 @@ class PriceTextFormField extends StatelessWidget {
   }
 }
 
-class ReleaseProductButton extends StatelessWidget {
-  const ReleaseProductButton({
+class NextButton extends StatelessWidget {
+  const NextButton({
     Key? key,
     required GlobalKey<FormState> formKey,
     required TextEditingController priceController,
@@ -88,13 +90,7 @@ class ReleaseProductButton extends StatelessWidget {
                 ownerId: AuthService.firebase().currentUser!.id,
               );
 
-          context.read<SaleProductNotifier>().releaseProduct();
-
-          // burası hiç güzel olmadı ama
-          // 3 geri çıkıp tekrar blocğun içine giriyoruz çünk,
-          Navigator.of(context).pop();
-          Navigator.of(context).pop();
-          Navigator.of(context).pop();
+          NavigationService.instance.navigateToPage(path: NavigationConstants.SET_LOCATION);
         }
       },
       child: const Text(

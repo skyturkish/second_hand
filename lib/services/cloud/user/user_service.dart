@@ -35,10 +35,19 @@ class UserCloudFireStoreService implements IUserCloudFireStoreService {
   }
 
   @override
-  Future<void> updateUserInformation({required String userId, required String name, required String aboutYou}) async {
+  Future<void> updateUserInformation({
+    required String userId,
+    required String name,
+    required String aboutYou,
+    required String profilePhotoDownloadUrl,
+  }) async {
     final userExist = await isUserExist(userId: userId);
     if (userExist == false) return;
-    await _collection.doc(userId).update({'name': name, 'aboutYou': aboutYou});
+    await _collection.doc(userId).update({
+      'name': name,
+      'aboutYou': aboutYou,
+      'profilePhotoPath': profilePhotoDownloadUrl,
+    });
   }
 
   @override

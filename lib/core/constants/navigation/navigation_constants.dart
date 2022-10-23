@@ -2,8 +2,9 @@
 
 class NavigationConstants {
   static const INCLUDE_SOME_DETAILS = '/include-some-details';
-  static const SET_A_PRICE = '/include-some-details/set-a-price';
-  static const UPLOAD_PHOTOS = '/include-some-details/set-a-price/upload-images';
+  static const UPLOAD_PHOTOS = '/include-some-details/upload-images';
+  static const SET_A_PRICE = '/include-some-details/upload-images/set-a-price';
+  static const SET_LOCATION = '/include-some-details/upload-images/set-a-price/set-location';
   static const ACCOUNT_DETAIL = '/account-detail';
   static const EDIT_PROFILE = '/edit-profile';
   static const PRODUCT_DETAIL = '/product-detail';

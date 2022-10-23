@@ -8,8 +8,10 @@ import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/services/auth/auth_service.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
+import 'package:second_hand/services/cloud/user/user_service.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 import 'package:second_hand/view/_product/_widgets/grid_view/refreshable_product_grid_view.dart';
+import 'package:second_hand/view/app/account/editprofile/viewmodel/edit_profile_notifier.dart';
 
 class AccountDetailView extends StatefulWidget {
   const AccountDetailView({super.key, required this.user});
@@ -24,7 +26,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
 
   @override
   void initState() {
-    isLocalUser = widget.user.userId == context.read<UserInformationNotifier>().userInformation.userId;
+    isLocalUser = widget.user.userId == context.read<UserInformationNotifier>().userInformation!.userId;
     super.initState();
   }
 
@@ -46,7 +48,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
                 child: CircleAvatar(
                   radius: 60,
                   backgroundImage: NetworkImage(
-                    widget.user.profilePhotoPath,
+                    (isLocalUser ? localUser : widget.user)!.profilePhotoPath,
                   ),
                 ),
               ),
@@ -56,12 +58,12 @@ class _AccountDetailViewState extends State<AccountDetailView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       FollowInformationColumn(
-                        count: (isLocalUser ? localUser : widget.user).followers.length,
+                        count: (isLocalUser ? localUser : widget.user)!.followers.length,
                         countName: 'Follower',
                         userInformation: widget.user,
                       ),
                       FollowInformationColumn(
-                        count: (isLocalUser ? localUser : widget.user).following.length,
+                        count: (isLocalUser ? localUser : widget.user)!.following.length,
                         countName: 'Following',
                         userInformation: widget.user,
                       ),
@@ -72,6 +74,12 @@ class _AccountDetailViewState extends State<AccountDetailView> {
                           dynamicWidth: 0.42,
                           borderRadius: 30,
                           onPressed: () {
+                            final user = context.read<UserInformationNotifier>().userInformation!;
+
+                            context
+                                .read<EditProfileNotifier>()
+                                .setEditProfileInformations(setName: user.name, setAboutYou: user.aboutYou);
+
                             NavigationService.instance.navigateToPage(
                               path: NavigationConstants.EDIT_PROFILE,
                             );
@@ -87,7 +95,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
           Padding(
             padding: context.paddingOnlyTopSmall,
             child: Text(
-              (isLocalUser ? localUser : widget.user).name.overFlowString(limit: 24),
+              (isLocalUser ? localUser : widget.user)!.name.overFlowString(limit: 24),
               style: Theme.of(context).textTheme.headline5!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -96,7 +104,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
           Padding(
             padding: context.paddingOnlyTopSmall,
             child: Text(
-              (isLocalUser ? localUser : widget.user).aboutYou,
+              (isLocalUser ? localUser : widget.user)!.aboutYou,
               style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
@@ -165,21 +173,30 @@ class FollowButtonView extends StatefulWidget {
 }
 
 class _FollowButtonViewState extends State<FollowButtonView> {
-  void breakFollow() {
-    context.read<UserInformationNotifier>().breakFollowUserBothFirebaseAndLocal(
-        userIdWhichOneWillFollow: widget.user.userId, followerId: AuthService.firebase().currentUser!.id);
+  void breakFollow() async {
+    context.read<UserInformationNotifier>().breakFollowUserLocal(userIdWhichOneWillFollow: widget.user.userId);
+
+    await UserCloudFireStoreService.instance.breakFollowUser(
+      userIdWhichOneWillFollow: widget.user.userId,
+      followerId: AuthService.firebase().currentUser!.id,
+    );
     setState(() {});
   }
 
-  void follow() {
-    context.read<UserInformationNotifier>().followUserBothFirebaseAndLocal(
-        userIdWhichOneWillFollow: widget.user.userId, followerId: AuthService.firebase().currentUser!.id);
+  void follow() async {
+    context.read<UserInformationNotifier>().followUserLocal(userIdWhichOneWillFollow: widget.user.userId);
+
+    await UserCloudFireStoreService.instance.followUser(
+      userIdWhichOneWillFollow: widget.user.userId,
+      followerId: AuthService.firebase().currentUser!.id,
+    );
+
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    bool isFollow = context.watch<UserInformationNotifier>().userInformation.following.contains(widget.user.userId);
+    bool isFollow = context.watch<UserInformationNotifier>().userInformation!.following.contains(widget.user.userId);
     return CustomElevatedButton(
       dynamicWidth: 0.3,
       onPressed: isFollow ? breakFollow : follow,

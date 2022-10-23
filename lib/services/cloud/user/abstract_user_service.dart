@@ -4,9 +4,15 @@ abstract class IUserCloudFireStoreService {
   Future<void> createUserIfNotExist({required String userId, String? name}); // Create
   Future<UserInformation?> getUserInformationById({required String userId}); // Read
   Future<void> updateUserInformation(
-      {required String userId, required String name, required String aboutYou}); // Update
+      {required String userId,
+      required String name,
+      required String aboutYou,
+      required String profilePhotoDownloadUrl}); // Update
   Future<void> deleteUserById({required String userId}); // Delete
-  Future<void> updateUserProfilePhotoPath({required String userId, required String profilePhotoURL}); // Update
+  Future<void> updateUserProfilePhotoPath({
+    required String userId,
+    required String profilePhotoURL,
+  }); // Update
   Future<bool> isUserExist({required String userId}); // Check
   Future<void> addProductToFavorites({required String userId, required String productId}); // Update
   Future<void> removeProductToFavorites({required String userId, required String productId}); // Update

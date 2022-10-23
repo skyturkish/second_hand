@@ -1,135 +1,93 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
 import 'package:second_hand/models/user.dart';
-import 'package:second_hand/services/auth/auth_service.dart';
 import 'package:second_hand/services/cloud/user/user_service.dart';
-import 'package:second_hand/services/storage/storage-service.dart';
-import 'package:second_hand/product/utilities/compress/compress_image.dart';
 
 class UserInformationNotifier extends ChangeNotifier {
-  UserInformation get userInformation => _userInformation;
+  UserInformation? get userInformation => _userInformation;
 
-  File? userPhoto;
+  UserInformation? _userInformation;
 
-  UserInformation _userInformation = UserInformation(
-    userId: '',
-    name: '',
-  );
+  void updateUserInformation({
+    String? userId,
+    String? name,
+    String? profilePhotoPath,
+    String? phoneNumber,
+    String? aboutYou,
+    List<String>? myProducts,
+    List<String>? favoriteProducts,
+    List<String>? following,
+    List<String>? followers,
+  }) {
+    if (_userInformation == null) return;
 
-  void changeProfilePhotoPathLocal({required String newPhotoPath}) {
-    _userInformation.profilePhotoPath = newPhotoPath;
-    notifyListeners();
-  }
-
-  void clearLocalPhoto() {
-    userPhoto = null;
-  }
-
-  void changeProfilePhotoLocal({required File? image}) {
-    userPhoto = image;
-    notifyListeners();
-  }
-
-  // notifier neden servisin görevini yapıyor ? ben de onu soruyorumn işte
-  Future<void> saveProfilePhotoToFirebaseIfPhotoChange({required BuildContext context}) async {
-    // check photo is changed or not
-    if (userPhoto == null) return;
-    // compressed Image help to https://pub.dev/packages/flutter_native_image
-    final compressedFile = await ImageCompress.instance.compressFile(userPhoto!);
-    // We upload photo to firebase then take download URl to save to local and firebase
-    final taskSnapshot = await StorageService.instance.uploadUserPhoto(
-      file: compressedFile,
-      userId: AuthService.firebase().currentUser!.id,
+    _userInformation = _userInformation!.copyWith(
+      userId: userId,
+      name: name,
+      profilePhotoPath: profilePhotoPath,
+      phoneNumber: phoneNumber,
+      aboutYou: aboutYou,
+      myProducts: myProducts,
+      favoriteProducts: favoriteProducts,
+      following: following,
+      followers: followers,
     );
-
-    final profilePhotoDownloadURL = await taskSnapshot.ref.getDownloadURL();
-
-    // local
-    context.read<UserInformationNotifier>().changeProfilePhotoPathLocal(newPhotoPath: profilePhotoDownloadURL);
-
-    // firebase, we don't use await because, we don't have to wait to update, we won't take user information again
-
-    UserCloudFireStoreService.instance.updateUserProfilePhotoPath(
-        userId: AuthService.firebase().currentUser!.id, profilePhotoURL: profilePhotoDownloadURL);
+    notifyListeners();
   }
 
+  void clearUserInformationsLocal() {
+    updateUserInformation(
+      userId: 'default user name',
+      name: 'default name',
+      profilePhotoPath: 'default profile photo path',
+      phoneNumber: 'default phone number',
+      aboutYou: 'Hi I am here new',
+      myProducts: [],
+      favoriteProducts: [],
+      following: [],
+      followers: [],
+    );
+    notifyListeners();
+  }
+
+  // bu da buraya ait değil, set fonksiyonu gibi bir şey olması lazım değil mi
   Future<void> getUserInformationById({required String userId}) async {
     final userInformationFromFirebase = await UserCloudFireStoreService.instance.getUserInformationById(userId: userId);
-    _userInformation = userInformationFromFirebase!;
-    _userInformation.favoriteProducts.add('value'); // we added this because, when list is empty firebase throw crash ?
+    if (userInformationFromFirebase == null) return;
+    _userInformation = userInformationFromFirebase;
+    // we added this because, when list is empty firebase throw crash ?
+    _userInformation!.favoriteProducts.add('value');
 
     notifyListeners();
   }
 
-  // add favorite product to local and firebase
-  Future<void> addFavoriteProduct({required String productId}) async {
-    _userInformation.favoriteProducts.add(productId);
-    notifyListeners();
-    await UserCloudFireStoreService.instance.addProductToFavorites(
-      userId: _userInformation.userId,
-      productId: productId,
-    );
+  bool isProductInFavoriteProducts({required String productId}) {
+    if (_userInformation == null) return false;
+
+    return userInformation!.favoriteProducts.contains(productId);
   }
 
-  // remove favorite product to local and firebase
-  Future<void> removeFavoriteProduct({required String productId}) async {
-    _userInformation.favoriteProducts.remove(productId);
-    notifyListeners();
-    await UserCloudFireStoreService.instance.removeProductToFavorites(
-      userId: _userInformation.userId,
-      productId: productId,
-    );
-  }
-
-  // we are checking whether there are any changes to the edit page.
-  bool anyChanges({required String name, required String aboutYou}) {
-    return !(name == _userInformation.name && aboutYou == _userInformation.aboutYou) || userPhoto != null;
-  }
-
-  // change user Information locally
-  Future<void> changeUserInformationLocal({required String name, required String aboutYou}) async {
-    _userInformation
-      ..name = name
-      ..aboutYou = aboutYou;
+  // şöyle yapabiliriz eğerki oradaki uzunluk halen buradaki uzunlukla aynı ise tekrardan servise çıkmayız ?
+  Future<void> addFavoriteProductLocal({required String productId}) async {
+    if (_userInformation == null) return;
+    _userInformation!.favoriteProducts.add(productId);
     notifyListeners();
   }
 
-  // clear user Information locally, when logout or delete account
-  void clearUserInformationsLocal() {
-    _userInformation = UserInformation(
-      userId: '',
-      name: '',
-    );
+  Future<void> removeFavoriteProductLocal({required String productId}) async {
+    if (_userInformation == null) return;
+    _userInformation!.favoriteProducts.remove(productId);
+    notifyListeners();
   }
 
-  // follow user
-  Future<void> followUserBothFirebaseAndLocal({
-    required String userIdWhichOneWillFollow,
-    required String followerId,
-  }) async {
-    _userInformation.following.add(userIdWhichOneWillFollow);
-
+  Future<void> followUserLocal({required String userIdWhichOneWillFollow}) async {
+    if (_userInformation == null) return;
+    _userInformation!.following.add(userIdWhichOneWillFollow);
     notifyListeners();
+  }
 
-    await UserCloudFireStoreService.instance.followUser(
-      userIdWhichOneWillFollow: userIdWhichOneWillFollow,
-      followerId: AuthService.firebase().currentUser!.id,
-    );
-  } // TODO isimlendirmeleri düzelt
-
-  // break follow user
-  Future<void> breakFollowUserBothFirebaseAndLocal({
-    required String userIdWhichOneWillFollow,
-    required String followerId,
-  }) async {
-    _userInformation.following.remove(userIdWhichOneWillFollow);
-
+  Future<void> breakFollowUserLocal({required String userIdWhichOneWillFollow}) async {
+    if (_userInformation == null) return;
+    _userInformation!.following.remove(userIdWhichOneWillFollow);
     notifyListeners();
-
-    await UserCloudFireStoreService.instance.breakFollowUser(
-      userIdWhichOneWillFollow: userIdWhichOneWillFollow,
-      followerId: AuthService.firebase().currentUser!.id,
-    );
   }
 }

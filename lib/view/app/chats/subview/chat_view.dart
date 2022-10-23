@@ -56,7 +56,7 @@ class _ChatViewState extends State<ChatView> {
                 ),
                 BottomChatField(
                   receiverUserInformation: contactUserInformation!,
-                  senderUserInformation: context.read<UserInformationNotifier>().userInformation,
+                  senderUserInformation: context.read<UserInformationNotifier>().userInformation!,
                   product: product!,
                 ),
               ],

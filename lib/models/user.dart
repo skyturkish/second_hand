@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class UserInformation {
   factory UserInformation.fromMap(Map<String, dynamic> map) {
     return UserInformation(
@@ -17,8 +15,8 @@ class UserInformation {
   // following
   // follower
   UserInformation({
-    required this.userId,
-    required this.name,
+    this.userId = 'default user Id',
+    this.name = 'defaul',
     this.profilePhotoPath =
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI64fYIV7EMYQ8XUYQ4_QrZM0YxY353PQI1yNYuaXbb_YbTJGwozRe6ru-RIsWTjGE8ZQ&usqp=CAU',
     this.phoneNumber = '',
@@ -29,10 +27,10 @@ class UserInformation {
     this.followers = const [],
   });
   final String userId;
-  String name;
-  String profilePhotoPath; // path değilde URL olması lazım bunun, direkt internetten çekiyoruz çünkü
-  String phoneNumber;
-  String aboutYou;
+  final String name;
+  final String profilePhotoPath; // path değilde URL olması lazım bunun, direkt internetten çekiyoruz çünkü
+  final String phoneNumber;
+  final String aboutYou;
   final List<String> myProducts;
   final List<String> favoriteProducts;
   final List<String> following;
@@ -55,5 +53,27 @@ class UserInformation {
     return result;
   }
 
-  String toJson() => json.encode(toMap());
+  UserInformation copyWith({
+    String? userId,
+    String? name,
+    String? profilePhotoPath,
+    String? phoneNumber,
+    String? aboutYou,
+    List<String>? myProducts,
+    List<String>? favoriteProducts,
+    List<String>? following,
+    List<String>? followers,
+  }) {
+    return UserInformation(
+      userId: userId ?? this.userId,
+      name: name ?? this.name,
+      profilePhotoPath: profilePhotoPath ?? this.profilePhotoPath,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      aboutYou: aboutYou ?? this.aboutYou,
+      myProducts: myProducts ?? this.myProducts,
+      favoriteProducts: favoriteProducts ?? this.favoriteProducts,
+      following: following ?? this.following,
+      followers: followers ?? this.followers,
+    );
+  }
 }

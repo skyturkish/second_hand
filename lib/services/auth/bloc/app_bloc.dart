@@ -202,6 +202,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<AppEventLogOut>(
       (event, emit) async {
         // DELETE USER'S INFORMATIONS LOCALE
+
         event.context.read<UserInformationNotifier>().clearUserInformationsLocal();
         // DELETE PRODUCT ADD INFORMATIONS LOCALE
         event.context.read<SaleProductNotifier>().clearProduct();

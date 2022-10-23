@@ -77,7 +77,7 @@ class _UserInformationCardState extends State<UserInformationCard> {
           CircleAvatar(
             radius: 60,
             backgroundImage: NetworkImage(
-              context.watch<UserInformationNotifier>().userInformation.profilePhotoPath,
+              context.watch<UserInformationNotifier>().userInformation!.profilePhotoPath,
             ),
           ),
           Padding(
@@ -87,7 +87,7 @@ class _UserInformationCardState extends State<UserInformationCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  context.watch<UserInformationNotifier>().userInformation.name.overFlowString(),
+                  context.watch<UserInformationNotifier>().userInformation!.name.overFlowString(),
                   style: Theme.of(context).textTheme.headline5!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

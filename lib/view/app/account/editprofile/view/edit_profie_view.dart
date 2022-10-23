@@ -10,6 +10,7 @@ import 'package:second_hand/services/auth/auth_service.dart';
 import 'package:second_hand/services/cloud/user/user_service.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 import 'package:second_hand/view/app/account/editprofile/view/select_image_bottom_sheet.dart';
+import 'package:second_hand/view/app/account/editprofile/viewmodel/edit_profile_notifier.dart';
 
 class EditProfileView extends StatefulWidget {
   const EditProfileView({super.key});
@@ -18,14 +19,12 @@ class EditProfileView extends StatefulWidget {
 }
 
 class _EditProfileViewState extends State<EditProfileView> {
-  // TEXT CONTROLLER
   late final TextEditingController nameController;
   late final TextEditingController aboutYouController;
-  // emaile dokundurtmayacaksın gösterme ??
   late final TextEditingController emailController;
   @override
   void initState() {
-    final user = context.read<UserInformationNotifier>().userInformation;
+    final user = context.read<UserInformationNotifier>().userInformation!;
     nameController = TextEditingController(text: user.name);
     aboutYouController = TextEditingController(text: user.aboutYou);
     emailController = TextEditingController(text: AuthService.firebase().currentUser!.email);
@@ -41,17 +40,16 @@ class _EditProfileViewState extends State<EditProfileView> {
   }
 
   Future<void> leaveEditView() async {
-    final isAnyChanges = context.read<UserInformationNotifier>().anyChanges(
-          name: nameController.text,
-          aboutYou: aboutYouController.text,
+    final isAnyChanges = context.read<EditProfileNotifier>().anyChanges(
+          newName: nameController.text,
+          newAboutYou: aboutYouController.text,
         );
-
     if (isAnyChanges) {
       final isWillIgnore = await ignoreChanges(context);
       if (!isWillIgnore) return;
     }
 
-    context.read<UserInformationNotifier>().clearLocalPhoto();
+    context.read<EditProfileNotifier>().clearEditProfileInformations();
     Navigator.of(context).pop();
   }
 
@@ -59,20 +57,27 @@ class _EditProfileViewState extends State<EditProfileView> {
   Future<void> saveChangesAndLeaveEditView() async {
     LoadingScreen().show(context: context, text: 'wait');
 
-    await context.read<UserInformationNotifier>().changeUserInformationLocal(
-          name: nameController.text,
-          aboutYou: aboutYouController.text,
+    final profilePhotoDownloadUrl = await context.read<EditProfileNotifier>().changeFirebasePhotoIfPhotoChange(
+          userId: AuthService.firebase().currentUser!.id,
         );
-    // hem firebase bekliyoruz hem şunu bu düzeltirlebilir
-    await context.read<UserInformationNotifier>().saveProfilePhotoToFirebaseIfPhotoChange(context: context);
+    if (profilePhotoDownloadUrl == null) {
+      LoadingScreen().hide();
+    } else {
+      context.read<UserInformationNotifier>().updateUserInformation(
+            name: nameController.text,
+            aboutYou: aboutYouController.text,
+            profilePhotoPath: profilePhotoDownloadUrl,
+          );
 
-    LoadingScreen().hide();
+      LoadingScreen().hide();
 
-    await UserCloudFireStoreService.instance.updateUserInformation(
-      userId: AuthService.firebase().currentUser!.id,
-      name: nameController.text,
-      aboutYou: aboutYouController.text,
-    ); // TODO ikisinden birini ortak alalım ya da almayalım
+      await UserCloudFireStoreService.instance.updateUserInformation(
+        userId: AuthService.firebase().currentUser!.id,
+        name: nameController.text,
+        profilePhotoDownloadUrl: profilePhotoDownloadUrl,
+        aboutYou: aboutYouController.text,
+      );
+    }
 
     Navigator.pop(context);
   }
@@ -126,7 +131,9 @@ class _EditProfileViewState extends State<EditProfileView> {
             WriteAboutYouTextFormField(aboutYouController: aboutYouController),
             Padding(
               padding: context.paddingOnlyTopSmall + context.paddingOnlyBottomSmall,
-              child: IgnorePointer(child: CustomTextFormField(controller: emailController, labelText: 'E-mail adress')),
+              child: IgnorePointer(
+                child: CustomTextFormField(controller: emailController, labelText: 'E-mail adress'),
+              ),
             ),
             const Text(
               'You are a verified user. Buyers will take this into account. ',
@@ -225,7 +232,7 @@ class _EditProfilePhotoViewState extends State<EditProfilePhotoView> {
 
         appearPhoto = croppedPhoto;
 
-        context.read<UserInformationNotifier>().changeProfilePhotoLocal(image: appearPhoto);
+        context.read<EditProfileNotifier>().setEditProfileInformations(image: appearPhoto);
 
         setState(() {});
       },
@@ -234,7 +241,7 @@ class _EditProfilePhotoViewState extends State<EditProfilePhotoView> {
         backgroundImage: appearPhoto != null
             ? FileImage(appearPhoto!) as ImageProvider
             : NetworkImage(
-                context.read<UserInformationNotifier>().userInformation.profilePhotoPath,
+                context.read<UserInformationNotifier>().userInformation!.profilePhotoPath,
               ),
         child: Icon(
           Icons.camera_alt_outlined,

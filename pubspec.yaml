@@ -35,8 +35,8 @@ dependencies:
 
   # Storage
   firebase_storage: ^10.3.9
-  flutter_native_image: ^0.0.6 # COMPRESS
-  image_picker: ^0.8.5+3 # bunun önüne katman yazmadın, yaz o halde
+  flutter_native_image: ^0.0.6 # COMPRESS IMAGE
+  image_picker: ^0.8.5+3
 
   # very_good
   very_good_analysis: ^3.1.0
@@ -46,8 +46,14 @@ dependencies:
   lottie: ^1.4.3
   image_cropper: ^3.0.0
 
-  equatable: ^2.0.5
+  # Location
+  geolocator: ^9.0.2
+  geocoding: ^2.0.5
+
+  # ID
   uuid: ^3.0.6
+
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
