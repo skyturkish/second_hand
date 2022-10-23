@@ -148,7 +148,7 @@ class NextButton extends StatelessWidget {
         if (formKey.currentState!.validate()) {
           context.read<SaleProductNotifier>().updateProduct(
                 title: titleController.text,
-                state: stateController.text,
+                condition: stateController.text,
                 description: describeController.text,
               );
           NavigationService.instance.navigateToPage(path: NavigationConstants.UPLOAD_PHOTOS);

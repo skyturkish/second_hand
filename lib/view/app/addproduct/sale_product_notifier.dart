@@ -36,7 +36,7 @@ class SaleProductNotifier extends ChangeNotifier {
   void updateProduct({
     String? productId,
     String? ownerId,
-    String? state,
+    String? condition,
     String? title,
     String? description,
     List<String>? imagesUrl,
@@ -46,7 +46,7 @@ class SaleProductNotifier extends ChangeNotifier {
     product = Product(
       productId: productId ?? product.productId,
       ownerId: ownerId ?? product.ownerId,
-      condition: state ?? product.condition,
+      condition: condition ?? product.condition,
       title: title ?? product.title,
       description: description ?? product.description,
       imagesUrl: imagesUrl ?? product.imagesUrl,

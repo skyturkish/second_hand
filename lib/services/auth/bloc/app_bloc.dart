@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/services/auth/auth_provider.dart';
 import 'package:second_hand/services/auth/auth_service.dart';
@@ -9,6 +8,7 @@ import 'package:second_hand/services/auth/bloc/app_state.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/services/cloud/user/user_service.dart';
 import 'package:second_hand/services/storage/storage-service.dart';
+import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc(AuthProvider provider) : super(const AppStateUninitialized(isLoading: true)) {

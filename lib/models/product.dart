@@ -2,24 +2,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Product {
   String productId;
+  String documentId;
   String ownerId;
   String condition;
   String title;
   String description;
   List<String> imagesUrl;
   int price;
-  String documentId;
-  // TODO final String location
+  String productSellState;
 
   Product({
     required this.productId,
+    this.documentId = '',
     required this.ownerId,
     required this.condition,
     required this.title,
     required this.description,
-    required this.price,
-    this.documentId = '',
     this.imagesUrl = const [],
+    required this.price,
+    this.productSellState = 'sell',
   });
 
   Product.fromSnapShot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
@@ -30,22 +31,21 @@ class Product {
         title = snapshot.data()['title'] as String,
         description = snapshot.data()['description'] as String,
         imagesUrl = List<String>.from(snapshot.data()['imagesUrl']),
-        price = snapshot.data()['price'] as int;
+        price = snapshot.data()['price'] as int,
+        productSellState = snapshot.data()['productSellState'] as String;
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
-    // cascade consecutive method
-    // https://dart.dev/guides/language/language-tour#cascade-notation
-    result
-      ..addAll({'productId': productId})
-      ..addAll({'ownerId': ownerId})
-      ..addAll({'condition': condition})
-      ..addAll({'title': title})
-      ..addAll({'description': description})
-      ..addAll({'imagesUrl': imagesUrl})
-      ..addAll({'price': price})
-      ..addAll({'documentId': documentId});
+    result.addAll({'productId': productId});
+    result.addAll({'documentId': documentId});
+    result.addAll({'ownerId': ownerId});
+    result.addAll({'condition': condition});
+    result.addAll({'title': title});
+    result.addAll({'description': description});
+    result.addAll({'imagesUrl': imagesUrl});
+    result.addAll({'price': price});
+    result.addAll({'productSellState': productSellState});
 
     return result;
   }
@@ -53,13 +53,14 @@ class Product {
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
       productId: map['productId'] ?? '',
+      documentId: map['documentId'] ?? '',
       ownerId: map['ownerId'] ?? '',
       condition: map['condition'] ?? '',
       title: map['title'] ?? '',
       description: map['description'] ?? '',
       imagesUrl: List<String>.from(map['imagesUrl']),
       price: map['price']?.toInt() ?? 0,
-      documentId: map['documentId'] ?? '',
+      productSellState: map['productSellState'] ?? '',
     );
   }
 }

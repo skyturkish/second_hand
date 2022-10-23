@@ -81,13 +81,11 @@ class MockAuthProvider implements AuthProvider {
 
   @override
   Future<void> sendPasswordReset({required String toEmail}) async {
-    // TODO: implement sendPasswordReset
     throw UnimplementedError();
   }
 
   @override
   Future<UserCredential> signInWithGoogle() {
-    // TODO: implement signInWithGoogle
     throw UnimplementedError();
   }
 }
