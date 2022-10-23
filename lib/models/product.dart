@@ -10,6 +10,8 @@ class Product {
   List<String> imagesUrl;
   int price;
   String productSellState;
+  String locateCountry;
+  String locateCity;
 
   Product({
     required this.productId,
@@ -21,6 +23,8 @@ class Product {
     this.imagesUrl = const [],
     required this.price,
     this.productSellState = 'sell',
+    this.locateCountry = 'locateCountry Unknown',
+    this.locateCity = 'locateCity Unknown',
   });
 
   Product.fromSnapShot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
@@ -32,7 +36,9 @@ class Product {
         description = snapshot.data()['description'] as String,
         imagesUrl = List<String>.from(snapshot.data()['imagesUrl']),
         price = snapshot.data()['price'] as int,
-        productSellState = snapshot.data()['productSellState'] as String;
+        productSellState = snapshot.data()['productSellState'] as String,
+        locateCountry = snapshot.data()['locateCountry'] as String,
+        locateCity = snapshot.data()['locateCity'] as String;
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
@@ -46,6 +52,8 @@ class Product {
     result.addAll({'imagesUrl': imagesUrl});
     result.addAll({'price': price});
     result.addAll({'productSellState': productSellState});
+    result.addAll({'locateCountry': locateCountry});
+    result.addAll({'locateCity': locateCity});
 
     return result;
   }
@@ -61,6 +69,8 @@ class Product {
       imagesUrl: List<String>.from(map['imagesUrl']),
       price: map['price']?.toInt() ?? 0,
       productSellState: map['productSellState'] ?? '',
+      locateCountry: map['locateCountry'] ?? '',
+      locateCity: map['locateCity'] ?? '',
     );
   }
 }

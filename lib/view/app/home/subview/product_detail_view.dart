@@ -4,8 +4,6 @@ import 'package:second_hand/core/constants/navigation/navigation_constants.dart'
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/models/user.dart';
-import 'package:second_hand/services/cloud/user/user_service.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 import 'package:second_hand/view/_product/_widgets/iconbutton/favorite_icon_button.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/user_information_listtile/user_information_listtile.dart';
@@ -148,24 +146,17 @@ class _ProductDetailViewState extends State<ProductDetailView> {
             const Divider(),
             UserInformationListtile(userId: widget.product.ownerId),
             const Divider(),
-            FutureBuilder(
-              future: UserCloudFireStoreService.instance.getUserInformationById(userId: widget.product.ownerId),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final userInformation = snapshot.data as UserInformation;
-                  return CustomElevatedButton(
-                    onPressed: () {
-                      NavigationService.instance.navigateToPage(
-                        path: NavigationConstants.CHAT_VIEW,
-                        data: [widget.product.productId, widget.product.ownerId],
-                      );
-                    },
-                    child: const Text('start talking'),
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
+            CustomElevatedButton(
+              onPressed: () {
+                NavigationService.instance.navigateToPage(
+                  path: NavigationConstants.CHAT_VIEW,
+                  data: [
+                    widget.product.productId,
+                    widget.product.ownerId,
+                  ],
+                );
               },
+              child: const Text('start talking'),
             ),
           ],
         ),
