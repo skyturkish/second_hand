@@ -94,7 +94,7 @@ class NextButton extends StatelessWidget {
         }
       },
       child: const Text(
-        'Release Product',
+        'Next',
       ),
     );
   }

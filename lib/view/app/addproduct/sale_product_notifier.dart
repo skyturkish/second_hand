@@ -1,12 +1,8 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/services/cloud/product/product_service.dart';
-import 'package:uuid/uuid.dart';
 
 class SaleProductNotifier extends ChangeNotifier {
-  SaleProductNotifier();
-
   List<File> images = [];
 
   void addImages({required List<File> newImages}) {
@@ -21,64 +17,58 @@ class SaleProductNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Product get localProduct => product;
+  Product? get localProduct => _product;
 
-  Product product = Product(
-    productId: const Uuid().v4(),
-    ownerId: '',
-    condition: '',
-    title: '',
-    description: '',
-    imagesUrl: [],
-    price: 1,
-  );
+  Product? _product;
 
   void updateProduct({
     String? productId,
+    String? documentId,
     String? ownerId,
     String? condition,
     String? title,
     String? description,
     List<String>? imagesUrl,
     int? price,
-    String? documentId,
+    String? productSellState,
+    String? locateCountry,
+    String? locateCity,
   }) {
-    product = Product(
-      productId: productId ?? product.productId,
-      ownerId: ownerId ?? product.ownerId,
-      condition: condition ?? product.condition,
-      title: title ?? product.title,
-      description: description ?? product.description,
-      imagesUrl: imagesUrl ?? product.imagesUrl,
-      price: price ?? product.price,
-      documentId: documentId ?? product.documentId,
-    );
+    if (_product == null) {
+      _product = Product(
+        productId: '',
+        ownerId: '',
+        condition: condition!,
+        title: title!,
+        description: description!,
+        price: 1,
+      );
+    } else {
+      _product = _product!.copyWith(
+        productId: productId,
+        documentId: documentId,
+        ownerId: ownerId,
+        condition: condition,
+        title: title,
+        description: description,
+        imagesUrl: imagesUrl,
+        price: price,
+        productSellState: productSellState,
+        locateCountry: locateCountry,
+        locateCity: locateCity,
+      );
+    }
+
+    notifyListeners();
   }
 
   void clearProduct() {
-    product = Product(
-      productId: const Uuid().v4(),
-      ownerId: '',
-      condition: '',
-      title: '',
-      description: '',
-      imagesUrl: [],
-      price: 1,
-    );
-    images = [];
+    _product = null;
+    notifyListeners();
   }
 
-  // If title place is not empty,  the user has not yet completed the process of selling the product.
   bool productInProcess() {
-    return product.title.isNotEmpty;
-  }
-
-  Future<void> releaseProduct() async {
-    await ProductCloudFireStoreService.instance.createProduct(
-      product: product,
-      images: images,
-    );
-
-    clearProduct();
+    if (_product == null) return false;
+    return _product!.title.isNotEmpty;
   }
 }

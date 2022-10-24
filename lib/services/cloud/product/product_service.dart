@@ -25,6 +25,7 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
 
   @override
   Future<void> createProduct({required Product product, required List<File> images}) async {
+    List<String> newUrls = [];
     for (final image in images) {
       final imageId = const Uuid().v4();
 
@@ -37,11 +38,11 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
       );
 
       final downloadURL = await taskSnapShot.ref.getDownloadURL();
-
-      product.imagesUrl.add(downloadURL);
+      newUrls.add(downloadURL);
     }
+    final sendProduct = product.copyWith(imagesUrl: newUrls);
     await _collection.doc().set(
-          product.toMap(),
+          sendProduct.toMap(),
         );
   }
 

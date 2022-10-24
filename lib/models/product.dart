@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Product {
-  String productId;
-  String documentId;
-  String ownerId;
-  String condition;
-  String title;
-  String description;
+  final String productId;
+  final String documentId;
+  final String ownerId;
+  final String condition;
+  final String title;
+  final String description;
   List<String> imagesUrl;
-  int price;
-  String productSellState;
-  String locateCountry;
-  String locateCity;
+  final int price;
+  final String productSellState;
+  final String locateCountry;
+  final String locateCity;
 
   Product({
     required this.productId,
@@ -26,6 +26,10 @@ class Product {
     this.locateCountry = 'locateCountry Unknown',
     this.locateCity = 'locateCity Unknown',
   });
+
+  void addImages({required String downloadURL}) {
+    imagesUrl.add(downloadURL);
+  }
 
   Product.fromSnapShot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
       : documentId = snapshot.id,
@@ -71,6 +75,34 @@ class Product {
       productSellState: map['productSellState'] ?? '',
       locateCountry: map['locateCountry'] ?? '',
       locateCity: map['locateCity'] ?? '',
+    );
+  }
+
+  Product copyWith({
+    String? productId,
+    String? documentId,
+    String? ownerId,
+    String? condition,
+    String? title,
+    String? description,
+    List<String>? imagesUrl,
+    int? price,
+    String? productSellState,
+    String? locateCountry,
+    String? locateCity,
+  }) {
+    return Product(
+      productId: productId ?? this.productId,
+      documentId: documentId ?? this.documentId,
+      ownerId: ownerId ?? this.ownerId,
+      condition: condition ?? this.condition,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      imagesUrl: imagesUrl ?? this.imagesUrl,
+      price: price ?? this.price,
+      productSellState: productSellState ?? this.productSellState,
+      locateCountry: locateCountry ?? this.locateCountry,
+      locateCity: locateCity ?? this.locateCity,
     );
   }
 }

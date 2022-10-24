@@ -114,9 +114,16 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             ),
           );
         } else {
-          await event.context
-              .read<UserInformationNotifier>()
-              .getUserInformationById(userId: AuthService.firebase().currentUser!.id);
+          final userInformation = await UserCloudFireStoreService.instance.getUserInformationById(
+            userId: AuthService.firebase().currentUser!.id,
+          );
+
+          if (userInformation == null) return;
+
+          event.context.read<UserInformationNotifier>().setAllUserInformation(
+                userInformation: userInformation,
+              );
+
           emit(
             AppStateLoggedIn(
               user: user,
@@ -161,9 +168,16 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             );
             await UserCloudFireStoreService.instance
                 .createUserIfNotExist(userId: AuthService.firebase().currentUser!.id);
-            await event.context
-                .read<UserInformationNotifier>()
-                .getUserInformationById(userId: AuthService.firebase().currentUser!.id);
+
+            final userInformation = await UserCloudFireStoreService.instance.getUserInformationById(
+              userId: AuthService.firebase().currentUser!.id,
+            );
+
+            if (userInformation == null) return;
+
+            event.context.read<UserInformationNotifier>().setAllUserInformation(
+                  userInformation: userInformation,
+                );
             emit(
               AppStateLoggedIn(
                 user: user,
@@ -184,10 +198,18 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<AppEventLogInWithGoogle>((event, emit) async {
       try {
         await provider.signInWithGoogle();
+
         await UserCloudFireStoreService.instance.createUserIfNotExist(userId: AuthService.firebase().currentUser!.id);
-        await event.context
-            .read<UserInformationNotifier>()
-            .getUserInformationById(userId: AuthService.firebase().currentUser!.id);
+
+        final userInformation = await UserCloudFireStoreService.instance.getUserInformationById(
+          userId: AuthService.firebase().currentUser!.id,
+        );
+
+        if (userInformation == null) return;
+
+        event.context.read<UserInformationNotifier>().setAllUserInformation(
+              userInformation: userInformation,
+            );
 
         emit(
           AppStateLoggedIn(

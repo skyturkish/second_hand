@@ -9,7 +9,9 @@ abstract class SetAPriceViewModel extends State<SetAPriceView> {
 
   @override
   void initState() {
-    priceController = TextEditingController(text: context.read<SaleProductNotifier>().localProduct.price.toString());
+    priceController = TextEditingController(
+      text: context.read<SaleProductNotifier>().localProduct?.price.toString() ?? '1',
+    );
     super.initState();
   }
 
