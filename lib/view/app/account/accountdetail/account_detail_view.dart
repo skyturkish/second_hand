@@ -5,7 +5,7 @@ import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
-import 'package:second_hand/models/user.dart';
+import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/services/auth/auth_service.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/services/cloud/user/user_service.dart';

@@ -108,13 +108,16 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
       .map((event) => event.docs.map((doc) => Product.fromSnapShot(doc)).where((product) => product.ownerId == userId));
 
   @override
-  Stream<Iterable<Product>> getAllFavoriteProductsStream({required String userId, required BuildContext context}) =>
-      _collection
-          .where('productId', whereIn: context.watch<UserInformationNotifier>().userInformation!.favoriteProducts)
-          .snapshots()
-          .map(
+  Stream<Iterable<Product>> getAllFavoriteProductsStream({required String userId, required BuildContext context}) {
+    List<String> favoriteList = context.watch<UserInformationNotifier>().userInformation!.favoriteProducts;
+    if (favoriteList.isEmpty) {
+      return const Stream<Iterable<Product>>.empty();
+    } else {
+      return _collection.where('productId', whereIn: favoriteList).snapshots().map(
             (event) => event.docs.map(
               Product.fromSnapShot, // same --> (doc) => Product.fromSnapShot(doc)
             ),
           );
+    }
+  }
 }

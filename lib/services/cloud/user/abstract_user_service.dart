@@ -1,4 +1,4 @@
-import 'package:second_hand/models/user.dart';
+import 'package:second_hand/models/user_information.dart';
 
 abstract class IUserCloudFireStoreService {
   Future<void> createUserIfNotExist({required String userId, String? name}); // Create

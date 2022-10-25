@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:second_hand/models/user.dart';
+import 'package:second_hand/models/user_information.dart';
 
 class UserInformationNotifier extends ChangeNotifier {
   UserInformation? get userInformation => _userInformation;
@@ -35,10 +35,6 @@ class UserInformationNotifier extends ChangeNotifier {
 
   void setAllUserInformation({required UserInformation userInformation}) {
     _userInformation = userInformation;
-    _userInformation!.myProducts.add('non-crash');
-    _userInformation!.favoriteProducts.add('non-crash');
-    _userInformation!.following.add('non-crash');
-    _userInformation!.followers.add('non-crash');
     notifyListeners();
   }
 
@@ -52,7 +48,6 @@ class UserInformationNotifier extends ChangeNotifier {
     return userInformation!.favoriteProducts.contains(productId);
   }
 
-  // TODO şöyle yapabiliriz eğerki oradaki uzunluk halen buradaki uzunlukla aynı ise tekrardan servise çıkmayız ?
   Future<void> addFavoriteProductLocal({required String productId}) async {
     if (_userInformation == null) return;
     _userInformation!.favoriteProducts.add(productId);

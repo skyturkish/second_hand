@@ -142,7 +142,7 @@ class FirebaseAuthProvider implements AuthProvider {
       await FirebaseAuth.instance.currentUser!.delete();
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
-        case 'auth/requires-recent-login':
+        case 'requires-recent-login':
           throw UserRequiresRecentLogin();
         default:
           throw GenericAuthException();

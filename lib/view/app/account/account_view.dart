@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:second_hand/core/constants/app/app_constants.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/extensions/string_extension.dart';
@@ -77,7 +78,8 @@ class _UserInformationCardState extends State<UserInformationCard> {
           CircleAvatar(
             radius: 60,
             backgroundImage: NetworkImage(
-              context.watch<UserInformationNotifier>().userInformation!.profilePhotoPath,
+              context.watch<UserInformationNotifier>().userInformation?.profilePhotoPath ??
+                  ApplicationConstants.DEFAULT_IMAGE,
             ),
           ),
           Padding(

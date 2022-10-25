@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:second_hand/core/extensions/string_extension.dart';
-import 'package:second_hand/models/user.dart';
+import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/services/cloud/user/abstract_user_service.dart';
 import 'package:second_hand/services/storage/storage-service.dart';
 

@@ -1,3 +1,5 @@
+import 'package:second_hand/core/constants/app/app_constants.dart';
+
 class UserInformation {
   factory UserInformation.fromMap(Map<String, dynamic> map) {
     return UserInformation(
@@ -12,13 +14,10 @@ class UserInformation {
       followers: List<String>.from(map['followers']),
     );
   }
-  // following
-  // follower
   UserInformation({
     this.userId = 'default user Id',
     this.name = 'defaul',
-    this.profilePhotoPath =
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI64fYIV7EMYQ8XUYQ4_QrZM0YxY353PQI1yNYuaXbb_YbTJGwozRe6ru-RIsWTjGE8ZQ&usqp=CAU',
+    this.profilePhotoPath = ApplicationConstants.DEFAULT_IMAGE,
     this.phoneNumber = '',
     this.aboutYou = 'Hi I am new here',
     this.myProducts = const [],

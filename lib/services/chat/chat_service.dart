@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/models/user.dart';
+import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/models/message.dart';
 import 'package:second_hand/models/chat_contact.dart';
 import 'package:second_hand/services/chat/abstract_chat_service.dart';

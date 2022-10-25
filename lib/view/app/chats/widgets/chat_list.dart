@@ -5,7 +5,7 @@ import 'package:second_hand/core/constants/navigation/navigation_constants.dart'
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/message.dart';
-import 'package:second_hand/models/user.dart';
+import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/services/auth/auth_service.dart';
 import 'package:second_hand/services/chat/chat_service.dart';
 import 'package:second_hand/view/app/chats/widgets/my_message_card.dart';

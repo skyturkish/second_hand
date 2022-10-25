@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/models/user.dart';
+import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/services/cloud/user/user_service.dart';
 import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';

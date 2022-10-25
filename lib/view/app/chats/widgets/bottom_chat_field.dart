@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/models/user.dart';
+import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/services/chat/chat_service.dart';
 
 class BottomChatField extends StatefulWidget {

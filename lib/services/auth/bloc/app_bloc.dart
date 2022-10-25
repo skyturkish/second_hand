@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/services/auth/auth_provider.dart';
@@ -223,11 +224,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     // log out
     on<AppEventLogOut>(
       (event, emit) async {
-        // DELETE USER'S INFORMATIONS LOCALE
-
-        event.context.read<UserInformationNotifier>().clearUserInformationsLocal();
-        // DELETE PRODUCT ADD INFORMATIONS LOCALE
-        event.context.read<SaleProductNotifier>().clearSaleProduct();
         try {
           await provider.logOut();
           emit(
@@ -236,6 +232,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
               isLoading: false,
             ),
           );
+          event.context.read<UserInformationNotifier>().clearUserInformationsLocal();
+
+          event.context.read<SaleProductNotifier>().clearSaleProduct();
         } on Exception catch (e) {
           emit(
             AppStateLoggedOut(
@@ -257,35 +256,28 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         );
         final userId = AuthService.firebase().currentUser!.id;
 
-        try {
-          await provider.deleteAccount();
+        FirebaseAuth.instance.currentUser!.reauthenticateWithCredential;
 
-          event.context.read<UserInformationNotifier>().clearUserInformationsLocal();
+        await provider.deleteAccount();
 
-          event.context.read<SaleProductNotifier>().clearSaleProduct();
+        event.context.read<UserInformationNotifier>().clearUserInformationsLocal();
 
-          ProductCloudFireStoreService.instance.removeAllProducts(
-            userId: userId,
-          );
-          // DELETE USER'S INFORMATIONS AT FIREBASE
-          UserCloudFireStoreService.instance.deleteUserById(
-            userId: userId,
-          );
+        event.context.read<SaleProductNotifier>().clearSaleProduct();
 
-          emit(
-            const AppStateDeletedAccount(
-              exception: null,
-              isLoading: false,
-            ),
-          );
-        } on FirebaseAuthException catch (e) {
-          emit(
-            AppStateLoggedOut(
-              exception: e,
-              isLoading: false,
-            ),
-          );
-        }
+        ProductCloudFireStoreService.instance.removeAllProducts(
+          userId: userId,
+        );
+        // DELETE USER'S INFORMATIONS AT FIREBASE
+        UserCloudFireStoreService.instance.deleteUserById(
+          userId: userId,
+        );
+
+        emit(
+          const AppStateDeletedAccount(
+            exception: null,
+            isLoading: false,
+          ),
+        );
       },
     );
   }
