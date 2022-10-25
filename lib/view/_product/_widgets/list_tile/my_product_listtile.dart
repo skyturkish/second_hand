@@ -36,9 +36,12 @@ class MyProductsListTile extends StatelessWidget {
               );
               return;
             case MyProductAction.delete:
-              await ProductCloudFireStoreService.instance.removeProduct(
+              await ProductCloudFireStoreService.instance.setProductAsRemoved(
                 product: product,
               );
+              // await ProductCloudFireStoreService.instance.removeProduct(
+              //   product: product,
+              // );
               return;
           }
         },

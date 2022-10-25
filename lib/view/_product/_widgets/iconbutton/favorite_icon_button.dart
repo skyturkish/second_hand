@@ -12,28 +12,25 @@ class FavoriteIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isFavorite = context.watch<UserInformationNotifier>().isProductInFavoriteProducts(
-          productId: product.productId,
+    final isFavorite = context.watch<UserInformationNotifier>().userInformation!.favoriteProducts.contains(
+          product.productId,
         );
     return IconButton(
-      onPressed: () {
-        isFavorite
-            ? () async {
-                context.read<UserInformationNotifier>().removeFavoriteProductLocal(productId: product.productId);
+      onPressed: () async {
+        if (!isFavorite) {
+          context.read<UserInformationNotifier>().addFavoriteProductLocal(productId: product.productId);
 
-                await UserCloudFireStoreService.instance.removeProductToFavorites(
-                  userId: AuthService.firebase().currentUser!.id,
-                  productId: product.productId,
-                );
-              }
-            : () async {
-                context.read<UserInformationNotifier>().addFavoriteProductLocal(productId: product.productId);
-
-                await UserCloudFireStoreService.instance.addProductToFavorites(
-                  userId: AuthService.firebase().currentUser!.id,
-                  productId: product.productId,
-                );
-              };
+          await UserCloudFireStoreService.instance.addProductToFavorites(
+            userId: AuthService.firebase().currentUser!.id,
+            productId: product.productId,
+          );
+        } else {
+          context.read<UserInformationNotifier>().removeFavoriteProductLocal(productId: product.productId);
+          await UserCloudFireStoreService.instance.removeProductToFavorites(
+            userId: AuthService.firebase().currentUser!.id,
+            productId: product.productId,
+          );
+        }
       },
       icon: Icon(
         isFavorite ? Icons.favorite : Icons.favorite_border,

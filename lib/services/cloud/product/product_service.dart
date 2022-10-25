@@ -56,7 +56,8 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
 
   @override
   Future<List<Product>?> getAllBelongProducts({required String userId}) async {
-    final querySnapShot = await _collection.where('ownerId', isEqualTo: userId).get();
+    final querySnapShot =
+        await _collection.where('ownerId', isEqualTo: userId).where('productSellState', isNotEqualTo: 'Removed').get();
     final products = querySnapShot.docs.map(
       (queryDocumentSnapshot) => Product.fromMap(
         queryDocumentSnapshot.data(),
@@ -73,7 +74,11 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
         queryDocumentSnapshot.data(),
       ),
     );
-    return products.toList();
+    return products.where((element) => element.productSellState != 'Removed').toList();
+  }
+
+  Future<void> setProductAsRemoved({required Product product}) async {
+    await _collection.doc(product.productId).update({'productSellState': 'Removed'});
   }
 
   // product alabiliriz
@@ -103,9 +108,10 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
   }
 
   @override
-  Stream<Iterable<Product>> getAllOwnerProductsStream({required String userId}) => _collection
-      .snapshots()
-      .map((event) => event.docs.map((doc) => Product.fromSnapShot(doc)).where((product) => product.ownerId == userId));
+  Stream<Iterable<Product>> getAllOwnerProductsStream({required String userId}) =>
+      _collection.snapshots().map((event) => event.docs
+          .map((doc) => Product.fromSnapShot(doc))
+          .where((product) => product.ownerId == userId && product.productSellState != 'Removed'));
 
   @override
   Stream<Iterable<Product>> getAllFavoriteProductsStream({required String userId, required BuildContext context}) {

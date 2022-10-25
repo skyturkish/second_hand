@@ -40,58 +40,80 @@ class ChatContactInformation extends StatelessWidget {
                     final chatContactData = snapshot.data.toList()[index] as ChatContact;
                     // olum lan bu list tile olabilirdi
                     return InkWell(
-                        onTap: () {
-                          NavigationService.instance.navigateToPage(
-                            path: NavigationConstants.CHAT_VIEW,
-                            data: [chatContactData.productId, chatContactData.receiverId],
-                          );
-                        },
-                        child: ListTile(
-                          leading: Stack(
-                            alignment: Alignment.bottomRight,
-                            children: [
-                              CircleAvatar(
-                                radius: 30,
-                                backgroundImage: NetworkImage(chatContactData.productPic),
+                      onTap: () {
+                        NavigationService.instance.navigateToPage(
+                          path: NavigationConstants.CHAT_VIEW,
+                          data: [chatContactData.productId, chatContactData.receiverId],
+                        );
+                      },
+                      child: ListTile(
+                        leading: Stack(
+                          alignment: Alignment.bottomRight,
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundImage: NetworkImage(chatContactData.productPic),
+                            ),
+                            CircleAvatar(
+                              radius: 13,
+                              backgroundImage: NetworkImage(chatContactData.receiverProfilePictureURL),
+                            ),
+                          ],
+                        ),
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: context.paddingOnlyBottomSmall / 3,
+                              child: Text(
+                                chatContactData.receiverName.overFlowString(limit: 20),
+                                style: Theme.of(context).textTheme.headline6!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: context.colors.onBackground,
+                                    ),
                               ),
-                              CircleAvatar(
-                                  radius: 13, backgroundImage: NetworkImage(chatContactData.receiverProfilePictureURL)),
-                            ],
-                          ),
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: context.paddingOnlyBottomSmall / 3,
-                                child: Text(
-                                  chatContactData.receiverName,
-                                  style: Theme.of(context).textTheme.headline6!.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        color: context.colors.onBackground,
-                                      ),
+                            ),
+                            Padding(
+                              padding: context.paddingOnlyBottomSmall / 3,
+                              child: Text(
+                                chatContactData.productName,
+                                style: Theme.of(context).textTheme.subtitle1,
+                              ),
+                            ),
+                          ],
+                        ),
+                        subtitle: Row(
+                          children: [
+                            Text(
+                              chatContactData.lastMessage.overFlowString(limit: 30),
+                              style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.w200),
+                            ),
+                          ],
+                        ),
+                        trailing: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              DateFormat.Hm().format(chatContactData.timeSent),
+                            ),
+                            Expanded(
+                              child: IconButton(
+                                onPressed: () {
+                                  ChatCloudFireStoreService.instance.deleteChatContact(
+                                    productId: chatContactData.productId,
+                                    senderId: chatContactData.senderId,
+                                    receiverId: chatContactData.receiverId,
+                                  );
+                                },
+                                icon: const Icon(
+                                  Icons.delete,
                                 ),
                               ),
-                              Padding(
-                                padding: context.paddingOnlyBottomSmall / 3,
-                                child: Text(
-                                  chatContactData.productName,
-                                  style: Theme.of(context).textTheme.subtitle1,
-                                ),
-                              ),
-                            ],
-                          ),
-                          subtitle: Row(
-                            children: [
-                              Text(
-                                chatContactData.lastMessage.overFlowString(limit: 30),
-                                style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.w200),
-                              ),
-                            ],
-                          ),
-                          trailing: Text(
-                            DateFormat.Hm().format(chatContactData.timeSent),
-                          ),
-                        ));
+                            )
+                          ],
+                        ),
+                      ),
+                    );
                   },
                 );
               }

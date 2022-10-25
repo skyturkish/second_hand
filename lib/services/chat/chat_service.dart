@@ -215,6 +215,19 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
             ));
   }
 
+  Future<void> deleteChatContact({
+    required String productId,
+    required String senderId,
+    required String receiverId,
+  }) async {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(senderId)
+        .collection('chats')
+        .doc('$receiverId$productId')
+        .delete();
+  }
+
   @override
   Stream<List<Message>> getChatStream(
       {required String productId, required String senderId, required String receiverId}) {

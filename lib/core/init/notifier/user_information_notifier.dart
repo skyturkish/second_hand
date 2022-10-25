@@ -43,11 +43,6 @@ class UserInformationNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isProductInFavoriteProducts({required String productId}) {
-    if (_userInformation == null) return false;
-    return userInformation!.favoriteProducts.contains(productId);
-  }
-
   Future<void> addFavoriteProductLocal({required String productId}) async {
     if (_userInformation == null) return;
     _userInformation!.favoriteProducts.add(productId);

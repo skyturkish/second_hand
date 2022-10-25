@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/message.dart';
 import 'package:second_hand/models/user_information.dart';
@@ -56,16 +57,22 @@ class _ChatListViewState extends State<ChatListView> {
                 children: [
                   CircleAvatar(
                     radius: 23,
-                    backgroundImage: NetworkImage(widget.productImage),
+                    backgroundImage: NetworkImage(
+                      widget.productImage,
+                    ),
                   ),
                   CircleAvatar(
-                      radius: 10, backgroundImage: NetworkImage(widget.receiverUserInformation.profilePhotoPath)),
+                    radius: 10,
+                    backgroundImage: NetworkImage(
+                      widget.receiverUserInformation.profilePhotoPath,
+                    ),
+                  ),
                 ],
               ),
               Padding(
                 padding: context.paddingOnlyLeftSmallX,
                 child: Text(
-                  widget.receiverUserInformation.name,
+                  widget.receiverUserInformation.name.overFlowString(limit: 22),
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
               ),

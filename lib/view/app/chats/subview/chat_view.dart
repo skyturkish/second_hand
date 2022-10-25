@@ -7,6 +7,7 @@ import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/services/cloud/user/user_service.dart';
 import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';
+import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 import 'package:second_hand/view/app/chats/widgets/chat_list.dart';
 import 'package:second_hand/view/app/chats/widgets/bottom_chat_field.dart';
 
@@ -42,25 +43,42 @@ class _ChatViewState extends State<ChatView> {
     return Scaffold(
       body: product == null || contactUserInformation == null
           ? const Center(child: LottieAnimationView(animation: LottieAnimation.messageChat))
-          : Column(
-              children: [
-                Expanded(
-                  child: ChatListView(
-                    productImage: product!.imagesUrl.first,
-                    productId: product!.productId,
-                    receiverUserInformation: contactUserInformation!,
+          : product!.productSellState == 'Removed'
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('this product is removed by owner'),
+                      CustomElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          'back to page',
+                        ),
+                      ),
+                    ],
                   ),
+                )
+              : Column(
+                  children: [
+                    Expanded(
+                      child: ChatListView(
+                        productImage: product!.imagesUrl.first,
+                        productId: product!.productId,
+                        receiverUserInformation: contactUserInformation!,
+                      ),
+                    ),
+                    const Divider(
+                      thickness: 2,
+                    ),
+                    BottomChatField(
+                      receiverUserInformation: contactUserInformation!,
+                      senderUserInformation: context.read<UserInformationNotifier>().userInformation!,
+                      product: product!,
+                    ),
+                  ],
                 ),
-                const Divider(
-                  thickness: 2,
-                ),
-                BottomChatField(
-                  receiverUserInformation: contactUserInformation!,
-                  senderUserInformation: context.read<UserInformationNotifier>().userInformation!,
-                  product: product!,
-                ),
-              ],
-            ),
     );
   }
 }

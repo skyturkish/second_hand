@@ -49,10 +49,10 @@ class StreamMyFavoriteProductsStream extends StatelessWidget {
                 },
               );
             } else {
-              return const ShimmerFavoriteListTileProduct();
+              return const Text('');
             }
           default:
-            return const ShimmerFavoriteListTileProduct();
+            return const Text('');
         }
       },
     );

@@ -2,7 +2,8 @@ enum LottieAnimation {
   notFound(name: '404_not_found'),
   splash(name: 'splash'),
   messageChat(name: 'message_chat'),
-  uploadPhotos(name: 'upload_photos');
+  uploadPhotos(name: 'upload_photos'),
+  location(name: 'location');
 
   final String name;
   const LottieAnimation({

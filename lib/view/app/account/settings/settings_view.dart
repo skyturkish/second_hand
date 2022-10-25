@@ -33,6 +33,7 @@ class SettingsView extends StatelessWidget {
               final logoutDecision = await showLogOutDialog(context);
               if (logoutDecision) {
                 Navigator.of(context).pop();
+
                 context.read<AppBloc>().add(
                       AppEventLogOut(context),
                     );
