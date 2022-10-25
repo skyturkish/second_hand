@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/models/user.dart';
 import 'package:second_hand/services/cloud/user/abstract_user_service.dart';
-import 'package:uuid/uuid.dart';
+import 'package:second_hand/services/storage/storage-service.dart';
 
 @immutable
 class UserCloudFireStoreService implements IUserCloudFireStoreService {
@@ -23,15 +24,16 @@ class UserCloudFireStoreService implements IUserCloudFireStoreService {
 
     if (userExist == true) return;
 
-    await _collection.doc(userId).set(UserInformation(userId: userId, name: 'User-${const Uuid().v4()}').toMap());
+    await _collection.doc(userId).set(UserInformation(userId: userId, name: 'User-$userId').toMap());
   }
 
   @override
   Future<void> deleteUserById({required String userId}) async {
-    final userExist = await isUserExist(userId: userId);
-    if (userExist == true) {
-      await _collection.doc(userId).delete();
-    }
+    final user = await getUserInformationById(userId: userId);
+    if (user == null) return;
+    _collection.doc(user.userId).delete();
+    StorageService.instance
+        .deletePhotoByReference(path: user.profilePhotoPath.convertToStorageReferenceFromDownloadUrl);
   }
 
   @override

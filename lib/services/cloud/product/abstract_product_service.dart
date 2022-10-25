@@ -7,8 +7,9 @@ abstract class IProductCloudFireStoreService {
   Future<void> createProduct({required Product product, required List<File> images});
   Future<List<Product>?> getAllBelongProducts({required String userId});
   Future<List<Product>?> getAllNotBelongProducts({required String userId});
-  Future<void> removeProduct({required String productId});
-  Future<void> removeAllProductWithImages({required String userId});
+  Future<Product>? getProductById({required String productId});
+  Future<void> removeProduct({required Product product});
+  Future<void> removeAllProducts({required String userId});
   Stream<Iterable<Product>> getAllOwnerProductsStream({required String userId});
   Stream<Iterable<Product>> getAllFavoriteProductsStream({required String userId, required BuildContext context});
 }

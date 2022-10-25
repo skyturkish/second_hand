@@ -19,5 +19,4 @@ class GenericAuthException implements AuthUserException {}
 
 class UserNotLoggedInAuthException implements AuthUserException {}
 
-//TODO use this delete account'da kullanmalısın bunu
 class UserRequiresRecentLogin implements AuthUserException {}

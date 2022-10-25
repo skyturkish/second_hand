@@ -7,7 +7,7 @@ import 'package:second_hand/product/utilities/dialogs/keep_same_product.dart';
 import 'package:second_hand/view/app/account/account_view.dart';
 import 'package:second_hand/view/app/chats/chats_view.dart';
 import 'package:second_hand/view/app/home/home_view.dart';
-import 'package:second_hand/view/app/my_ads/my_products_view.dart';
+import 'package:second_hand/view/app/my_ads/product_tabbar.dart';
 
 class BottomNavigationView extends StatefulWidget {
   const BottomNavigationView({super.key});
@@ -33,7 +33,7 @@ class BottomNavigationViewState extends State<BottomNavigationView> {
           HomeView(),
           ChatsView(),
           SizedBox.shrink(),
-          MyProductsView(),
+          ProductsTabBar(),
           AccountView(),
         ],
       ),
@@ -69,7 +69,7 @@ class BottomNavigationViewState extends State<BottomNavigationView> {
           if (isProcess) {
             final isKeep = await keepSameProduct(context);
             if (!isKeep) {
-              context.read<SaleProductNotifier>().clearProduct();
+              context.read<SaleProductNotifier>().clearSaleProduct();
             }
           }
           await NavigationService.instance.navigateToPage(path: NavigationConstants.INCLUDE_SOME_DETAILS);

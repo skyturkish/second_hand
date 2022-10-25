@@ -28,6 +28,8 @@ class _LoginViewState extends LoginViewmodel {
             await showErrorDialog(context, 'Wrong credentials');
           } else if (state.exception is GenericAuthException) {
             await showErrorDialog(context, 'Authentication error');
+          } else if (state.exception is UserRequiresRecentLogin) {
+            await showErrorDialog(context, 'the account could not be deleted, please log in again!');
           }
         }
       },

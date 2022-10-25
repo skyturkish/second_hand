@@ -45,18 +45,18 @@ class IncludeSomeDetailsViewState extends IncludeSomeDetailsViewModel {
                 onChanged: (productState) {
                   setState(
                     () {
-                      stateController.text = productState!.name;
-                      valueProductState = productState;
+                      valueProductState = productState!;
                     },
                   );
                 },
               ),
               const Spacer(),
               NextButton(
-                  formKey: formKey,
-                  titleController: titleController,
-                  stateController: stateController,
-                  describeController: describeController),
+                formKey: formKey,
+                titleController: titleController,
+                describeController: describeController,
+                stateText: valueProductState.name,
+              ),
             ],
           ),
         ),
@@ -132,13 +132,13 @@ class NextButton extends StatelessWidget {
     Key? key,
     required this.formKey,
     required this.titleController,
-    required this.stateController,
     required this.describeController,
+    required this.stateText,
   }) : super(key: key);
 
   final GlobalKey<FormState> formKey;
+  final String stateText;
   final TextEditingController titleController;
-  final TextEditingController stateController;
   final TextEditingController describeController;
 
   @override
@@ -148,7 +148,7 @@ class NextButton extends StatelessWidget {
         if (formKey.currentState!.validate()) {
           context.read<SaleProductNotifier>().updateProduct(
                 title: titleController.text,
-                condition: stateController.text,
+                condition: stateText,
                 description: describeController.text,
               );
           NavigationService.instance.navigateToPage(path: NavigationConstants.UPLOAD_PHOTOS);

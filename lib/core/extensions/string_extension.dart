@@ -24,3 +24,8 @@ extension _ImageConstantsExtensionPng on String {
 extension _ImageConstantsExtensionJpg on String {
   String get toJPG => 'assets/images/$this.jph';
 }
+
+// TODO bad named
+extension TurnStorageReference on String {
+  String get convertToStorageReferenceFromDownloadUrl => Uri.parse(this).pathSegments.last;
+}

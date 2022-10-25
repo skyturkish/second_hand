@@ -25,11 +25,6 @@ class StorageService {
     return await FirebaseStorage.instance.ref('users').child(userId).putFile(file);
   }
 
-  Future<void> deleteProductPhoto({required String path}) =>
+  Future<void> deletePhotoByReference({required String path}) =>
       FirebaseStorage.instance.ref(path).delete().then((_) => true).catchError((_) => false);
-
-  Future<void> deleteUserProfilePhoto({required String userId}) =>
-      FirebaseStorage.instance.ref('users').child(userId).delete().then((value) => true).catchError(
-            (_) => false,
-          );
 }

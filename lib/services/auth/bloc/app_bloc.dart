@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/services/auth/auth_provider.dart';
@@ -7,7 +8,6 @@ import 'package:second_hand/services/auth/bloc/app_event.dart';
 import 'package:second_hand/services/auth/bloc/app_state.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/services/cloud/user/user_service.dart';
-import 'package:second_hand/services/storage/storage-service.dart';
 import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
@@ -227,7 +227,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
         event.context.read<UserInformationNotifier>().clearUserInformationsLocal();
         // DELETE PRODUCT ADD INFORMATIONS LOCALE
-        event.context.read<SaleProductNotifier>().clearProduct();
+        event.context.read<SaleProductNotifier>().clearSaleProduct();
         try {
           await provider.logOut();
           emit(
@@ -255,34 +255,37 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             loadingText: 'Wait a second, we delete your account',
           ),
         );
-        // DELETE USER'S INFORMATIONS LOCALE
-        event.context.read<UserInformationNotifier>().clearUserInformationsLocal();
-        // DELETE PRODUCT ADD INFORMATIONS LOCALE
-        event.context.read<SaleProductNotifier>().clearProduct();
-
         final userId = AuthService.firebase().currentUser!.id;
 
-        // DELETE ACCOUNT
-        await provider.deleteAccount();
+        try {
+          await provider.deleteAccount();
 
-        emit(
-          const AppStateDeletedAccount(
-            exception: null,
-            isLoading: false,
-          ),
-        );
-        // DELETE PRODUCTS
-        ProductCloudFireStoreService.instance.removeAllProductWithImages(
-          userId: userId,
-        );
-        // DELETE USER'S INFORMATIONS AT FIREBASE
-        UserCloudFireStoreService.instance.deleteUserById(
-          userId: userId,
-        );
-        // DELETE USER'S PROFILE PHOTO
-        StorageService.instance.deleteUserProfilePhoto(
-          userId: userId,
-        );
+          event.context.read<UserInformationNotifier>().clearUserInformationsLocal();
+
+          event.context.read<SaleProductNotifier>().clearSaleProduct();
+
+          ProductCloudFireStoreService.instance.removeAllProducts(
+            userId: userId,
+          );
+          // DELETE USER'S INFORMATIONS AT FIREBASE
+          UserCloudFireStoreService.instance.deleteUserById(
+            userId: userId,
+          );
+
+          emit(
+            const AppStateDeletedAccount(
+              exception: null,
+              isLoading: false,
+            ),
+          );
+        } on FirebaseAuthException catch (e) {
+          emit(
+            AppStateLoggedOut(
+              exception: e,
+              isLoading: false,
+            ),
+          );
+        }
       },
     );
   }

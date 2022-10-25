@@ -66,14 +66,3 @@ class AppStateDeletedAccount extends AppState {
   });
   final Exception? exception;
 }
-
-extension GetUser on AppState {
-  AuthUser? get user {
-    final cls = this;
-    if (cls is AppStateLoggedIn) {
-      return cls.user;
-    } else {
-      return null;
-    }
-  }
-}

@@ -74,7 +74,7 @@ class _SetLocationViewState extends State<SetLocationView> {
                       images: saleProductProvider.images,
                     );
 
-                    saleProductProvider.clearProduct();
+                    saleProductProvider.clearSaleProduct();
 
                     Navigator.pop(context);
                     Navigator.pop(context);

@@ -9,14 +9,12 @@ abstract class IncludeSomeDetailsViewModel extends State<IncludeSomeDetailsView>
 
   ProductState valueProductState = ProductState.values.last;
 
-  late final TextEditingController stateController;
   late final TextEditingController titleController;
   late final TextEditingController describeController;
 
   @override
   void initState() {
     final productInformation = context.read<SaleProductNotifier>().localProduct;
-    stateController = TextEditingController(text: productInformation?.condition ?? '');
     titleController = TextEditingController(text: productInformation?.title ?? '');
     describeController = TextEditingController(text: productInformation?.description ?? '');
     super.initState();
@@ -24,7 +22,6 @@ abstract class IncludeSomeDetailsViewModel extends State<IncludeSomeDetailsView>
 
   @override
   void dispose() {
-    stateController.dispose();
     titleController.dispose();
     describeController.dispose();
     super.dispose();

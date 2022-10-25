@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:second_hand/core/extensions/string_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/services/cloud/product/abstract_product_service.dart';
@@ -26,6 +27,7 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
   @override
   Future<void> createProduct({required Product product, required List<File> images}) async {
     List<String> newUrls = [];
+    final productId = const Uuid().v4();
     for (final image in images) {
       final imageId = const Uuid().v4();
 
@@ -38,10 +40,16 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
       );
 
       final downloadURL = await taskSnapShot.ref.getDownloadURL();
+
       newUrls.add(downloadURL);
     }
-    final sendProduct = product.copyWith(imagesUrl: newUrls);
-    await _collection.doc().set(
+
+    final sendProduct = product.copyWith(
+      imagesUrl: newUrls,
+      productId: productId,
+    );
+
+    await _collection.doc(productId).set(
           sendProduct.toMap(),
         );
   }
@@ -68,38 +76,27 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
     return products.toList();
   }
 
+  // product alabiliriz
   @override
-  Future<void> removeProduct({required String productId}) async {
-    final querySnapShot = await _collection.where('productId', isEqualTo: productId).get();
+  Future<void> removeProduct({required Product product}) async {
+    for (final image in product.imagesUrl) {
+      await StorageService.instance.deletePhotoByReference(
+        path: image.convertToStorageReferenceFromDownloadUrl,
+      );
+    }
+    await _collection.doc(product.productId).delete();
+  }
 
-    for (final doc in querySnapShot.docs) {
-      await doc.reference.delete();
-      final data = Product.fromMap(doc.data());
-
-      for (final image in data.imagesUrl) {
-        StorageService.instance.deleteProductPhoto(
-          path: image,
-        );
-      }
+  @override
+  Future<void> removeAllProducts({required String userId}) async {
+    final allProducts = await getAllBelongProducts(userId: userId);
+    if (allProducts == null) return;
+    for (final product in allProducts) {
+      removeProduct(product: product);
     }
   }
 
   @override
-  Future<void> removeAllProductWithImages({required String userId}) async {
-    final querySnapShot = await _collection.where('ownerId', isEqualTo: userId).get();
-
-    for (final doc in querySnapShot.docs) {
-      await doc.reference.delete();
-      final data = Product.fromMap(doc.data());
-
-      for (final image in data.imagesUrl) {
-        StorageService.instance.deleteProductPhoto(
-          path: image,
-        );
-      }
-    }
-  }
-
   Future<Product> getProductById({required String productId}) async {
     final querySnapShot = await _collection.where('productId', isEqualTo: productId).get();
     return Product.fromSnapShot(querySnapShot.docs.first);

@@ -23,7 +23,6 @@ class SaleProductNotifier extends ChangeNotifier {
 
   void updateProduct({
     String? productId,
-    String? documentId,
     String? ownerId,
     String? condition,
     String? title,
@@ -46,7 +45,6 @@ class SaleProductNotifier extends ChangeNotifier {
     } else {
       _product = _product!.copyWith(
         productId: productId,
-        documentId: documentId,
         ownerId: ownerId,
         condition: condition,
         title: title,
@@ -62,8 +60,9 @@ class SaleProductNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void clearProduct() {
+  void clearSaleProduct() {
     _product = null;
+    images = [];
     notifyListeners();
   }
 

@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Product {
   final String productId;
-  final String documentId;
   final String ownerId;
   final String condition;
   final String title;
@@ -15,7 +14,6 @@ class Product {
 
   Product({
     required this.productId,
-    this.documentId = '',
     required this.ownerId,
     required this.condition,
     required this.title,
@@ -32,8 +30,7 @@ class Product {
   }
 
   Product.fromSnapShot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
-      : documentId = snapshot.id,
-        productId = snapshot.data()['productId'] as String,
+      : productId = snapshot.data()['productId'] as String,
         ownerId = snapshot.data()['ownerId'] as String,
         condition = snapshot.data()['condition'] as String,
         title = snapshot.data()['title'] as String,
@@ -48,7 +45,6 @@ class Product {
     final result = <String, dynamic>{};
 
     result.addAll({'productId': productId});
-    result.addAll({'documentId': documentId});
     result.addAll({'ownerId': ownerId});
     result.addAll({'condition': condition});
     result.addAll({'title': title});
@@ -65,7 +61,6 @@ class Product {
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
       productId: map['productId'] ?? '',
-      documentId: map['documentId'] ?? '',
       ownerId: map['ownerId'] ?? '',
       condition: map['condition'] ?? '',
       title: map['title'] ?? '',
@@ -80,7 +75,6 @@ class Product {
 
   Product copyWith({
     String? productId,
-    String? documentId,
     String? ownerId,
     String? condition,
     String? title,
@@ -93,7 +87,6 @@ class Product {
   }) {
     return Product(
       productId: productId ?? this.productId,
-      documentId: documentId ?? this.documentId,
       ownerId: ownerId ?? this.ownerId,
       condition: condition ?? this.condition,
       title: title ?? this.title,

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/services/auth/auth_service.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
-import 'package:second_hand/view/_product/_widgets/list_tile/my_ads_listtile.dart';
+import 'package:second_hand/view/_product/_widgets/list_tile/my_product_listtile.dart';
 
-class ProductsView extends StatefulWidget {
-  const ProductsView({Key? key}) : super(key: key);
+class MyProductsView extends StatefulWidget {
+  const MyProductsView({Key? key}) : super(key: key);
 
   @override
-  State<ProductsView> createState() => ProductsViewState();
+  State<MyProductsView> createState() => MyProductsViewState();
 }
 
-class ProductsViewState extends State<ProductsView> with AutomaticKeepAliveClientMixin {
+class MyProductsViewState extends State<MyProductsView> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
