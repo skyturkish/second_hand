@@ -40,7 +40,7 @@ void main() {
       downloadUrl = downloadUrl.substring(ps, qs).replaceAll(RegExp(r'%2[Ff]'), '/');
       expect(downloadUrl, 'products/2b1ab929-4914-4d1e-b133-9a2eae8143d8');
     });
-
+    // for more information https://www.youtube.com/watch?v=lkAeX3T6A9I
     // thanks for their help. https://github.com/BSTech   https://github.com/allxrise
     test(' Uri parse pathSegments', () {
       String downloadUrl =
