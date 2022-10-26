@@ -37,9 +37,9 @@ class SaleProductNotifier extends ChangeNotifier {
       _product = Product(
         productId: '',
         ownerId: '',
-        condition: condition!,
-        title: title!,
-        description: description!,
+        condition: condition ?? 'Very Good',
+        title: title ?? '',
+        description: description ?? '',
         price: 1,
       );
     } else {

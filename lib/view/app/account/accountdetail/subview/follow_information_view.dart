@@ -4,7 +4,6 @@ import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/user_information_listtile/user_information_listtile.dart';
 import 'package:second_hand/view/_product/enums/follow_type.dart';
 
-// TODO burada direkt bool değer al, follow mu followers mı diye hatta enum al direkt
 class FollowInformationsView extends StatefulWidget {
   const FollowInformationsView({Key? key, required this.followType, required this.userInformation}) : super(key: key);
   final FollowType followType;

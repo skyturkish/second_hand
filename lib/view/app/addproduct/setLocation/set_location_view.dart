@@ -85,7 +85,7 @@ class _SetLocationViewState extends State<SetLocationView> {
                                   locateCity: 'Izmir',
                                 );
 
-                                await ProductCloudFireStoreService.instance.createProduct(
+                                ProductCloudFireStoreService.instance.createProduct(
                                   product: saleProductProvider.localProduct!,
                                   images: saleProductProvider.images,
                                 );

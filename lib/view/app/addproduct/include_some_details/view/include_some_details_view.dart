@@ -31,31 +31,12 @@ class IncludeSomeDetailsViewState extends IncludeSomeDetailsViewModel {
             children: [
               TitleTextFormField(titleController: titleController),
               DescriptionTextFormField(describeController: describeController),
-              DropdownButton<ProductState>(
-                // TODO tüm sayfa yenileniyor burada, bunu engelleyebilirdik valuelisten ile
-                value: valueProductState,
-                items: ProductState.values
-                    .map<DropdownMenuItem<ProductState>>(
-                      (value) => DropdownMenuItem<ProductState>(
-                        value: value,
-                        child: Text(value.name),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (productState) {
-                  setState(
-                    () {
-                      valueProductState = productState!;
-                    },
-                  );
-                },
-              ),
+              const ProductConditionDropDownButton(),
               const Spacer(),
               NextButton(
                 formKey: formKey,
                 titleController: titleController,
                 describeController: describeController,
-                stateText: valueProductState.name,
               ),
             ],
           ),
@@ -127,17 +108,49 @@ class _DescriptionTextFormFieldState extends State<DescriptionTextFormField> {
   }
 }
 
+class ProductConditionDropDownButton extends StatefulWidget {
+  const ProductConditionDropDownButton({Key? key}) : super(key: key);
+
+  @override
+  State<ProductConditionDropDownButton> createState() => _ProductConditionDropDownButtonState();
+}
+
+class _ProductConditionDropDownButtonState extends State<ProductConditionDropDownButton> {
+  ProductState valueProductState = ProductState.values.last;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<ProductState>(
+      value: valueProductState,
+      items: ProductState.values
+          .map<DropdownMenuItem<ProductState>>(
+            (value) => DropdownMenuItem<ProductState>(
+              value: value,
+              child: Text(value.name),
+            ),
+          )
+          .toList(),
+      onChanged: (productState) {
+        setState(
+          () {
+            valueProductState = productState!;
+            context.read<SaleProductNotifier>().updateProduct(condition: productState.name);
+          },
+        );
+      },
+    );
+  }
+}
+
 class NextButton extends StatelessWidget {
   const NextButton({
     Key? key,
     required this.formKey,
     required this.titleController,
     required this.describeController,
-    required this.stateText,
   }) : super(key: key);
 
   final GlobalKey<FormState> formKey;
-  final String stateText;
   final TextEditingController titleController;
   final TextEditingController describeController;
 
@@ -148,7 +161,6 @@ class NextButton extends StatelessWidget {
         if (formKey.currentState!.validate()) {
           context.read<SaleProductNotifier>().updateProduct(
                 title: titleController.text,
-                condition: stateText,
                 description: describeController.text,
               );
           NavigationService.instance.navigateToPage(path: NavigationConstants.UPLOAD_PHOTOS);

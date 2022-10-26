@@ -42,6 +42,7 @@ class NavigationRoute {
             product: product,
           ),
         );
+
       case NavigationConstants.SETTINGS_VIEW:
         return createRoute(widget: const SettingsView());
 
@@ -65,7 +66,9 @@ class NavigationRoute {
         final productId = arguments[0] as String;
         final contactUserId = arguments[1] as String;
 
-        return createRoute(widget: ChatView(productId: productId, contactUserId: contactUserId));
+        return createRoute(
+          widget: ChatView(productId: productId, contactUserId: contactUserId),
+        );
 
       default:
         return normalNavigate(

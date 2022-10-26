@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 extension ContextExtension on BuildContext {
@@ -69,13 +67,4 @@ extension PaddingAll on BuildContext {
   EdgeInsets get paddingAllLarge => EdgeInsets.all(largeValue);
   EdgeInsets get paddingAllLargeX => EdgeInsets.all(largeXValue);
   EdgeInsets get paddingAllLargeXX => EdgeInsets.all(largeXXValue);
-}
-
-extension PageExtension on BuildContext {
-  Color get randomColor => Colors.primaries[Random().nextInt(17)];
-}
-
-extension DurationExtension on BuildContext {
-  Duration get lowDuration => const Duration(milliseconds: 500);
-  Duration get normalDuration => const Duration(seconds: 1);
 }

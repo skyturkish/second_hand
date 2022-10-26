@@ -81,7 +81,6 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
     await _collection.doc(product.productId).update({'productSellState': 'Removed'});
   }
 
-  // product alabiliriz
   @override
   Future<void> removeProduct({required Product product}) async {
     for (final image in product.imagesUrl) {
@@ -93,7 +92,7 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
   }
 
   @override
-  Future<void> removeAllProducts({required String userId}) async {
+  Future<void> removeAllProductsById({required String userId}) async {
     final allProducts = await getAllBelongProducts(userId: userId);
     if (allProducts == null) return;
     for (final product in allProducts) {
@@ -125,5 +124,10 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
             ),
           );
     }
+  }
+
+  @override
+  Future<void> updateProductDescription({required String productId, required String newDescription}) async {
+    await _collection.doc(productId).update({'description': newDescription});
   }
 }

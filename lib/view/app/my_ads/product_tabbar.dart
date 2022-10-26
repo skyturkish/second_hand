@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/view/app/my_ads/subview/favorite_view.dart';
-import 'package:second_hand/view/app/my_ads/subview/products_view.dart';
+import 'package:second_hand/view/app/my_ads/subview/my_products_view.dart';
 
 class ProductsTabBar extends StatefulWidget {
   const ProductsTabBar({super.key});

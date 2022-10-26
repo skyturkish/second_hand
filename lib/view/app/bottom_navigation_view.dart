@@ -5,7 +5,7 @@ import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 import 'package:second_hand/product/utilities/dialogs/keep_same_product.dart';
 import 'package:second_hand/view/app/account/account_view.dart';
-import 'package:second_hand/view/app/chats/chats_view.dart';
+import 'package:second_hand/view/app/chats/view/chats_view.dart';
 import 'package:second_hand/view/app/home/home_view.dart';
 import 'package:second_hand/view/app/my_ads/product_tabbar.dart';
 

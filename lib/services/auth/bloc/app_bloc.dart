@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/services/auth/auth_provider.dart';
@@ -264,7 +263,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
         event.context.read<SaleProductNotifier>().clearSaleProduct();
 
-        ProductCloudFireStoreService.instance.removeAllProducts(
+        ProductCloudFireStoreService.instance.removeAllProductsById(
           userId: userId,
         );
         // DELETE USER'S INFORMATIONS AT FIREBASE

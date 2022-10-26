@@ -4,9 +4,12 @@ import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/services/chat/chat_service.dart';
 
 class BottomChatField extends StatefulWidget {
-  const BottomChatField(
-      {Key? key, required this.receiverUserInformation, required this.senderUserInformation, required this.product})
-      : super(key: key);
+  const BottomChatField({
+    Key? key,
+    required this.receiverUserInformation,
+    required this.senderUserInformation,
+    required this.product,
+  }) : super(key: key);
   final UserInformation receiverUserInformation;
   final UserInformation senderUserInformation;
   final Product product;

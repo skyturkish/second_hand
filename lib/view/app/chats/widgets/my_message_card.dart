@@ -19,8 +19,8 @@ class MyMessageCard extends StatelessWidget {
         child: Card(
           elevation: 1,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          color: context.colors.background, // değiştir bunu
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5), // contexten oku
+          color: context.colors.background,
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,

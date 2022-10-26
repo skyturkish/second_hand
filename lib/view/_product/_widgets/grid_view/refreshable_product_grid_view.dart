@@ -37,22 +37,29 @@ class _RefreshsableProductGridViewState extends State<RefreshsableProductGridVie
   Widget build(BuildContext context) {
     return products == null
         ? const Text('----wait----')
-        : RefreshIndicator(
-            onRefresh: () async {
-              getAll();
-            },
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 3,
-                mainAxisSpacing: 3,
-              ),
-              itemCount: products!.length,
-              itemBuilder: (BuildContext context, int index) {
-                final product = products![index];
-                return ProductCard(product: product);
-              },
-            ),
-          );
+        : products!.isEmpty
+            ? Center(
+                child: Text(
+                  'No one sell the products, now',
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+              )
+            : RefreshIndicator(
+                onRefresh: () async {
+                  getAll();
+                },
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 3,
+                    mainAxisSpacing: 3,
+                  ),
+                  itemCount: products!.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final product = products![index];
+                    return ProductCard(product: product);
+                  },
+                ),
+              );
   }
 }

@@ -4,28 +4,6 @@ extension OverFlowString on String {
   }
 }
 
-class ImageConstants {
-  ImageConstants._();
-  static ImageConstants? _instance;
-
-  static ImageConstants get instance {
-    _instance ??= ImageConstants._();
-    return _instance!;
-  }
-
-  final String addPhoto = 'add_photo'.toPNG;
-  final String dogEatsBread = 'dog_eats_bread'.toJPG;
-}
-
-extension _ImageConstantsExtensionPng on String {
-  String get toPNG => 'assets/images/$this.png';
-}
-
-extension _ImageConstantsExtensionJpg on String {
-  String get toJPG => 'assets/images/$this.jph';
-}
-
-// TODO bad named
-extension TurnStorageReference on String {
+extension ToStorageReference on String {
   String get convertToStorageReferenceFromDownloadUrl => Uri.parse(this).pathSegments.last;
 }

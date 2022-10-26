@@ -7,25 +7,13 @@ import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
+import 'package:second_hand/product/utilities/image_pick/image_picker_manager.dart';
 import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 
-class UploadPhotosView extends StatefulWidget {
+class UploadPhotosView extends StatelessWidget {
   const UploadPhotosView({super.key});
-
-  @override
-  State<UploadPhotosView> createState() => UploadPhotosViewState();
-}
-
-// tamamm bunun photo muhabbetini, kaç sayfa olduğunu vesaire viewmodel ile yap, en son kaydettiğinde git genel provider'a kayıt et
-class UploadPhotosViewState extends State<UploadPhotosView> {
-  late final ImagePicker _picker;
-  @override
-  void initState() {
-    _picker = ImagePicker();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +28,9 @@ class UploadPhotosViewState extends State<UploadPhotosView> {
           Divider(thickness: 6, height: context.dynamicHeight(0.03)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              FromGalleryButton(picker: _picker),
-              TakeAPictureButton(picker: _picker),
+            children: const [
+              FromGalleryButton(),
+              TakeAPictureButton(),
             ],
           ),
           Divider(thickness: 6, height: context.dynamicHeight(0.03)),
@@ -86,12 +74,8 @@ class PageViewImages extends StatelessWidget {
 
 class FromGalleryButton extends StatelessWidget {
   const FromGalleryButton({
-    Key? key,
-    required ImagePicker picker,
-  })  : _picker = picker,
-        super(key: key);
-
-  final ImagePicker _picker;
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -99,18 +83,15 @@ class FromGalleryButton extends StatelessWidget {
       dynamicWidth: 0.4,
       borderRadius: 10,
       onPressed: () async {
-        final images = await _picker.pickMultiImage(
-          maxHeight: 1024,
-          maxWidth: 1024,
-          imageQuality: 50,
-        );
-        final fileimages = images!.map(
+        final xFileImages = await ImagePickerManager.instance.pickMultiImage();
+
+        final fileImages = xFileImages!.map(
           (xFile) => File(
             xFile.path,
           ),
         );
         context.read<SaleProductNotifier>().addImages(
-              newImages: fileimages.toList(),
+              newImages: fileImages.toList(),
             );
       },
       child: const Text('From gallery'),
@@ -120,12 +101,8 @@ class FromGalleryButton extends StatelessWidget {
 
 class TakeAPictureButton extends StatelessWidget {
   const TakeAPictureButton({
-    Key? key,
-    required ImagePicker picker,
-  })  : _picker = picker,
-        super(key: key);
-
-  final ImagePicker _picker;
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -133,12 +110,11 @@ class TakeAPictureButton extends StatelessWidget {
       dynamicWidth: 0.4,
       borderRadius: 10,
       onPressed: () async {
-        final xFileimage = await _picker.pickImage(
-          source: ImageSource.camera,
-          imageQuality: 50,
+        final xFileImage = await ImagePickerManager.instance.pickSingleImage(
+          imageSource: ImageSource.camera,
         );
 
-        final fileImage = File(xFileimage!.path);
+        final fileImage = File(xFileImage!.path);
 
         context.read<SaleProductNotifier>().addImages(
           newImages: [fileImage],

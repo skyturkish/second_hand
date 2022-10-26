@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:second_hand/product/utilities/image_pick/image_picker_manager.dart';
 
 extension SelectImageFrom on SelectPhotoFromBottomSheet {
   // --> from https://vbacik-10.medium.com/season-two-flutter-short-but-golds-8cff8f4b0b29
@@ -9,12 +10,8 @@ extension SelectImageFrom on SelectPhotoFromBottomSheet {
   }
 }
 
-@immutable
 class SelectPhotoFromBottomSheet extends StatelessWidget {
-  SelectPhotoFromBottomSheet({Key? key}) : super(key: key);
-  late final File? photo;
-  final ImagePicker _picker = ImagePicker();
-
+  const SelectPhotoFromBottomSheet({super.key});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,10 +21,12 @@ class SelectPhotoFromBottomSheet extends StatelessWidget {
           leading: const Icon(Icons.camera_alt_outlined),
           title: const Text('From camera'),
           onTap: () async {
-            final XFile? selectedImage = await _picker.pickImage(source: ImageSource.camera);
+            final XFile? selectedImage =
+                await ImagePickerManager.instance.pickSingleImage(imageSource: ImageSource.camera);
+
             if (selectedImage == null) return;
 
-            photo = File(selectedImage.path);
+            final photo = File(selectedImage.path);
             Navigator.pop<File?>(context, photo);
           },
         ),
@@ -35,9 +34,13 @@ class SelectPhotoFromBottomSheet extends StatelessWidget {
           leading: const Icon(Icons.image),
           title: const Text('From gallery'),
           onTap: () async {
-            final XFile? selectedImage = await _picker.pickImage(source: ImageSource.gallery);
+            final XFile? selectedImage =
+                await ImagePickerManager.instance.pickSingleImage(imageSource: ImageSource.gallery);
+
             if (selectedImage == null) return;
-            photo = File(selectedImage.path);
+
+            final photo = File(selectedImage.path);
+
             Navigator.pop<File?>(context, photo);
           },
         ),

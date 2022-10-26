@@ -54,6 +54,7 @@ dependencies:
   uuid: ^3.0.6
 
   equatable: ^2.0.5
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -66,7 +67,6 @@ flutter:
 
   assets:
     - assets/translations/
-    - assets/images/
     - assets/animations/
 
 flutter_icons:

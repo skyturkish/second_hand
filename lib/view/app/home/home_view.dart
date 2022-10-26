@@ -3,7 +3,6 @@ import 'package:second_hand/core/extensions/context_extension.dart';
 import 'package:second_hand/services/auth/auth_service.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/view/_product/_widgets/grid_view/refreshable_product_grid_view.dart';
-import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -32,25 +31,9 @@ class HomeViewState extends State<HomeView> {
               Padding(
                 padding: context.paddingOnlyTopSmall,
                 child: Row(
-                  children: const [
-                    Icon(
-                      Icons.location_city,
-                    ),
-                    Text('  Manchester, UK'),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: context.paddingOnlyTopSmall,
-                child:
-                    CustomTextFormField(controller: _searchController, labelText: 'search for books, cars, and more'),
-              ),
-              Padding(
-                padding: context.paddingOnlyTopSmall,
-                child: Row(
                   children: [
                     Text(
-                      'products around you',
+                      'Products ',
                       style: Theme.of(context).textTheme.headline5!.copyWith(
                             fontWeight: FontWeight.bold,
                           ),

@@ -7,17 +7,12 @@ import 'package:second_hand/models/product.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 import 'package:second_hand/view/_product/_widgets/iconbutton/favorite_icon_button.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/user_information_listtile/user_information_listtile.dart';
+import 'package:second_hand/view/_product/_widgets/row/location_information_row.dart';
 import 'package:second_hand/view/app/home/subview/product_detail_view_model.dart';
 
-class ProductDetailView extends StatefulWidget {
+class ProductDetailView extends StatelessWidget {
   const ProductDetailView({super.key, required this.product});
   final Product product;
-
-  @override
-  State<ProductDetailView> createState() => _ProductDetailViewState();
-}
-
-class _ProductDetailViewState extends State<ProductDetailView> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +22,6 @@ class _ProductDetailViewState extends State<ProductDetailView> {
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
-                context.read<ProductDetailViewModelNotifier>().resetPageIndex();
               },
               icon: const Icon(Icons.arrow_back)),
         ),
@@ -38,128 +32,137 @@ class _ProductDetailViewState extends State<ProductDetailView> {
             Stack(
               alignment: Alignment.bottomCenter,
               children: [
-                Hero(
-                  tag: 'image ${widget.product.productId}',
-                  child: SizedBox(
-                    height: context.dynamicHeight(0.33),
-                    width: context.dynamicWidth(0.90),
-                    child: PageView.builder(
-                      allowImplicitScrolling: true,
-                      itemCount: widget.product.imagesUrl.length,
-                      itemBuilder: (context, index) {
-                        final productImage = widget.product.imagesUrl[index];
-                        return Image.network(
-                          productImage,
-                          fit: BoxFit.contain,
-                        );
-                      },
-                      onPageChanged: (index) {
-                        context.read<ProductDetailViewModelNotifier>().setCurrentPageIndex(
-                              index: index,
-                            );
-                      },
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const SizedBox.shrink(),
-                    SizedBox(
-                      height: 15,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: widget.product.imagesUrl.length,
-                        itemBuilder: (context, index) {
-                          return CircleImageCount(
-                            isSelected: context.watch<ProductDetailViewModelNotifier>().currentPageIndex == index,
-                          );
-                        },
-                      ),
-                    ),
-                    Text(
-                      '${context.watch<ProductDetailViewModelNotifier>().currentPageIndex + 1}'
-                      '/ ${widget.product.imagesUrl.length}',
-                    )
-                  ],
-                )
+                ImagesPageView(product: product),
+                PageIndicatorAndCount(product: product),
               ],
             ),
-            Padding(
-              padding: context.paddingHorizontalSmall + context.paddingOnlyTopSmall,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        '${widget.product.price}' ' \$',
-                        style: Theme.of(context).textTheme.headline5!.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: context.colors.onBackground,
-                            ),
-                      ),
-                      const SizedBox.shrink(),
-                      FavoriteIconButton(
-                        product: widget.product,
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: context.paddingOnlyTopSmall,
-                    child: Text(
-                      widget.product.title,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            PriceAndFavoriteButtonRow(product: product),
             const Divider(),
-            Padding(
-              padding: context.paddingHorizontalSmall,
-              child: SizedBox(
-                width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: context.paddingOnlyTopSmall,
-                      child: Text(
-                        'Description',
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                    ),
-                    Padding(
-                      padding: context.paddingOnlyTopSmall,
-                      child: Text(
-                        widget.product.description,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            DescriptionText(description: product.description),
+            LocationInformationRow(product: product),
             const Divider(),
-            UserInformationListtile(userId: widget.product.ownerId),
+            UserInformationListtile(userId: product.ownerId),
             const Divider(),
-            CustomElevatedButton(
-              onPressed: () {
-                NavigationService.instance.navigateToPage(
-                  path: NavigationConstants.CHAT_VIEW,
-                  data: [
-                    widget.product.productId,
-                    widget.product.ownerId,
-                  ],
-                );
-              },
-              child: const Text('start talking'),
-            ),
+            StartTalkingButton(product: product),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ImagesPageView extends StatelessWidget {
+  const ImagesPageView({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: 'image ${product.productId}',
+      child: SizedBox(
+        height: context.dynamicHeight(0.33),
+        width: context.dynamicWidth(0.90),
+        child: PageView.builder(
+          allowImplicitScrolling: true,
+          itemCount: product.imagesUrl.length,
+          itemBuilder: (context, index) {
+            final productImage = product.imagesUrl[index];
+            return Image.network(
+              productImage,
+              fit: BoxFit.contain,
+            );
+          },
+          onPageChanged: (index) {
+            context.read<ProductDetailViewModelNotifier>().setCurrentPageIndex(
+                  index: index,
+                );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class PageIndicatorAndCount extends StatelessWidget {
+  const PageIndicatorAndCount({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const SizedBox.shrink(),
+        SizedBox(
+          height: 15,
+          child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: product.imagesUrl.length,
+            itemBuilder: (context, index) {
+              return CircleImageCount(
+                isSelected: context.watch<ProductDetailViewModelNotifier>().currentPageIndex == index,
+              );
+            },
+          ),
+        ),
+        Text(
+          '${context.watch<ProductDetailViewModelNotifier>().currentPageIndex + 1}'
+          '/ ${product.imagesUrl.length}',
+        )
+      ],
+    );
+  }
+}
+
+class PriceAndFavoriteButtonRow extends StatelessWidget {
+  const PriceAndFavoriteButtonRow({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: context.paddingHorizontalSmall + context.paddingOnlyTopSmall,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                '${product.price}' ' \$',
+                style: Theme.of(context).textTheme.headline5!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: context.colors.onBackground,
+                    ),
+              ),
+              const SizedBox.shrink(),
+              FavoriteIconButton(
+                product: product,
+              ),
+            ],
+          ),
+          Padding(
+            padding: context.paddingOnlyTopSmall,
+            child: Text(
+              product.title,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -177,6 +180,68 @@ class CircleImageCount extends StatelessWidget {
         radius: isSelected ? 4 : 3,
         backgroundColor: isSelected ? const Color.fromARGB(255, 208, 87, 87) : const Color.fromARGB(255, 105, 91, 91),
       ),
+    );
+  }
+}
+
+class DescriptionText extends StatelessWidget {
+  const DescriptionText({
+    Key? key,
+    required this.description,
+  }) : super(key: key);
+
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: context.paddingHorizontalSmall,
+      child: SizedBox(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: context.paddingOnlyTopSmall,
+              child: Text(
+                'Description',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ),
+            Padding(
+              padding: context.paddingOnlyTopSmall,
+              child: Text(
+                description,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class StartTalkingButton extends StatelessWidget {
+  const StartTalkingButton({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomElevatedButton(
+      onPressed: () {
+        NavigationService.instance.navigateToPage(
+          path: NavigationConstants.CHAT_VIEW,
+          data: [
+            product.productId,
+            product.ownerId,
+          ],
+        );
+      },
+      child: const Text('start talking'),
     );
   }
 }
