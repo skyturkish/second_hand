@@ -196,6 +196,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       },
     );
     on<AppEventLogInWithGoogle>((event, emit) async {
+      const AppStateLoggedOut(
+        exception: null,
+        isLoading: true,
+      );
       try {
         await provider.signInWithGoogle();
 
@@ -217,7 +221,14 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             isLoading: false,
           ),
         );
-      } catch (_) {}
+      } catch (_) {
+        emit(
+          const AppStateLoggedOut(
+            exception: null,
+            isLoading: false,
+          ),
+        );
+      }
     });
 
     // log out
