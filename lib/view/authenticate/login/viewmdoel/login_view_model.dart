@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/extensions/if_debugging.dart';
+import 'package:second_hand/core/extensions/string/if_debugging.dart';
 import 'package:second_hand/view/authenticate/login/view/login_view.dart';
 
 abstract class LoginViewmodel extends State<LoginView> {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
-import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
 import 'package:second_hand/product/utilities/location/location_manager.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
-import 'package:second_hand/core/extensions/context_extension.dart';
-import 'package:second_hand/core/extensions/string_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/string/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/user_information.dart';

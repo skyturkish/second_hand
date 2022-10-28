@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
 import 'package:second_hand/services/auth/bloc/app_bloc.dart';
 import 'package:second_hand/services/auth/bloc/app_event.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';

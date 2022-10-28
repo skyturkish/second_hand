@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
 
 class CropImage {
   static final CropImage instance = CropImage._internal();

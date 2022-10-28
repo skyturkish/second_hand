@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
-import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';

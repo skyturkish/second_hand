@@ -13,6 +13,8 @@ dependencies:
 
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   # Firebase
   firebase_auth: ^3.8.0
@@ -29,9 +31,6 @@ dependencies:
   flutter_bloc: ^8.1.1
   bloc: ^8.1.0
   provider: ^6.0.3
-
-  # Localization
-  easy_localization: ^3.0.1
 
   # Storage
   firebase_storage: ^10.3.9
@@ -55,6 +54,7 @@ dependencies:
 
   equatable: ^2.0.5
   google_fonts: ^3.0.1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -63,10 +63,11 @@ dev_dependencies:
   flutter_launcher_icons: "^0.10.0"
 
 flutter:
+  generate: true
+
   uses-material-design: true
 
   assets:
-    - assets/translations/
     - assets/animations/
 
 flutter_icons:

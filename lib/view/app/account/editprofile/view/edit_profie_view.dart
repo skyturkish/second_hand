@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/loading/loading_screen.dart';
 import 'package:second_hand/product/utilities/crop_image/crop_image.dart';

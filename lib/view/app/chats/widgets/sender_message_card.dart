@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
 
 class SenderMessageCard extends StatelessWidget {
   const SenderMessageCard({super.key, required this.message, required this.date, required this.isSeen});

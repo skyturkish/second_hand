@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
 import 'package:second_hand/services/auth/auth_service.dart';
 import 'package:second_hand/view/_product/enums/chat_contact_type_enum.dart';
 import '../../../_product/_widgets/row/chat_contact_information.dart';

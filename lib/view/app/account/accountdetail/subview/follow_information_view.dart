@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
 import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/user_information_listtile/user_information_listtile.dart';
 import 'package:second_hand/view/_product/enums/follow_type.dart';

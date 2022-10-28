@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
-import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/product/utilities/image_pick/image_picker_manager.dart';
 import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:second_hand/core/extensions/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/services/auth/auth_exceptions.dart';
 import 'package:second_hand/services/auth/bloc/app_bloc.dart';
 import 'package:second_hand/services/auth/bloc/app_event.dart';
@@ -35,7 +36,7 @@ class _LoginViewState extends LoginViewmodel {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Login'),
+          title: Text(context.loc.login),
         ),
         body: Padding(
           padding: context.paddingAllMedium,

@@ -1,8 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
-import 'package:second_hand/core/extensions/context_extension.dart';
-import 'package:second_hand/core/extensions/string_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/string/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/chat_contact.dart';
 import 'package:second_hand/services/chat/chat_service.dart';

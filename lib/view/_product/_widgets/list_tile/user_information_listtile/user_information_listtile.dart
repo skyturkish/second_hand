@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
-import 'package:second_hand/core/extensions/string_extension.dart';
+import 'package:second_hand/core/extensions/string/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/services/cloud/user/user_service.dart';

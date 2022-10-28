@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/app/app_constants.dart';
 import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
 import 'package:second_hand/core/init/cache/locale_manager.dart';
-import 'package:second_hand/core/init/localization/language_manager.dart';
 import 'package:second_hand/core/init/navigation/navigation_route.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/provider_list.dart';
@@ -22,6 +20,7 @@ import 'package:second_hand/view/authenticate/forgotpassword/view/forgot_passwor
 import 'package:second_hand/view/authenticate/login/view/login_view.dart';
 import 'package:second_hand/view/authenticate/register/view/register_view.dart';
 import 'package:second_hand/view/authenticate/verifyemail/verify_email_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   await _init();
@@ -32,23 +31,17 @@ void main() async {
         ...ApplicationProvider.instance.singleItems,
         ...ApplicationProvider.instance.uiChangesItems,
       ],
-      child: EasyLocalization(
-        supportedLocales: LanguageManager.instance.supportedLocales,
-        path: ApplicationConstants.TRANSLATIONS_ASSET_PATH,
-        startLocale: LanguageManager.instance.enLocale,
-        child: const MyApp(),
-      ),
+      child: const MyApp(),
     ),
   );
 }
 
 Future<void> _init() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await LocaleManager.preferencesInit(); // Shared_preferences init
+  await LocaleManager.preferencesInit();
 }
 
 class MyApp extends StatelessWidget {
@@ -56,16 +49,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // bu buraya ait değil ama, init diye bir şey yapabiliriz biz
-    // splash screen zamanı
     context.read<ThemeNotifier>().initTheme();
     return MaterialApp(
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: context.watch<ThemeNotifier>().currentTheme,
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
       onGenerateRoute: NavigationRoute.instance.generateRoute,
       navigatorKey: NavigationService.instance.navigatorKey,
-      locale: context.locale,
       debugShowCheckedModeBanner: false,
       title: ApplicationConstants.APPLICATION_TITLE,
       home: const App(),
