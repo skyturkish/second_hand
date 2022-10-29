@@ -85,7 +85,6 @@ MaterialPageRoute normalNavigate({required Widget widget, String? pageName}) {
   );
 }
 
-// PageRouteBuilder has more properites than MaterialPageBuilder
 PageRouteBuilder createRoute({required Widget widget}) {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => widget,

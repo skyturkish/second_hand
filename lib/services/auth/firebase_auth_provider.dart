@@ -102,7 +102,7 @@ class FirebaseAuthProvider implements AuthProvider {
     } else {
       throw UserNotLoggedInAuthException();
     }
-    // If user login with google, If we don't do these, we can't again ask user login witch which account?
+
     GoogleSignIn googleSignIn = GoogleSignIn();
     await googleSignIn.disconnect();
     await FirebaseAuth.instance.signOut();

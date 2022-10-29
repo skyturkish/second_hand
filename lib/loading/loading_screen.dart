@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/loading/loading_screen_controller.dart';
 
 class LoadingScreen {
@@ -29,7 +30,6 @@ class LoadingScreen {
     _controller = null;
   }
 
-  // overlay, kelime anlamıyla üstüne yatma, yani ekranın üstüne bir şey getirip gösterme
   LoadingScreenController _showOverlay({
     required BuildContext context,
     required String text,
@@ -38,7 +38,6 @@ class LoadingScreen {
 
     streamControllerText.add(text);
 
-    // get the size
     final state = Overlay.of(context);
     final renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
@@ -88,7 +87,7 @@ class LoadingScreen {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               return Text(
-                                snapshot.data ?? 'loading_screen.dart 81.satır null geldi',
+                                snapshot.data ?? context.loc.anErrorOccurred,
                                 textAlign: TextAlign.center,
                               );
                             } else {

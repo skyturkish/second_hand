@@ -3,7 +3,8 @@ enum LottieAnimation {
   splash(name: 'splash'),
   messageChat(name: 'message_chat'),
   uploadPhotos(name: 'upload_photos'),
-  location(name: 'location');
+  location(name: 'location'),
+  loading(name: 'loading');
 
   final String name;
   const LottieAnimation({

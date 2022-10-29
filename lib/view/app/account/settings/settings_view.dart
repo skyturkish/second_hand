@@ -18,11 +18,6 @@ class SettingsView extends StatelessWidget {
       body: Column(
         children: [
           OptionListTile(
-            titleText: 'Pricavy',
-            subTitleText: 'Phone number visibility',
-            onTap: () {},
-          ),
-          OptionListTile(
             titleText: 'Notifications',
             subTitleText: 'Recommendations & Special communications',
             onTap: () {},

@@ -1,7 +1,9 @@
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
 import 'package:second_hand/models/product.dart';
+import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';
 import 'package:second_hand/view/_product/_widgets/card/product_card.dart';
 
 typedef getAllProducts = Future<List<Product>?> Function({required String userId});
@@ -36,7 +38,7 @@ class _RefreshsableProductGridViewState extends State<RefreshsableProductGridVie
   @override
   Widget build(BuildContext context) {
     return products == null
-        ? const Text('----wait----')
+        ? const LottieAnimationView(animation: LottieAnimation.loading)
         : products!.isEmpty
             ? Center(
                 child: Text(

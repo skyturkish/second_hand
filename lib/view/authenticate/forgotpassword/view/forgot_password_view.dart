@@ -72,7 +72,7 @@ class EmailTextFormField extends StatelessWidget {
     return CustomTextFormField(
       controller: controller,
       labelText: 'email',
-      hintText: 'Your email adres...',
+      hintText: 'email',
       prefix: const Icon(Icons.email),
     );
   }

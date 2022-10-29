@@ -77,7 +77,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       ],
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please enter ${widget.labelText}';
+          return 'This field cannot be blank';
         }
         return null;
       },

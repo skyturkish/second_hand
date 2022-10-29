@@ -146,7 +146,6 @@ class _EditProfileViewState extends State<EditProfileView> {
   }
 }
 
-// Enter name Text Form Field
 class EnterNameTextFormField extends StatefulWidget {
   const EnterNameTextFormField({
     Key? key,
@@ -176,7 +175,6 @@ class _EnterNameTextFormFieldState extends State<EnterNameTextFormField> {
   }
 }
 
-// Write About you Text Form Field
 class WriteAboutYouTextFormField extends StatefulWidget {
   const WriteAboutYouTextFormField({
     Key? key,
@@ -221,11 +219,12 @@ class _EditProfilePhotoViewState extends State<EditProfilePhotoView> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        // ask, from gallery ? or camera
-        final photo = await SelectPhotoFromBottomSheet().show<File>(context);
+        final photo = await const SelectPhotoFromBottomSheet().show<File>(context);
+
         if (photo == null) return;
-        // want to crop image or not ?
+
         final croppedFile = await CropImage.instance.croppedFile(context: context, imageFilePath: photo.path);
+
         if (croppedFile == null) return;
 
         final croppedPhoto = File(croppedFile.path);

@@ -8,7 +8,7 @@ import 'package:second_hand/core/init/theme/light/ligh_theme.dart';
 class ThemeNotifier extends ChangeNotifier {
   ThemeData _currentTheme = SpaceDarkTheme.instance.theme!;
 
-  AppThemes _currenThemeEnum = AppThemes.DARK;
+  AppThemes _currenThemeEnum = AppThemes.SPACE_DARK;
 
   AppThemes get currentThemeEnum => _currenThemeEnum;
 
@@ -17,15 +17,15 @@ class ThemeNotifier extends ChangeNotifier {
   void initTheme() {
     final theme = LocaleManager.instance.getStringValue(LocaleCacheKeys.THEME);
 
-    theme == 'LIGHT' ? setLightTheme() : setDarkTheme();
+    theme == AppThemes.LIGHT.name ? setLightTheme() : setDarkTheme();
   }
 
   void setDarkTheme() {
     _currentTheme = SpaceDarkTheme.instance.theme!;
 
-    _currenThemeEnum = AppThemes.DARK;
+    _currenThemeEnum = AppThemes.SPACE_DARK;
 
-    LocaleManager.instance.setStringValue(LocaleCacheKeys.THEME, 'DARK');
+    LocaleManager.instance.setStringValue(LocaleCacheKeys.THEME, AppThemes.SPACE_DARK.name);
   }
 
   void setLightTheme() {
@@ -33,7 +33,7 @@ class ThemeNotifier extends ChangeNotifier {
 
     _currenThemeEnum = AppThemes.LIGHT;
 
-    LocaleManager.instance.setStringValue(LocaleCacheKeys.THEME, 'LIGHT');
+    LocaleManager.instance.setStringValue(LocaleCacheKeys.THEME, AppThemes.LIGHT.name);
   }
 
   void changeTheme() {
@@ -41,7 +41,7 @@ class ThemeNotifier extends ChangeNotifier {
 
     if (theme == AppThemes.LIGHT) {
       setDarkTheme();
-    } else if (theme == AppThemes.DARK) {
+    } else if (theme == AppThemes.SPACE_DARK) {
       setLightTheme();
     }
     notifyListeners();

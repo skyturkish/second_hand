@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
 import 'package:second_hand/core/extensions/string/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/chat_contact.dart';
 import 'package:second_hand/services/chat/chat_service.dart';
+import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';
 import 'package:second_hand/view/_product/enums/chat_contact_type_enum.dart';
 
 class ChatContactInformation extends StatelessWidget {
@@ -23,13 +25,9 @@ class ChatContactInformation extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
-              return const Center(child: Text('DONE'));
-
             case ConnectionState.none:
-              return const Center(child: Text('NONE'));
-
             case ConnectionState.waiting:
-              return const Center(child: Text('waiting data '));
+              return const LottieAnimationView(animation: LottieAnimation.loading);
             case ConnectionState.active:
               if (!snapshot.hasData) {
                 return const Text('HAS NO DATA');

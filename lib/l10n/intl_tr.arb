@@ -1,3 +1,137 @@
 {
-    "login":"Giriş yap"
+    // AUTHENTICATE
+
+    // LOGIN
+    "email": "email",
+    "password":"parola",
+    "login":"Giriş Yap",
+    "cannotFindAUser":"Bu bilgilere sahip herhangi bir kullanıcı mevcut değil!",
+    "wrongCredentials":"Email yada parola hatalı",
+    "authenticationError":"Giriş yaparken bir hata oluştu",
+    "theAccountCouldNotBeDeleted":"Hesap silinemedi,lütfen tekrar giriş yaptıktan sonra tekrar deneyiniz.",
+    "pleaseLogUnToYourAccount":"Ürün alıp satmak için lütfen girip yapın!",
+    "iForgotMyPassword":"Parolamı unuttum",
+    "signInWithGoogle":"Google ile giriş yap",
+    "notRegisteredYet":"Henüz bir hesabın yok mu ? Hesap Oluştur!",
+
+    // REGISTER
+    "register":"Kayıt ol",
+    "weakPassord":"Güçşüz şifre",
+    "emailIsAlreadyInUse":"Email kullanımda",
+    "failedToRegister":"Kayıt olunamadı",
+    "invalidEmail":"Geçersiz email",
+    "enterYourEmail":"Ürün alıp satmak için email ve parola giriniz!",
+    "alreadyRegistered":"Hesabın zaten var mı? Giriş Yap!",
+
+    // FORGOT PASSWORD
+    "weCouldNotProcessYourRequest": "Şuanda işleminizi gerçekleştiremiyoruz,Lütfen giriş yaptığınızdan emin olun,eğer hesabınız yoksa,bir tane oluşturun",
+    "forgotPassword":"Şifremi unuttum",
+    "ifYouForgotYourPassword":"Şifrenizi mi unuttunuz ? email adresinizi girin, size bir parola göndereceğiz",
+    "sendMePasswordResetLink":"Bana şifre sıfırlama isteğini yolla",
+    "backToLoginPage":"Hemen Giriş Yap!",
+
+    // VERIFY EMAIL
+    "verifyEmail":"Hesabı onayla",
+    "ifYouHavenotReceived":"Hesabı onayla maili  size ulaşmadı mı ? Tekrar Gönder!",
+    "sendEmailVerification":"Email onaylama isteği gönder!",
+    "weHaveSentYouAnEmail":"Bir email gönderdik, lütfen onaylayın",
+    "loginHere":"Login here!",
+
+
+    // APP
+    "description":"Açıklama",
+    "startTalking":"Konuşmaya başla",
+    "products":"Ürünler",
+    "thisProductIsRemoved":"Bu ürün sahibi tarafından kaldırıldı",
+    "backToPage":"Bir önceki sayfaya dön",
+    "myChats":"Sohbetler",
+    "writeHere": "Mesajını yaz...",
+    "youCantSendEmptyMessage": "Boş mesaj gönderemezsin",
+    "myProducts":"Benim ürünlerim",
+    "myNetwork":"Bağlantılarım",
+    "accountDetail":"Hesap Detay",
+    "follower":"Takipçi",
+    "following":"Takip ettiklerim",
+    "editProfile:"Profili güncelle",
+    "follow":"Takip et",
+    "breakFollow": "Takibi bırak",
+    "save":"Kaydet",
+    "informations":"Bilgiler",
+    "youAreAVerifiedUser":"Onaylanmış kullanıcısınız. Satıcılar bunu dikkate alacak.",
+    "enterName": "İsim gir",
+    "writeAboutYou": "Kendin hakkında yaz",
+    "fromCamera":"Kameradan",
+    "fromGallery":"Galeriden",
+    "helpAndSupport":"Yardım ve Destek",
+    "helpCenter":"Yardım Merkezi",
+    "youCanReadOurHelpGuide":"Yardım rehberimizi okuyabilirsiniz",
+    "rateUs":"Bizi puanla",
+    "ifYouLikeOurApp":"Eğer uygulamamızı sevdiyseniz, bizi puanlayın",
+    "inviteYourFriends":"Arkadaşlarını Second-Hand'e davet et",
+    "inviteYourFriendsToBuy":"Eşyalarının eşyaları satın alması ve satması için Arkadaşlarını davet et!",
+    "settings":"Ayarlar",
+    "privacyAndLogout":"Gizlilik ve Çıkış",
+    "helpAndSupport":"Yardım & Destek",
+    "helpCenterAndLegalTerms":"Yardım merkezi ve yasal şartlar",
+    "notifications":"Bildirimler",
+    "recommendations":"Önerilenler & Özel ilişkiler",
+    "logout":"çıkış yap",
+    "darkLight":"Karanlık / Aydınlık",
+    "uploadPhotos":"Resimleri yükle",
+    "takeAPicture":"Fotoğraf Çek",
+    "youMustSelect":"En az bir tane fotoğraf eklemelisiniz",
+    "setAPrice":"Fiyat belirleyin",
+    "price":"Fiyat",
+    "location":"Konum",
+    "weAreTryingToFind":"Konumunuzu tespit etmeye çalışıyoruz ...",
+    "releaseProduct":"Ürünü yayınla",
+
+
+    // Add Product
+    "includeSomeDetails":"Detaylar ekleyin",
+    "title":"Başlık",
+
+
+    // Buttons
+    "delete":"Sil",
+    "buttonCancel": "İptal",
+    "buttonYes": "Evet",
+    "buttonNo": "Hayır",
+    "buttonLogOut": "Çıkış Yap",
+    "buttonOk": "Tamam",
+    "next":"İlerle",
+
+    // Dialogs
+    "dialogDeleteAccountTitle": "Hesabı Sil",
+    "dialogDeleteAccountContent": "Tüm bilgilerinizz hesabınızla beraber silinecektir, silmek istediğinize emin misiniz ?",
+    "dialogIgnoreChangesTitle": "Değişikleri yoksay",
+    "dialogIgnoreChangesContent": "Yaptığım değişiklikleri yoksay ?",
+    "dialogKeepSameProductTitle": "Aynı ürünle devam et",
+    "dialogKeepSameProductContent": "Aynı ürünle devam etmek istiyor musunuz ?",
+    "dialogLogOutTitle": "Çıkış Yap",
+    "dialogLogOutContent": "Çıkış yapmak istediğinize emin misiniz?",
+    "dialogPasswordResetTitle": "Şifreyi sıfırla",
+    "dialogPasswordResetContent": "Şuan parola sıfırlamak için bir email gönderdik, lütfen kontrol ediniz.",
+   
+    // Errors    
+    "anErrorOccurred": "Bir hata oluştu",
+    
+    // Loadings 
+    "pleaseWait": "Lütfen bekleyiz ",
+    "wait":"bekleyin",
+
+    // Product
+    "noOneSellTheProducts":"Şuan herhangi bir ürün satışta değil",
+
+    // Chat
+    "hasNoData": "Veriler henüz gelmedi",
+    "thereIsNoChat":"Henüz hiçbir konuşmanız yok",
+
+    // textformfield
+    "thisFieldCannotBeBlank": "Bu alan boş bırakılamaz"
+
+
+
+
+
 }

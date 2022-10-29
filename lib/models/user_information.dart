@@ -27,7 +27,7 @@ class UserInformation {
   });
   final String userId;
   final String name;
-  final String profilePhotoPath; // path değilde URL olması lazım bunun, direkt internetten çekiyoruz çünkü
+  final String profilePhotoPath;
   final String phoneNumber;
   final String aboutYou;
   final List<String> myProducts;

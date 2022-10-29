@@ -23,7 +23,7 @@ class MyProductsListTile extends StatelessWidget {
       leading: CircleAvatar(
         radius: 30,
         backgroundImage: NetworkImage(
-          product.imagesUrl[0],
+          product.imagesUrl.first,
         ),
       ),
       trailing: PopupMenuButton<MyProductAction>(

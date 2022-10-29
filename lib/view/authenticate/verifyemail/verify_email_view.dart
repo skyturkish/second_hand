@@ -20,7 +20,7 @@ class VerifyEmailViewState extends State<VerifyEmailView> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Verifiy email',
+            'Verify Email',
             style: Theme.of(context).textTheme.headline5,
           ),
         ),

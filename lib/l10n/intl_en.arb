@@ -1,3 +1,140 @@
 {
-    "login":"Login"
+    // AUTHENTICATE
+
+    // LOGIN
+    "email": "email",
+    "password":"password",
+    "login":"Login",
+    "cannotFindAUser":"Cannot find a user with the entered credentials!",
+    "wrongCredentials":"Wrong credentials",
+    "authenticationError":"Authentication error",
+    "theAccountCouldNotBeDeleted":"the account could not be deleted, please log in again!",
+    "pleaseLogUnToYourAccount":"Please log in to your account to sell and buy products",
+    "iForgotMyPassword":"I forgot my password",
+    "signInWithGoogle":"Sign in with google",
+    "notRegisteredYet":"Not registered yet? Register here!",
+
+    // REGISTER
+    "register":"Register",
+    "weakPassord":"Weak Password",
+    "emailIsAlreadyInUse":"Email is already in use",
+    "failedToRegister":"Failed to register",
+    "invalidEmail":"Invalid email",
+    "enterYourEmail":"Enter your email and password to sell and buy products",
+    "alreadyRegistered":"Already registered? Login here!",
+
+    // FORGOT PASSWORD
+    "weCouldNotProcessYourRequest": "We could not process your request, Please make sure that you are a registered user, or if not, register a user now by going back one step",
+    "forgotPassword":"Forgot Password",
+    "ifYouForgotYourPassword":"If you forgot your password, simply enter your email and we will send you a password",
+    "sendMePasswordResetLink":"Send me password reset link",
+    "backToLoginPage":"Back to login page",
+
+    // VERIFY EMAIL
+    "verifyEmail":"Verify Email",
+    "ifYouHavenotReceived":"If you haven't received a verification email yet, press the buton below",
+    "sendEmailVerification":"Send email verification",
+    "weHaveSentYouAnEmail":"we've sent you an email... Please open it to verify your account",
+    "loginHere":"Login here!",
+
+
+    // APP
+    "description":"Description",
+    "startTalking":"Start Talking",
+    "products":"Products",
+    "thisProductIsRemoved":"This product is removed by owner",
+    "backToPage":"Back To Page",
+    "myChats":"My Chats",
+    "writeHere": "Write Here!",
+    "youCantSendEmptyMessage": "You can't send empty message",
+    "myProducts":"My Products",
+    "myNetwork":"My Network",
+    "accountDetail":"Account Detail",
+    "follower":"Follower",
+    "following":"Following",
+    "editProfile:"Edit Profile",
+    "follow":"Follow",
+    "breakFollow": "Break Follow",
+    "save":"Save",
+    "informations":"Informations",
+    "youAreAVerifiedUser":"You are a verified user. Buyers will take this into account.",
+    "enterName": "Enter name",
+    "writeAboutYou": "Write about you",
+    "fromCamera":"From Camera",
+    "fromGallery":"From Gallery",
+    "helpAndSupport":"Help and Support",
+    "helpCenter":"Help Center",
+    "youCanReadOurHelpGuide":"You can read our help guide",
+    "rateUs":"Rate Us",
+    "ifYouLikeOurApp":"If you like our app, we will be happy if you rate us",
+    "inviteYourFriends":"Invite your friends to Second-Hand",
+    "inviteYourFriendsToBuy":"Invite your friends to buy and sell their stuff",
+    "settings":"Settings",
+    "privacyAndLogout":"Privacy and Logout",
+    "helpAndSupport":"Help & Support",
+    "helpCenterAndLegalTerms":"Help center and legal terms",
+    "notifications":"Notifications",
+    "recommendations":"Recommendations & Special communications",
+    "logout":"Logout",
+    "darkLight":"Dark / Light",
+    "uploadPhotos":"Upload Photos",
+    "takeAPicture":"Take a picture",
+    "youMustSelect":"You must select at least one photo",
+    "setAPrice":"Set A Price",
+    "price":"Price",
+    "location":"Location",
+    "weAreTryingToFind":"We are trying to find your location ...",
+    "releaseProduct":"Release Product",
+
+
+    // Add Product
+    "includeSomeDetails":"Include some details",
+    "title":"Title",
+
+
+
+
+
+    // Buttons
+    "delete":"delete",
+    "buttonCancel": "Cancel",
+    "buttonYes": "Yes",
+    "buttonNo": "No",
+    "buttonLogOut": "Log out",
+    "buttonOk": "OK",
+    "next":"Next",
+
+    // Dialogs
+    "dialogDeleteAccountTitle": "Delete Account",
+    "dialogDeleteAccountContent": "All your information will be deleted along with your account, are you sure you want to delete it ?",
+    "dialogIgnoreChangesTitle": "Ignore Changes",
+    "dialogIgnoreChangesContent": "Are you sure you ignore the changes?",
+    "dialogKeepSameProductTitle": "Keep on same product",
+    "dialogKeepSameProductContent": "Do you want to work on same product",
+    "dialogLogOutTitle": "Log Out",
+    "dialogLogOutContent": "Are you sure you want to log out?",
+    "dialogPasswordResetTitle": "Password reset",
+    "dialogPasswordResetContent": "We have now sent you a pssword reset link. Please Chech your email for more information",
+   
+    // Errors    
+    "anErrorOccurred": "An error occurred",
+    
+    // Loadings 
+    "pleaseWait": "Please wait a moment",
+    "wait":"wait",
+
+    // Product
+    "noOneSellTheProducts":"No one sell the products, now",
+
+    // Chat
+    "hasNoData": "has no data, yet",
+    "thereIsNoChat":"There is no chat, yet",
+
+    // textformfield
+    "thisFieldCannotBeBlank": "This field cannot be blank."
+
+
+
+
+
 }

@@ -33,7 +33,7 @@ class HomeViewState extends State<HomeView> {
                 child: Row(
                   children: [
                     Text(
-                      'Products ',
+                      'Products',
                       style: Theme.of(context).textTheme.headline5!.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
