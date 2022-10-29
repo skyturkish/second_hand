@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/models/user_information.dart';
@@ -48,13 +49,13 @@ class _ChatViewState extends State<ChatView> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('this product is removed by owner'),
+                      Text(context.loc.thisProductIsRemoved),
                       CustomElevatedButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: const Text(
-                          'back to page',
+                        child: Text(
+                          context.loc.backToPage,
                         ),
                       ),
                     ],

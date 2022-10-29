@@ -9,6 +9,7 @@ import 'package:second_hand/models/chat_contact.dart';
 import 'package:second_hand/services/chat/chat_service.dart';
 import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';
 import 'package:second_hand/view/_product/enums/chat_contact_type_enum.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 
 class ChatContactInformation extends StatelessWidget {
   const ChatContactInformation({super.key, required this.userId, required this.chatContactType});
@@ -30,12 +31,12 @@ class ChatContactInformation extends StatelessWidget {
               return const LottieAnimationView(animation: LottieAnimation.loading);
             case ConnectionState.active:
               if (!snapshot.hasData) {
-                return const Text('HAS NO DATA');
+                return Text(context.loc.hasNoData);
               } else {
                 return snapshot.data!.isEmpty
                     ? Center(
                         child: Text(
-                          'There is no chat, yet',
+                          context.loc.thereIsNoChat,
                           style: Theme.of(context).textTheme.headline5,
                         ),
                       )

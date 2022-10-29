@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 import 'package:second_hand/product/utilities/dialogs/keep_same_product.dart';
@@ -38,26 +39,26 @@ class BottomNavigationViewState extends State<BottomNavigationView> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: const Icon(Icons.home),
+            label: context.loc.home,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Chats',
+            icon: const Icon(Icons.chat),
+            label: context.loc.chats,
           ),
           BottomNavigationBarItem(
-            icon: SizedBox.shrink(),
-            label: 'Sell',
+            icon: const SizedBox.shrink(),
+            label: context.loc.sell,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'My Products',
+            icon: const Icon(Icons.favorite),
+            label: context.loc.myProducts,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Account',
+            icon: const Icon(Icons.account_circle),
+            label: context.loc.account,
           ),
         ],
         currentIndex: _selectedIndex,

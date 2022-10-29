@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/product/utilities/dialogs/generic_dialog.dart';
 
 Future<bool> showDeleteAccountDialog(BuildContext context) {
   return showGenericDialog<bool>(
     context: context,
-    title: 'Delete Account',
-    content: 'All your information will be deleted along with your account, are you sure you want to delete it ?',
+    title: context.loc.dialogDeleteAccountTitle,
+    content: context.loc.dialogDeleteAccountContent,
     optionsBuilder: () => {
-      'Cancel': false,
-      'Yes': true,
+      context.loc.buttonCancel: false,
+      context.loc.buttonYes: true,
     },
   ).then(
     (value) => value ?? false,

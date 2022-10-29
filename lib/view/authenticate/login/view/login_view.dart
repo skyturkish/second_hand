@@ -24,13 +24,13 @@ class _LoginViewState extends LoginViewmodel {
       listener: (context, state) async {
         if (state is AppStateLoggedOut) {
           if (state.exception is UserNotFoundAuthException) {
-            await showErrorDialog(context, 'Cannot find a user with the entered credentials!');
+            await showErrorDialog(context, context.loc.cannotFindAUser);
           } else if (state.exception is WrongPasswordAuthException) {
-            await showErrorDialog(context, 'Wrong credentials');
+            await showErrorDialog(context, context.loc.wrongCredentials);
           } else if (state.exception is GenericAuthException) {
-            await showErrorDialog(context, 'Authentication error');
+            await showErrorDialog(context, context.loc.authenticationError);
           } else if (state.exception is UserRequiresRecentLogin) {
-            await showErrorDialog(context, 'the account could not be deleted, please log in again!');
+            await showErrorDialog(context, context.loc.theAccountCouldNotBeDeleted);
           }
         }
       },
@@ -45,8 +45,9 @@ class _LoginViewState extends LoginViewmodel {
               key: formKey,
               child: Column(
                 children: [
-                  const Text(
-                    'Please log in to your account to sell and buy products',
+                  Text(
+                    // TODO adını düzelt
+                    context.loc.pleaseLogUnToYourAccount,
                   ),
                   EmailTextFormField(emailController: emailController),
                   PasswordTextFormField(passwordController: passwordController),
@@ -78,7 +79,7 @@ class EmailTextFormField extends StatelessWidget {
       padding: context.paddingOnlyTopSmall,
       child: CustomTextFormField(
         controller: emailController,
-        labelText: 'email',
+        labelText: context.loc.email,
         prefix: const Icon(Icons.mail),
         keyboardType: TextInputType.emailAddress,
       ),
@@ -101,7 +102,7 @@ class PasswordTextFormField extends StatelessWidget {
       child: CustomTextFormField(
         passwordTextFormField: true,
         controller: passwordController,
-        labelText: 'password',
+        labelText: context.loc.password,
         prefix: const Icon(
           Icons.password,
         ),
@@ -134,7 +135,7 @@ class LoginButton extends StatelessWidget {
               ),
             );
       },
-      child: const Text('Login'),
+      child: Text(context.loc.login),
     );
   }
 }
@@ -152,7 +153,7 @@ class ForgotPasswordButton extends StatelessWidget {
               const AppEventForgotPassword(),
             );
       },
-      child: const Text('I forgot my password'),
+      child: Text(context.loc.iForgotMyPassword),
     );
   }
 }
@@ -170,7 +171,7 @@ class SignInWithGoogleButton extends StatelessWidget {
               AppEventLogInWithGoogle(context),
             );
       },
-      child: const Text('Sign in with google'),
+      child: Text(context.loc.signInWithGoogle),
     );
   }
 }
@@ -188,7 +189,7 @@ class NotRegisterYetButton extends StatelessWidget {
               const AppEventShouldRegister(),
             );
       },
-      child: const Text('Not registered yet? Register here!'),
+      child: Text(context.loc.notRegisteredYet),
     );
   }
 }

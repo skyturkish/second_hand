@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/product/utilities/dialogs/generic_dialog.dart';
 
 Future<bool> keepSameProduct(BuildContext context) {
   return showGenericDialog<bool>(
     context: context,
-    title: 'Keep on same product',
-    content: 'Do you want to work on same product',
+    title: context.loc.dialogKeepSameProductTitle,
+    content: context.loc.dialogKeepSameProductContent,
     optionsBuilder: () => {
-      'No': false,
-      'Yes': true,
+      context.loc.buttonNo: false,
+      context.loc.buttonYes: true,
     },
   ).then(
     (value) => value ?? false,

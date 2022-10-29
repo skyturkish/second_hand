@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/services/auth/auth_exceptions.dart';
 import 'package:second_hand/services/auth/bloc/app_bloc.dart';
 import 'package:second_hand/services/auth/bloc/app_event.dart';
@@ -23,19 +24,19 @@ class RegisterViewState extends RegisterViewModel {
       listener: (context, state) async {
         if (state is AppStateRegistering) {
           if (state.exception is WeakPasswordAuthException) {
-            await showErrorDialog(context, 'Weak Password');
+            await showErrorDialog(context, context.loc.weakPassord);
           } else if (state.exception is EmailAlreadyInUseAuthException) {
-            await showErrorDialog(context, 'Email is already in use');
+            await showErrorDialog(context, context.loc.emailIsAlreadyInUse);
           } else if (state.exception is GenericAuthException) {
-            await showErrorDialog(context, 'Failed to register');
+            await showErrorDialog(context, context.loc.failedToRegister);
           } else if (state.exception is InvalidEmailAuthException) {
-            await showErrorDialog(context, 'Invalid email');
+            await showErrorDialog(context, context.loc.invalidEmail);
           }
         }
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Register'),
+          title: Text(context.loc.register),
         ),
         body: Padding(
           padding: context.paddingAllMedium,
@@ -45,7 +46,7 @@ class RegisterViewState extends RegisterViewModel {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Enter your email and password to sell and buy products'),
+                  Text(context.loc.enterYourEmail),
                   EmailTextFormField(emailController: emailController),
                   PasswordTextFormField(passwordController: passwordController),
                   Center(
@@ -80,7 +81,7 @@ class EmailTextFormField extends StatelessWidget {
       padding: context.paddingOnlyTopSmall,
       child: CustomTextFormField(
         controller: emailController,
-        labelText: 'email',
+        labelText: context.loc.email,
         prefix: const Icon(Icons.mail),
         keyboardType: TextInputType.emailAddress,
       ),
@@ -103,7 +104,7 @@ class PasswordTextFormField extends StatelessWidget {
       child: CustomTextFormField(
         passwordTextFormField: true,
         controller: passwordController,
-        labelText: 'password',
+        labelText: context.loc.password,
         prefix: const Icon(
           Icons.password,
         ),
@@ -135,7 +136,7 @@ class RegisterButton extends StatelessWidget {
               ),
             );
       },
-      child: const Text('Register'),
+      child: Text(context.loc.register),
     );
   }
 }
@@ -153,7 +154,7 @@ class AlreadyRegisterButton extends StatelessWidget {
               AppEventLogOut(context),
             );
       },
-      child: const Text('Already registered? Login here!'),
+      child: Text(context.loc.alreadyRegistered),
     );
   }
 }

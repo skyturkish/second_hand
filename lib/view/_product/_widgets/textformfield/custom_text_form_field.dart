@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
@@ -77,7 +78,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       ],
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'This field cannot be blank';
+          return context.loc.thisFieldCannotBeBlank;
         }
         return null;
       },

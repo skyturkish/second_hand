@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 import 'package:second_hand/services/auth/auth_service.dart';
@@ -22,7 +23,7 @@ class SetAPriceViewState extends SetAPriceViewModel {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SetAPrice'),
+        title: Text(context.loc.setAPrice),
       ),
       body: Form(
         key: formKey,
@@ -54,7 +55,7 @@ class PriceTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomTextFormField(
       controller: _priceController,
-      labelText: 'price',
+      labelText: context.loc.price,
       keyboardType: TextInputType.number,
       prefix: const Icon(
         Icons.money,
@@ -93,8 +94,8 @@ class NextButton extends StatelessWidget {
           NavigationService.instance.navigateToPage(path: NavigationConstants.SET_LOCATION);
         }
       },
-      child: const Text(
-        'Next',
+      child: Text(
+        context.loc.next,
       ),
     );
   }

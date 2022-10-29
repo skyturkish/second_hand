@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/services/auth/auth_service.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/view/_product/_widgets/grid_view/refreshable_product_grid_view.dart';
@@ -33,7 +34,7 @@ class HomeViewState extends State<HomeView> {
                 child: Row(
                   children: [
                     Text(
-                      'Products',
+                      context.loc.products,
                       style: Theme.of(context).textTheme.headline5!.copyWith(
                             fontWeight: FontWeight.bold,
                           ),

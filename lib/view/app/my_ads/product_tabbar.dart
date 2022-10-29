@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/view/app/my_ads/subview/favorite_view.dart';
 import 'package:second_hand/view/app/my_ads/subview/my_products_view.dart';
 
@@ -24,7 +25,7 @@ class ProductsTabBarState extends State<ProductsTabBar> with TickerProviderState
       length: _MyTabViews.values.length,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('My Products'),
+          title: Text(context.loc.myProducts),
           bottom: _myTabView(),
         ),
         body: _tabbarView(),

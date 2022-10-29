@@ -1,7 +1,7 @@
 {
-    // AUTHENTICATE
 
-    // LOGIN
+
+
     "email": "email",
     "password":"parola",
     "login":"Giriş Yap",
@@ -14,7 +14,7 @@
     "signInWithGoogle":"Google ile giriş yap",
     "notRegisteredYet":"Henüz bir hesabın yok mu ? Hesap Oluştur!",
 
-    // REGISTER
+
     "register":"Kayıt ol",
     "weakPassord":"Güçşüz şifre",
     "emailIsAlreadyInUse":"Email kullanımda",
@@ -23,14 +23,14 @@
     "enterYourEmail":"Ürün alıp satmak için email ve parola giriniz!",
     "alreadyRegistered":"Hesabın zaten var mı? Giriş Yap!",
 
-    // FORGOT PASSWORD
+
     "weCouldNotProcessYourRequest": "Şuanda işleminizi gerçekleştiremiyoruz,Lütfen giriş yaptığınızdan emin olun,eğer hesabınız yoksa,bir tane oluşturun",
     "forgotPassword":"Şifremi unuttum",
     "ifYouForgotYourPassword":"Şifrenizi mi unuttunuz ? email adresinizi girin, size bir parola göndereceğiz",
     "sendMePasswordResetLink":"Bana şifre sıfırlama isteğini yolla",
     "backToLoginPage":"Hemen Giriş Yap!",
 
-    // VERIFY EMAIL
+
     "verifyEmail":"Hesabı onayla",
     "ifYouHavenotReceived":"Hesabı onayla maili  size ulaşmadı mı ? Tekrar Gönder!",
     "sendEmailVerification":"Email onaylama isteği gönder!",
@@ -38,7 +38,7 @@
     "loginHere":"Login here!",
 
 
-    // APP
+
     "description":"Açıklama",
     "startTalking":"Konuşmaya başla",
     "products":"Ürünler",
@@ -52,7 +52,7 @@
     "accountDetail":"Hesap Detay",
     "follower":"Takipçi",
     "following":"Takip ettiklerim",
-    "editProfile:"Profili güncelle",
+    "editProfile":"Profili güncelle",
     "follow":"Takip et",
     "breakFollow": "Takibi bırak",
     "save":"Kaydet",
@@ -85,14 +85,24 @@
     "location":"Konum",
     "weAreTryingToFind":"Konumunuzu tespit etmeye çalışıyoruz ...",
     "releaseProduct":"Ürünü yayınla",
+    "showProfileAndEdit":"Profili gör ve düzenle",
 
 
-    // Add Product
+
+      "home":"Home",
+    "chats":"Sohbetler",
+    "sell":"Sat",
+    "myProducts":"Ürünlerim",
+    "account":"Hesap",
+
+
+
+
     "includeSomeDetails":"Detaylar ekleyin",
     "title":"Başlık",
 
 
-    // Buttons
+
     "delete":"Sil",
     "buttonCancel": "İptal",
     "buttonYes": "Evet",
@@ -101,7 +111,7 @@
     "buttonOk": "Tamam",
     "next":"İlerle",
 
-    // Dialogs
+
     "dialogDeleteAccountTitle": "Hesabı Sil",
     "dialogDeleteAccountContent": "Tüm bilgilerinizz hesabınızla beraber silinecektir, silmek istediğinize emin misiniz ?",
     "dialogIgnoreChangesTitle": "Değişikleri yoksay",
@@ -113,21 +123,21 @@
     "dialogPasswordResetTitle": "Şifreyi sıfırla",
     "dialogPasswordResetContent": "Şuan parola sıfırlamak için bir email gönderdik, lütfen kontrol ediniz.",
    
-    // Errors    
+
     "anErrorOccurred": "Bir hata oluştu",
     
-    // Loadings 
+
     "pleaseWait": "Lütfen bekleyiz ",
     "wait":"bekleyin",
 
-    // Product
+
     "noOneSellTheProducts":"Şuan herhangi bir ürün satışta değil",
 
-    // Chat
+
     "hasNoData": "Veriler henüz gelmedi",
     "thereIsNoChat":"Henüz hiçbir konuşmanız yok",
 
-    // textformfield
+
     "thisFieldCannotBeBlank": "Bu alan boş bırakılamaz"
 
 

@@ -12,6 +12,7 @@ import 'package:second_hand/services/cloud/user/user_service.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 import 'package:second_hand/view/_product/_widgets/grid_view/refreshable_product_grid_view.dart';
 import 'package:second_hand/view/app/account/editprofile/viewmodel/edit_profile_notifier.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 
 class AccountDetailView extends StatefulWidget {
   const AccountDetailView({super.key, required this.user});
@@ -35,7 +36,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
     final localUser = context.watch<UserInformationNotifier>().userInformation;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Account detail'),
+        title: Text(context.loc.accountDetail),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,12 +60,12 @@ class _AccountDetailViewState extends State<AccountDetailView> {
                     children: [
                       FollowInformationColumn(
                         count: (isLocalUser ? localUser : widget.user)!.followers.length,
-                        countName: 'Follower',
+                        countName: context.loc.follower,
                         userInformation: widget.user,
                       ),
                       FollowInformationColumn(
                         count: (isLocalUser ? localUser : widget.user)!.following.length,
-                        countName: 'Following',
+                        countName: context.loc.following,
                         userInformation: widget.user,
                       ),
                     ],
@@ -84,7 +85,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
                               path: NavigationConstants.EDIT_PROFILE,
                             );
                           },
-                          child: const Text('Edit Profile'),
+                          child: Text(context.loc.editProfile),
                         )
                       : FollowButtonView(user: widget.user),
                 ],
@@ -200,7 +201,7 @@ class _FollowButtonViewState extends State<FollowButtonView> {
     return CustomElevatedButton(
       dynamicWidth: 0.3,
       onPressed: isFollow ? breakFollow : follow,
-      child: Text(isFollow ? 'Break Follow' : 'Follow'),
+      child: Text(isFollow ? context.loc.breakFollow : context.loc.follow),
     );
   }
 }

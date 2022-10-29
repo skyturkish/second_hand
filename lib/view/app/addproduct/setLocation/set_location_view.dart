@@ -3,6 +3,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
 import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/product/utilities/location/location_manager.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';
@@ -34,8 +35,8 @@ class _SetLocationViewState extends State<SetLocationView> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Location',
+          title: Text(
+            context.loc.location,
           ),
         ),
         body: Padding(
@@ -45,7 +46,7 @@ class _SetLocationViewState extends State<SetLocationView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'We are trying to find your location ...',
+                      context.loc.weAreTryingToFind,
                       style: Theme.of(context).textTheme.headline6!.copyWith(
                             color: const Color.fromARGB(255, 67, 117, 167),
                           ),
@@ -59,7 +60,9 @@ class _SetLocationViewState extends State<SetLocationView> {
                   children: [
                     Card(
                       child: ListTile(
-                        title: const Text('Location'),
+                        title: Text(
+                          context.loc.location,
+                        ),
                         subtitle: Row(
                           children: [
                             const Icon(
@@ -75,29 +78,32 @@ class _SetLocationViewState extends State<SetLocationView> {
                     ),
                     const Spacer(),
                     CustomElevatedButton(
-                        onPressed: placeMark == null
-                            ? null
-                            : () async {
-                                final saleProductProvider = context.read<SaleProductNotifier>();
-                                saleProductProvider.updateProduct(
-                                  productSellState: 'Sell',
-                                  locateCountry: 'Turkey',
-                                  locateCity: 'Izmir',
-                                );
+                      onPressed: placeMark == null
+                          ? null
+                          : () async {
+                              final saleProductProvider = context.read<SaleProductNotifier>();
+                              saleProductProvider.updateProduct(
+                                productSellState: 'Sell',
+                                locateCountry: 'Turkey',
+                                locateCity: 'Izmir',
+                              );
 
-                                ProductCloudFireStoreService.instance.createProduct(
-                                  product: saleProductProvider.localProduct!,
-                                  images: saleProductProvider.images,
-                                );
+                              ProductCloudFireStoreService.instance.createProduct(
+                                product: saleProductProvider.localProduct!,
+                                images: saleProductProvider.images,
+                              );
 
-                                saleProductProvider.clearSaleProduct();
+                              saleProductProvider.clearSaleProduct();
 
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                              },
-                        child: const Text('Release Product'))
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                      child: Text(
+                        context.loc.releaseProduct,
+                      ),
+                    )
                   ],
                 ),
         ),

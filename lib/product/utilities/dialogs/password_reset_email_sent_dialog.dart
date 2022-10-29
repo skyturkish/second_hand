@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/product/utilities/dialogs/generic_dialog.dart';
 
 Future<void> showPasswordResetSentDialog(BuildContext context) {
   return showGenericDialog(
     context: context,
-    title: 'Password reset',
-    content: 'We have now sent you a pssword reset link. Please Chech your email for more information',
+    title: context.loc.dialogPasswordResetTitle,
+    content: context.loc.dialogPasswordResetContent,
     optionsBuilder: () => {
-      'OK': null,
+      context.loc.buttonOk: null,
     },
   );
 }

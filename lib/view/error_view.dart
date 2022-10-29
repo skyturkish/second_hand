@@ -8,15 +8,9 @@ class ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            LottieAnimationView(animation: LottieAnimation.notFound),
-            Text('asdas'),
-          ],
-        ),
+        child: LottieAnimationView(animation: LottieAnimation.notFound),
       ),
     );
   }

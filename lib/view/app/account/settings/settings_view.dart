@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/core/init/notifier/theme_notifer.dart';
 import 'package:second_hand/services/auth/bloc/app_bloc.dart';
 import 'package:second_hand/services/auth/bloc/app_event.dart';
@@ -13,17 +14,17 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(context.loc.settings),
       ),
       body: Column(
         children: [
           OptionListTile(
-            titleText: 'Notifications',
-            subTitleText: 'Recommendations & Special communications',
+            titleText: context.loc.notifications,
+            subTitleText: context.loc.recommendations,
             onTap: () {},
           ),
           OptionListTile(
-            titleText: 'Logout',
+            titleText: context.loc.logout,
             onTap: () async {
               final logoutDecision = await showLogOutDialog(context);
               if (logoutDecision) {
@@ -35,23 +36,23 @@ class SettingsView extends StatelessWidget {
               }
             },
           ),
-          OptionListTile(
-            titleText: 'Delete account --- DİSABLED',
-            onTap: () async {
-              // final deleteDecision = await showDeleteAccountDialog(context);
+          // OptionListTile(
+          //   titleText:  'Delete account --- DİSABLED',
+          //   onTap: () async {
+          //     final deleteDecision = await showDeleteAccountDialog(context);
 
-              // if (deleteDecision) {
-              //   // son zamanlarda girilmeyi isteyebiliyor bazen hesabın silinmesi için onu handle et
-              //   Navigator.of(context).pop();
+          //     if (deleteDecision) {
+          //       // son zamanlarda girilmeyi isteyebiliyor bazen hesabın silinmesi için onu handle et
+          //       Navigator.of(context).pop();
 
-              //   context.read<AppBloc>().add(
-              //         AppEventDeleteAccount(context),
-              //       );
-              // }
-            },
-          ),
+          //       context.read<AppBloc>().add(
+          //             AppEventDeleteAccount(context),
+          //           );
+          //     }
+          //   },
+          // ),
           OptionListTile(
-            titleText: 'Dark/Light',
+            titleText: context.loc.darkLight,
             onTap: () {
               context.read<ThemeNotifier>().changeTheme();
             },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
@@ -21,7 +22,7 @@ class IncludeSomeDetailsViewState extends IncludeSomeDetailsViewModel {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Include some details'),
+        title: Text(context.loc.includeSomeDetails),
       ),
       body: Form(
         key: formKey,
@@ -66,7 +67,7 @@ class _TitleTextFormFieldState extends State<TitleTextFormField> {
       child: CustomTextFormField(
         line: 2,
         controller: widget.titleController,
-        labelText: 'title',
+        labelText: context.loc.title,
         prefix: const Icon(Icons.title_outlined),
         maxLetter: 75,
         onChanged: (text) {
@@ -97,7 +98,7 @@ class _DescriptionTextFormFieldState extends State<DescriptionTextFormField> {
       child: CustomTextFormField(
         line: 4,
         controller: widget.describeController,
-        labelText: 'description',
+        labelText: context.loc.description,
         prefix: const Icon(Icons.description),
         maxLetter: 300,
         onChanged: (text) {
@@ -166,8 +167,8 @@ class NextButton extends StatelessWidget {
           NavigationService.instance.navigateToPage(path: NavigationConstants.UPLOAD_PHOTOS);
         }
       },
-      child: const Text(
-        'Next',
+      child: Text(
+        context.loc.next,
       ),
     );
   }

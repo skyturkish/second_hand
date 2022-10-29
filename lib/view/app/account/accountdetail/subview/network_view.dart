@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/view/_product/enums/follow_type.dart';
 import 'package:second_hand/view/app/account/accountdetail/subview/follow_information_view.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 
 class NetworkView extends StatefulWidget {
   const NetworkView({super.key, required this.userInformation});
@@ -25,7 +26,7 @@ class NetworkViewState extends State<NetworkView> with TickerProviderStateMixin 
       length: FollowTypeEnum.values.length,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('My Network'),
+          title: Text(context.loc.myNetwork),
           bottom: _myTabView(),
         ),
         body: _tabbarView(),

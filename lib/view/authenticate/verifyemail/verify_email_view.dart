@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/services/auth/bloc/app_bloc.dart';
 import 'package:second_hand/services/auth/bloc/app_event.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
@@ -20,7 +21,7 @@ class VerifyEmailViewState extends State<VerifyEmailView> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Verify Email',
+            context.loc.verifyEmail,
             style: Theme.of(context).textTheme.headline5,
           ),
         ),
@@ -29,8 +30,8 @@ class VerifyEmailViewState extends State<VerifyEmailView> {
             children: [
               Padding(
                 padding: context.paddingOnlyTopSmall,
-                child: const Text(
-                  "If you haven't received a verification email yet, press the buton below",
+                child: Text(
+                  context.loc.ifYouHavenotReceived,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -42,13 +43,13 @@ class VerifyEmailViewState extends State<VerifyEmailView> {
                           const AppEventSendEmailVerification(),
                         );
                   },
-                  child: const Text('Send email verification'),
+                  child: Text(context.loc.sendEmailVerification),
                 ),
               ),
               Padding(
                 padding: context.paddingOnlyTopMedium,
-                child: const Text(
-                  "we've sent you an email... Please open it to verify your account",
+                child: Text(
+                  context.loc.weHaveSentYouAnEmail,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -60,8 +61,8 @@ class VerifyEmailViewState extends State<VerifyEmailView> {
                           AppEventLogOut(context),
                         );
                   },
-                  child: const Text(
-                    'Login here!',
+                  child: Text(
+                    context.loc.loginHere,
                   ),
                 ),
               ),

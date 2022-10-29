@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/product/utilities/image_pick/image_picker_manager.dart';
 import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
@@ -20,7 +21,7 @@ class UploadPhotosView extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Upload Photos'),
+        title: Text(context.loc.uploadPhotos),
       ),
       body: Column(
         children: [
@@ -94,7 +95,7 @@ class FromGalleryButton extends StatelessWidget {
               newImages: fileImages.toList(),
             );
       },
-      child: const Text('From gallery'),
+      child: Text(context.loc.fromGallery),
     );
   }
 }
@@ -120,7 +121,7 @@ class TakeAPictureButton extends StatelessWidget {
           newImages: [fileImage],
         );
       },
-      child: const Text('Take a picture'),
+      child: Text(context.loc.takeAPicture),
     );
   }
 }
@@ -177,16 +178,16 @@ class NextButton extends StatelessWidget {
     return CustomElevatedButton(
       onPressed: () {
         if (context.read<SaleProductNotifier>().images.isEmpty) {
-          const snackBar = SnackBar(
-            content: Text('You must select at least one photo'),
+          final snackBar = SnackBar(
+            content: Text(context.loc.youMustSelect),
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
           return;
         }
         NavigationService.instance.navigateToPage(path: NavigationConstants.SET_A_PRICE);
       },
-      child: const Text(
-        'Next',
+      child: Text(
+        context.loc.next,
       ),
     );
   }

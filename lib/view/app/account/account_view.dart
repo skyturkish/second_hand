@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/app/app_constants.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
 import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/core/extensions/string/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
@@ -27,9 +28,9 @@ class AccountViewState extends State<AccountView> {
             Padding(
               padding: context.paddingOnlyTopSmall / 2,
               child: OptionListTile(
-                titleText: 'Settings',
+                titleText: context.loc.settings,
                 leadingIcon: Icons.settings,
-                subTitleText: 'Privacy and logout',
+                subTitleText: context.loc.privacyAndLogout,
                 onTap: () {
                   NavigationService.instance.navigateToPage(path: NavigationConstants.SETTINGS_VIEW);
                 },
@@ -38,9 +39,9 @@ class AccountViewState extends State<AccountView> {
             Padding(
               padding: context.paddingOnlyTopSmall / 2,
               child: OptionListTile(
-                titleText: 'Help & Support',
+                titleText: context.loc.helpAndSupport,
                 leadingIcon: Icons.support_agent_outlined,
-                subTitleText: 'Help center and legal terms',
+                subTitleText: context.loc.helpCenter,
                 onTap: () {
                   NavigationService.instance.navigateToPage(path: NavigationConstants.HELP_AND_SUPPORT);
                 },

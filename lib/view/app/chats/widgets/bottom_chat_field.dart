@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/services/chat/chat_service.dart';
@@ -37,10 +38,10 @@ class _BottomChatFieldState extends State<BottomChatField> {
           Expanded(
             child: TextFormField(
               controller: messageController,
-              decoration: const InputDecoration(hintText: 'write here!'),
+              decoration: InputDecoration(hintText: context.loc.writeHere),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "you can't send empty message";
+                  return context.loc.youCantSendEmptyMessage;
                 }
                 return null;
               },

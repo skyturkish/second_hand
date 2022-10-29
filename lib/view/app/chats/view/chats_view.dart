@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/services/auth/auth_service.dart';
 import 'package:second_hand/view/_product/enums/chat_contact_type_enum.dart';
 import '../../../_product/_widgets/row/chat_contact_information.dart';
@@ -26,7 +27,7 @@ class ChatsViewState extends State<ChatsView> with TickerProviderStateMixin {
       length: ChatContactType.values.length,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('My Chats'),
+          title: Text(context.loc.myChats),
           bottom: _myTabView(),
         ),
         body: _tabbarView(),

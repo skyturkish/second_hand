@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/services/auth/bloc/app_bloc.dart';
 import 'package:second_hand/services/auth/bloc/app_event.dart';
 import 'package:second_hand/services/auth/bloc/app_state.dart';
@@ -29,14 +30,14 @@ class ForgotPasswordViewState extends ForgotPasswordViewModel {
           if (state.exception != null) {
             await showErrorDialog(
               context,
-              'We could not process your request, Please make sure that you are a registered user, or if not, register a user now by going back one step',
+              context.loc.weCouldNotProcessYourRequest,
             );
           }
         }
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Forgot Password'),
+          title: Text(context.loc.forgotPassword),
         ),
         body: Padding(
           padding: context.paddingAllMedium,
@@ -45,7 +46,7 @@ class ForgotPasswordViewState extends ForgotPasswordViewModel {
               key: formKey,
               child: Column(
                 children: [
-                  const Text('If you forgot your password, simply enter your email and we will send you a password'),
+                  Text(context.loc.ifYouForgotYourPassword),
                   EmailTextFormField(controller: controller),
                   SendPasswordButton(controller: controller),
                   const BackToLoginButton(),

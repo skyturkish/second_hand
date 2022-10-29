@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/product/utilities/dialogs/generic_dialog.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 
 Future<bool> ignoreChanges(BuildContext context) {
   return showGenericDialog<bool>(
     context: context,
-    title: 'Ignore Changes',
-    content: 'Are you sure you ignore the changes?',
+    title: context.loc.dialogIgnoreChangesTitle,
+    content: context.loc.dialogIgnoreChangesContent,
     optionsBuilder: () => {
-      'Cancel': false,
-      'Yes': true,
+      context.loc.buttonCancel: false,
+      context.loc.buttonYes: true,
     },
   ).then(
     (value) => value ?? false,

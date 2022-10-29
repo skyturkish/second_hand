@@ -11,6 +11,7 @@ import 'package:second_hand/services/cloud/user/user_service.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 import 'package:second_hand/view/app/account/editprofile/view/select_image_bottom_sheet.dart';
 import 'package:second_hand/view/app/account/editprofile/viewmodel/edit_profile_notifier.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 
 class EditProfileView extends StatefulWidget {
   const EditProfileView({super.key});
@@ -55,7 +56,7 @@ class _EditProfileViewState extends State<EditProfileView> {
 
   // bir provider'ın başka bir providerla haberleşmesi normal anlaşılır
   Future<void> saveChangesAndLeaveEditView() async {
-    LoadingScreen().show(context: context, text: 'wait');
+    LoadingScreen().show(context: context, text: context.loc.wait);
 
     final profilePhotoDownloadUrl = await context.read<EditProfileNotifier>().changeFirebasePhotoIfPhotoChange(
           userId: AuthService.firebase().currentUser!.id,
@@ -98,7 +99,7 @@ class _EditProfileViewState extends State<EditProfileView> {
               await saveChangesAndLeaveEditView();
             },
             child: Text(
-              'Save',
+              context.loc.save,
               style: Theme.of(context).textTheme.headline6!.copyWith(
                     color: context.colors.secondary,
                   ),
@@ -111,7 +112,7 @@ class _EditProfileViewState extends State<EditProfileView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Informations',
+              context.loc.informations,
               style: Theme.of(context).textTheme.headline5!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -132,11 +133,11 @@ class _EditProfileViewState extends State<EditProfileView> {
             Padding(
               padding: context.paddingOnlyTopSmall + context.paddingOnlyBottomSmall,
               child: IgnorePointer(
-                child: CustomTextFormField(controller: emailController, labelText: 'E-mail adress'),
+                child: CustomTextFormField(controller: emailController, labelText: context.loc.email),
               ),
             ),
-            const Text(
-              'You are a verified user. Buyers will take this into account. ',
+            Text(
+              context.loc.youAreAVerifiedUser,
               textAlign: TextAlign.center,
             ),
           ],
@@ -165,7 +166,7 @@ class _EnterNameTextFormFieldState extends State<EnterNameTextFormField> {
       width: MediaQuery.of(context).size.width * 0.6,
       child: CustomTextFormField(
         controller: widget.nameController,
-        labelText: 'Enter name',
+        labelText: context.loc.enterName,
         maxLetter: 25,
         onChanged: (text) {
           setState(() {});
@@ -194,7 +195,7 @@ class _WriteAboutYouTextFormFieldState extends State<WriteAboutYouTextFormField>
       padding: context.paddingOnlyTopSmall,
       child: CustomTextFormField(
         controller: widget.aboutYouController,
-        labelText: 'Write about you',
+        labelText: context.loc.writeAboutYou,
         maxLetter: 150,
         onChanged: (text) {
           setState(() {});

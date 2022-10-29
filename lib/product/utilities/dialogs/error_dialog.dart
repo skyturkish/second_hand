@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/product/utilities/dialogs/generic_dialog.dart';
 
 Future<void> showErrorDialog(
@@ -7,10 +8,10 @@ Future<void> showErrorDialog(
 ) {
   return showGenericDialog<void>(
     context: context,
-    title: 'An error occurred',
+    title: context.loc.anErrorOccurred,
     content: text,
     optionsBuilder: () => {
-      'OK': null,
+      context.loc.buttonOk: null,
     },
   );
 }

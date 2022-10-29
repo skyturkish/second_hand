@@ -1,4 +1,5 @@
 // ignore_for_file: camel_case_types
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
@@ -42,7 +43,7 @@ class _RefreshsableProductGridViewState extends State<RefreshsableProductGridVie
         : products!.isEmpty
             ? Center(
                 child: Text(
-                  'No one sell the products, now',
+                  context.loc.noOneSellTheProducts,
                   style: Theme.of(context).textTheme.headline5,
                 ),
               )

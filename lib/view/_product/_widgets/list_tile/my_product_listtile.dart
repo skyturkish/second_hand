@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:second_hand/core/extensions/string/string_extension.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 
 @immutable
 class MyProductsListTile extends StatelessWidget {
@@ -39,9 +40,9 @@ class MyProductsListTile extends StatelessWidget {
         },
         itemBuilder: (context) {
           return [
-            const PopupMenuItem<MyProductAction>(
+            PopupMenuItem<MyProductAction>(
               value: MyProductAction.delete,
-              child: Text('delete'),
+              child: Text(context.loc.delete),
             ),
           ];
         },

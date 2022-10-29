@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:second_hand/product/utilities/image_pick/image_picker_manager.dart';
+import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 
 extension SelectImageFrom on SelectPhotoFromBottomSheet {
   // --> from https://vbacik-10.medium.com/season-two-flutter-short-but-golds-8cff8f4b0b29
@@ -19,7 +20,7 @@ class SelectPhotoFromBottomSheet extends StatelessWidget {
       children: [
         ListTile(
           leading: const Icon(Icons.camera_alt_outlined),
-          title: const Text('From camera'),
+          title: Text(context.loc.fromCamera),
           onTap: () async {
             final XFile? selectedImage =
                 await ImagePickerManager.instance.pickSingleImage(imageSource: ImageSource.camera);
@@ -32,7 +33,7 @@ class SelectPhotoFromBottomSheet extends StatelessWidget {
         ),
         ListTile(
           leading: const Icon(Icons.image),
-          title: const Text('From gallery'),
+          title: Text(context.loc.fromGallery),
           onTap: () async {
             final XFile? selectedImage =
                 await ImagePickerManager.instance.pickSingleImage(imageSource: ImageSource.gallery);
