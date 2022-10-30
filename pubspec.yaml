@@ -44,6 +44,10 @@ dependencies:
   shimmer: ^2.0.0
   lottie: ^1.4.3
   image_cropper: ^3.0.0
+  flutter_native_splash: ^2.2.13
+
+  # Network
+  connectivity_plus: ^3.0.2
 
   # Location
   geolocator: ^9.0.2
@@ -52,11 +56,10 @@ dependencies:
   # ID
   uuid: ^3.0.6
 
-  equatable: ^2.0.5
-  google_fonts: ^3.0.1
+  # localization
   intl: ^0.17.0
-  connectivity_plus: ^3.0.2
 
+  equatable: ^2.0.5
 dev_dependencies:
   flutter_test:
     sdk: flutter

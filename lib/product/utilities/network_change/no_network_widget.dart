@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
 import 'package:second_hand/product/utilities/network_change/network_change_manager.dart';
+import 'package:second_hand/product/utilities/network_change/network_result_enum.dart';
 import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';
 
 class NoNetworkWidget extends StatefulWidget {

@@ -1,26 +1,9 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:second_hand/product/utilities/network_change/network_result_enum.dart';
 
 typedef NetworkCallBack = void Function(NetworkResult result);
-
-enum NetworkResult {
-  ON,
-  OFF;
-
-  static NetworkResult checkConnectivityResult(ConnectivityResult result) {
-    switch (result) {
-      case ConnectivityResult.bluetooth:
-      case ConnectivityResult.wifi:
-      case ConnectivityResult.ethernet:
-      case ConnectivityResult.mobile:
-      case ConnectivityResult.vpn:
-        return NetworkResult.ON;
-      case ConnectivityResult.none:
-        return NetworkResult.OFF;
-    }
-  }
-}
 
 abstract class INetworkChangeManager {
   Future<NetworkResult> checkNetworkFirstTime();
