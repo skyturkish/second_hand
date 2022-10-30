@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/app/app_constants.dart';
 import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
@@ -24,7 +25,6 @@ import 'package:second_hand/view/authenticate/forgotpassword/view/forgot_passwor
 import 'package:second_hand/view/authenticate/login/view/login_view.dart';
 import 'package:second_hand/view/authenticate/register/view/register_view.dart';
 import 'package:second_hand/view/authenticate/verifyemail/verify_email_view.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   await _init();
@@ -50,7 +50,9 @@ Future<void> _init() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +72,9 @@ class MyApp extends StatelessWidget {
 }
 
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

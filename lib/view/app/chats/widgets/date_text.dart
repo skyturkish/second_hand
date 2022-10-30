@@ -3,9 +3,9 @@ import 'package:second_hand/core/extensions/build_context/context_extension.dart
 
 class DateText extends StatelessWidget {
   const DateText({
-    Key? key,
+    super.key,
     required this.date,
-  }) : super(key: key);
+  });
 
   final String date;
 

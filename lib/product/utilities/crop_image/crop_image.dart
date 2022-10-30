@@ -22,11 +22,12 @@ class CropImage {
       ],
       uiSettings: [
         AndroidUiSettings(
-            toolbarTitle: 'Cropper',
-            toolbarColor: context.colors.primary,
-            toolbarWidgetColor: context.colors.onPrimary,
-            initAspectRatio: CropAspectRatioPreset.original,
-            lockAspectRatio: false),
+          toolbarTitle: 'Cropper',
+          toolbarColor: context.colors.primary,
+          toolbarWidgetColor: context.colors.onPrimary,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
+        ),
         IOSUiSettings(
           title: 'Cropper',
         ),

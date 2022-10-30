@@ -11,7 +11,9 @@ import 'package:second_hand/view/app/home/home_view.dart';
 import 'package:second_hand/view/app/my_ads/product_tabbar.dart';
 
 class BottomNavigationView extends StatefulWidget {
-  const BottomNavigationView({super.key});
+  const BottomNavigationView({
+    super.key,
+  });
 
   @override
   State<BottomNavigationView> createState() => BottomNavigationViewState();

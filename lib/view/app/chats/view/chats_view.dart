@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:second_hand/core/extensions/build_context/context_extension.dart';
 import 'package:second_hand/core/extensions/build_context/loc.dart';
 import 'package:second_hand/services/auth/auth_service.dart';
+import 'package:second_hand/view/_product/_widgets/row/chat_contact_information.dart';
 import 'package:second_hand/view/_product/enums/chat_contact_type_enum.dart';
-import '../../../_product/_widgets/row/chat_contact_information.dart';
 
 class ChatsView extends StatefulWidget {
-  const ChatsView({super.key});
+  const ChatsView({
+    super.key,
+  });
 
   @override
   State<ChatsView> createState() => ChatsViewState();

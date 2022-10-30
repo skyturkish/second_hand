@@ -8,7 +8,9 @@ import 'package:second_hand/services/auth/bloc/app_event.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 
 class VerifyEmailView extends StatefulWidget {
-  const VerifyEmailView({super.key});
+  const VerifyEmailView({
+    super.key,
+  });
 
   @override
   VerifyEmailViewState createState() => VerifyEmailViewState();
@@ -42,8 +44,8 @@ class VerifyEmailViewState extends State<VerifyEmailView> {
 
 class IfYouHaveNotReceivedText extends StatelessWidget {
   const IfYouHaveNotReceivedText({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +61,8 @@ class IfYouHaveNotReceivedText extends StatelessWidget {
 
 class SendEmailVerificationButton extends StatelessWidget {
   const SendEmailVerificationButton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +84,8 @@ class SendEmailVerificationButton extends StatelessWidget {
 
 class WeHaveSentYouAnEmailText extends StatelessWidget {
   const WeHaveSentYouAnEmailText({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -99,8 +101,8 @@ class WeHaveSentYouAnEmailText extends StatelessWidget {
 
 class LoginHereButton extends StatelessWidget {
   const LoginHereButton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

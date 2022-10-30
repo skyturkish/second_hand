@@ -12,7 +12,9 @@ import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_for
 import 'package:second_hand/view/app/addproduct/setprice/viewmodel/set_a_price_view_model.dart';
 
 class SetAPriceView extends StatefulWidget {
-  const SetAPriceView({super.key});
+  const SetAPriceView({
+    super.key,
+  });
 
   @override
   State<SetAPriceView> createState() => SetAPriceViewState();
@@ -44,10 +46,9 @@ class SetAPriceViewState extends SetAPriceViewModel {
 
 class PriceTextFormField extends StatelessWidget {
   const PriceTextFormField({
-    Key? key,
+    super.key,
     required TextEditingController priceController,
-  })  : _priceController = priceController,
-        super(key: key);
+  }) : _priceController = priceController;
 
   final TextEditingController _priceController;
 
@@ -63,7 +64,7 @@ class PriceTextFormField extends StatelessWidget {
       inputFormatters: [
         // only let positivi numbers -->
         // from https://stackoverflow.com/questions/71841263/flutter-textfield-only-positive-numbers
-        FilteringTextInputFormatter.allow(RegExp(r'^[1-9][0-9]*')),
+        FilteringTextInputFormatter.allow(RegExp('^[1-9][0-9]*')),
       ],
     );
   }
@@ -71,12 +72,11 @@ class PriceTextFormField extends StatelessWidget {
 
 class NextButton extends StatelessWidget {
   const NextButton({
-    Key? key,
+    super.key,
     required GlobalKey<FormState> formKey,
     required TextEditingController priceController,
   })  : _formKey = formKey,
-        _priceController = priceController,
-        super(key: key);
+        _priceController = priceController;
 
   final GlobalKey<FormState> _formKey;
   final TextEditingController _priceController;

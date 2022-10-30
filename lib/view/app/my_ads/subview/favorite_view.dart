@@ -5,7 +5,9 @@ import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/favorite_product_listtile/favorite_product_listtile.dart';
 
 class FavoritesView extends StatefulWidget {
-  const FavoritesView({super.key});
+  const FavoritesView({
+    super.key,
+  });
 
   @override
   State<FavoritesView> createState() => FavoritesViewState();
@@ -25,8 +27,8 @@ class FavoritesViewState extends State<FavoritesView> with AutomaticKeepAliveCli
 
 class StreamMyFavoriteProductsStream extends StatelessWidget {
   const StreamMyFavoriteProductsStream({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

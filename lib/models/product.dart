@@ -44,16 +44,17 @@ class Product {
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
-    result.addAll({'productId': productId});
-    result.addAll({'ownerId': ownerId});
-    result.addAll({'condition': condition});
-    result.addAll({'title': title});
-    result.addAll({'description': description});
-    result.addAll({'imagesUrl': imagesUrl});
-    result.addAll({'price': price});
-    result.addAll({'productSellState': productSellState});
-    result.addAll({'locateCountry': locateCountry});
-    result.addAll({'locateCity': locateCity});
+    result
+      ..addAll({'productId': productId})
+      ..addAll({'ownerId': ownerId})
+      ..addAll({'condition': condition})
+      ..addAll({'title': title})
+      ..addAll({'description': description})
+      ..addAll({'imagesUrl': imagesUrl})
+      ..addAll({'price': price})
+      ..addAll({'productSellState': productSellState})
+      ..addAll({'locateCountry': locateCountry})
+      ..addAll({'locateCity': locateCity});
 
     return result;
   }

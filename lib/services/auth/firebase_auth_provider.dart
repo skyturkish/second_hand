@@ -103,7 +103,7 @@ class FirebaseAuthProvider implements AuthProvider {
       throw UserNotLoggedInAuthException();
     }
 
-    GoogleSignIn googleSignIn = GoogleSignIn();
+    final googleSignIn = GoogleSignIn();
     await googleSignIn.disconnect();
     await FirebaseAuth.instance.signOut();
   }
@@ -153,10 +153,10 @@ class FirebaseAuthProvider implements AuthProvider {
   @override
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    final googleAuth = await googleUser?.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(

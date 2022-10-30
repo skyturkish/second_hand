@@ -17,12 +17,13 @@ class Message {
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
-    result.addAll({'senderId': senderId});
-    result.addAll({'receiverId': receiverId});
-    result.addAll({'text': text});
-    result.addAll({'timeSent': timeSent.millisecondsSinceEpoch});
-    result.addAll({'messageId': messageId});
-    result.addAll({'isSeen': isSeen});
+    result
+      ..addAll({'senderId': senderId})
+      ..addAll({'receiverId': receiverId})
+      ..addAll({'text': text})
+      ..addAll({'timeSent': timeSent.millisecondsSinceEpoch})
+      ..addAll({'messageId': messageId})
+      ..addAll({'isSeen': isSeen});
 
     return result;
   }

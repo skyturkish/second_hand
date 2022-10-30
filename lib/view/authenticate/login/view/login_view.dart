@@ -11,7 +11,9 @@ import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_for
 import 'package:second_hand/view/authenticate/login/viewmdoel/login_view_model.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+  const LoginView({
+    super.key,
+  });
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -64,9 +66,9 @@ class _LoginViewState extends LoginViewmodel {
 
 class EmailTextFormField extends StatelessWidget {
   const EmailTextFormField({
-    Key? key,
+    super.key,
     required this.emailController,
-  }) : super(key: key);
+  });
 
   final TextEditingController emailController;
 
@@ -86,9 +88,9 @@ class EmailTextFormField extends StatelessWidget {
 
 class PasswordTextFormField extends StatelessWidget {
   const PasswordTextFormField({
-    Key? key,
+    super.key,
     required this.passwordController,
-  }) : super(key: key);
+  });
 
   final TextEditingController passwordController;
 
@@ -110,10 +112,10 @@ class PasswordTextFormField extends StatelessWidget {
 
 class LoginButton extends StatelessWidget {
   const LoginButton({
-    Key? key,
+    super.key,
     required this.emailController,
     required this.passwordController,
-  }) : super(key: key);
+  });
 
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -139,8 +141,8 @@ class LoginButton extends StatelessWidget {
 
 class ForgotPasswordButton extends StatelessWidget {
   const ForgotPasswordButton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -157,8 +159,8 @@ class ForgotPasswordButton extends StatelessWidget {
 
 class SignInWithGoogleButton extends StatelessWidget {
   const SignInWithGoogleButton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -175,8 +177,8 @@ class SignInWithGoogleButton extends StatelessWidget {
 
 class NotRegisterYetButton extends StatelessWidget {
   const NotRegisterYetButton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

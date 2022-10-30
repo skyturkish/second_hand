@@ -12,8 +12,10 @@ class SpaceDarkTheme implements AppTheme {
 
   @override
   ThemeData? get theme => ThemeData.dark().copyWith(
-        floatingActionButtonTheme:
-            const FloatingActionButtonThemeData(backgroundColor: Color.fromARGB(133, 83, 92, 145), elevation: 10),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Color.fromARGB(133, 83, 92, 145),
+          elevation: 10,
+        ),
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(
             fontSize: 18,

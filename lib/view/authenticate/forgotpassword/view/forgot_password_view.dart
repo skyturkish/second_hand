@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:second_hand/core/extensions/build_context/context_extension.dart';
 import 'package:second_hand/core/extensions/build_context/loc.dart';
+import 'package:second_hand/product/utilities/dialogs/error_dialog.dart';
+import 'package:second_hand/product/utilities/dialogs/password_reset_email_sent_dialog.dart';
 import 'package:second_hand/services/auth/bloc/app_bloc.dart';
 import 'package:second_hand/services/auth/bloc/app_event.dart';
 import 'package:second_hand/services/auth/bloc/app_state.dart';
-import 'package:second_hand/product/utilities/dialogs/error_dialog.dart';
-import 'package:second_hand/product/utilities/dialogs/password_reset_email_sent_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 import 'package:second_hand/view/authenticate/forgotpassword/viewmodel/forgot_password_view_model.dart';
 
 class ForgotPasswordView extends StatefulWidget {
-  const ForgotPasswordView({super.key});
+  const ForgotPasswordView({
+    super.key,
+  });
 
   @override
   ForgotPasswordViewState createState() => ForgotPasswordViewState();
@@ -62,9 +64,9 @@ class ForgotPasswordViewState extends ForgotPasswordViewModel {
 
 class EmailTextFormField extends StatelessWidget {
   const EmailTextFormField({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   final TextEditingController controller;
 
@@ -81,9 +83,9 @@ class EmailTextFormField extends StatelessWidget {
 
 class SendPasswordButton extends StatelessWidget {
   const SendPasswordButton({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   final TextEditingController controller;
 
@@ -101,8 +103,8 @@ class SendPasswordButton extends StatelessWidget {
 
 class BackToLoginButton extends StatelessWidget {
   const BackToLoginButton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

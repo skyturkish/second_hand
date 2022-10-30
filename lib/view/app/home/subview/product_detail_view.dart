@@ -54,9 +54,9 @@ class ProductDetailView extends StatelessWidget {
 
 class ImagesPageView extends StatelessWidget {
   const ImagesPageView({
-    Key? key,
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
 
   final Product product;
 
@@ -90,9 +90,9 @@ class ImagesPageView extends StatelessWidget {
 
 class PageIndicatorAndCount extends StatelessWidget {
   const PageIndicatorAndCount({
-    Key? key,
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
 
   final Product product;
 
@@ -126,9 +126,9 @@ class PageIndicatorAndCount extends StatelessWidget {
 
 class PriceAndFavoriteButtonRow extends StatelessWidget {
   const PriceAndFavoriteButtonRow({
-    Key? key,
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
 
   final Product product;
 
@@ -187,9 +187,9 @@ class CircleImageCount extends StatelessWidget {
 
 class DescriptionText extends StatelessWidget {
   const DescriptionText({
-    Key? key,
+    super.key,
     required this.description,
-  }) : super(key: key);
+  });
 
   final String description;
 
@@ -224,9 +224,9 @@ class DescriptionText extends StatelessWidget {
 
 class StartTalkingButton extends StatelessWidget {
   const StartTalkingButton({
-    Key? key,
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
 
   final Product product;
 

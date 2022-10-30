@@ -4,9 +4,9 @@ import 'package:second_hand/models/product.dart';
 
 class LocationInformationRow extends StatelessWidget {
   const LocationInformationRow({
-    Key? key,
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
 
   final Product product;
 

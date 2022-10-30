@@ -5,7 +5,7 @@ import 'package:second_hand/product/utilities/network_change/network_result_enum
 import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';
 
 class NoNetworkWidget extends StatefulWidget {
-  const NoNetworkWidget({Key? key}) : super(key: key);
+  const NoNetworkWidget({super.key});
 
   @override
   State<NoNetworkWidget> createState() => NoNetworkWidgetState();
@@ -21,12 +21,11 @@ class NoNetworkWidgetState extends State<NoNetworkWidget> {
     _networkChange = NetworkChangeManager();
 
     fetchFirstResult();
-    _networkChange.handleNetworkChange((result) {
-      _updateView(result);
-    });
+
+    _networkChange.handleNetworkChange(_updateView);
   }
 
-  void fetchFirstResult() async {
+  Future<void> fetchFirstResult() async {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       final result = await _networkChange.checkNetworkFirstTime();
       _updateView(result);

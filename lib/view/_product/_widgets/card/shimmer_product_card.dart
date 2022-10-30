@@ -31,17 +31,19 @@ class ShimmerProductCard extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                    padding: context.paddingOnlyTopSmall,
-                    child: SizedBox(
-                      width: context.dynamicWidth(0.12),
-                      height: 15,
-                    )),
+                  padding: context.paddingOnlyTopSmall,
+                  child: SizedBox(
+                    width: context.dynamicWidth(0.12),
+                    height: 15,
+                  ),
+                ),
                 Padding(
-                    padding: context.paddingOnlyBottomSmall,
-                    child: SizedBox(
-                      width: context.dynamicWidth(0.16),
-                      height: 15,
-                    )),
+                  padding: context.paddingOnlyBottomSmall,
+                  child: SizedBox(
+                    width: context.dynamicWidth(0.16),
+                    height: 15,
+                  ),
+                ),
               ],
             ),
           ],

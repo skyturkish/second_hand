@@ -70,24 +70,25 @@ class _AccountDetailViewState extends State<AccountDetailView> {
                       ),
                     ],
                   ),
-                  isLocalUser
-                      ? CustomElevatedButton(
-                          dynamicWidth: 0.42,
-                          borderRadius: 30,
-                          onPressed: () {
-                            final user = context.read<UserInformationNotifier>().userInformation!;
+                  if (isLocalUser)
+                    CustomElevatedButton(
+                      dynamicWidth: 0.42,
+                      borderRadius: 30,
+                      onPressed: () {
+                        final user = context.read<UserInformationNotifier>().userInformation!;
 
-                            context
-                                .read<EditProfileNotifier>()
-                                .setEditProfileInformations(setName: user.name, setAboutYou: user.aboutYou);
+                        context
+                            .read<EditProfileNotifier>()
+                            .setEditProfileInformations(setName: user.name, setAboutYou: user.aboutYou);
 
-                            NavigationService.instance.navigateToPage(
-                              path: NavigationConstants.EDIT_PROFILE,
-                            );
-                          },
-                          child: Text(context.loc.editProfile),
-                        )
-                      : FollowButtonView(user: widget.user),
+                        NavigationService.instance.navigateToPage(
+                          path: NavigationConstants.EDIT_PROFILE,
+                        );
+                      },
+                      child: Text(context.loc.editProfile),
+                    )
+                  else
+                    FollowButtonView(user: widget.user),
                 ],
               ),
               const SizedBox.shrink(),
@@ -113,14 +114,15 @@ class _AccountDetailViewState extends State<AccountDetailView> {
             height: 10,
             thickness: 2,
           ),
-          isLocalUser
-              ? const Text('')
-              : Expanded(
-                  child: RefreshsableProductGridView(
-                    getProducts: ProductCloudFireStoreService.instance.getAllBelongProducts,
-                    userId: widget.user.userId,
-                  ),
-                ),
+          if (isLocalUser)
+            const Text('')
+          else
+            Expanded(
+              child: RefreshsableProductGridView(
+                getProducts: ProductCloudFireStoreService.instance.getAllBelongProducts,
+                userId: widget.user.userId,
+              ),
+            ),
         ],
       ),
     );
@@ -167,15 +169,15 @@ class FollowInformationColumn extends StatelessWidget {
 }
 
 class FollowButtonView extends StatefulWidget {
-  const FollowButtonView({Key? key, required this.user}) : super(key: key);
+  const FollowButtonView({super.key, required this.user});
   final UserInformation user;
   @override
   State<FollowButtonView> createState() => _FollowButtonViewState();
 }
 
 class _FollowButtonViewState extends State<FollowButtonView> {
-  void breakFollow() async {
-    context.read<UserInformationNotifier>().breakFollowUserLocal(userIdWhichOneWillFollow: widget.user.userId);
+  Future<void> breakFollow() async {
+    await context.read<UserInformationNotifier>().breakFollowUserLocal(userIdWhichOneWillFollow: widget.user.userId);
 
     await UserCloudFireStoreService.instance.breakFollowUser(
       userIdWhichOneWillFollow: widget.user.userId,
@@ -184,8 +186,8 @@ class _FollowButtonViewState extends State<FollowButtonView> {
     setState(() {});
   }
 
-  void follow() async {
-    context.read<UserInformationNotifier>().followUserLocal(userIdWhichOneWillFollow: widget.user.userId);
+  Future<void> follow() async {
+    await context.read<UserInformationNotifier>().followUserLocal(userIdWhichOneWillFollow: widget.user.userId);
 
     await UserCloudFireStoreService.instance.followUser(
       userIdWhichOneWillFollow: widget.user.userId,
@@ -197,7 +199,7 @@ class _FollowButtonViewState extends State<FollowButtonView> {
 
   @override
   Widget build(BuildContext context) {
-    bool isFollow = context.watch<UserInformationNotifier>().userInformation!.following.contains(widget.user.userId);
+    final isFollow = context.watch<UserInformationNotifier>().userInformation!.following.contains(widget.user.userId);
     return CustomElevatedButton(
       dynamicWidth: 0.3,
       onPressed: isFollow ? breakFollow : follow,

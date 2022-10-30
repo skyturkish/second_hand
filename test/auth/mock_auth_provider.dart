@@ -15,7 +15,7 @@ class MockAuthProvider implements AuthProvider {
     required String password,
   }) async {
     if (!isInitialized) throw NotInitializedException();
-    await Future.delayed(const Duration(seconds: 1));
+    await Future<void>.delayed(const Duration(seconds: 1));
     return logIn(
       email: email,
       password: password,
@@ -27,7 +27,7 @@ class MockAuthProvider implements AuthProvider {
 
   @override
   Future<void> initialize() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future<void>.delayed(const Duration(seconds: 1));
     _isInitialized = true;
   }
 
@@ -35,7 +35,7 @@ class MockAuthProvider implements AuthProvider {
   Future<void> deleteAccount() async {
     if (!isInitialized) throw NotInitializedException();
     if (_user == null) throw UserNotFoundAuthException();
-    await Future.delayed(const Duration(seconds: 1));
+    await Future<void>.delayed(const Duration(seconds: 1));
     _user = null;
   }
 
@@ -62,7 +62,7 @@ class MockAuthProvider implements AuthProvider {
   Future<void> logOut() async {
     if (!isInitialized) throw NotInitializedException();
     if (_user == null) throw UserNotFoundAuthException();
-    await Future.delayed(const Duration(seconds: 1));
+    await Future<void>.delayed(const Duration(seconds: 1));
     _user = null;
   }
 

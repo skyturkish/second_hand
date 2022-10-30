@@ -34,7 +34,7 @@ class ChatContact {
 
   ChatContact.fromSnapShot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
       : chatContactId = snapshot.id,
-        senderName = snapshot.data()['senderName'] ?? 'null geldi',
+        senderName = snapshot.data()['senderName'] ?? 'is null now',
         receiverName = snapshot.data()['receiverName'] as String,
         senderId = snapshot.data()['senderId'] as String,
         receiverId = snapshot.data()['receiverId'] as String,
@@ -50,19 +50,20 @@ class ChatContact {
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
-    result.addAll({'chatContactId': chatContactId});
-    result.addAll({'senderName': senderName});
-    result.addAll({'receiverName': receiverName});
-    result.addAll({'senderId': senderId});
-    result.addAll({'receiverId': receiverId});
-    result.addAll({'senderProfilePictureURL': senderProfilePictureURL});
-    result.addAll({'receiverProfilePictureURL': receiverProfilePictureURL});
-    result.addAll({'lastMessage': lastMessage});
-    result.addAll({'productPic': productPic});
-    result.addAll({'productName': productName});
-    result.addAll({'productId': productId});
-    result.addAll({'sellerId': sellerId});
-    result.addAll({'timeSent': timeSent.millisecondsSinceEpoch});
+    result
+      ..addAll({'chatContactId': chatContactId})
+      ..addAll({'senderName': senderName})
+      ..addAll({'receiverName': receiverName})
+      ..addAll({'senderId': senderId})
+      ..addAll({'receiverId': receiverId})
+      ..addAll({'senderProfilePictureURL': senderProfilePictureURL})
+      ..addAll({'receiverProfilePictureURL': receiverProfilePictureURL})
+      ..addAll({'lastMessage': lastMessage})
+      ..addAll({'productPic': productPic})
+      ..addAll({'productName': productName})
+      ..addAll({'productId': productId})
+      ..addAll({'sellerId': sellerId})
+      ..addAll({'timeSent': timeSent.millisecondsSinceEpoch});
 
     return result;
   }

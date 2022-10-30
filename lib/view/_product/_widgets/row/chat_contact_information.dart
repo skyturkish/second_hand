@@ -33,7 +33,8 @@ class ChatContactInformation extends StatelessWidget {
               if (!snapshot.hasData) {
                 return Text(context.loc.hasNoData);
               } else {
-                return snapshot.data!.isEmpty
+                final chatContacts = snapshot.data as Iterable<ChatContact>;
+                return chatContacts.isEmpty
                     ? Center(
                         child: Text(
                           context.loc.thereIsNoChat,
@@ -41,7 +42,7 @@ class ChatContactInformation extends StatelessWidget {
                         ),
                       )
                     : ListView.builder(
-                        itemCount: snapshot.data!.length,
+                        itemCount: chatContacts.length,
                         itemBuilder: (context, index) {
                           final chatContactData = snapshot.data.toList()[index] as ChatContact;
                           return InkWell(

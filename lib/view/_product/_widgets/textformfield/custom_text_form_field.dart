@@ -73,8 +73,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       ),
       inputFormatters: [
         ...widget.inputFormatters,
-        LengthLimitingTextInputFormatter(widget
-            .maxLetter), // Remi Rousselet --> https://stackoverflow.com/questions/49126449/how-to-limit-number-of-characters-in-textformfield
+        LengthLimitingTextInputFormatter(
+          widget.maxLetter,
+        ), // Remi Rousselet --> https://stackoverflow.com/questions/49126449/how-to-limit-number-of-characters-in-textformfield
       ],
       validator: (value) {
         if (value == null || value.isEmpty) {

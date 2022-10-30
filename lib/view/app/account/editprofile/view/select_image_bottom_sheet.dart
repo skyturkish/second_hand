@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:second_hand/product/utilities/image_pick/image_picker_manager.dart';
 import 'package:second_hand/core/extensions/build_context/loc.dart';
+import 'package:second_hand/product/utilities/image_pick/image_picker_manager.dart';
 
 extension SelectImageFrom on SelectPhotoFromBottomSheet {
   // --> from https://vbacik-10.medium.com/season-two-flutter-short-but-golds-8cff8f4b0b29
@@ -12,7 +12,9 @@ extension SelectImageFrom on SelectPhotoFromBottomSheet {
 }
 
 class SelectPhotoFromBottomSheet extends StatelessWidget {
-  const SelectPhotoFromBottomSheet({super.key});
+  const SelectPhotoFromBottomSheet({
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,8 +24,7 @@ class SelectPhotoFromBottomSheet extends StatelessWidget {
           leading: const Icon(Icons.camera_alt_outlined),
           title: Text(context.loc.fromCamera),
           onTap: () async {
-            final XFile? selectedImage =
-                await ImagePickerManager.instance.pickSingleImage(imageSource: ImageSource.camera);
+            final selectedImage = await ImagePickerManager.instance.pickSingleImage(imageSource: ImageSource.camera);
 
             if (selectedImage == null) return;
 
@@ -35,8 +36,7 @@ class SelectPhotoFromBottomSheet extends StatelessWidget {
           leading: const Icon(Icons.image),
           title: Text(context.loc.fromGallery),
           onTap: () async {
-            final XFile? selectedImage =
-                await ImagePickerManager.instance.pickSingleImage(imageSource: ImageSource.gallery);
+            final selectedImage = await ImagePickerManager.instance.pickSingleImage(imageSource: ImageSource.gallery);
 
             if (selectedImage == null) return;
 

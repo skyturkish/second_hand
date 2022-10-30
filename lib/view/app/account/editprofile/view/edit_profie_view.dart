@@ -1,17 +1,20 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/build_context/context_extension.dart';
+import 'package:second_hand/core/extensions/build_context/loc.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/product/utilities/crop_image/crop_image.dart';
 import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_form_field.dart';
 import 'package:second_hand/view/app/account/editprofile/view/select_image_bottom_sheet.dart';
 import 'package:second_hand/view/app/account/editprofile/viewmodel/edit_profile_notifier.dart';
-import 'package:second_hand/core/extensions/build_context/loc.dart';
 import 'package:second_hand/view/app/account/editprofile/viewmodel/edit_profile_view_model.dart';
 
 class EditProfileView extends StatefulWidget {
-  const EditProfileView({super.key});
+  const EditProfileView({
+    super.key,
+  });
   @override
   State<EditProfileView> createState() => _EditProfileViewState();
 }
@@ -83,9 +86,9 @@ class _EditProfileViewState extends EditProfileViewModel {
 
 class EnterNameTextFormField extends StatefulWidget {
   const EnterNameTextFormField({
-    Key? key,
+    super.key,
     required this.nameController,
-  }) : super(key: key);
+  });
 
   final TextEditingController nameController;
 
@@ -112,9 +115,9 @@ class _EnterNameTextFormFieldState extends State<EnterNameTextFormField> {
 
 class WriteAboutYouTextFormField extends StatefulWidget {
   const WriteAboutYouTextFormField({
-    Key? key,
+    super.key,
     required this.aboutYouController,
-  }) : super(key: key);
+  });
 
   final TextEditingController aboutYouController;
 
@@ -140,7 +143,9 @@ class _WriteAboutYouTextFormFieldState extends State<WriteAboutYouTextFormField>
 }
 
 class EditProfilePhotoView extends StatefulWidget {
-  const EditProfilePhotoView({Key? key}) : super(key: key);
+  const EditProfilePhotoView({
+    super.key,
+  });
 
   @override
   State<EditProfilePhotoView> createState() => _EditProfilePhotoViewState();

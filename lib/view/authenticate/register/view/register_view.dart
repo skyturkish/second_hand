@@ -11,7 +11,9 @@ import 'package:second_hand/view/_product/_widgets/textformfield/custom_text_for
 import 'package:second_hand/view/authenticate/register/viewmodel/register_view_model.dart';
 
 class RegisterView extends StatefulWidget {
-  const RegisterView({super.key});
+  const RegisterView({
+    super.key,
+  });
 
   @override
   RegisterViewState createState() => RegisterViewState();
@@ -69,9 +71,9 @@ class RegisterViewState extends RegisterViewModel {
 
 class EmailTextFormField extends StatelessWidget {
   const EmailTextFormField({
-    Key? key,
+    super.key,
     required this.emailController,
-  }) : super(key: key);
+  });
 
   final TextEditingController emailController;
 
@@ -91,9 +93,9 @@ class EmailTextFormField extends StatelessWidget {
 
 class PasswordTextFormField extends StatelessWidget {
   const PasswordTextFormField({
-    Key? key,
+    super.key,
     required this.passwordController,
-  }) : super(key: key);
+  });
 
   final TextEditingController passwordController;
 
@@ -115,10 +117,10 @@ class PasswordTextFormField extends StatelessWidget {
 
 class RegisterButton extends StatelessWidget {
   const RegisterButton({
-    Key? key,
+    super.key,
     required this.emailController,
     required this.passwordController,
-  }) : super(key: key);
+  });
 
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -143,8 +145,8 @@ class RegisterButton extends StatelessWidget {
 
 class AlreadyRegisterButton extends StatelessWidget {
   const AlreadyRegisterButton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -7,10 +7,11 @@ enum LottieAnimation {
   loading(name: 'loading'),
   noInternet(name: 'no-internet');
 
-  final String name;
   const LottieAnimation({
     required this.name,
   });
+
+  final String name;
 
   String get fullPath => 'assets/animations/$name.json';
 }

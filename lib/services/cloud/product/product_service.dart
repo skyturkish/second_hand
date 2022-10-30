@@ -26,7 +26,7 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
 
   @override
   Future<void> createProduct({required Product product, required List<File> images}) async {
-    List<String> newUrls = [];
+    final newUrls = <String>[];
     final productId = const Uuid().v4();
     for (final image in images) {
       final imageId = const Uuid().v4();
@@ -96,7 +96,7 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
     final allProducts = await getAllBelongProducts(userId: userId);
     if (allProducts == null) return;
     for (final product in allProducts) {
-      removeProduct(product: product);
+      await removeProduct(product: product);
     }
   }
 
@@ -107,14 +107,18 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
   }
 
   @override
-  Stream<Iterable<Product>> getAllOwnerProductsStream({required String userId}) =>
-      _collection.snapshots().map((event) => event.docs
-          .map((doc) => Product.fromSnapShot(doc))
-          .where((product) => product.ownerId == userId && product.productSellState != 'Removed'));
+  Stream<Iterable<Product>> getAllOwnerProductsStream({required String userId}) => _collection.snapshots().map(
+        (event) => event.docs.map(Product.fromSnapShot).where(
+              (product) => product.ownerId == userId && product.productSellState != 'Removed',
+            ),
+      );
 
   @override
-  Stream<Iterable<Product>> getAllFavoriteProductsStream({required String userId, required BuildContext context}) {
-    List<String> favoriteList = context.watch<UserInformationNotifier>().userInformation!.favoriteProducts;
+  Stream<Iterable<Product>> getAllFavoriteProductsStream({
+    required String userId,
+    required BuildContext context,
+  }) {
+    final favoriteList = context.watch<UserInformationNotifier>().userInformation!.favoriteProducts;
     if (favoriteList.isEmpty) {
       return const Stream<Iterable<Product>>.empty();
     } else {
@@ -127,7 +131,10 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
   }
 
   @override
-  Future<void> updateProductDescription({required String productId, required String newDescription}) async {
+  Future<void> updateProductDescription({
+    required String productId,
+    required String newDescription,
+  }) async {
     await _collection.doc(productId).update({'description': newDescription});
   }
 }

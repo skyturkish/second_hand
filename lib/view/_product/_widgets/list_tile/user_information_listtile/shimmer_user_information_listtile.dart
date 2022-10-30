@@ -4,7 +4,9 @@ import 'package:shimmer/shimmer.dart';
 
 @immutable
 class ShimmerUserInformationListTile extends StatelessWidget {
-  const ShimmerUserInformationListTile({super.key});
+  const ShimmerUserInformationListTile({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

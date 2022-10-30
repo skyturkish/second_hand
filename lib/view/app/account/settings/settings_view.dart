@@ -8,7 +8,9 @@ import 'package:second_hand/product/utilities/dialogs/logout_dialog.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
 
 class SettingsView extends StatelessWidget {
-  const SettingsView({super.key});
+  const SettingsView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

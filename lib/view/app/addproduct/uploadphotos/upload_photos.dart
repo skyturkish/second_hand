@@ -14,7 +14,9 @@ import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_vi
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 
 class UploadPhotosView extends StatelessWidget {
-  const UploadPhotosView({super.key});
+  const UploadPhotosView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +50,7 @@ class UploadPhotosView extends StatelessWidget {
 }
 
 class PageViewImages extends StatelessWidget {
-  const PageViewImages({
-    Key? key,
-  }) : super(key: key);
-
+  const PageViewImages({super.key});
   @override
   Widget build(BuildContext context) {
     final saleProductProvider = context.watch<SaleProductNotifier>();
@@ -74,9 +73,7 @@ class PageViewImages extends StatelessWidget {
 }
 
 class FromGalleryButton extends StatelessWidget {
-  const FromGalleryButton({
-    super.key,
-  });
+  const FromGalleryButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -101,9 +98,7 @@ class FromGalleryButton extends StatelessWidget {
 }
 
 class TakeAPictureButton extends StatelessWidget {
-  const TakeAPictureButton({
-    super.key,
-  });
+  const TakeAPictureButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -127,10 +122,7 @@ class TakeAPictureButton extends StatelessWidget {
 }
 
 class ImagesGridView extends StatelessWidget {
-  const ImagesGridView({
-    Key? key,
-  }) : super(key: key);
-  // tüm kareyi kaplaması için şunu sağdan ve soldan çekiştirsene , Positional.fill'in içine - değer vererek
+  const ImagesGridView({super.key});
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -169,9 +161,7 @@ class ImagesGridView extends StatelessWidget {
 }
 
 class NextButton extends StatelessWidget {
-  const NextButton({
-    Key? key,
-  }) : super(key: key);
+  const NextButton({super.key});
 
   @override
   Widget build(BuildContext context) {

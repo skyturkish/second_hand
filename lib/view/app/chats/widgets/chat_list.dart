@@ -14,11 +14,11 @@ import 'package:second_hand/view/app/chats/widgets/sender_message_card.dart';
 
 class ChatListView extends StatefulWidget {
   const ChatListView({
-    Key? key,
+    super.key,
     required this.receiverUserInformation,
     required this.productId,
     required this.productImage,
-  }) : super(key: key);
+  });
   final UserInformation receiverUserInformation;
   final String productId;
   final String productImage;

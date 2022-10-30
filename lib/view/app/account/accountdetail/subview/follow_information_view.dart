@@ -5,7 +5,7 @@ import 'package:second_hand/view/_product/_widgets/list_tile/user_information_li
 import 'package:second_hand/view/_product/enums/follow_type.dart';
 
 class FollowInformationsView extends StatefulWidget {
-  const FollowInformationsView({Key? key, required this.followType, required this.userInformation}) : super(key: key);
+  const FollowInformationsView({super.key, required this.followType, required this.userInformation});
   final FollowType followType;
   final UserInformation userInformation;
   @override

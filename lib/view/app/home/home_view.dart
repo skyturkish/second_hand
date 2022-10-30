@@ -5,21 +5,8 @@ import 'package:second_hand/services/auth/auth_service.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/view/_product/_widgets/grid_view/refreshable_product_grid_view.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({super.key});
-
-  @override
-  State<HomeView> createState() => HomeViewState();
-}
-
-class HomeViewState extends State<HomeView> {
-  late final TextEditingController _searchController;
-
-  @override
-  void initState() {
-    _searchController = TextEditingController();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +30,8 @@ class HomeViewState extends State<HomeView> {
 
 class ProductsText extends StatelessWidget {
   const ProductsText({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +53,8 @@ class ProductsText extends StatelessWidget {
 
 class ProductsGridView extends StatelessWidget {
   const ProductsGridView({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

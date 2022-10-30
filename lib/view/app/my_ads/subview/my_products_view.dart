@@ -5,7 +5,7 @@ import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/my_product_listtile.dart';
 
 class MyProductsView extends StatefulWidget {
-  const MyProductsView({Key? key}) : super(key: key);
+  const MyProductsView({Key? key});
 
   @override
   State<MyProductsView> createState() => MyProductsViewState();
@@ -29,8 +29,8 @@ class MyProductsViewState extends State<MyProductsView> with AutomaticKeepAliveC
 
 class StreamMyProductsProducts extends StatelessWidget {
   const StreamMyProductsProducts({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -3,9 +3,9 @@ import 'package:second_hand/core/extensions/build_context/context_extension.dart
 
 class BlueReadTick extends StatelessWidget {
   const BlueReadTick({
-    Key? key,
+    super.key,
     required this.isSeen,
-  }) : super(key: key);
+  });
 
   final bool isSeen;
 

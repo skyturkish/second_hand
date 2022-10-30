@@ -10,7 +10,9 @@ import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
 
 class AccountView extends StatefulWidget {
-  const AccountView({super.key});
+  const AccountView({
+    super.key,
+  });
 
   @override
   State<AccountView> createState() => AccountViewState();
@@ -97,8 +99,8 @@ class _UserInformationCardState extends State<UserInformationCard> {
 
 class SettingsListTile extends StatelessWidget {
   const SettingsListTile({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -118,8 +120,8 @@ class SettingsListTile extends StatelessWidget {
 
 class HelpAndSupportListTile extends StatelessWidget {
   const HelpAndSupportListTile({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

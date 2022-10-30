@@ -9,9 +9,9 @@ import 'package:second_hand/view/_product/_widgets/list_tile/user_information_li
 @immutable
 class UserInformationListtile extends StatelessWidget {
   const UserInformationListtile({
-    Key? key,
+    super.key,
     required this.userId,
-  }) : super(key: key);
+  });
 
   final String userId;
 

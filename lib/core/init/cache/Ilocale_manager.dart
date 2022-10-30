@@ -4,8 +4,8 @@ import 'package:second_hand/core/constants/enums/locale_keys_enum.dart';
 
 abstract class IlocaleManager {
   Future<void> clearAll();
-  Future<void> setBoolValue(LocaleCacheKeys key, bool value);
+  Future<void> setBoolValue(LocaleCacheKeys key, {required bool value});
   bool getBoolValue(LocaleCacheKeys key);
-  setStringValue(LocaleCacheKeys key, String value);
-  getStringValue(LocaleCacheKeys key);
+  void setStringValue(LocaleCacheKeys key, String value);
+  void getStringValue(LocaleCacheKeys key);
 }

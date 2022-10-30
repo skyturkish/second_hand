@@ -11,7 +11,9 @@ import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button
 import 'package:second_hand/view/app/addproduct/sale_product_notifier.dart';
 
 class SetLocationView extends StatefulWidget {
-  const SetLocationView({super.key});
+  const SetLocationView({
+    super.key,
+  });
 
   @override
   State<SetLocationView> createState() => _SetLocationViewState();

@@ -27,15 +27,16 @@ class CustomElevatedButton extends StatelessWidget {
       height: context.dynamicHeight(dynamicHeight),
       width: context.dynamicWidth(dynamicWidth),
       child: ElevatedButton(
-          onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-            elevation: elevation,
-            backgroundColor: context.colors.primary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
-            ),
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          elevation: elevation,
+          backgroundColor: context.colors.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
           ),
-          child: child),
+        ),
+        child: child,
+      ),
     );
   }
 }

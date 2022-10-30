@@ -11,7 +11,9 @@ import 'package:second_hand/view/app/addproduct/include_some_details/view/enum_p
 import 'package:second_hand/view/app/addproduct/include_some_details/viewmodel/include_some_details_view_model.dart';
 
 class IncludeSomeDetailsView extends StatefulWidget {
-  const IncludeSomeDetailsView({super.key});
+  const IncludeSomeDetailsView({
+    super.key,
+  });
 
   @override
   State<IncludeSomeDetailsView> createState() => IncludeSomeDetailsViewState();
@@ -49,9 +51,9 @@ class IncludeSomeDetailsViewState extends IncludeSomeDetailsViewModel {
 
 class TitleTextFormField extends StatefulWidget {
   const TitleTextFormField({
-    Key? key,
+    super.key,
     required this.titleController,
-  }) : super(key: key);
+  });
 
   final TextEditingController titleController;
 
@@ -80,9 +82,9 @@ class _TitleTextFormFieldState extends State<TitleTextFormField> {
 
 class DescriptionTextFormField extends StatefulWidget {
   const DescriptionTextFormField({
-    Key? key,
+    super.key,
     required this.describeController,
-  }) : super(key: key);
+  });
 
   final TextEditingController describeController;
 
@@ -110,7 +112,7 @@ class _DescriptionTextFormFieldState extends State<DescriptionTextFormField> {
 }
 
 class ProductConditionDropDownButton extends StatefulWidget {
-  const ProductConditionDropDownButton({Key? key}) : super(key: key);
+  const ProductConditionDropDownButton({Key? key});
 
   @override
   State<ProductConditionDropDownButton> createState() => _ProductConditionDropDownButtonState();
@@ -145,11 +147,11 @@ class _ProductConditionDropDownButtonState extends State<ProductConditionDropDow
 
 class NextButton extends StatelessWidget {
   const NextButton({
-    Key? key,
+    super.key,
     required this.formKey,
     required this.titleController,
     required this.describeController,
-  }) : super(key: key);
+  });
 
   final GlobalKey<FormState> formKey;
   final TextEditingController titleController;

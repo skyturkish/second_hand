@@ -7,9 +7,9 @@ import 'package:second_hand/core/extensions/build_context/loc.dart';
 @immutable
 class MyProductsListTile extends StatelessWidget {
   const MyProductsListTile({
-    Key? key,
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
 
   final Product product;
 

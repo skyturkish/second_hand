@@ -9,11 +9,15 @@ import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/services/cloud/user/user_service.dart';
 import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
-import 'package:second_hand/view/app/chats/widgets/chat_list.dart';
 import 'package:second_hand/view/app/chats/widgets/bottom_chat_field.dart';
+import 'package:second_hand/view/app/chats/widgets/chat_list.dart';
 
 class ChatView extends StatefulWidget {
-  const ChatView({super.key, required this.productId, required this.contactUserId});
+  const ChatView({
+    super.key,
+    required this.productId,
+    required this.contactUserId,
+  });
   final String productId;
   final String contactUserId;
 
@@ -32,10 +36,13 @@ class _ChatViewState extends State<ChatView> {
   }
 
   Future<void> getProductAndInformation() async {
-    product = await ProductCloudFireStoreService.instance.getProductById(productId: widget.productId);
+    product = await ProductCloudFireStoreService.instance.getProductById(
+      productId: widget.productId,
+    );
 
-    contactUserInformation =
-        await UserCloudFireStoreService.instance.getUserInformationById(userId: widget.contactUserId);
+    contactUserInformation = await UserCloudFireStoreService.instance.getUserInformationById(
+      userId: widget.contactUserId,
+    );
     setState(() {});
   }
 
@@ -43,7 +50,11 @@ class _ChatViewState extends State<ChatView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: product == null || contactUserInformation == null
-          ? const Center(child: LottieAnimationView(animation: LottieAnimation.messageChat))
+          ? const Center(
+              child: LottieAnimationView(
+                animation: LottieAnimation.messageChat,
+              ),
+            )
           : product!.productSellState == 'Removed'
               ? Center(
                   child: Column(

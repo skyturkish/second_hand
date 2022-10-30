@@ -3,7 +3,9 @@ import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.d
 import 'package:second_hand/core/extensions/build_context/loc.dart';
 
 class HelpAndSupportView extends StatelessWidget {
-  const HelpAndSupportView({super.key});
+  const HelpAndSupportView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
