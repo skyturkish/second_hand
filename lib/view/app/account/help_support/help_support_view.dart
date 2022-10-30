@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/options_list_tile.dart';
-import 'package:second_hand/core/extensions/buildcontext/loc.dart';
+import 'package:second_hand/core/extensions/build_context/loc.dart';
 
 class HelpAndSupportView extends StatelessWidget {
   const HelpAndSupportView({super.key});
@@ -32,10 +32,8 @@ class HelpAndSupportView extends StatelessWidget {
           ),
           OptionListTile(
             titleText: 'Version',
-            subTitleText: '1.01.215',
-            onTap: () {
-              // kendim yazacam
-            },
+            subTitleText: '0.2.5',
+            onTap: () {},
           ),
         ],
       ),

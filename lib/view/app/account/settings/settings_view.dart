@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:second_hand/core/extensions/buildcontext/loc.dart';
+import 'package:second_hand/core/extensions/build_context/loc.dart';
 import 'package:second_hand/core/init/notifier/theme_notifer.dart';
 import 'package:second_hand/services/auth/bloc/app_bloc.dart';
 import 'package:second_hand/services/auth/bloc/app_event.dart';

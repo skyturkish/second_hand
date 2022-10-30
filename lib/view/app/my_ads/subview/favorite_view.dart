@@ -37,7 +37,9 @@ class StreamMyFavoriteProductsStream extends StatelessWidget {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
           case ConnectionState.active:
-            if (snapshot.hasData) {
+            if (!snapshot.hasData) {
+              return const Text('');
+            } else {
               final allProduct = snapshot.data as Iterable<Product>;
               return ListView.builder(
                 shrinkWrap: true,
@@ -47,8 +49,6 @@ class StreamMyFavoriteProductsStream extends StatelessWidget {
                   return FavoriteListTileProduct(product: product);
                 },
               );
-            } else {
-              return const Text('');
             }
           default:
             return const Text('');

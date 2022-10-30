@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
-import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/build_context/context_extension.dart';
 import 'package:second_hand/core/extensions/string/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
@@ -12,7 +12,7 @@ import 'package:second_hand/services/cloud/user/user_service.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 import 'package:second_hand/view/_product/_widgets/grid_view/refreshable_product_grid_view.dart';
 import 'package:second_hand/view/app/account/editprofile/viewmodel/edit_profile_notifier.dart';
-import 'package:second_hand/core/extensions/buildcontext/loc.dart';
+import 'package:second_hand/core/extensions/build_context/loc.dart';
 
 class AccountDetailView extends StatefulWidget {
   const AccountDetailView({super.key, required this.user});

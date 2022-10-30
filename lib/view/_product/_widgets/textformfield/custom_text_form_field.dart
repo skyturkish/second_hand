@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:second_hand/core/extensions/buildcontext/loc.dart';
+import 'package:second_hand/core/extensions/build_context/loc.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({

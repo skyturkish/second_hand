@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/extensions/string/if_debugging.dart';
 import 'package:second_hand/view/authenticate/register/view/register_view.dart';
 
 abstract class RegisterViewModel extends State<RegisterView> {
@@ -10,9 +9,8 @@ abstract class RegisterViewModel extends State<RegisterView> {
 
   @override
   void initState() {
-    // TODO bunları kaldır
-    emailController = TextEditingController(text: 'gokturk.acr2002@gmail.com'.ifDebugging);
-    passwordController = TextEditingController(text: 'deniyorum123'.ifDebugging);
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
     super.initState();
   }
 

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
-import 'package:second_hand/core/extensions/buildcontext/loc.dart';
+import 'package:second_hand/core/extensions/build_context/context_extension.dart';
+import 'package:second_hand/core/extensions/build_context/loc.dart';
 import 'package:second_hand/loading/loading_screen_controller.dart';
 
 class LoadingScreen {

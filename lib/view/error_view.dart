@@ -10,7 +10,9 @@ class ErrorView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: LottieAnimationView(animation: LottieAnimation.notFound),
+        child: LottieAnimationView(
+          animation: LottieAnimation.notFound,
+        ),
       ),
     );
   }

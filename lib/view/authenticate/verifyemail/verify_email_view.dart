@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
-import 'package:second_hand/core/extensions/buildcontext/loc.dart';
+import 'package:second_hand/core/extensions/build_context/context_extension.dart';
+import 'package:second_hand/core/extensions/build_context/loc.dart';
 import 'package:second_hand/services/auth/bloc/app_bloc.dart';
 import 'package:second_hand/services/auth/bloc/app_event.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
@@ -27,47 +27,93 @@ class VerifyEmailViewState extends State<VerifyEmailView> {
         ),
         body: SingleChildScrollView(
           child: Column(
-            children: [
-              Padding(
-                padding: context.paddingOnlyTopSmall,
-                child: Text(
-                  context.loc.ifYouHavenotReceived,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Padding(
-                padding: context.paddingOnlyTopSmall,
-                child: CustomElevatedButton(
-                  onPressed: () {
-                    context.read<AppBloc>().add(
-                          const AppEventSendEmailVerification(),
-                        );
-                  },
-                  child: Text(context.loc.sendEmailVerification),
-                ),
-              ),
-              Padding(
-                padding: context.paddingOnlyTopMedium,
-                child: Text(
-                  context.loc.weHaveSentYouAnEmail,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Padding(
-                padding: context.paddingOnlyTopSmall,
-                child: CustomElevatedButton(
-                  onPressed: () {
-                    context.read<AppBloc>().add(
-                          AppEventLogOut(context),
-                        );
-                  },
-                  child: Text(
-                    context.loc.loginHere,
-                  ),
-                ),
-              ),
+            children: const [
+              IfYouHaveNotReceivedText(),
+              SendEmailVerificationButton(),
+              WeHaveSentYouAnEmailText(),
+              LoginHereButton(),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class IfYouHaveNotReceivedText extends StatelessWidget {
+  const IfYouHaveNotReceivedText({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: context.paddingOnlyTopSmall,
+      child: Text(
+        context.loc.ifYouHavenotReceived,
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
+class SendEmailVerificationButton extends StatelessWidget {
+  const SendEmailVerificationButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: context.paddingOnlyTopSmall,
+      child: CustomElevatedButton(
+        onPressed: () {
+          context.read<AppBloc>().add(
+                const AppEventSendEmailVerification(),
+              );
+        },
+        child: Text(
+          context.loc.sendEmailVerification,
+        ),
+      ),
+    );
+  }
+}
+
+class WeHaveSentYouAnEmailText extends StatelessWidget {
+  const WeHaveSentYouAnEmailText({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: context.paddingOnlyTopMedium,
+      child: Text(
+        context.loc.weHaveSentYouAnEmail,
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
+class LoginHereButton extends StatelessWidget {
+  const LoginHereButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: context.paddingOnlyTopSmall,
+      child: CustomElevatedButton(
+        onPressed: () {
+          context.read<AppBloc>().add(
+                AppEventLogOut(context),
+              );
+        },
+        child: Text(
+          context.loc.loginHere,
         ),
       ),
     );

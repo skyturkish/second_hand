@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/view/_product/enums/follow_type.dart';
 import 'package:second_hand/view/app/account/accountdetail/subview/follow_information_view.dart';
-import 'package:second_hand/core/extensions/buildcontext/loc.dart';
+import 'package:second_hand/core/extensions/build_context/loc.dart';
 
 class NetworkView extends StatefulWidget {
   const NetworkView({super.key, required this.userInformation});

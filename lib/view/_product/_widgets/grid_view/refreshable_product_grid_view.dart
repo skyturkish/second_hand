@@ -1,5 +1,5 @@
 // ignore_for_file: camel_case_types
-import 'package:second_hand/core/extensions/buildcontext/loc.dart';
+import 'package:second_hand/core/extensions/build_context/loc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';

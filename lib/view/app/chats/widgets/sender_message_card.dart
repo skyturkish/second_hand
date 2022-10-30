@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/extensions/buildcontext/context_extension.dart';
+import 'package:second_hand/core/extensions/build_context/context_extension.dart';
+import 'package:second_hand/view/app/chats/widgets/blue_read_tick.dart';
+import 'package:second_hand/view/app/chats/widgets/date_text.dart';
 
 class SenderMessageCard extends StatelessWidget {
   const SenderMessageCard({super.key, required this.message, required this.date, required this.isSeen});
@@ -26,24 +28,8 @@ class SenderMessageCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Flexible(child: Text(message)),
-                Padding(
-                  padding: context.paddingOnlyLeftSmallX + context.paddingOnlyLeftSmallX,
-                  child: Text(
-                    date,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: context.colors.onPrimary,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: context.paddingOnlyLeftSmallX,
-                  child: Icon(
-                    isSeen ? Icons.done_all : Icons.done,
-                    size: 20,
-                    color: isSeen ? Colors.blue : context.colors.onPrimary,
-                  ),
-                ),
+                DateText(date: date),
+                BlueReadTick(isSeen: isSeen),
               ],
             ),
           ),

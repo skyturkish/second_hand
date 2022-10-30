@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/extensions/string/if_debugging.dart';
 import 'package:second_hand/view/authenticate/login/view/login_view.dart';
 
 abstract class LoginViewmodel extends State<LoginView> {
@@ -9,8 +8,8 @@ abstract class LoginViewmodel extends State<LoginView> {
 
   @override
   void initState() {
-    emailController = TextEditingController(text: 'gokturk.acr2002@gmail.com'.ifDebugging);
-    passwordController = TextEditingController(text: 'deniyorum123'.ifDebugging);
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
     super.initState();
   }
 

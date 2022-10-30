@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/extensions/buildcontext/loc.dart';
+import 'package:second_hand/core/extensions/build_context/loc.dart';
 import 'package:second_hand/product/utilities/dialogs/generic_dialog.dart';
 
 Future<bool> showDeleteAccountDialog(BuildContext context) {

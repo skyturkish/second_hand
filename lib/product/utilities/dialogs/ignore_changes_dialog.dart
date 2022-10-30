@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/product/utilities/dialogs/generic_dialog.dart';
-import 'package:second_hand/core/extensions/buildcontext/loc.dart';
+import 'package:second_hand/core/extensions/build_context/loc.dart';
 
 Future<bool> ignoreChanges(BuildContext context) {
   return showGenericDialog<bool>(

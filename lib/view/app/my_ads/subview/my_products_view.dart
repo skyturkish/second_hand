@@ -41,7 +41,9 @@ class StreamMyProductsProducts extends StatelessWidget {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
           case ConnectionState.active:
-            if (snapshot.hasData) {
+            if (!snapshot.hasData) {
+              return const CircularProgressIndicator();
+            } else {
               final allProduct = snapshot.data as Iterable<Product>;
               return ListView.builder(
                 shrinkWrap: true,
@@ -51,8 +53,6 @@ class StreamMyProductsProducts extends StatelessWidget {
                   return MyProductsListTile(product: product);
                 },
               );
-            } else {
-              return const CircularProgressIndicator();
             }
           default:
             return const CircularProgressIndicator();

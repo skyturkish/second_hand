@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/extensions/buildcontext/loc.dart';
+import 'package:second_hand/core/extensions/build_context/loc.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/models/user_information.dart';
 import 'package:second_hand/services/chat/chat_service.dart';
@@ -48,18 +48,21 @@ class _BottomChatFieldState extends State<BottomChatField> {
             ),
           ),
           IconButton(
-              onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  ChatCloudFireStoreService.instance.sendTextMessage(
-                    senderUserInformation: widget.senderUserInformation,
-                    receiverUserInformation: widget.receiverUserInformation,
-                    text: messageController.text,
-                    product: widget.product,
-                  );
-                  messageController.clear();
-                }
-              },
-              icon: const Icon(Icons.send))
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                ChatCloudFireStoreService.instance.sendTextMessage(
+                  senderUserInformation: widget.senderUserInformation,
+                  receiverUserInformation: widget.receiverUserInformation,
+                  text: messageController.text,
+                  product: widget.product,
+                );
+                messageController.clear();
+              }
+            },
+            icon: const Icon(
+              Icons.send,
+            ),
+          )
         ],
       ),
     );

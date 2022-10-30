@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:second_hand/product/utilities/image_pick/image_picker_manager.dart';
-import 'package:second_hand/core/extensions/buildcontext/loc.dart';
+import 'package:second_hand/core/extensions/build_context/loc.dart';
 
 extension SelectImageFrom on SelectPhotoFromBottomSheet {
   // --> from https://vbacik-10.medium.com/season-two-flutter-short-but-golds-8cff8f4b0b29
