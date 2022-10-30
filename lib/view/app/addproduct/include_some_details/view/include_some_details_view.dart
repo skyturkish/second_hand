@@ -161,6 +161,8 @@ class NextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomElevatedButton(
       onPressed: () {
+        // TODO bunu son kez checkle
+        FocusManager.instance.primaryFocus?.unfocus();
         if (formKey.currentState!.validate()) {
           context.read<SaleProductNotifier>().updateProduct(
                 title: titleController.text,
