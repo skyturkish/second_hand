@@ -277,7 +277,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         ProductCloudFireStoreService.instance.removeAllProductsById(
           userId: userId,
         );
-        // DELETE USER'S INFORMATIONS AT FIREBASE
+
         UserCloudFireStoreService.instance.deleteUserById(
           userId: userId,
         );

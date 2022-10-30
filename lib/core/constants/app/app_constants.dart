@@ -5,5 +5,5 @@ class ApplicationConstants {
   static const APPLICATION_TITLE = 'Second hand';
 
   static const DEFAULT_IMAGE =
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI64fYIV7EMYQ8XUYQ4_QrZM0YxY353PQI1yNYuaXbb_YbTJGwozRe6ru-RIsWTjGE8ZQ&usqp=CAU';
+      'https://w7.pngwing.com/pngs/86/421/png-transparent-computer-icons-user-profile-set-of-abstract-icon-miscellaneous-monochrome-computer-wallpaper-thumbnail.png';
 }
