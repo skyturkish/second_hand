@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +8,7 @@ import 'package:second_hand/core/constants/app/app_constants.dart';
 import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
 import 'package:second_hand/core/extensions/buildcontext/loc.dart';
 import 'package:second_hand/core/init/cache/locale_manager.dart';
+import 'package:second_hand/core/init/main_build/main_build.dart';
 import 'package:second_hand/core/init/navigation/navigation_route.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/core/init/notifier/provider_list.dart';
@@ -38,6 +41,7 @@ void main() async {
 }
 
 Future<void> _init() async {
+  DartPluginRegistrant.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -52,6 +56,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<ThemeNotifier>().initTheme();
     return MaterialApp(
+      builder: MainBuild.build,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: context.watch<ThemeNotifier>().currentTheme,

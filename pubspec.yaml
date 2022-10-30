@@ -17,14 +17,14 @@ dependencies:
     sdk: flutter
 
   # Firebase
-  firebase_auth: ^3.8.0
-  firebase_analytics: ^9.3.4
-  firebase_core: ^1.22.0
+  firebase_auth: ^4.1.0
+  firebase_analytics: ^10.0.3
+  firebase_core: ^2.1.1
   google_sign_in: ^5.4.2
 
   #  Cache
   cached_network_image: ^3.2.2
-  cloud_firestore: ^3.4.7
+  cloud_firestore: ^4.0.3
   shared_preferences: ^2.0.15
 
   # State Management
@@ -33,7 +33,7 @@ dependencies:
   provider: ^6.0.3
 
   # Storage
-  firebase_storage: ^10.3.9
+  firebase_storage: ^11.0.3
   flutter_native_image: ^0.0.6 # COMPRESS IMAGE
   image_picker: ^0.8.5+3
 
@@ -55,6 +55,7 @@ dependencies:
   equatable: ^2.0.5
   google_fonts: ^3.0.1
   intl: ^0.17.0
+  connectivity_plus: ^3.0.2
 
 dev_dependencies:
   flutter_test:

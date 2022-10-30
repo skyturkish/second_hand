@@ -4,7 +4,8 @@ enum LottieAnimation {
   messageChat(name: 'message_chat'),
   uploadPhotos(name: 'upload_photos'),
   location(name: 'location'),
-  loading(name: 'loading');
+  loading(name: 'loading'),
+  noInternet(name: 'no-internet');
 
   final String name;
   const LottieAnimation({
