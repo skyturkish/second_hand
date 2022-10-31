@@ -28,6 +28,9 @@ flutter run
 
 # SCREENSHOTS
 
+<details>
+  <summaryScreenshots</summary>
+    
 ## Authentication
     
 <img src="https://user-images.githubusercontent.com/73424678/199055199-b55f033e-98a3-4f60-9830-523564ac6ae1.jpg" width="235"> <img src="https://user-images.githubusercontent.com/73424678/199052922-2f0ec195-2877-41ef-a967-c5875fae57df.jpg" width="235"> <img src="https://user-images.githubusercontent.com/73424678/199052933-93bb674b-8797-46ca-a604-66a2c9665c73.jpg" width="235"> 
@@ -60,6 +63,8 @@ flutter run
 
 ## Settings
 <img src="https://user-images.githubusercontent.com/73424678/199054482-9070571b-9b06-4ec0-ad20-9205c782edd8.jpg" width="235"> <img src="https://user-images.githubusercontent.com/73424678/199054487-0d790ac9-3a41-4a32-9501-ca01562c1b09.jpg" width="235">
+
+</details>
 
 ## Contributing 
 
