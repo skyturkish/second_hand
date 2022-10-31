@@ -6,9 +6,21 @@
     Flutter projects which ones I have been seen are similar each other and simple. the existence of projects like <a href="https://github.com/openfoodfacts/smooth-app">smooth-app</a> is indisputable, they work with tremendous beauty. I wanted to do a slightly different business and a business that, if developed, could really become a product. It's not perfect I know, but that's the second-hand.
 </p>
  
- 
 
-## Installation
+### What can I do on 
+<details>
+  <summary>More Info</summary>
+  <ul>
+  <li>The User can log in with email and password or with google, forgot password, verify email ...</li>
+  <li>The User can edit profile </li>
+  <li>The User can sell and buy products </li>
+  <li>The User can follow or unfollow other users </li>
+  <li>Users can message each other about products </li>
+  <li>The User can add the products to favorites, remove the products The User sells from sale..... </li>
+</ul>
+</details>
+
+#### How to run the project:
 ```
 flutter pub get
 flutter run
