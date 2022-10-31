@@ -3,7 +3,7 @@
 ---
 
 <p align="center">
-    Flutter projects which ones I have been seeing are similar each other and simple. the existence of projects like <a href="https://github.com/openfoodfacts/smooth-app">smooth-app</a> is indisputable, they work with tremendous beauty.
+    Flutter projects which ones I have been seen are similar each other and simple. the existence of projects like <a href="https://github.com/openfoodfacts/smooth-app">smooth-app</a> is indisputable, they work with tremendous beauty.
 </p>
  
  
