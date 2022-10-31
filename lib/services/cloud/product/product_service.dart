@@ -57,7 +57,7 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
   @override
   Future<List<Product>?> getAllBelongProducts({required String userId}) async {
     final querySnapShot =
-        await _collection.where('ownerId', isEqualTo: userId).where('productSellState', isNotEqualTo: 'Removed').get();
+        await _collection.where('ownerId', isEqualTo: userId).where('productSellState', isEqualTo: 'Sell').get();
     final products = querySnapShot.docs.map(
       (queryDocumentSnapshot) => Product.fromMap(
         queryDocumentSnapshot.data(),
@@ -68,13 +68,14 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
 
   @override
   Future<List<Product>?> getAllNotBelongProducts({required String userId}) async {
-    final querySnapShot = await _collection.where('ownerId', isNotEqualTo: userId).get();
+    final querySnapShot =
+        await _collection.where('ownerId', isNotEqualTo: userId).where('productSellState', isEqualTo: 'Sell').get();
     final products = querySnapShot.docs.map(
       (queryDocumentSnapshot) => Product.fromMap(
         queryDocumentSnapshot.data(),
       ),
     );
-    return products.where((element) => element.productSellState != 'Removed').toList();
+    return products.toList();
   }
 
   Future<void> setProductAsRemoved({required Product product}) async {
@@ -136,5 +137,13 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
     required String newDescription,
   }) async {
     await _collection.doc(productId).update({'description': newDescription});
+  }
+
+  Query<Map<String, dynamic>> getQueryProductBelongUser({required String userId}) {
+    return _collection.where('ownerId', isEqualTo: userId).where('productSellState', isEqualTo: 'Sell');
+  }
+
+  Query<Map<String, dynamic>> getQueryProductNotBelongUser({required String userId}) {
+    return _collection.where('ownerId', isNotEqualTo: userId).where('productSellState', isEqualTo: 'Sell');
   }
 }

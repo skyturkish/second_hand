@@ -281,6 +281,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.13"
+  firebase_ui_firestore:
+    dependency: "direct main"
+    description:
+      name: firebase_ui_firestore
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
+  firebase_ui_localizations:
+    dependency: transitive
+    description:
+      name: firebase_ui_localizations
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   flutter:
     dependency: "direct main"
     description: flutter

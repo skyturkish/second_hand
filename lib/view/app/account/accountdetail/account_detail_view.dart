@@ -118,9 +118,10 @@ class _AccountDetailViewState extends State<AccountDetailView> {
             const Text('')
           else
             Expanded(
-              child: RefreshsableProductGridView(
-                getProducts: ProductCloudFireStoreService.instance.getAllBelongProducts,
-                userId: widget.user.userId,
+              child: ProductGridView(
+                query: ProductCloudFireStoreService.instance.getQueryProductBelongUser(
+                  userId: widget.user.userId,
+                ),
               ),
             ),
         ],

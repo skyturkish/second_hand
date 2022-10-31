@@ -1,44 +1,45 @@
 // ignore_for_file: camel_case_types
-import 'package:second_hand/core/extensions/build_context/loc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 
 import 'package:flutter/material.dart';
-import 'package:second_hand/core/constants/enums/lottie_animation_enum.dart';
 import 'package:second_hand/models/product.dart';
-import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';
 import 'package:second_hand/view/_product/_widgets/card/product_card.dart';
 
-typedef getAllProducts = Future<List<Product>?> Function({required String userId});
-
-@immutable
-class RefreshsableProductGridView extends StatefulWidget {
-  const RefreshsableProductGridView({
+class ProductGridView extends StatelessWidget {
+  const ProductGridView({
     super.key,
-    required this.userId,
-    required this.getProducts,
+    required this.query,
   });
-  final String userId;
-  final getAllProducts getProducts;
-  @override
-  State<RefreshsableProductGridView> createState() => _RefreshsableProductGridViewState();
-}
-
-class _RefreshsableProductGridViewState extends State<RefreshsableProductGridView> {
-  List<Product>? products;
-
-  @override
-  void initState() {
-    super.initState();
-    getAll();
-  }
-
-  Future<void> getAll() async {
-    products = await widget.getProducts(userId: widget.userId);
-    setState(() {});
-  }
-
+  final Query<Map<String, dynamic>> query;
   @override
   Widget build(BuildContext context) {
-    return products == null
+    return FirestoreQueryBuilder<Map<String, dynamic>>(
+      query: query,
+      builder: (context, snapshot, _) {
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 3,
+            mainAxisSpacing: 3,
+          ),
+          itemCount: snapshot.docs.length,
+          itemBuilder: (context, index) {
+            if (snapshot.hasMore && index + 1 == snapshot.docs.length) {
+              snapshot.fetchMore();
+            }
+
+            final product = Product.fromMap(snapshot.docs[index].data());
+
+            return ProductCard(product: product);
+          },
+        );
+      },
+    );
+  }
+}
+
+/**products == null
         ? const LottieAnimationView(animation: LottieAnimation.loading)
         : products!.isEmpty
             ? Center(
@@ -63,6 +64,4 @@ class _RefreshsableProductGridViewState extends State<RefreshsableProductGridVie
                     return ProductCard(product: product);
                   },
                 ),
-              );
-  }
-}
+              ); */

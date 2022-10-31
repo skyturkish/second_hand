@@ -45,6 +45,7 @@ dependencies:
   lottie: ^1.4.3
   image_cropper: ^3.0.0
   flutter_native_splash: ^2.2.13
+  firebase_ui_firestore: ^1.0.3
 
   # Network
   connectivity_plus: ^3.0.2

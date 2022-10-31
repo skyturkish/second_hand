@@ -60,9 +60,10 @@ class ProductsGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: context.paddingOnlyTopSmall,
-      child: RefreshsableProductGridView(
-        getProducts: ProductCloudFireStoreService.instance.getAllNotBelongProducts,
-        userId: AuthService.firebase().currentUser!.id,
+      child: ProductGridView(
+        query: ProductCloudFireStoreService.instance.getQueryProductNotBelongUser(
+          userId: AuthService.firebase().currentUser!.id,
+        ),
       ),
     );
   }

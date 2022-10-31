@@ -4,14 +4,9 @@ import 'package:second_hand/services/auth/auth_service.dart';
 import 'package:second_hand/services/cloud/product/product_service.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/my_product_listtile.dart';
 
-class MyProductsView extends StatefulWidget {
-  const MyProductsView({Key? key});
+class MyProductsView extends StatelessWidget {
+  const MyProductsView({super.key});
 
-  @override
-  State<MyProductsView> createState() => MyProductsViewState();
-}
-
-class MyProductsViewState extends State<MyProductsView> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,9 +17,6 @@ class MyProductsViewState extends State<MyProductsView> with AutomaticKeepAliveC
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
 
 class StreamMyProductsProducts extends StatelessWidget {
