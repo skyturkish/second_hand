@@ -61,6 +61,13 @@ flutter run
 ## Settings
 <img src="https://user-images.githubusercontent.com/73424678/199054482-9070571b-9b06-4ec0-ad20-9205c782edd8.jpg" width="235"> <img src="https://user-images.githubusercontent.com/73424678/199054487-0d790ac9-3a41-4a32-9501-ca01562c1b09.jpg" width="235">
 
+## Contributing 
+
+<details>
+  <summary>More Info</summary>
+ After the iOS and android tests are over, the contributan guideline will be published after it is uploaded to the apple store and google play.
+</details>
+
 ## License
 ```
 
