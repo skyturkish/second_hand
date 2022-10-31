@@ -9,9 +9,6 @@
  
 
 ## Installation
-
-Run the following commands: <will edit>
-
 ```
 flutter pub get
 flutter run
@@ -51,32 +48,6 @@ flutter run
 
 ## Settings
 <img src="https://user-images.githubusercontent.com/73424678/199054482-9070571b-9b06-4ec0-ad20-9205c782edd8.jpg" width="235"> <img src="https://user-images.githubusercontent.com/73424678/199054487-0d790ac9-3a41-4a32-9501-ca01562c1b09.jpg" width="235">
-
-
-
-## TO DO 📋 
----
-- [X] Linked Firebase
-- [ ] Auth
-  - [ ] Phone Authentication
-  - [x] Email & Password
-  - [X] Google
-- [X] Create an account, get informations from user
-- [X] Product
-  - [X] Pick images and to make the product sellable.
-  - [X] to be able to see which products are being sold.
-  - [X] addable favorite product.
-  - [X] manage your product
-- [X] Account
-  - [X] User can see own Informations  
-  - [X] User can update own Informations
-  - [X] User can update own Photo 
-- [x] Communication
-  - [X] Messenger
-  - [X] Users can communicate each other about a product
-- [ ] Security
-  - [ ] Block option
-  - [ ] Report system
 
 
 ## Features
