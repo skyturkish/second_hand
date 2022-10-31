@@ -50,24 +50,21 @@ abstract class EditProfileViewModel extends State<EditProfileView> {
     final profilePhotoDownloadUrl = await context.read<EditProfileNotifier>().changeFirebasePhotoIfPhotoChange(
           userId: AuthService.firebase().currentUser!.id,
         );
-    if (profilePhotoDownloadUrl == null) {
-      LoadingScreen().hide();
-    } else {
-      context.read<UserInformationNotifier>().updateUserInformation(
-            name: nameController.text,
-            aboutYou: aboutYouController.text,
-            profilePhotoPath: profilePhotoDownloadUrl,
-          );
+    context.read<UserInformationNotifier>().updateUserInformation(
+          name: nameController.text,
+          aboutYou: aboutYouController.text,
+          profilePhotoPath: profilePhotoDownloadUrl,
+        );
 
-      LoadingScreen().hide();
+    LoadingScreen().hide();
 
-      await UserCloudFireStoreService.instance.updateUserInformation(
-        userId: AuthService.firebase().currentUser!.id,
-        name: nameController.text,
-        profilePhotoDownloadUrl: profilePhotoDownloadUrl,
-        aboutYou: aboutYouController.text,
-      );
-    }
+    UserCloudFireStoreService.instance.updateUserInformation(
+      userId: AuthService.firebase().currentUser!.id,
+      name: nameController.text,
+      aboutYou: aboutYouController.text,
+      profilePhotoDownloadUrl:
+          profilePhotoDownloadUrl ?? context.read<UserInformationNotifier>().userInformation!.profilePhotoPath,
+    );
 
     Navigator.pop(context);
   }

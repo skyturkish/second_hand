@@ -40,7 +40,10 @@ class ProductDetailView extends StatelessWidget {
             PriceAndFavoriteButtonRow(product: product),
             const Divider(),
             DescriptionText(description: product.description),
-            LocationInformationRow(product: product),
+            Padding(
+              padding: context.paddingOnlyTopSmall,
+              child: LocationInformationRow(product: product),
+            ),
             const Divider(),
             UserInformationListtile(userId: product.ownerId),
             const Divider(),

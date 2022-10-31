@@ -8,8 +8,8 @@ abstract class LoginViewmodel extends State<LoginView> {
 
   @override
   void initState() {
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
+    emailController = TextEditingController(text: 'gokturk.acr2002@gmail.com');
+    passwordController = TextEditingController(text: 'deniyor123');
     super.initState();
   }
 

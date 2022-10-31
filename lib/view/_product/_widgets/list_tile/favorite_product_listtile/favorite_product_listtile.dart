@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
+import 'package:second_hand/core/extensions/string/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
 import 'package:second_hand/models/product.dart';
 import 'package:second_hand/view/_product/_widgets/iconbutton/favorite_icon_button.dart';
@@ -26,7 +27,9 @@ class FavoriteListTileProduct extends StatelessWidget {
         );
       },
       title: Text(product.title),
-      subtitle: Text(product.description),
+      subtitle: Text(
+        product.description.overFlowString(limit: 75),
+      ),
       leading: CircleAvatar(
         radius: 30,
         backgroundImage: NetworkImage(

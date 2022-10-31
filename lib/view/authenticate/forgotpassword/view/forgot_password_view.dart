@@ -72,11 +72,14 @@ class EmailTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomTextFormField(
-      controller: controller,
-      labelText: 'email',
-      hintText: 'email',
-      prefix: const Icon(Icons.email),
+    return Padding(
+      padding: context.paddingOnlyTopSmall,
+      child: CustomTextFormField(
+        controller: controller,
+        labelText: 'email',
+        hintText: 'email',
+        prefix: const Icon(Icons.email),
+      ),
     );
   }
 }
@@ -93,7 +96,7 @@ class SendPasswordButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        final email = controller.text;
+        final email = controller.text.replaceAll(' ', '');
         context.read<AppBloc>().add(AppEventForgotPassword(email: email));
       },
       child: const Text('Send me password reset link'),
