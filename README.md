@@ -6,6 +6,9 @@
     Flutter projects which ones I have been seen are similar each other and simple. the existence of projects like <a href="https://github.com/openfoodfacts/smooth-app">smooth-app</a> is indisputable, they work with tremendous beauty. I wanted to do a slightly different business and a business that, if developed, could really become a product. It's not perfect I know, but that's the second-hand.
 </p>
  
+ #### Thanks you
+ We would like to thank <a href="https://github.com/VB10">Veli Bacik</a> and <a href="https://github.com/vandadnp">Vandad Nahavandipoor
+</a> for sharing their valuable information with us.
 
 ### What can I do on 
 <details>
