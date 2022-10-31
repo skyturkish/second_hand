@@ -14,6 +14,7 @@
 <details>
   <summary>More Info</summary>
   <ul>
+  <li>The application is made with firebase </li>
   <li>The User can log in with email and password or with google, forgot password, verify email ...</li>
   <li>The User can edit profile </li>
   <li>The User can sell and buy products </li>
