@@ -3,7 +3,7 @@
 ---
 
 <p align="center">
-    Are you thinking of throwing away or storing your old or unused product? what if we said someone wants to buy it. Second-Hand is taking the stage here.
+    Flutter projects which ones I have been seeing are similar each other and simple. the existence of projects like <a href="https://github.com/openfoodfacts/smooth-app">smooth-app</a> is indisputable, they work with tremendous beauty.
 </p>
  
  
