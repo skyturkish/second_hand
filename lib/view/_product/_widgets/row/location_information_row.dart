@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/extensions/build_context/context_extension.dart';
-import 'package:second_hand/models/product.dart';
+import 'package:second_hand/models/product/product.dart';
 
 class LocationInformationRow extends StatelessWidget {
   const LocationInformationRow({

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:second_hand/models/product.dart';
-import 'package:second_hand/models/user_information.dart';
-import 'package:second_hand/models/message.dart';
-import 'package:second_hand/models/chat_contact.dart';
+import 'package:second_hand/models/product/product.dart';
+import 'package:second_hand/models/user_information/user_information.dart';
+import 'package:second_hand/models/message/message.dart';
+import 'package:second_hand/models/chat_contact/chat_contact.dart';
 import 'package:second_hand/services/chat/abstract_chat_service.dart';
 import 'package:uuid/uuid.dart';
 
@@ -142,7 +142,7 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
         .collection('messages')
         .doc(messageId)
         .set(
-          message.toMap(),
+          message.toJson(),
         );
     // we save message to receiver
 
@@ -154,7 +154,7 @@ class ChatCloudFireStoreService extends IChatCloudFireStoreService {
         .collection('messages')
         .doc(messageId)
         .set(
-          message.toMap(),
+          message.toJson(),
         );
   }
 

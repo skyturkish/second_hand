@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:second_hand/models/product.dart';
+import 'package:second_hand/models/product/product.dart';
 
 class SaleProductNotifier extends ChangeNotifier {
   List<File> images = [];

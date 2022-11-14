@@ -1,19 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:second_hand/core/constants/app/app_constants.dart';
 
+part 'user_information.g.dart';
+
+@JsonSerializable()
 class UserInformation {
-  factory UserInformation.fromMap(Map<String, dynamic> map) {
-    return UserInformation(
-      userId: map['userId'] ?? '',
-      name: map['name'] ?? '',
-      profilePhotoPath: map['profilePhotoPath'] ?? '',
-      phoneNumber: map['phoneNumber'] ?? '',
-      aboutYou: map['aboutYou'] ?? '',
-      myProducts: List<String>.from(map['myProducts']),
-      favoriteProducts: List<String>.from(map['favoriteProducts']),
-      following: List<String>.from(map['following']),
-      followers: List<String>.from(map['followers']),
-    );
-  }
   UserInformation({
     this.userId = 'default user Id',
     this.name = 'defaul',
@@ -35,22 +26,8 @@ class UserInformation {
   final List<String> following;
   final List<String> followers;
 
-  Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-
-    result
-      ..addAll({'userId': userId})
-      ..addAll({'name': name})
-      ..addAll({'profilePhotoPath': profilePhotoPath})
-      ..addAll({'phoneNumber': phoneNumber})
-      ..addAll({'aboutYou': aboutYou})
-      ..addAll({'myProducts': myProducts})
-      ..addAll({'favoriteProducts': favoriteProducts})
-      ..addAll({'following': following})
-      ..addAll({'followers': followers});
-
-    return result;
-  }
+  factory UserInformation.fromMap(Map<String, dynamic> json) => _$UserInformationFromJson(json);
+  Map<String, dynamic> toJson() => _$UserInformationToJson(this);
 
   UserInformation copyWith({
     String? userId,

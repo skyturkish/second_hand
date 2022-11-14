@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:second_hand/core/extensions/string/string_extension.dart';
 import 'package:second_hand/core/init/notifier/user_information_notifier.dart';
-import 'package:second_hand/models/product.dart';
+import 'package:second_hand/models/product/product.dart';
 import 'package:second_hand/services/cloud/product/abstract_product_service.dart';
 import 'package:second_hand/services/storage/storage-service.dart';
 import 'package:second_hand/product/utilities/compress/compress_image.dart';
@@ -50,7 +50,7 @@ class ProductCloudFireStoreService implements IProductCloudFireStoreService {
     );
 
     await _collection.doc(productId).set(
-          sendProduct.toMap(),
+          sendProduct.toJson(),
         );
   }
 

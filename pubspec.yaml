@@ -59,11 +59,14 @@ dependencies:
 
   # localization
   intl: ^0.17.0
-
+  json_annotation: ^4.7.0
   equatable: ^2.0.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  json_serializable: ^6.5.4
+  build_runner: ^2.3.2
   flutter_lints: ^2.0.0
   flutter_launcher_icons: "^0.10.0"
 

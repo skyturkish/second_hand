@@ -4,7 +4,7 @@ import 'package:second_hand/core/constants/navigation/navigation_constants.dart'
 import 'package:second_hand/core/extensions/build_context/context_extension.dart';
 import 'package:second_hand/core/extensions/build_context/loc.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
-import 'package:second_hand/models/product.dart';
+import 'package:second_hand/models/product/product.dart';
 import 'package:second_hand/view/_product/_widgets/button/custom_elevated_button.dart';
 import 'package:second_hand/view/_product/_widgets/iconbutton/favorite_icon_button.dart';
 import 'package:second_hand/view/_product/_widgets/list_tile/user_information_listtile/user_information_listtile.dart';

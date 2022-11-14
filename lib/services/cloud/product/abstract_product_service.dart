@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/widgets.dart';
-import 'package:second_hand/models/product.dart';
+import 'package:second_hand/models/product/product.dart';
 
 abstract class IProductCloudFireStoreService {
   Future<void> createProduct({required Product product, required List<File> images});

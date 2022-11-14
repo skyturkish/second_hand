@@ -1,7 +1,7 @@
-import 'package:second_hand/models/chat_contact.dart';
-import 'package:second_hand/models/message.dart';
-import 'package:second_hand/models/product.dart';
-import 'package:second_hand/models/user_information.dart';
+import 'package:second_hand/models/chat_contact/chat_contact.dart';
+import 'package:second_hand/models/message/message.dart';
+import 'package:second_hand/models/product/product.dart';
+import 'package:second_hand/models/user_information/user_information.dart';
 
 abstract class IChatCloudFireStoreService {
   // get Chat Contacts who I did write to buy their items

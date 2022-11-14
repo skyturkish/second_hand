@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'product.g.dart';
+
+@JsonSerializable()
 class Product {
   final String productId;
   final String ownerId;
@@ -41,38 +45,8 @@ class Product {
         locateCountry = snapshot.data()['locateCountry'] as String,
         locateCity = snapshot.data()['locateCity'] as String;
 
-  Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-
-    result
-      ..addAll({'productId': productId})
-      ..addAll({'ownerId': ownerId})
-      ..addAll({'condition': condition})
-      ..addAll({'title': title})
-      ..addAll({'description': description})
-      ..addAll({'imagesUrl': imagesUrl})
-      ..addAll({'price': price})
-      ..addAll({'productSellState': productSellState})
-      ..addAll({'locateCountry': locateCountry})
-      ..addAll({'locateCity': locateCity});
-
-    return result;
-  }
-
-  factory Product.fromMap(Map<String, dynamic> map) {
-    return Product(
-      productId: map['productId'] ?? '',
-      ownerId: map['ownerId'] ?? '',
-      condition: map['condition'] ?? '',
-      title: map['title'] ?? '',
-      description: map['description'] ?? '',
-      imagesUrl: List<String>.from(map['imagesUrl']),
-      price: map['price']?.toInt() ?? 0,
-      productSellState: map['productSellState'] ?? '',
-      locateCountry: map['locateCountry'] ?? '',
-      locateCity: map['locateCity'] ?? '',
-    );
-  }
+  factory Product.fromMap(Map<String, dynamic> json) => _$ProductFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductToJson(this);
 
   Product copyWith({
     String? productId,

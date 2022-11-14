@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:second_hand/core/extensions/string/string_extension.dart';
-import 'package:second_hand/models/user_information.dart';
+import 'package:second_hand/models/user_information/user_information.dart';
 import 'package:second_hand/services/cloud/user/abstract_user_service.dart';
 import 'package:second_hand/services/storage/storage-service.dart';
 
@@ -24,7 +24,7 @@ class UserCloudFireStoreService implements IUserCloudFireStoreService {
 
     if (userExist == true) return;
 
-    await _collection.doc(userId).set(UserInformation(userId: userId, name: 'User-$userId').toMap());
+    await _collection.doc(userId).set(UserInformation(userId: userId, name: 'User-$userId').toJson());
   }
 
   @override

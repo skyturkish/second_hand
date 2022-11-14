@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:second_hand/models/user_information.dart';
+import 'package:second_hand/models/user_information/user_information.dart';
 
 class UserInformationNotifier extends ChangeNotifier {
   UserInformation? get userInformation => _userInformation;

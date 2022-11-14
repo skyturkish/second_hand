@@ -5,7 +5,7 @@ import 'package:second_hand/core/constants/navigation/navigation_constants.dart'
 import 'package:second_hand/core/extensions/build_context/context_extension.dart';
 import 'package:second_hand/core/extensions/string/string_extension.dart';
 import 'package:second_hand/core/init/navigation/navigation_service.dart';
-import 'package:second_hand/models/chat_contact.dart';
+import 'package:second_hand/models/chat_contact/chat_contact.dart';
 import 'package:second_hand/services/chat/chat_service.dart';
 import 'package:second_hand/view/_product/_widgets/animation/lottie_animation_view.dart';
 import 'package:second_hand/view/_product/enums/chat_contact_type_enum.dart';

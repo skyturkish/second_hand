@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:second_hand/core/constants/navigation/navigation_constants.dart';
-import 'package:second_hand/models/product.dart';
-import 'package:second_hand/models/user_information.dart';
+import 'package:second_hand/models/product/product.dart';
+import 'package:second_hand/models/user_information/user_information.dart';
 import 'package:second_hand/view/app/account/accountdetail/account_detail_view.dart';
 import 'package:second_hand/view/app/account/accountdetail/subview/network_view.dart';
 import 'package:second_hand/view/app/account/editprofile/view/edit_profie_view.dart';
