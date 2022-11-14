@@ -105,7 +105,7 @@ class LoadingScreen {
         );
       },
     );
-    // https://stackoverflow.com/questions/56537718/what-assert-do-in-dart ,,, eğer test yazmıyorsak bunu kullanabilirsen
+    // https://stackoverflow.com/questions/56537718/what-assert-do-in-dart
     state?.insert(
       overlay,
     );
